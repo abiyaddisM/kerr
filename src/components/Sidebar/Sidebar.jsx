@@ -32,21 +32,21 @@ const SideBar = () => {
     return (
         <div className="sidebar">
             <img src={logo} className='kerrlogo' alt="" />
-            <button className='button'>
+            <button className='button' onClick={navigateToHome}>
                 <img src={homeIcon} alt="" />
             </button>
-            <button className='button'>
+            <button className='button' onClick={navigateToJobListing}>
                 <img src={briefcaseIcon} alt="" />
             </button>
             <img src={horizontalLine} className='hr' alt="" />
-            <button className='button'>
+            <button className='button' onClick={navigateToMyJobs}>
                 <img src={documentIcon} alt="" />
             </button>
-            <button className='button'>
+            <button className='button' onClick={navigateToChats}>
                 <img src={messageIcon} alt="" />
             </button>
             <img src={horizontalLine} className='hr' alt="" />
-            <button className='button'>
+            <button className='button' onClick={navigateToLibrary}>
                 <img src={brushIcon} alt="" />
             </button>
             <button className='button'>
