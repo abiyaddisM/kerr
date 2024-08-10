@@ -1,8 +1,21 @@
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-function App() {
-    return(
-        <p id="po">Hello</p>
-    )
+import Sidebar from './components/Sidebar/Sidebar'
+
+function App () {
+  
+
+  return (
+    <Router>
+    
+     <Sidebar/>
+     <Routes>
+      <Route path='/' />
+     </Routes>
+     
+    </Router>
+  )
 
 }
 
