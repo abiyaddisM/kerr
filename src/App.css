@@ -1,9 +1,16 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: 100vw; /* Full viewport width */
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height */
+  margin: 0 auto; /* Center horizontally if needed */
+  padding: 2rem; /* Padding inside the root element */
+  text-align: center; /* Center text inside */
+  position: relative; /* For absolute positioning of children */
+  background-color: white; /* Background color */
+  box-sizing: border-box; /* Include padding in width and height calculations */
 }
+
+
 
 .logo {
   height: 6em;
