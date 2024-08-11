@@ -6,7 +6,7 @@ import messageIcon from '../../assets/icons/messageIcon.svg'
 import horizontalLine from '../../assets/icons/horizontalLine.svg'
 import brushIcon from '../../assets/icons/brushIcon.svg'
 import libraryIcon from '../../assets/icons/libraryIcon.svg'
-import './sidebar.css';
+import './Sidebar.css';
 
 const SideBar = () => {
     const navigateToHome = () =>{
