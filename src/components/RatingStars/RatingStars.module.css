@@ -1,0 +1,28 @@
+.rating_stars {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    gap: 5px;
+}
+
+.star {
+    width: 14px;
+    height: 13px;
+    fill: var(--background-color); 
+    cursor: pointer;
+    transition: fill 0.3s ease; 
+}
+
+.star:hover {
+    fill: var(--border-color); 
+}
+.star.hover {
+    fill: var(--border-color); 
+}
+
+.star.filled {
+    fill: var(--dark-border-color); 
+}
+
+
