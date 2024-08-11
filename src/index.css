@@ -22,7 +22,6 @@
     --text-primary-color:var(--gray-1000);
     --text-secondary-color:var(--gray-800);
     --text-counter-color:var(--gray-0);
-
 }
 *{
     font-family: "Barlow", sans-serif;
