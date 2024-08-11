@@ -6,6 +6,7 @@ import messageIcon from '../../assets/icons/messageIcon.svg'
 import horizontalLine from '../../assets/icons/horizontalLine.svg'
 import brushIcon from '../../assets/icons/brushIcon.svg'
 import libraryIcon from '../../assets/icons/libraryIcon.svg'
+import styles from './sidebar.module.css';
 import './Sidebar.css';
 
 const SideBar = () => {
@@ -30,26 +31,26 @@ const SideBar = () => {
     }
 
     return (
-        <div className="sidebar">
-            <img src={logo} className='kerrlogo' alt="" />
-            <button className='button' onClick={navigateToHome}>
+        <div className={styles.sidebar}>
+            <img src={logo} className={styles.kerrlogo} alt="" />
+            <button className= {styles.button} onClick={navigateToHome}>
                 <img src={homeIcon} alt="" />
             </button>
-            <button className='button' onClick={navigateToJobListing}>
+            <button className={styles.button} onClick={navigateToJobListing}>
                 <img src={briefcaseIcon} alt="" />
             </button>
             <img src={horizontalLine} className='hr' alt="" />
-            <button className='button' onClick={navigateToMyJobs}>
+            <button className={styles.button} onClick={navigateToMyJobs}>
                 <img src={documentIcon} alt="" />
             </button>
-            <button className='button' onClick={navigateToChats}>
+            <button className={styles.button} onClick={navigateToChats}>
                 <img src={messageIcon} alt="" />
             </button>
             <img src={horizontalLine} className='hr' alt="" />
-            <button className='button' onClick={navigateToLibrary}>
+            <button className={styles.button} onClick={navigateToLibrary}>
                 <img src={brushIcon} alt="" />
             </button>
-            <button className='button'>
+            <button className={styles.button}>
                 <img src={libraryIcon} alt="" />
             </button>
             {/* remaining buttons */}

@@ -4,6 +4,7 @@
     --black-color: black;
     --white-color: white;
     --light-gray-color: #E0E4E8;
+    --dark-gray-color: #A6A6A6;
     --dark-cyan: #172430;
 
     --gray-1000: #000000;
@@ -16,11 +17,11 @@
     --secondary-color:var(--dark-cyan);
     --background-color:var(--white-color);
     --border-color:var(--light-gray-color);
+    --dark-border-color:var(--dark-gray-color);
 
     --text-primary-color:var(--gray-1000);
     --text-secondary-color:var(--gray-800);
     --text-counter-color:var(--gray-0);
-
 }
 *{
     font-family: "Barlow", sans-serif;
