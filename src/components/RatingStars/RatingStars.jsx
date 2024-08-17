@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styles from './RatingStars.module.css'
 
-const RatingStars = () => {
-    const [rating, setRating] = useState(0);
+const RatingStars = ({star}) => {
+    const [rating, setRating] = useState(star);
     const [hoverIndex, setHoverIndex] = useState(null)
 
     const handleClick = (index) => {
@@ -19,7 +19,7 @@ const RatingStars = () => {
 
     return (
         <div className={styles.rating_stars}>
-            {Array.from({ length: 5 }, (_, index) => (
+            { Array.from({ length: 5 }, (_, index) => (
                 <svg
                     key={index}
                     className={`${styles.star} 

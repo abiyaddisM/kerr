@@ -8,6 +8,7 @@
     --dark-cyan: #172430;
 
     --gray-1000: #000000;
+    --gray-900: #3F4551;
     --gray-800: #333333;
     --gray-200: #cccccc;
     --gray-0: #ffffff;
@@ -21,6 +22,7 @@
 
     --text-primary-color:var(--gray-1000);
     --text-secondary-color:var(--gray-800);
+    --text-dark-gray-color:var(--gray-900);
     --text-counter-color:var(--gray-0);
 }
 *{

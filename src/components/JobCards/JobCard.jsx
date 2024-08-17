@@ -1,7 +1,9 @@
 import styles from './JobCard.module.css';
 import arrowrightIcon from '../../assets/icons/arrow-rightIcon.svg'
 import RatingStars from '../RatingStars/RatingStars';
-const JobCard = () => {
+
+
+const JobCard = ({job: {image, name, title, hourlyrate, description, rating, totalPrice, successrate}}) => {
 
     const handleApplyClicked = () => {
         // navigates to apply window 
@@ -15,9 +17,9 @@ const JobCard = () => {
     return (
         <div className={styles.jobcard}>
 
-            {/* TO BE DELETED place holder image  */}
             <img 
-            className={styles.profile_image} src="https://s3-alpha-sig.figma.com/img/5092/512c/8486c7c89c9bd726da4a9370ff0c1d02?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Xt-gzOMhlAuWrIgJRXK5MahzrFOsOps~JvwwPjFjKgmER6ZdMnlbfFaBDEqAtmDNP7H4cWK4JzhhdzXHYhKyXR9HriMrFzE50ZUAJnh8zP~NjmnQXetpY-glzhtvVg5YnTMpiynSyCpjW39TzoD3nbAWe4IxLd7RltjiR~bEH1bXiQpq5~t7BddyUMZeGEp5c2D-dbfXrQKiF3rjpxiPwr-txyTCwGbxRh3~qIiKuF3gXXBqjNpSERlDgFn5LE~hV2fCho653fiHGxIXXRhFlqkXqkh9zOrEPmoOegifr8pX9OwVfiYIf~uqMeE0wIvNTKtOKxk2vvoUpMaA6Ij37Q__" 
+            className={styles.profile_image} 
+            src={image}
             alt="profile image" />
 
             
@@ -25,7 +27,7 @@ const JobCard = () => {
                 <div className={styles.line1}>
 
                     <div className={styles.nameaddress}>
-                        <p className={styles.names}>Kate Smith</p>
+                        <p className={styles.names}>{name}</p>
                         <p className={styles.address}>Ethiopia, Summit</p>
                     </div>
 
@@ -42,8 +44,8 @@ const JobCard = () => {
                 </div>
 
                 <p className={styles.role}>
-                    Tech Start Up Logo Design
-                    <span className={styles.rate}>650 Birr/hr</span>    
+                    {title}
+                    <span className={styles.rate}>{hourlyrate} Birr/hr</span>    
                 </p>
 
                 
@@ -58,24 +60,17 @@ const JobCard = () => {
 
                 <div className={styles.description}>
                     <p className={styles.jobdescription}>
-                        We are seeking a talented digital artist to create a 
-                        realistic portrait that embodies a futuristic vibe 
-                        with a cool color palette. The portrait should seamlessly 
-                        blend realistic human features with elements that evoke a 
-                        sense of advanced technology and forward-thinking aesthetics. 
-                        The overall color tone should convey a sense of calmness and 
-                        sophistication. The artwork should evoke a sense of the future, 
-                        incorporating modern and high-tech elements
+                        {description}
                     </p>
                 </div>
 
                 <div className={styles.ratings}>
 
-                    <RatingStars/>
+                    <RatingStars star={rating}/>
 
                     <p className={styles.payment}>
                         <p>
-                            20,504
+                            {totalPrice}
                             <span>Birr</span>
                         </p>
                         
@@ -83,7 +78,7 @@ const JobCard = () => {
                     </p>
                     <p className={styles.success}>
                         <p>
-                            91
+                            {successrate}
                             <span>%</span>
                         </p>
                         <span>job success</span>

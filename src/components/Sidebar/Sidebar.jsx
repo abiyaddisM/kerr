@@ -7,8 +7,7 @@ import horizontalLine from '../../assets/icons/horizontalLine.svg'
 import brushIcon from '../../assets/icons/brushIcon.svg'
 import libraryIcon from '../../assets/icons/libraryIcon.svg'
 import styles from './sidebar.module.css';
-import './Sidebar.css';
-
+// import './SideBar.css'
 const SideBar = () => {
     const navigateToHome = () =>{
 

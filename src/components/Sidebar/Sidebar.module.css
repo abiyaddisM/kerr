@@ -1,5 +1,5 @@
 .sidebar {
-    position: absolute;
+    position: fixed; 
     left: 0;
     top: 50%;
     transform: translateY(-50%); 
@@ -7,45 +7,34 @@
     flex-direction: column;
     align-items: center;
     padding: 15px 5px;
-
     gap: 5px;
     height: fit-content;
     width: fit-content;
     border: 1px solid var(--border-color);
     border-radius: 35px;
     background-color: var(--background-color);
+    z-index: 1000; 
 }
 
 .button {
     padding: 8px 15px;
-    border-radius: 14px;
-    height: fit-content;
-    width:fit-content;
+    border-radius: 8px; /* Consolidated radius */
     background-color: transparent;
     border: none;
     cursor: pointer;
+    height: fit-content;
+    width: fit-content;
 }
 
-.button:hover{
+.button:hover, .button:active {
     background-color: var(--primary-color);
-    img{
-        filter: invert(100%);
-    }
 }
 
-.button:active{
-    background-color: var(--primary-color);
-    img{
-        filter: invert(100%);
-    }
+.button:hover img, .button:active img {
+    filter: invert(100%);
 }
 
-
-.sidebar > img {
-    padding: 10px 15px;
+.kerrlogo {
+    padding-bottom: 16px; /* Consolidated padding */
+    gap: 8px;
 }
- 
-.kerrlogo{
-    padding: 0px 0px 16px 0px;
-}
-
