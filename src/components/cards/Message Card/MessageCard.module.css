@@ -41,16 +41,19 @@
 .time{
     font-size: 12px;
     font-weight: 500;
-    color: var(--text-secondary-color);
+    color: var(--text-light-color);
 }
 .image{
     width: 100%;
     border-radius: 8px;
+    border: 1px #eaeaea solid;
 
+    background: #eaeaea;
 }
 .text{
     font-size: 14px;
-    color: var(--text-secondary-color);
+    color: var(--text-medium-color);
     font-weight: 500;
     line-height: 150%;
+    word-break: break-word;
 }

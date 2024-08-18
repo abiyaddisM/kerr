@@ -1,18 +1,17 @@
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Sidebar from './components/Sidebar/Sidebar'
+import {MessageContainer} from "./components/containers/Message Container/MessageContainer.jsx";
+import JobCard from "./components/cards/Job Cards/JobCard.jsx";
 import ChatPage from "./pages/Chat Page/ChatPage.jsx";
-import MessageCard from "./components/Message Card/MessageCard.jsx";
-import {MessageContainer} from "./components/Message Container/MessageContainer.jsx";
+import {IconButton} from "./components/buttons/Icon Button/IconButton.jsx";
+import themeIcon from './assets/icons/moon.svg'
+import {PopOver} from "./components/general/Pop Over/PopOver.jsx";
 
 function App () {
-  
+
   return (
     <Router>
-    
-    {/*<ChatPage></ChatPage>*/}
-    <MessageContainer/>
     </Router>
   )
 

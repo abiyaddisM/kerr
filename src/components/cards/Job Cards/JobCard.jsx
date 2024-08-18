@@ -1,6 +1,6 @@
 import styles from './JobCard.module.css';
-import arrowrightIcon from '../../assets/icons/arrow-rightIcon.svg'
-import RatingStars from '../RatingStars/RatingStars';
+import arrowrightIcon from '../../../assets/icons/arrow-rightIcon.svg'
+import RatingStars from '../../general/RatingStars/RatingStars.jsx';
 const JobCard = () => {
 
     const handleApplyClicked = () => {

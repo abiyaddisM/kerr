@@ -1,0 +1,30 @@
+
+.container{
+    display: grid;
+    grid-template-areas:
+        'chat message'
+        'chat input'
+    ;
+    grid-template-columns: 310px 1fr;
+    grid-template-rows: 1fr auto;
+    max-width: 1800px;
+    height: 100vh;
+    padding: 10px;
+    grid-gap: 10px;
+}
+.message_container{
+    grid-area: message;
+    height: 100%;
+    overflow: auto;
+
+}
+.chat_container{
+    grid-area: chat;
+    height: 100%;
+
+
+}
+.input_container{
+    grid-area: input;
+
+}

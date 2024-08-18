@@ -5,7 +5,6 @@
     padding: 10px 20px;
     cursor: pointer;
     transition: 0.2s;
-    margin: 100px;
 
 }
 .container:hover{
@@ -14,13 +13,11 @@
 }
 
 .image_container{
-    width: 42px;
-    height: 42px;
     position: relative;
 }
 .image{
-    width: 100%;
-    height: 100%;
+    width: 42px;
+    aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -28,8 +25,8 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    bottom: 0;
-    right: 0;
+    bottom: 4px;
+    right: 4px;
     border-radius: 50%;
     border: 1px white solid;
 
@@ -44,7 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 10%;
+    width: 100%;
 
 }
 .name_container{
@@ -57,15 +54,15 @@
 .name{
     font-size: 14px;
     font-weight: 500;
+    color: var(--text-heavy-color);
 }
 .last_sent_message{
     font-size: 11px;
     font-weight: 500;
-    color: #6D6D6D;
+    color: var(--text-light-color);
 }
 .last_sent_time{
     font-size: 11px;
     font-weight: 500;
-    color: #6D6D6D;
-
+    color: var(--text-light-color);
 }

@@ -1,0 +1,7 @@
+.container{
+    border: 1px var(--border-color) solid;
+    border-radius: 20px;
+    padding: 20px;
+    height: 100%;
+    overflow: auto;
+}

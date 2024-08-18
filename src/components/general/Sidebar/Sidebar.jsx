@@ -1,13 +1,12 @@
-import logo from '../../assets/icons/logo.svg'
-import homeIcon from '../../assets/icons/homeIcon.svg'
-import briefcaseIcon from '../../assets/icons/briefcaseIcon.svg'
-import documentIcon from '../../assets/icons/documentIcon.svg'
-import messageIcon from '../../assets/icons/messageIcon.svg'
-import horizontalLine from '../../assets/icons/horizontalLine.svg'
-import brushIcon from '../../assets/icons/brushIcon.svg'
-import libraryIcon from '../../assets/icons/libraryIcon.svg'
-import styles from './sidebar.module.css';
-import './Sidebar.css';
+import logo from '../../../assets/icons/logo.svg'
+import homeIcon from '../../../assets/icons/homeIcon.svg'
+import briefcaseIcon from '../../../assets/icons/briefcaseIcon.svg'
+import documentIcon from '../../../assets/icons/documentIcon.svg'
+import messageIcon from '../../../assets/icons/messageIcon.svg'
+import horizontalLine from '../../../assets/icons/horizontalLine.svg'
+import brushIcon from '../../../assets/icons/brushIcon.svg'
+import libraryIcon from '../../../assets/icons/libraryIcon.svg'
+import styles from './Sidebar.module.css';
 
 const SideBar = () => {
     const navigateToHome = () =>{

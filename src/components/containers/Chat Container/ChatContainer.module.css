@@ -1,0 +1,7 @@
+.container{
+    border: 1px var(--border-color) solid;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 10px 0;
+    height: 100%;
+}

@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    width: fit-content;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+
+}
