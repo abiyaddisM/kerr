@@ -1,0 +1,61 @@
+.rating_filter{
+    display: grid;
+    width: inherit;
+    grid-template-rows: repeat(1fr);
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+}
+.rating {
+    display: flex;
+    gap: 10px;
+}
+
+.rating input {
+    appearance: none;
+    width: 20px;
+    height: 14px;
+    border: 1px solid var(--dark-border-color);
+    border-radius: 8px;
+    position: relative;
+    padding: 0px;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.rating input:hover, 
+input:checked{
+    border-color: var(--primary-color);
+}
+
+.rating label{
+    color: var(--text-dark-gray-color);
+    transition: color 0.3s ease-in-out; 
+}
+
+.rating input:checked + label{
+    color: var(--primary-color);
+}
+
+.rating input::before
+{
+    content: '';
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+    right: 1px;
+    margin: 1px;
+    border-radius: 7px;
+    transition: background-color 0.2s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.rating input:checked::before{
+    background-color: var(--primary-color); /* Background color when checked */
+    border-color: var(--primary-color); /* Border color when checked */
+}
+
+.rating label {
+    font-size: 12px;
+    line-height: 14px;
+    cursor: pointer; 
+}

@@ -1,0 +1,32 @@
+.jobpage{
+    padding: 10px 20px 0px 20px ;
+    display: flex;
+    gap: 10px; 
+
+}
+.page {
+    display: grid;
+    grid-template-rows: auto;
+    width: 100vw;
+}
+.container{
+    display: grid;
+    grid-template-columns: auto auto;
+    /* gap: 0px 20px; */
+}
+.searchbar{
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.jobfilter{
+    padding: 10px;
+    width: 100%;
+}
+
+.jobcontainer{
+    padding: 10px 0px;
+    width: 100%;
+}
