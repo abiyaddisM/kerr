@@ -1,0 +1,71 @@
+
+.rate_filter{
+    display: grid;
+    width: inherit;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+}
+
+.rate{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    label{
+        font-size: 12px;
+        color: var(--text-dark-gray-color);
+        span{
+            font-size: 10px;
+        }
+    }
+    input{
+        appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        border-radius: 5px;
+        padding: 0px;
+        cursor: pointer;
+        transition: border-color 0.3s ease-in-out;
+    }
+    
+}
+.rate input::before
+{
+    border-radius: 3px;
+}
+.rating input:hover, 
+.rate input:hover,
+input:checked{
+    border-color: var(--primary-color);
+}
+
+.rating label, .rate label{
+    color: var(--text-dark-gray-color);
+    transition: color 0.3s ease-in-out; 
+}
+
+
+.rate input:checked + label{
+    color: var(--primary-color);
+    /* border-color: var(--primary-color); */
+}
+
+.rate input::before
+{
+    content: '';
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+    right: 1px;
+    margin: 1px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+
+.rate input:checked::before {
+    background-color: var(--primary-color); /* Background color when checked */
+    border-color: var(--primary-color); /* Border color when checked */
+}

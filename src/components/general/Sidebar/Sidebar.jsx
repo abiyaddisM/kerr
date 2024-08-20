@@ -8,6 +8,7 @@ import brushIcon from '../../../assets/icons/brushIcon.svg'
 import libraryIcon from '../../../assets/icons/libraryIcon.svg'
 import styles from './Sidebar.module.css';
 
+
 const SideBar = () => {
     const navigateToHome = () =>{
 
