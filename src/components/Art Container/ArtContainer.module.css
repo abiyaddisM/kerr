@@ -1,0 +1,12 @@
+.art_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 349px);
+    gap: 10px;
+    width: 100%;
+    
+}
+
+.art_card {
+    width: auto;
+    height: auto;
+}
