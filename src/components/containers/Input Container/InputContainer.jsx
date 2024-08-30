@@ -4,9 +4,10 @@ import paperclipIcon from '../../../assets/icons/paperclip.svg';
 import addIcon from '../../../assets/icons/add.svg';
 import sendIcon from '../../../assets/icons/send.svg';
 import {useRef, useState} from "react";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export function InputContainer({onClick}) {
+export function InputContainer({onClick,userID,chatID}) {
     //state that is bound to the input
     const [inputValue, setInputValue] = useState('');
     //state for the image uploads
@@ -15,7 +16,8 @@ export function InputContainer({onClick}) {
     const fileInputRef = useRef(null);
     //for sending messages
     const sendMessage = ()=>{
-        onClick({message:inputValue,images:imageUrls});
+        onClick({message:inputValue,images: {images:imageUrls}});
+        sendMessageToServer(userID,chatID,inputValue,imageUrls);
         setImageUrl([]);
         setInputValue('')
     }
@@ -86,4 +88,14 @@ export function InputContainer({onClick}) {
             </div>
         </>
     )
+}
+function sendMessageToServer(userID,chatID,inputValue,imageUrls){
+    const data = {userID:userID,chatID:chatID,messageText:inputValue,messageImage:{images:imageUrls.length === 0 ? [] : ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyXeKDN29AmZgZPLS7n0Bepe8QmVappBwZCeA3XWEbWNdiDFB']},messageType:'normal'};
+    axios.post('http://localhost:3000/api/v1/message',data)
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
 }

@@ -1,6 +1,7 @@
 .notification{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: fit-content;
     height: inherit;
     border: 1px solid var(--border-color);

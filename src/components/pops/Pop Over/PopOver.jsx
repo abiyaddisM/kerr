@@ -5,10 +5,12 @@ import { motion,AnimatePresence  } from 'framer-motion';
 export function PopOver({component,children,left = false}) {
     let [state,setState] = useState(false);
     return (
-        <div>
-            <div className={styles.cover} onClick={()=>{setState(false)}}/>
+        <div className={styles.parent_container}>
+            {state && <div className={styles.cover} onClick={() => {
+                setState(false)
+            }}/>}
             <div className={styles.container} >
-                <div onClick={()=>{setState(!state)}}>
+                <div className={styles.component_container} onClick={()=>{setState(!state)}}>
                     {component}
                 </div>
                 <AnimatePresence>

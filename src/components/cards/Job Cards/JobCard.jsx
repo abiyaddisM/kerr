@@ -1,29 +1,29 @@
 import styles from './JobCard.module.css';
 import arrowrightIcon from '../../../assets/icons/arrow-rightIcon.svg'
 import RatingStars from '../../general/RatingStars/RatingStars.jsx';
-const JobCard = () => {
 
 
+// eslint-disable-next-line react/prop-types
 const JobCard = ({job: {image, name, title, hourlyrate, description, rating, totalPrice, successrate}}) => {
 
     const handleApplyClicked = () => {
-        // navigates to apply window 
-        
+        // navigates to apply window
+
     }
 
     const handleContactClicked = () => {
-        // navigates to message 
+        // navigates to message
     }
 
     return (
         <div className={styles.jobcard}>
 
-            <img 
-            className={styles.profile_image} 
+            <img
+            className={styles.profile_image}
             src={image}
             alt="profile image" />
 
-            
+
             <div className={styles.jobcard_content}>
                 <div className={styles.line1}>
 
@@ -41,23 +41,23 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                             <img src={arrowrightIcon} alt="" />
                         </button>
                     </div>
-                    
+
                 </div>
 
                 <p className={styles.role}>
                     {title}
-                    <span className={styles.rate}>{hourlyrate} Birr/hr</span>    
+                    <span className={styles.rate}>{hourlyrate} Birr/hr</span>
                 </p>
 
-                
+
                     <ul className={styles.keywords}>
-                        <l1 className={styles.key}>Realistic</l1>
+                        <li className={styles.key}>Realistic</li>
                         <li className={styles.key}>Portrait</li>
                         <li className={styles.key}>Cool</li>
                         <li className={styles.key}>Futuristic</li>
 
                     </ul>
-                
+
 
                 <div className={styles.description}>
                     <p className={styles.jobdescription}>
@@ -74,7 +74,7 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                             {totalPrice}
                             <span>Birr</span>
                         </p>
-                        
+
                         <span>total payout</span>
                     </p>
                     <p className={styles.success}>
@@ -85,10 +85,10 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                         <span>job success</span>
                     </p>
                 </div>
-                
+
             </div>
         </div>
     )
 }
 
-export default JobCard
+export default JobCard;

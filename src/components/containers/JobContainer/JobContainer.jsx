@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import JobCard from "../JobCards/JobCard";
+import JobCard from "../../cards/Job Cards/JobCard.jsx";
 import styles from './JobContainer.module.css'
 
 const user = [

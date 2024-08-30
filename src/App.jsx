@@ -1,29 +1,24 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-import {MessageContainer} from "./components/containers/Message Container/MessageContainer.jsx";
-import JobCard from "./components/cards/Job Cards/JobCard.jsx";
 import ChatPage from "./pages/Chat Page/ChatPage.jsx";
-import {IconButton} from "./components/buttons/Icon Button/IconButton.jsx";
+import {PopUp} from "./components/pops/Pop Up/PopUp.jsx";
+import {useState} from "react";
 
-import MessageCard from "./components/Message Card/MessageCard.jsx";
-import {MessageContainer} from "./components/Message Container/MessageContainer.jsx";
-import JobFilter from './components/Job Filter/JobFilter.jsx';
-import JobContainer from './components/JobContainer/JobContainer.jsx';
-import JobPage from './pages/Jobs Page/JobPage.jsx';
 function App () {
+    let [state1,setState1] = useState(false);
+    let [state2,setState2] = useState(false);
 
   return (
     <Router>
-    {/* <ChatPage/> */}
-    {/*<ChatPage></ChatPage>*/}
-    {/* <MessageContainer/> */}
-    {/* <JobFilter/> */}
-    {/* <JobContainer/> */}
-    <JobPage/>
+        {/*<ChatPage></ChatPage>*/}
+        <PopUp component={<button >Pop up 1</button>} state={state1} setState={setState1}>
+            <h1 onClick={()=>{alert('dd')}}>Hi from pop up 1</h1>
+        </PopUp>
+        <PopUp component={<button >Pop up 2</button>} state={state2} setState={setState2}>
+            <h1 onClick={()=>{alert('dd')}}>Hi from pop up 2</h1>
+        </PopUp>
     </Router>
   )
-
 }
 
 export default App
