@@ -4,11 +4,18 @@ import ArtContainer from '../../components/Art Container/ArtContainer'
 
 import './ArtPage.css'
 
+
+
 const ArtPage = () =>{
+
+    const keywords = ['Trending', 'Recent', 'All Time Popular', 'Most Views', 'Oldest']
+
     return(
         <div className='art_page'>
-            {/* <SearchBar/> */} 
-            <Keywords/>
+            {/* <SearchBar/>  */}
+            <div className='keywords'>
+            <Keywords keywords={keywords}/>
+            </div>
             <ArtContainer/>
         </div>
     )

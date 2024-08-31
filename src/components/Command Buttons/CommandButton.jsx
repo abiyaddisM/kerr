@@ -1,25 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import styles from './CommandButton.module.css'
+import styles from './CommandButton.module.css';
 
-
-function handleClick(route){
-    console.log(route);
-    // navigate(`/${route}`)
-}
-
-const CommandButton = ({commandTerm}) =>{
-
-    // const navigate = useNavigate()
-
-   
-    return(
-        <button 
-        className={styles.button} 
-        value={commandTerm}
-        onClick={()=>handleClick(commandTerm)} >
-            {commandTerm}
-        </button>
-    )
-}
+const CommandButton = ({ commandTerm, selected = false, onClick }) => {
+  return (
+    <button
+      className={`${styles.button} ${selected ? styles.selected : ''}`}
+      onClick={() => onClick(commandTerm)}
+    >
+      {commandTerm}
+    </button>
+  );
+};
 
 export default CommandButton;

@@ -5,17 +5,17 @@ import styles from './JobContainer.module.css'
 const user = [
     {
         id: '1',
-        image: 'https://s3-alpha-sig.figma.com/img/1120/5a78/6937745c3558139520e2a36c339911c2?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HxXwboFcW~OzP7l8JE7ao7DdCHIRT9cfG0n9gMRgUyGzkwpgXPQiJ~encA95RHrlQPCQ5GVDn4DMNxw7~Si3vlSeRRcCfIcWvGMViUr5Rf9TSJsq1ipyJtOsTw58WktIjewYhV0jei~Ebg2hogbp6iEpmjEpvjWcE4WUhmqh3jL0JEsOi6CYg9rMT6N2iyHjKrlXOojojp0R7nZMr5iWH6~KkDV7lFJ0mJMDB9~kEJDWxhG1ibLBxF5Qsg01ObtvumqtSbaJyu0Q0HvxeK2vrZnwQKHcHRGmCwFrWR8zyRGskDeOF1UDtza2hIr2edYboFWcd~igvBwXC6QDc3scqQ__',
+        image: 'https://s3-alpha-sig.figma.com/img/1120/5a78/6937745c3558139520e2a36c339911c2?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CnlHAhBd1D0h5E0nrFu8lENfYMdV5GvOwb3MplvjcSbi5PW7IIt23UlWYEgaVwPSNH3LZ4WrlWBPLNLIXeVsIiM43apMo9pHtsjI7tuz-uvHCZEif7T8sVuzNyyl2KP8Cm0L4WuBC7MJoJvSpIMG6ZUvV7BHLvMpKBMiENfEGU4n3wDoixBDNWN5hZwRwii-uu7CWL-xq6zdXUng1Vy0QxjoDFV5LPfKNLawf0Z6FMp2tMSU9QMhd5wK3NJ0C9VofUrIXcJNVUC26gGVqcOv8t06iod9KvlC8Fxs8V9EDIhulGSB24sFZAwnjEXzL-3C2JkFP~SWf6KyGT0KUcChZw__',
         name: 'Aaron Mesfin'
     },
     {
         id:'2',
-        image: 'https://s3-alpha-sig.figma.com/img/cbe3/46be/9b643bcdc2bda9bf5fa82b6bc8253d56?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KTxPVUGBCSy1~HNEFcf~e~oRGwsI6WSr0rQprruzJU3~8VHB4cWc73T295SftHZaZXd7lTKaFPChV1iCfowe-Sb8MnbquJyPxCMZxbFmN85CllnKIucacs-hvTq2DFlj9SWljYrFH1hiAV7~U9Zmrrg8QoHS64H11w-zFiAG5ewi5JuycEZaVlIi1EmSHAvIPTzdZHgrCH7q7LQ3yiV4Dd0syH8~PO6SFtCqmxOqPR-Hxp1i4HGwhTRJT7onz20Ll97oQhKEWqMDWG4I1AwNR3j2Am3uz5a2vpEs1B3CSOB1Yi0xa8l8Z3-1nnKze7A0ush2Dw0Ca9m1kJ3m0ihINg__',
+        image: 'https://s3-alpha-sig.figma.com/img/cbe3/46be/9b643bcdc2bda9bf5fa82b6bc8253d56?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Izxqi5Yttmrb8UOgxq2uS8MOFLcMZ5sgsWq9deY8YvRpTT5thFxPrToncCMUsYQjBo1SwXPxMKAI0aYCpYu-LIlhgLffYYXdAwF7kDXqQTx6eKpS7xtuI9S7-xn4~cFbQG1i3h1v2gmpOZji2L04V41ned86ghr35ClYJQkcpx3w-7Kr-0z~uyBTPGcdrNJiRAVBDom1Mp8r1FoEzUFuwlYZOVwzPgCVsEk-KIxwcSbP1~waHbnuSy4RzYQYf9~wgrzfM0lTW0fup~ahGB5VpdGExMzvd-MzvyIP0tyapLzjFBVia3xiFc7nfak6f1KQAJM3iHXhpVfmgeZKikSkDg__',
         name: 'Some Guy'
     },
     {
-        id: '2',
-        image: 'https://s3-alpha-sig.figma.com/img/5092/512c/8486c7c89c9bd726da4a9370ff0c1d02?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ji2rcQMGilGhikanDR~0I5jbsLSpuK73l5jR4MF6du749i34jmvcSgcCWI6KIacwFBc5nqQCheKDWdbTUsQxzgweKzkmFv65~2BcGbtekiDV5h4518-2aeXdhRkZgaYH2GHEJ-jPPEzN0Uane2xohQSR5-hZEMZxsBvcgFRYCDn4OKIpaAXBMwtMZzVYtjES4gkmZqzdwauajc2d2naqhcvHXrcBO0Xn6dXj6tWpCZvSuDemnMrfw85hNGeMOhGLGL508V3Vkx~VJpZf1ASbSuX4X6JjckdzFxxudywcXhgtXs9u8b50cnbthHJy9ORl1fT-iS~aAVoG9d5P~z9xDQ__',
+        id: '3',
+        image: 'https://s3-alpha-sig.figma.com/img/5092/512c/8486c7c89c9bd726da4a9370ff0c1d02?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cgvqS~buljhPcbVLwbMy4jxRsNDweWTgSo4fhE0KG6hr4Ubg26QvovHSq3mXqzKq19CcQ~TX4kefPHk5xyYWj9-VO2ZVMQs8~ZT7GfNh4NzCHFABuH7mVFxJ4ZucTH8NqL40QqZnQFHGSRxEqY7XQbDqfykbP6X7y~AnF61IWnliZ-l8JSxXTkhZs5hJGFNyWCmE0xl4zd9BML6W6-wl5w2IvKQXZiIuva~KzbWEqj498MvvchSAZX3K~GjbtT76Jb82LkK8JxZ~HrGGKy8l6ykFR4F-0MGNlAy1le9AtDvRj08U8DKXF6w6h~GJ2hQbSCrkYbyCGVIzjRl98syy0Q__',
         name: 'Kate Smith'
     }
 ]

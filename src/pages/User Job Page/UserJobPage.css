@@ -1,0 +1,78 @@
+.user_job_page{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 100%;
+    /* padding: 10px 20px; */
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.filter_buttons{
+   
+    display: flex;
+    width: fit-content;
+    gap: 5px;
+    /* justify-content: flex-end; */
+   
+}
+.bid_buttons{
+    display: flex;
+    width: fit-content;
+}
+.type, .status, .bids{
+    width: fit-content;
+    /* justify-self: start;
+    align-items: end; */
+
+}
+/* .div{
+    display: flex;
+    justify-content: end;
+} */
+
+.contract_filters{
+    display: flex;
+    gap: 10px   ;
+}
+
+
+
+@media (max-width: 800px) {
+    .buttons {
+        /* display: grid;
+        grid-template-columns: 1fr 1fr; Stacks the columns vertically on smaller screens */
+        flex-direction: column;
+        gap: 10px; /* Adjust gap if needed */
+        justify-content: left; /* Centers items on smaller screens */
+    }
+
+    .type, .status, .bids {
+        grid-column: span 1;
+        width: 100%; /* Makes each item take up full width of its grid cell */
+        justify-self: left; /* Centers items within their grid cell */
+    }
+    .div{
+        display: flex;
+        justify-content: start;
+    }
+}
+
+@media (max-width: 550px) {
+    .buttons {
+        /* display: grid;
+        grid-template-columns: 1fr; */
+        gap: 10px; 
+        justify-content: left; /* Centers items on smaller screens */
+    }
+    .filter_buttons{
+        flex-direction: column;
+    }
+
+    .type, .status, .bids {
+        grid-column: span 1;
+        width: 100%; /* Makes each item take up full width of its grid cell */
+        justify-self: left; /* Centers items within their grid cell */
+    }
+}

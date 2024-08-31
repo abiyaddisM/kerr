@@ -1,0 +1,102 @@
+.job_card{
+    display: flex;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    /* width: 100%; */
+    gap: 10px;
+    /* margin: 5px */
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+.profile_image{
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.user_details{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0px 0px 0px;
+}
+
+.active{
+    font-size: 14px;
+    font-weight: 500;
+    color: green;
+}
+.cancelled{
+    font-size: 14px;
+    font-weight: 500;
+    color: red;
+}
+.completed{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary-color);
+}
+.username{
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+   
+   
+}
+
+.name{
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    color: var(--text-secondary-color);
+}
+.location{
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 13px;
+    color: var(--text-light-gray-color);
+
+}
+
+.user_details ~ p{
+    font-size: 14px;
+    color: var(--text-secondary-color);
+}
+p.title{
+    font-weight: 600;
+    color: var(--text-primary-color);
+}
+.description{
+    font-weight: 400;
+   line-height: 17px;
+}
+.messages{
+    display:flex;
+    justify-content: space-between;
+
+    p{
+        font-weight: 500;
+        line-height: 15px;
+        font-size: 13px;
+    }
+    :first-child {
+        color: var(--text-secondary-color);
+        
+    }
+
+    :last-child {
+        color: var(--text-light-gray-color);
+
+    }
+    
+}

@@ -10,11 +10,18 @@
     line-height: 14.4px;
 }
 
+
 .button:hover{
     cursor: pointer;
     background-color: var(--primary-color);
     color: var(--text-counter-color);
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out ;
     transform: scale(1.1);
+}
+
+.selected{
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--text-counter-color);
 }
 

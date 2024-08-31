@@ -122,7 +122,6 @@ const ArtContainer = () => {
         <div className={styles.art_container}>
             {arts.map((a)=>{
                 return <ArtCard key={a.id} art={a} className={styles.art_card}/>
-
             })}
 
         </div>
