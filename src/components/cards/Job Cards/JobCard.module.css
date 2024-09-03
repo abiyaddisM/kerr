@@ -69,7 +69,6 @@
 }
 
 .buttons button{
-    padding: 8px 20px;
     width: fit-content;
     height: fit-content;
     font-size: 13px;
@@ -77,7 +76,9 @@
     
 }
 .apply{
+    padding: 8px 20px;
     border-radius: 27px;
+    border: 1px solid var(--text-counter-color);
     color: var(--text-counter-color);
     background-color: var(--primary-color);
 }

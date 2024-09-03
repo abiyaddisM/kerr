@@ -1,0 +1,14 @@
+.art_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    width: auto;
+    
+}
+/* @media (max-width: 768px) {
+    .art_container{
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+} */
+
+

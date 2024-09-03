@@ -26,8 +26,8 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
 
             <div className={styles.jobcard_content}>
                 <div className={styles.line1}>
-
                     <div className={styles.nameaddress}>
+
                         <p className={styles.names}>{name}</p>
                         <p className={styles.address}>Ethiopia, Summit</p>
                     </div>

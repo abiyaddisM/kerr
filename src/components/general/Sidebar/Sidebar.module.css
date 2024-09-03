@@ -1,8 +1,7 @@
 .sidebar {
-    position: fixed; 
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%); 
+    position: sticky;
+    /* transform: translateY(-50%);  */
+    top: 20vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +12,7 @@
     border: 1px solid var(--border-color);
     border-radius: 35px;
     background-color: var(--background-color);
-    z-index: 1000; 
+    /* z-index: 1000;  */
 }
 
 .button {
@@ -23,14 +22,14 @@
     border: none;
     cursor: pointer;
     height: fit-content;
-    width: fit-content;
+    width: auto;
 }
 
-.button:hover, .button:active {
+.button:hover, .selected {
     background-color: var(--primary-color);
 }
 
-.button:hover img, .button:active img {
+.button:hover img, .selected img {
     filter: invert(100%);
 }
 

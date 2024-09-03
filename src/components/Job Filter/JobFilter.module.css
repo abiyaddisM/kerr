@@ -5,12 +5,12 @@
     padding: 20px;
     border: 1px solid var(--border-color);
     border-radius: 19px;
-    width: fit-content;
+    width: auto;
     height: 100vh;
 }
 
 .title{
-    display: flex;
+    display: flex;  
     justify-content: space-between;
     align-items: center;
     :first-child{

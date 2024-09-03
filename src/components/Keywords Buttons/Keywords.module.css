@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    width: inherit;
+    height: fit-content;
+    padding: 10px;
+    gap: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
