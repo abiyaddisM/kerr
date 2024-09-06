@@ -8,8 +8,7 @@
     grid-template-columns: 310px 1fr;
     grid-template-rows: 1fr auto;
     max-width: 1800px;
-    height: 100vh;
-    padding: 10px;
+    height: 100%;
     grid-gap: 10px;
 }
 .message_container{

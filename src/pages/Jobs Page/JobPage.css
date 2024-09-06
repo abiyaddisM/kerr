@@ -1,9 +1,11 @@
 .jobpage{
     display: grid;
-    grid-template-columns: minmax(150px, 1fr) 2fr   ; 
+    grid-template-columns: 320px 2fr   ;
+    grid-template-rows: 100%;
     width: 100%;
     gap: 10px; 
     transition: grid-template-columns 0.3s ease;
+    height: 100%;
 }
 
 .jobfilter{
@@ -13,5 +15,7 @@
 
 .jobcontainer{
     /* padding: 10px 0px; */
+    display: flex;
     width: 100%;
+    height: 100%;
 }

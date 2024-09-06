@@ -59,6 +59,18 @@ const jobs = [
         successrate: 90
 
     },
+    {
+        id: '4',
+        title: 'Tech Start Up Logo Design',
+        description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
+        rating: 2,
+        image: user[2].image,
+        name: user[2].name,
+        hourlyrate: 950,
+        totalPrice: 3000,
+        successrate: 90
+
+    },
 ]
 
 

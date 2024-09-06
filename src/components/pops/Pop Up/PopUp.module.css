@@ -1,10 +1,11 @@
 .parent_container{
     display: flex;
     height: fit-content;
-
+    width: 100%;
 }
 .component_container{
     display: flex;
+    width: 100%;
 }
 .cover{
     position: fixed;
@@ -16,8 +17,9 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    z-index: 10;
 }
-
+    
 .child_container{
     margin: 2px;
     background: var(--background-color);
@@ -25,5 +27,6 @@
     border-radius: 30px;
     top: 100%;
     padding: 400px 300px;
-
+    display: flex;
+    width: 100%;
 }

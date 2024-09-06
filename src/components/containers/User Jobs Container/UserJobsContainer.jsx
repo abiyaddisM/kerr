@@ -1,4 +1,4 @@
-import UserJobCard from '../User Job Card/UserJobCard'
+import UserJobCard from '../../cards/User Job Card/UserJobCard.jsx'
 import styles from './UserJobsContainer.module.css'
 
 const UserJobsContainer = ({userJobs}) => {

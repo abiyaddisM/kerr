@@ -13,7 +13,7 @@ const HourlyRate = () => {
                     </div>
                     <div className={styles.rate}>
                         <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">&lt; 100</label>
+                        <label htmlFor="rate">&lt; 100<span>Birr</span></label>
                     </div>
                     <div className={styles.rate}>
                         <input type="checkbox" name="rate" id="" />

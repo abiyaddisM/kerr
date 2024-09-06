@@ -1,6 +1,6 @@
-import SearchBar from '../../components/Search Bar/SearchBar'
-import Keywords from '../../components/Keywords Buttons/Keywords'
-import ArtContainer from '../../components/Art Container/ArtContainer'
+import SearchBar from '../../components/general/Search Bar/SearchBar'
+import Keywords from '../../components/buttons/Keywords Buttons/Keywords'
+import ArtContainer from '../../components/containers/Art Container/ArtContainer'
 
 import './ArtPage.css'
 

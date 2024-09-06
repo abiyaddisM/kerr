@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CommandButton from '../Command Buttons/CommandButton';
+import CommandButton from '../Command Buttons/CommandButton.jsx';
 import styles from './Keywords.module.css';
 
 const Keywords = ({ keywords, onClick }) => {

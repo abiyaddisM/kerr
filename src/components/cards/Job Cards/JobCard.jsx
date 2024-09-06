@@ -46,7 +46,7 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
 
                 <p className={styles.role}>
                     {title}
-                    <span className={styles.rate}>{hourlyrate} Birr/hr</span>
+                    <span className={styles.rate}>{hourlyrate} <span>Birr/hr</span></span>
                 </p>
 
 

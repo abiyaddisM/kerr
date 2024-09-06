@@ -2,21 +2,26 @@
 .rate_filter{
     display: grid;
     width: inherit;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(4, auto);
     grid-template-columns: repeat(2, auto);
     gap: 10px;
+    height: fit-content;
+
 }
 
 .rate{
     display: flex;
     align-items: center;
+    height: fit-content;
     gap: 10px;
+
     label{
         font-size: 12px;
         color: var(--text-dark-gray-color);
         span{
             font-size: 10px;
         }
+
     }
     input{
         appearance: none;

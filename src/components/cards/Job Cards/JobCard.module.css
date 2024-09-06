@@ -41,7 +41,7 @@
 }
 
 .nameaddress{
-    color: var(--text-secondary-color);
+    color: var(--text-medium-color);
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -84,7 +84,7 @@
 }
 .contact{
     border: 1px solid var(--border-color) ;
-    color: var(--text-secondary-color);
+    color: var(--text-medium-color);
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -95,19 +95,26 @@
 
 
 .role{
-    color: var(--text-primary-color);
+    color: var(--text-heavy-color);
     font-weight: 600;
     display: flex;
     flex-direction: row;
     align-items: end;
     gap: 15px;
+    font-size: 14px;
+
+
 }
 .rate{
-    color: var(--text-secondary-color);
+    color: var(--text-heavy-color);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
 }
+.rate span {
+    font-size: 12px;
+    font-weight: 500;
 
+}
 .keywords{
     list-style: none;
     display: flex;
@@ -124,7 +131,7 @@
 .key{
     border: 1px solid var(--border-color);
     background-color: transparent;
-    color: var(--text-secondary-color);
+    color: var(--text-medium-color);
     border-radius: 12px;
     padding: 5px 10px;
     width: fit-content;
@@ -137,7 +144,7 @@
 
 }
 .jobdescription {
-    color: var(--text-secondary-color);
+    color: var(--text-medium-color);
     font-size: 14px;
     font-weight: 400;
     line-height: 16.8px;
@@ -145,7 +152,7 @@
 }
 
 .ratings{
-    color: var(--text-secondary-color);
+    color: var(--text-medium-color);
     display: flex;
     flex-direction: row;
     gap: 30px;

@@ -7,6 +7,8 @@ import horizontalLine from '../../../assets/icons/horizontalLine.svg'
 import brushIcon from '../../../assets/icons/brushIcon.svg'
 import libraryIcon from '../../../assets/icons/libraryIcon.svg'
 import styles from './Sidebar.module.css';
+import {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 const routeMap = {
@@ -22,7 +24,6 @@ const SideBar = () => {
     const [selected, setSelected] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
-
     useEffect(() => {
         const currentPath = location.pathname;
         setSelected(routeMap[currentPath] || '');
