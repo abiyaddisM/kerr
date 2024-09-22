@@ -16,13 +16,15 @@ export function PopOver({component,children,left = false}) {
                 <AnimatePresence>
                 {state && (
                     <motion.div
+                    className={styles.motion_container}
+                    style={!left?{right:0}:{left:0}}
                     key="child_container"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     >
-                        <div  className={styles.child_container} style={!left?{right:0}:{left:0}}>
+                        <div  className={styles.child_container} >
                             {children}
                         </div>
                     </motion.div>

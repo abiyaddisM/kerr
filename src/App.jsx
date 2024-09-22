@@ -8,6 +8,10 @@ import ArtPage from './pages/Art Page/ArtPage.jsx';
 import UserJobPage from './pages/User Job Page/UserJobPage.jsx';
 import PrivateLayout from './layouts/Private Layout/PrivateLayout.jsx';
 import {ProtectedRoutes} from "./utils/ProtectedRoutes.jsx";
+import LibraryPage from './pages/Library Page/LibraryPage.jsx';
+import ViewPage from './pages/View Page/ViewPage.jsx';
+
+
 function App () {
 
   return (
@@ -19,6 +23,9 @@ function App () {
             <Route path='/jobs' element={<JobPage/>}/>
             <Route path='/user-jobs' element={<UserJobPage/>}/>
             <Route path='/chat' element={<ChatPage/>}/>
+            <Route path='/library' element={<LibraryPage/>}/>
+            <Route path='/view' element={<ViewPage/>}/>
+
         </Route>
       </Routes>
 
