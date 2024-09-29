@@ -1,44 +1,31 @@
 import styles from './ChatContainer.module.css'
+import './ChatContainer.module.css'
 import ChatCard from "../../cards/Chat Card/ChatCard.jsx";
-export function ChatContainer() {
-    const data = [
-        {
-            id:'1',
-            image:'https://miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-            state:false,
-            name:'Gary Mave',
-            lastSentMessage:'Would you like to see...',
-            lastSentTime:'5 min'
-        },
-        {
-            id:'2',
-            image:'https://miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-            state:true,
-            name:'Gary Mave',
-            lastSentMessage:'Would you like to see...',
-            lastSentTime:'5 min'
-        },
-        {
-            id:'3',
-            image:'https://miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-            state:false,
-            name:'Gary Mave',
-            lastSentMessage:'Would you like to see...',
-            lastSentTime:'5 min'
-        },
-    ]
+import axios from "axios";
+import {useAuth} from "../../../utils/AuthContext.jsx";
+import {useEffect, useState} from "react";
+import formatDateTime from "../../../services/formatTimeService.js";
+import {NavLink, useNavigate} from "react-router-dom";
+export function ChatContainer({chats}) {
+    const {user} = useAuth();
     return (
-        <div className={styles.container}>
-            {data.map((value=>{
-                return <ChatCard
-                    key={value.id}
-                    image={value.image}
-                    state={value.state}
-                    name={value.name}
-                    lastSentMessage={value.lastSentMessage}
-                    lastSentTime={value.lastSentTime}
-                />
-            }))}
-        </div>
+           <div className={styles.container}>
+               {/* eslint-disable-next-line react/prop-types */}
+               {chats.map((value=>{
+                   return(
+
+                           <ChatCard
+                               key={value.id}
+                               chatID={value.id}
+                               image={value.profile_picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyXeKDN29AmZgZPLS7n0Bepe8QmVappBwZCeA3XWEbWNdiDFB'}
+                               state={false}
+                               name={value.first_name + ' ' + value.last_name}
+                               lastSentMessage={value.last_sent_message || '...'}
+                               lastSentTime={formatDateTime(value.created_at)}
+                           />
+                      )
+               }))}
+           </div>
+
     )
 }

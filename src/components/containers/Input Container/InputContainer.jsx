@@ -5,6 +5,8 @@ import addIcon from '../../../assets/icons/add.svg';
 import sendIcon from '../../../assets/icons/send.svg';
 import {useRef, useState} from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom";
+import {Add, Paperclip2, Send2} from "iconsax-react";
 
 // eslint-disable-next-line react/prop-types
 export function InputContainer({onClick,userID,chatID}) {
@@ -14,10 +16,10 @@ export function InputContainer({onClick,userID,chatID}) {
     const [imageUrls, setImageUrl] = useState([]);
     //ref for file explorer call
     const fileInputRef = useRef(null);
-    //for sending messages
+
     const sendMessage = ()=>{
         onClick({message:inputValue,images: {images:imageUrls}});
-        sendMessageToServer(userID,chatID,inputValue,imageUrls);
+        sendMessageToServer(userID,Number(chatID),inputValue,imageUrls);
         setImageUrl([]);
         setInputValue('')
     }
@@ -68,8 +70,13 @@ export function InputContainer({onClick,userID,chatID}) {
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />
-                <IconButton backgroundColor={'transparent'} backgroundColorHover={'#F4F7F9'} padding={'5px'} src={paperclipIcon} onClick={handleFileClick}/>
-                <IconButton backgroundColor={'transparent'} backgroundColorHover={'#F4F7F9'} padding={'5px'} src={addIcon}/>
+                <IconButton backgroundColor={'transparent'} backgroundColorHover={'#F4F7F9'} padding={'6px'} src={paperclipIcon} onClick={handleFileClick}>
+                    <Paperclip2 size="28" color="var(--secondary-color)"/>
+
+                </IconButton>
+                <IconButton backgroundColor={'transparent'} backgroundColorHover={'#F4F7F9'} padding={'6px'} src={addIcon}>
+                    <Add size="28" color="var(--secondary-color)"/>
+                </IconButton>
                 <input
                     className={styles.input}
                     type="text"
@@ -79,12 +86,14 @@ export function InputContainer({onClick,userID,chatID}) {
                     onKeyPress={sendMessageOnEnter}
                 />
                 <IconButton
-                    backgroundColor={'var(--primary-color)'}
-                    backgroundColorHover={'#272A2D'}
+                    backgroundColor={'transparent'}
+                    border={'1px solid var(--border-color)'}
                     padding={'8px'}
                     src={sendIcon}
                     onClick={sendMessage}
-                />
+                >
+                    <Send2 size="24" color="var(--secondary-color)"/>
+                </IconButton>
             </div>
         </>
     )

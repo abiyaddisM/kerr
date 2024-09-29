@@ -1,27 +1,26 @@
 .button{
     padding: 5px 10px;
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: 12px;
     width: fit-content;
     height: fit-content;
     background-color: var(--background-color);
     font-size: 12px;
-    font-weight: 600;
-    line-height: 14.4px;
+    font-weight: 500;
+    cursor: pointer;
+
 }
 
 
 .button:hover{
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--text-counter-color);
+    outline: 1px solid var(--border-color);
+
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out ;
-    transform: scale(1.1);
 }
 
+
 .selected{
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--text-counter-color);
+    outline: 1px solid var(--border-color);
+
 }
 

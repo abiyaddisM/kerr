@@ -6,34 +6,63 @@ import {useEffect, useState} from "react";
 import {IconButton} from "../../components/buttons/Icon Button/IconButton.jsx";
 import themeIcon from "../../assets/icons/moon.svg";
 import axios from "axios";
+import {useAuth} from "../../utils/AuthContext.jsx";
+import {useParams} from "react-router-dom";
+import {number} from "prop-types";
 
 function ChatPage(){
-    const [selectedChat,setSelectedChat] = useState(2)
     const [messages,setMessages] = useState([]);
     const [chats,setChats] = useState([]);
-    const userID = 1;
+    const {user} = useAuth()
+    const userID = user.id;
+    const {id} = useParams();
+    const [chatMessages] =useState({});
 
 
     const sendMessage = (data)=>{
-        const newMessage = { user_id: 1, created_at: new Date().toISOString(), message_text: data.message,message_image:data.images };
+        const newMessage = { user_id: userID, created_at: new Date().toISOString(), message_text: data.message,message_image:data.images };
         const updatedMessages = [...messages, newMessage]; // Create a new array
         setMessages(updatedMessages);
+        chatMessages[Number(id)].push(newMessage);
     }
 
+    useEffect(()=>{
+        axios.get('http://localhost:3000/api/v1/chat',{params:{userID:userID}})
+            .then((res=>{
+                setChats(res.data[0])
+                console.log('From chat',res.data[0]);
+            }))
+            .catch((error)=>{
+                console.log(error);
+            })
+    },[])
     return (
         <div className={styles.container}>
-            
+
             {/*<IconButton src={themeIcon} padding={'5px'} backgroundColor={'transparent'} backgroundColorHover={'transparent'} onClick={changeTheme}/>*/}
 
-            <div className={styles.message_container}>
-                <MessageContainer selectedChat={selectedChat} messages={messages} setMessages={setMessages}/>
-            </div>
             <div className={styles.chat_container}>
-                <ChatContainer/>
+                <ChatContainer chats={chats}/>
             </div>
-            <div className={styles.input_container}>
-                <InputContainer onClick={sendMessage} userID={userID} chatID={selectedChat}/>
-            </div>
+            {id ? (
+                <>
+                    <div className={styles.message_container}>
+                        <MessageContainer messages={messages} setMessages={setMessages} chats={chats}
+                                          chatMessages={chatMessages}/>
+                    </div>
+                    <div className={styles.input_container}>
+                        <InputContainer onClick={sendMessage} userID={userID} chatID={id}/>
+                    </div>
+                </>
+            )
+                :
+                (
+                    <div className={styles.select_chat}>
+                        <span>Select a chat to start messaging</span>
+                    </div>
+                )
+            }
+
         </div>
     )
 }
