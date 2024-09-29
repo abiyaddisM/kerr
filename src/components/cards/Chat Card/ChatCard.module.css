@@ -2,13 +2,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     cursor: pointer;
     transition: 0.2s;
+    margin: 0 10px;
+    border: 1px solid transparent;
+    border-radius: 16px;
 
 }
 .container:hover{
-    background: #F8F8F8;
+    border: 1px solid var(--border-color);
     transition: 0.2s;
 }
 
@@ -65,4 +68,8 @@
     font-size: 11px;
     font-weight: 500;
     color: var(--text-light-color);
+}
+.active_link .container{
+    border: 1px solid var(--border-color);
+
 }

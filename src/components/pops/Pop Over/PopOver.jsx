@@ -3,14 +3,29 @@ import {useEffect, useRef, useState} from "react";
 import { motion,AnimatePresence  } from 'framer-motion';
 // eslint-disable-next-line react/prop-types
 export function PopOver({component,children,left = false}) {
-    let [state,setState] = useState(false);
+    const [state,setState] = useState(false);
+    const componentRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (componentRef.current && !componentRef.current.contains(event.target)) {
+
+                setState(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+
     return (
         <div className={styles.parent_container}>
-            {state && <div className={styles.cover} onClick={() => {
-                setState(false)
-            }}/>}
             <div className={styles.container} >
-                <div className={styles.component_container} onClick={()=>{setState(!state)}}>
+                <div className={styles.component_container} onClick={()=>{setState(!state)}} ref={componentRef}>
                     {component}
                 </div>
                 <AnimatePresence>
