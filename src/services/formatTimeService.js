@@ -11,11 +11,11 @@ const formatDateTime = (isoDate) => {
     }
 
     if (diffInWeeks >= 1) {
-        return `${diffInWeeks} w${diffInWeeks > 1 ? 's' : ''}`;
+        return `${diffInWeeks} w${diffInWeeks > 1 ? '' : ''}`;
     }
 
     if (diffInDays >= 1) {
-        return `${diffInDays} day${diffInDays > 1 ? 's' : ''}`;
+        return `${diffInDays} d${diffInDays > 1 ? '' : ''}`;
     }
 
     // Extract hours and minutes

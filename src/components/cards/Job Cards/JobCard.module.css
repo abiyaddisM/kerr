@@ -73,18 +73,24 @@
     width: fit-content;
     height: fit-content;
     font-size: 13px;
-    font-weight: 600;
-    
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: background-color 0.3s;
+}
+.buttons button:hover {
+    background-color: #f3f3f3;
 }
 .apply{
     padding: 8px 20px;
     border-radius: 27px;
-    border: 1px solid var(--text-counter-color);
-    color: var(--text-counter-color);
-    background-color: var(--primary-color);
+    border: transparent;
+    outline: 1px solid var(--border-color) ;
+
 }
 .contact{
-    border: 1px solid var(--border-color) ;
+    outline: 1px solid var(--border-color) ;
     color: var(--text-medium-color);
     background-color: transparent;
     display: flex;

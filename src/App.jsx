@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import ChatPage from "./pages/Chat Page/ChatPage.jsx";
@@ -29,6 +28,7 @@ function App () {
       </Routes>
 
     </Router>
+
 
   )
 }
