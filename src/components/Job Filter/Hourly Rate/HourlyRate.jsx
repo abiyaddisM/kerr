@@ -1,33 +1,40 @@
 
 import styles from './HourlyRate.module.css'
-const HourlyRate = () => {
+const HourlyRate = ({values, selectedValues=[], onSelect}) => {
+
+    function handleCheckChange(index){
+        const rangeString = values[index].toString()
+        let newSelected
+        if(selectedValues.includes(rangeString))
+            newSelected = selectedValues.filter(item => item !== rangeString)
+        else
+            newSelected = [...selectedValues, rangeString]
+        // console.log(newSelected)
+        
+        onSelect(newSelected)
+    }
+
     return (
         <div className={styles.rate_filter}>
-                    <div className={styles.rate}>
-                        <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">Any</label>
-                    </div>
-                    <div className={styles.rate}>
-                        <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">1000<span>Birr</span>-10,000<span>Birr</span></label>
-                    </div>
-                    <div className={styles.rate}>
-                        <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">&lt; 100<span>Birr</span></label>
-                    </div>
-                    <div className={styles.rate}>
-                        <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">10,000<span>Birr</span> - 20,000<span>Birr</span></label>
-                    </div>
-                    <div className={styles.rate}>
-                        <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">100<span>Birr</span> - 1000<span>Birr</span></label>
-                    </div>
-                    <div className={styles.rate}>
-                        <input type="checkbox" name="rate" id="" />
-                        <label htmlFor="rate">&gt; 20,000</label>
-                    </div>
+            {values.map((value, index)=>(
+                <div key={index} className={styles.rate}>
+                    <input type="checkbox" 
+                    checked ={selectedValues.includes(value.toString())}
+                    onChange={() =>handleCheckChange(index)} />
+                    {/* <label>{`${value[0] === 0 ? '>' : value[0]} - ${value[1] === Infinity ? '<' : value[1]+1}`}</label> */}
+                    <label>
+    {value !== 'Any' 
+        ? `${value[0] === 0 ? ' < ' : value[0]}${(value[0] !== 0 && value[1] !== Infinity) ? ' - ' : ''}${value[1] === Infinity ? ' >' : value[1] + 1}`
+        : 'Any'}
+</label>
+
+
+
+
                 </div>
+            ))}
+                   
+        </div>
 
     )
 }

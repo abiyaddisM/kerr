@@ -1,33 +1,57 @@
 import './UserJobPage.css';
-import JobContainer from '../../components/containers/JobContainer/JobContainer';
 import UserJobsContainer from '../../components/containers/User Jobs Container/UserJobsContainer';
-import Keywords from '../../components/buttons/Keywords Buttons/Keywords';
+import ButtonGroup from '../../components/buttons/Button Group/ButtonGroup'
 import RadioButtons from '../../components/buttons/RadioButtons/RadioButtons';
-import SearchBar from '../../components/general/Search Bar/SearchBar';
-import SideBar from '../../components/general/Sidebar/Sidebar';
 import { useState } from 'react';
+import CommandButton from '../../components/buttons/Command Buttons/CommandButton';
+import CreateJobContainer from '../../components/containers/Create Job Container/CreateJobContainer'
+import ViewBidsContainer from '../../components/containers/View Bids Container/ViewBidsContainer'
+import { PopUp } from '../../components/pops/Pop Up/PopUp';
+import { IconButton } from '../../components/buttons/Icon Button/IconButton';
+import addIcon from '../../assets/icons/add.svg'
+import plusIcon from '../../assets/icons/plusIcon.svg'
+import arrowrightIcon from '../../assets/icons/arrowrightIcon.svg'
+
+
+
 
 const keywords1 = ['Contracted', 'Unassigned'];
 const keywords2 = ['All', 'Active', 'Completed', 'Cancelled'];
-const keywords3 = ['Create Jobs', 'View Bids'];
+const keywords3 = ['Create Job', 'View Bids'];
+
+const user = [
+  {
+      id: '1',
+      image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+      name: 'Aaron Mesfin'
+  },
+  {
+      id:'2',
+      image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+      name: 'Some Guy'
+  },
+  {
+      id: '3',
+      image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+      name: 'Kate Smith'
+  }
+]
 
 const jobs = [
   {
   id: 1,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[0],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
   messages: 3,
   date:'24/3/2024',
-  isAssigned: true,
+  isAssigned: false,
   isActive: true
 },
 {
   id: 2,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[2],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
@@ -38,33 +62,30 @@ const jobs = [
 },
 {
   id: 3,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[1],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
   messages: 3,
   date:'24/3/2024',
-  isAssigned: true,
+  isAssigned: false,
   isActive: true
   
 },
 {
   id: 4,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[0],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
   messages: 3,
   date:'24/3/2024',
-  isAssigned: true
+  isAssigned: false
 
 },
 {
   id: 5,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[2],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
@@ -75,8 +96,7 @@ const jobs = [
 },
 {
   id: 6,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[2],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
@@ -88,8 +108,7 @@ const jobs = [
 },
 {
   id: 7,
-  userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-  userName:'Some dude',
+  user: user[0],
   location:'Addis Ababa, Ethiopia',
   jobTitle:'Some Drawing',
   jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
@@ -103,21 +122,31 @@ const jobs = [
 ]
 
 const UserJobPage = () => {
-  const [selectedType, setSelectedType] = useState('Contracted');
-  const [selectedStatus, setSelectedStatus] = useState('All');
 
-  function handleTypeSelect(term) {
-    setSelectedType(term);
+  const [selectedType, setSelectedType] = useState(keywords1[0]);
+  const [selectedStatus, setSelectedStatus] = useState('All');
+  const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
+  const [isViewBidsOpen, setIsViewBidsOpen] = useState(false);
+
+  function handlePopup(button) {
+    console.log(button)
+    if (button === 'Create Job') {
+      setIsCreateJobOpen(!isCreateJobOpen);
+    } else if (button === 'View Bids') {
+      setIsViewBidsOpen(!isViewBidsOpen);
+    }
+  }
+  function handleTypeSelect(index) {
+    setSelectedType(keywords1[index]);
   }
 
-  function handleStatusSelect(term) {
-    setSelectedStatus(term);
+  function handleStatusSelect(index) {
+    setSelectedStatus(keywords2[index]);
   }
 
   const filteredJobs = jobs.filter(job => {
-    const typeFilter = selectedType === 'all' ||
-    (selectedType === 'Contracted' && job.isAssigned) ||
-    (selectedType === 'Unassigned' && !job.isAssigned);
+    const typeFilter = (selectedType === 'Contracted' && !job.isAssigned) ||
+    (selectedType === 'Unassigned' && job.isAssigned);
 
     // job.isAssigned === (selectedType === 'Contracted');
     const statusFilter = selectedStatus === 'All' || 
@@ -125,36 +154,55 @@ const UserJobPage = () => {
     (selectedStatus === 'Cancelled' && job.isActive === false) ||
     (selectedStatus === 'Completed' && job.isActive === undefined);
     
-    return statusFilter;
+    return statusFilter &&  typeFilter;
   });
+
+  
+
 
   return (
     <div className="user_job_page">
       <div className="buttons">
         <div className="filter_buttons">
           <RadioButtons 
-            className='type' 
+            // className='type' 
             keywords={keywords1} 
-            onClick={handleTypeSelect} 
+            onSelect={handleTypeSelect} 
             selected={selectedType}
+            border={true}
           />
         
         
-          <Keywords 
-            className='status'
+          <RadioButtons 
+            // className='status'
             keywords={keywords2}
-            onClick={handleStatusSelect}
+            onSelect={handleStatusSelect}
+            selected={selectedStatus}
+            border={true}
           />
         </div>
+
         <div className="bid_buttons">
-          <Keywords 
-            className='bids'
-            keywords={keywords3}
-          />
+          <PopUp 
+            component={<IconButton src={plusIcon} term='Create Job' onClick={()=>handlePopup('Create Job')}/>} 
+            state={isCreateJobOpen} setState={setIsCreateJobOpen}>
+              <CreateJobContainer/>
+          </PopUp>
+          <PopUp 
+            component={<IconButton src={arrowrightIcon} term='View Bids' onClick={()=>handlePopup('View Bids')}/>}
+            state={isViewBidsOpen} setState={setIsViewBidsOpen}>
+              <ViewBidsContainer/>
+          </PopUp>
         </div>
+        
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
-       <UserJobsContainer userJobs={filteredJobs} />
+      {filteredJobs.length !== 0?
+        <UserJobsContainer userJobs={filteredJobs} /> 
+      :
+      <div className="no_jobs">
+        No jobs found
+        </div>}
     </div>
   );
 };

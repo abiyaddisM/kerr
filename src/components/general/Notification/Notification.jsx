@@ -1,16 +1,25 @@
 import styles from './Notification.module.css'
 import bellIcon from '../../../assets/icons/bellIcon.svg'
 import {PopOver} from "../../pops/Pop Over/PopOver.jsx";
+import ProfileImage from '../Profile Image/ProfileImage.jsx';
+import ProfileCard from '../../cards/Profile Card/ProfileCard.jsx';
 
 
-const image = 'https://s3-alpha-sig.figma.com/img/1120/5a78/6937745c3558139520e2a36c339911c2?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CnlHAhBd1D0h5E0nrFu8lENfYMdV5GvOwb3MplvjcSbi5PW7IIt23UlWYEgaVwPSNH3LZ4WrlWBPLNLIXeVsIiM43apMo9pHtsjI7tuz-uvHCZEif7T8sVuzNyyl2KP8Cm0L4WuBC7MJoJvSpIMG6ZUvV7BHLvMpKBMiENfEGU4n3wDoixBDNWN5hZwRwii-uu7CWL-xq6zdXUng1Vy0QxjoDFV5LPfKNLawf0Z6FMp2tMSU9QMhd5wK3NJ0C9VofUrIXcJNVUC26gGVqcOv8t06iod9KvlC8Fxs8V9EDIhulGSB24sFZAwnjEXzL-3C2JkFP~SWf6KyGT0KUcChZw__'
+const image = '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg';
+const user = {
+    id: '1',
+    image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+    name: 'Aaron Mesfin'
+}
 const Notification = () => {
     return (
         <div className={styles.notification}>
             <PopOver component={<img src={bellIcon} alt="" />}>
                 <button>Press me</button>
             </PopOver>
-            <PopOver component={<img src={image} className={styles.profile_image} alt="" />}>
+            <PopOver component={
+                <ProfileImage  userId={1} src={image} size='32px'/>
+                }>
                 yoo
             </PopOver>
         </div>

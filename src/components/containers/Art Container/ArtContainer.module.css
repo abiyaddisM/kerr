@@ -3,7 +3,10 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 10px;
     width: auto;
-    
+    height: 100%;   
+    overflow: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 /* @media (max-width: 768px) {
     .art_container{

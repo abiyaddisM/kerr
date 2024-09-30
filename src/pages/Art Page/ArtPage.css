@@ -4,6 +4,13 @@
     width: auto;
     /* padding: 10px; */
     gap: 10px;
+    overflow: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
+}
+
+.art_container::-webkit-scrollbar{
+    display: none;
 }
 .keywords{
     width: fit-content;

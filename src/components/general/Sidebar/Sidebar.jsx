@@ -17,13 +17,15 @@ const routeMap = {
     '/user-jobs': 'user-jobs',
     '/chat': 'chats',
     '/library': 'library',
-    '/other': 'other' // Example for additional routes
+    '/portfolio': 'portfolio' // Example for additional routes
 };
 
 const SideBar = () => {
     const [selected, setSelected] = useState('');
+    const [hover, setHover] = useState('')
     const navigate = useNavigate();
     const location = useLocation();
+
     useEffect(() => {
         const currentPath = location.pathname;
         setSelected(routeMap[currentPath] || '');
@@ -37,12 +39,13 @@ const SideBar = () => {
     return (
         <div className={styles.sidebar}>
             <img src={logo} className={styles.kerrlogo} alt="Logo" />
-            
+            <div className={styles.buttons}>
             <button
                 className={`${styles.button} ${selected === 'home' ? styles.selected : ''}`}
                 onClick={() => handleClick('home', '/')}
             >
                 <img src={homeIcon} alt="Home" />
+                <p className={styles.label}>Home</p>
             </button>
             
             <button
@@ -50,15 +53,23 @@ const SideBar = () => {
                 onClick={() => handleClick('jobs', '/jobs')}
             >
                 <img src={briefcaseIcon} alt="Job Listing" />
+                <p className={styles.label}>Job Listing</p>
+
             </button>
 
+            </div>
+            
+            
             <img src={horizontalLine} className={styles.hr} alt="" />
+            <div className={styles.buttons}>
 
             <button
                 className={`${styles.button} ${selected === 'user-jobs' ? styles.selected : ''}`}
                 onClick={() => handleClick('user-jobs', '/user-jobs')}
             >
                 <img src={documentIcon} alt="User Jobs" />
+                <p className={styles.label}>My Project</p>
+
             </button>
 
             <button
@@ -66,23 +77,33 @@ const SideBar = () => {
                 onClick={() => handleClick('chats', '/chat')}
             >
                 <img src={messageIcon} alt="Chats" />
+                <p className={styles.label}>Chat</p>
+
             </button>
+            </div>
 
             <img src={horizontalLine} className={styles.hr} alt="" />
+
+            <div className={styles.buttons}>
+
+            <button
+                className={`${styles.button} ${selected === 'portfolio' ? styles.selected : ''}`}
+                onClick={() => handleClick('portfolio', '/portfolio')}
+            >
+                <img src={brushIcon} alt="Portfolio" />
+                <p className={styles.label}>Portfolio</p>
+
+            </button>
 
             <button
                 className={`${styles.button} ${selected === 'library' ? styles.selected : ''}`}
                 onClick={() => handleClick('library', '/library')}
             >
-                <img src={brushIcon} alt="Library" />
-            </button>
+                <img src={libraryIcon} alt="Library" />
+                <p className={styles.label}>Library</p>
 
-            <button
-                className={`${styles.button} ${selected === 'other' ? styles.selected : ''}`}
-                onClick={() => handleClick('other', '/other')}
-            >
-                <img src={libraryIcon} alt="Other" />
             </button>
+            </div>
         </div>
     );
 }

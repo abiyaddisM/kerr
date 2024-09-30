@@ -1,18 +1,21 @@
 import { element } from 'prop-types'
 import styles from './UserJobCard.module.css'
+import ProfileCard from '../Profile Card/ProfileCard'
+import ProfileImage from '../../general/Profile Image/ProfileImage'
 
-const UserJobCard = ({job: {userImage, userName, location, jobTitle, jobDescription, messages, date, isActive}}) =>{
+const UserJobCard = ({job: {user, location, jobTitle, jobDescription, messages, date, isActive}}) =>{
     return (
         <div className={styles.job_card}>
-            <img 
-            className={styles.profile_image} 
-            src={userImage}
-            alt="profile image" />
+
+            <ProfileImage 
+                userId ={user.id}
+                src={user.image}
+                size='46px'/>
 
             <div className={styles.details}>
                 <div className={styles.user_details}>
                     <div className={styles.username}>
-                        <p className={styles.name}>{userName}</p>
+                        <p className={styles.name}>{user.name}</p>
                         <p className={styles.location}>{location}</p>
                     </div>
                     <p className={

@@ -1,14 +1,14 @@
 import styles from './JobCard.module.css';
-import arrowrightIcon from '../../../assets/icons/arrow-rightIcon.svg'
+import arrowrightIcon from '../../../assets/icons/arrow-rightIcon.svg';
 import RatingStars from '../../general/RatingStars/RatingStars.jsx';
-
+import ProfileImage from '../../general/Profile Image/ProfileImage.jsx';
 
 // eslint-disable-next-line react/prop-types
-const JobCard = ({job: {image, name, title, hourlyrate, description, rating, totalPrice, successrate}}) => {
+const JobCard = ({ job }) => {
+    const { user, title, hourlyrate, description, rating, totalPrice, successrate } = job;
 
     const handleApplyClicked = () => {
         // navigates to apply window
-
     }
 
     const handleContactClicked = () => {
@@ -17,18 +17,12 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
 
     return (
         <div className={styles.jobcard}>
-
-            <img
-            className={styles.profile_image}
-            src={image}
-            alt="profile image" />
-
+            <ProfileImage userId={user.id} src={user.image} size='46px' />
 
             <div className={styles.jobcard_content}>
                 <div className={styles.line1}>
                     <div className={styles.nameaddress}>
-
-                        <p className={styles.names}>{name}</p>
+                        <p className={styles.names}>{user.name}</p> {/* Access name from user object */}
                         <p className={styles.address}>Ethiopia, Summit</p>
                     </div>
 
@@ -41,7 +35,6 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                             <img src={arrowrightIcon} alt="" />
                         </button>
                     </div>
-
                 </div>
 
                 <p className={styles.role}>
@@ -49,15 +42,13 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                     <span className={styles.rate}>{hourlyrate} <span>Birr/hr</span></span>
                 </p>
 
-
-                    <ul className={styles.keywords}>
-                        <li className={styles.key}>Realistic</li>
-                        <li className={styles.key}>Portrait</li>
-                        <li className={styles.key}>Cool</li>
-                        <li className={styles.key}>Futuristic</li>
-
-                    </ul>
-
+                <ul className={styles.keywords}>
+                    {job.keywords.map((k, index)=>
+                    <li className={styles.key}
+                        key={index}>
+                        {k}</li>
+                )}
+                </ul>
 
                 <div className={styles.description}>
                     <p className={styles.jobdescription}>
@@ -66,15 +57,13 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                 </div>
 
                 <div className={styles.ratings}>
-
-                    <RatingStars star={rating}/>
+                    <RatingStars star={rating} />
 
                     <p className={styles.payment}>
                         <p>
                             {totalPrice}
                             <span>Birr</span>
                         </p>
-
                         <span>total payout</span>
                     </p>
                     <p className={styles.success}>
@@ -85,7 +74,6 @@ const JobCard = ({job: {image, name, title, hourlyrate, description, rating, tot
                         <span>job success</span>
                     </p>
                 </div>
-
             </div>
         </div>
     )

@@ -1,16 +1,12 @@
-.container{
-    display: flex;
-    justify-content: space-between;
-}
 .searchbar{
     /* position: absolute; */
     top: 0;
     /* left: 0; */
-    width: 70%;
+    width: 100%;
     height: fit-content;
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 12px 20px;
+    padding: 0px 20px;
     display: flex;
     gap: 10px;
     
@@ -21,4 +17,5 @@
     outline: none;
     background-color: transparent;
     color: var(--text--dark-gray-color);
+    width: 100%;
 }

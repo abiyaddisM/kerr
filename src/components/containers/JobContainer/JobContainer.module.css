@@ -5,6 +5,12 @@
     padding: 10px, 0px;
     gap: 10px;
     width: auto;
-    height: 100%;
+    height: fit-content;
     overflow: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
 }
+
+/* .jobContainer::-webkit-scrollbar{
+    display: none;
+} */

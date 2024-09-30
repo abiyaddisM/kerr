@@ -1,11 +1,14 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .style_inputs{
     height: fit-content;
-    /* max-height: 40px;
-    overflow-y: hidden; */
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    .style_input{
+    .array{
         border: 1px solid var(--border-color);
         border-radius: 12px;
         padding: 5px 10px;
@@ -16,7 +19,18 @@
         gap: 5px;
         justify-content: center;
         align-items: center;
+
+        img{
+            cursor: pointer;
+        }
         
        
     }
+}
+input{
+    padding: 10px;
+    border: 1px solid var(--dark-border-color);
+    border-radius: 11px;
+    font-size: 12px;
+    width: 100%;
 }
