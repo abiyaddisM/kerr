@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import CommandButton from '../Command Buttons/CommandButton.jsx';
-import styles from './Keywords.module.css';
+import styles from './ButtonGroup.module.css';
 
-const Keywords = ({ keywords, onClick }) => {
-  const [selected, setSelected] = useState(keywords[0]);
+const ButtonGroup = ({ keywords, selected=null, onClick }) => {
+  // const [active, setActive] = useState(selected);
 
   const handleKeywordClick = (commandTerm) => {
-    setSelected(commandTerm);
-    if (onClick) {
-      onClick(commandTerm);
-    }
+    onClick?.(commandTerm);
   };
+  
 
   return (
     <div className={styles.container}>
@@ -27,4 +25,4 @@ const Keywords = ({ keywords, onClick }) => {
   );
 };
 
-export default Keywords;
+export default ButtonGroup;

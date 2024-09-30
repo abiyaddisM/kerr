@@ -1,7 +1,4 @@
 .layout{
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /* grid-template-columns: auto auto; */
     display: grid;
     grid-template-areas:
         'sidebar searchbar'
@@ -21,6 +18,8 @@
     grid-area: sidebar;
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: visible;
 }
 .search_bar{
     grid-area: searchbar;

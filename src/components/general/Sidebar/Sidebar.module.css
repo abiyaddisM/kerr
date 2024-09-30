@@ -4,7 +4,7 @@
     top: 20vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
     padding: 15px 5px;
     gap: 5px;
     height: fit-content;
@@ -14,18 +14,43 @@
     background-color: var(--background-color);
     /* z-index: 1000;  */
 }
+.label{
+    display: none;
+}
+.sidebar:hover{
 
+    .label{
+        display: block;
+        transition: ease-in-out 0.2s;
+    }
+}
 .button {
     padding: 8px 15px;
     border-radius: 8px; /* Consolidated radius */
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    gap: 10px;
     background-color: transparent;
+    color: var(--text-counter-color);
     border: none;
     cursor: pointer;
     height: fit-content;
-    width: auto;
+    width: 100%;
+}
+.buttons{
+    display: block;
+    width: 100%;
+    /* justify-content: start; */
+    align-items: start;
+}
+.label{
+    /* font-size: 16px; */
+    font-weight: 500;
+    color: var(--text-medium-color);
 }
 
-.button:hover, .selected {
+.button:hover, .selected{
     background-color: var(--primary-color);
 }
 
@@ -33,7 +58,14 @@
     filter: invert(100%);
 }
 
+.button:hover .label, .selected .label{
+    color: var(--text-counter-color);
+}
+
 .kerrlogo {
     padding-bottom: 16px; /* Consolidated padding */
     gap: 8px;
+}
+.hr{
+    width: auto;
 }

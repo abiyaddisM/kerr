@@ -1,27 +1,29 @@
-import { useState } from 'react';
-import styles from './RadioButtons.module.css'
+import React from 'react';
+import styles from './RadioButtons.module.css';
 
-
-const RadioButtons = ({keywords}) => {
-
-    const [selected, setSelected] = useState(null);
-
-    const handleSelect = (keyword) => {
-        console.log(keyword);
-        setSelected(keyword);
-    }
-
+const RadioButtons = ({ keywords = [], children, selected, onSelect, border = false }) => {
     return (
-        <div className={styles.container}>
-            {keywords.map((k, index)=>(
-                <div key={index} 
-                className={`${styles.button} ${selected === k? styles.selected : ''}`}
-                onClick={() => handleSelect(k)}>
-                    <p>{k}</p>
-                </div>
-            ))}
+        <div className={`${styles.container} ${border ? styles.outerBorder : ''}`}>
+            {keywords.length ? (
+                keywords.map((k, index) => (
+                    <div
+                        key={index}
+                        className={`${styles.button} ${selected === k ? styles.selected : ''} ${border ? styles.noBorder : ''}`}
+                        onClick={() => onSelect(index)}
+                    >
+                        <p>{k}</p>
+                    </div>
+                ))
+            ) : (
+                React.Children.map(children, (child, index) =>
+                    React.cloneElement(child, {
+                        selected: selected === child.props.commandTerm,
+                        onClick: () => onSelect(index),
+                    })
+                )
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default RadioButtons;

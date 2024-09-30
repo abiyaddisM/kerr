@@ -1,32 +1,34 @@
+import { useState } from 'react';
 import styles from './ClientRating.module.css'
 
-const ClientRating = () => {
+const ClientRating = ({values, selectedValues=[], onSelect}) => {
+
+    // const [selectedValues, setSelectedValues] = useState(values[0])
+
+    function handleCheckChange (index) {
+        let newSelected;
+        if(selectedValues.includes(values[index]))
+            newSelected = selectedValues.filter(value=> value != values[index])
+        else
+            newSelected = [...selectedValues, values[index]]
+
+        onSelect(newSelected)    
+
+    }
+    
     return(
         <div className={styles.rating_filter}>
-                    <div className={styles.rating}>
-                        <input type="checkbox" name="all" id="" />
-                        <label htmlFor="rating">All</label>
-                    </div>
-                    <div className={styles.rating}>
-                        <input type="checkbox" name="3" id="" />
-                        <label htmlFor="rating">3 Star</label>
-                    </div>
-                    <div className={styles.rating}>
-                        <input type="checkbox" name="1" id="" />
-                        <label htmlFor="rating">1 Star</label>
-                    </div>
-                    <div className={styles.rating}>
-                        <input type="checkbox" name="4" id="" />
-                        <label htmlFor="rating">4 Star</label>
-                    </div>
-                    <div className={styles.rating}>
-                        <input type="checkbox" name="2" id="" />
-                        <label htmlFor="rating">2 Star</label>
-                    </div>
-                    <div className={styles.rating}>
-                        <input type="checkbox" name="5" id="" />
-                        <label htmlFor="rating">5 Star</label>
-                    </div>
+                    {values.map((value, index)=> (
+                        <div key={index} className={styles.rating}>
+                            <input type='checkbox' 
+                            checked = {selectedValues.includes(value)}
+                            onChange={()=>handleCheckChange(index)}
+                                />
+                            <label>{value}</label>
+                            </div>
+                    ))
+                    }
+               
                 </div>
     )
 }

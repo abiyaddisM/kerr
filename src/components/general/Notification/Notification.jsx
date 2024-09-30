@@ -1,6 +1,5 @@
 import styles from './Notification.module.css'
 import bellIcon from '../../../assets/icons/bellIcon.svg'
-import {PopOver} from "../../pops/Pop Over/PopOver.jsx";
 import {useAuth} from "../../../utils/AuthContext.jsx";
 
 
@@ -10,7 +9,7 @@ const Notification = () => {
     return (
         <div className={styles.notification}>
             <PopOver component={<img src={bellIcon} alt="" />}>
-            </PopOver>
+
             <PopOver component={<img src={image} className={styles.profile_image} alt="" />}>
                 <div className={styles.button_container}>
                     <button className={styles.button}>Profile</button>

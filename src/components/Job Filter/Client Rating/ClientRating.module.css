@@ -50,8 +50,8 @@ input:checked{
 }
 
 .rating input:checked::before{
-    background-color: var(--primary-color); /* Background color when checked */
-    border-color: var(--primary-color); /* Border color when checked */
+    background-color: var(--primary-color); 
+    border-color: var(--primary-color); 
 }
 
 .rating label {

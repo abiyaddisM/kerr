@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+.container:hover{
+    border-color: var(--dark-border-color);
+    /* transform: scale(1.01); */
+}
+.name{
+    color: var(--text-medium-color);
+    font-weight: 500;
+    /* font-size: ; */
+}

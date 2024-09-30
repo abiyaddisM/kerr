@@ -1,5 +1,6 @@
-import SearchBar from "../../components/general/Search Bar/SearchBar.jsx";
+
 import SideBar  from "../../components/general/Sidebar/Sidebar.jsx";
+import TopBar from "../../components/general/Top Bar/TopBar.jsx";
 import styles from './PrivateLayout.module.css'
 
 const PrivateLayout = ({children}) => {
@@ -9,7 +10,7 @@ const PrivateLayout = ({children}) => {
                 <SideBar/>
             </div>
             <div className={styles.search_bar}>
-                <SearchBar/>
+                <TopBar/>
             </div>
             <div className={styles.content}>
                 {children}

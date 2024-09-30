@@ -1,0 +1,32 @@
+.custom-select-container {
+    position: relative;
+    display: inline-block;
+    /* width: 100%; */
+}
+
+/* Custom arrow positioning, if needed */
+.custom-select-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust to control spacing from the edge */
+    transform: translateY(-50%);
+    width: 12px; /* Adjust width */
+    height: 12px; /* Adjust height */
+    background: url('path-to-your-arrow-image.svg') no-repeat center;
+    background-size: contain; /* Scale the image to fit */
+    pointer-events: none; /* Ensure the arrow does not block interactions */
+}
+
+.sort_by {
+    padding: 10px 40px 10px 10px; /* Add padding to the right to make space for the arrow */
+    border: 1px solid var(--dark-border-color);
+    border-radius: 11px;
+    background-color: transparent;
+    font-size: 12px;
+    appearance: none;
+    background: url('../../../assets/icons/dropDown.svg') no-repeat right 10px center;
+    background-size: 12px; /* Adjust size if needed */
+    width: 100%;
+
+}

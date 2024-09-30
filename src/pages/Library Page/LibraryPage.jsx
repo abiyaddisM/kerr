@@ -1,15 +1,11 @@
-import LibraryContainer from "../../components/containers/Library Container/LibraryContainer";
-import styles from "./LibraryPage.module.css"
+import styles from './LibraryPage.module.css';
 
-function LibraryPage(){
-   return(
-    <LibraryContainer>
-        
-    </LibraryContainer>
-   );
-        
+const LibraryPage = () => {
+    return(
+        <div className={styles.libraryPage}>
+            <h2>Coming soon...</h2>
+        </div>
+    )
 
 }
-
 export default LibraryPage;
-

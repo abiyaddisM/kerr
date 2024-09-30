@@ -6,8 +6,14 @@
     gap: 10px; 
     transition: grid-template-columns 0.3s ease;
     height: 100%;
+    overflow: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
 }
 
+.jobpage::-webkit-scrollbar{
+    display: none;
+}
 .jobfilter{
     /* padding: 10px; */
     width: 100%;
@@ -18,4 +24,11 @@
     display: flex;
     width: 100%;
     height: 100%;
+    overflow: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
+}
+
+.jobcontainer::-webkit-scrollbar{
+    display: none;
 }

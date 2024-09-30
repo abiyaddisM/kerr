@@ -4,6 +4,23 @@
     gap:10px;
     width: 100%;
     /* padding: 10px 20px; */
+    overflow: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
+}
+
+.no_jobs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    color: var(--text-light-color);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.user_job_page::-webkit-scrollbar{
+    display: none;
 }
 .buttons{
     display: flex;
@@ -20,6 +37,12 @@
 .bid_buttons{
     display: flex;
     width: fit-content;
+    height: inherit;
+    padding: 0px 10px;
+    gap: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    align-items: center;
 }
 .type, .status, .bids{
     width: fit-content;

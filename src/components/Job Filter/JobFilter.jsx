@@ -1,33 +1,72 @@
 import styles from './JobFilter.module.css'
 import ClientRating from './Client Rating/ClientRating'
 import HourlyRate from './Hourly Rate/HourlyRate';
-import StyleInputs from './Style/Style';
-import { useState } from 'react';
+import StyleInputs from './StyleInputs/StyleInputs';
+import { useEffect, useState } from 'react';
+import Timeline from './Timeline/Timeline';
+import LocationInput from './LocationInput/LocationInput';
 
 
-const JobFilter = () => {
+const JobFilter = ({onStateChange}) => {
 
+    const ratings = ['All', '3 Star', '1 Star', '4 Star', '2 Star', '5 Star' ]
+    const hourlyRates = [
+        'Any',
+        [0, 99], 
+        [100, 999], 
+        [1000, 9999], 
+        [10000, 19999], 
+        [20000, Infinity]
+    ]
 
-    const [newStyle, setNewStyle] = useState('')
+    const [searchTerm, setSearchTerm] = useState('')
+
+    // const [newStyle, setNewStyle] = useState('')
 
     const [artStyles, setartStyles] = useState([]);
 
-    const handleAdd = () => {
-        if (newStyle.trim()) { // Only add non-empty values
-            setartStyles(prevKeys => [...prevKeys, newStyle]);
-            setNewStyle(''); // Clear the input field
-        }
-    };
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault(); // Prevent default behavior
-            handleAdd(); // Call the handleAdd function when Enter is pressed
-        }
-    };
-    const handleStyleDelete = (index)=>{
-        console.log(index)
-        setartStyles(prev => prev.filter((_,i) => i!==index))
+    const [location, setLocation] = useState('')
+
+    const [clientRating, setClientRating] = useState([ratings[0]])
+
+    const [timeline, setTimeline] = useState('')
+
+    const [hourlyRange, setHourlyRange] = useState([hourlyRates[0]])
+
+    const handleRatingSelect = (newSelected) => {
+        setClientRating(newSelected)
+        // console.log(newSelected);
     }
+
+    const handleRangeSelect = (newSelected) => {
+        setHourlyRange(newSelected)
+        // console.log(newSelected)
+    }
+
+    
+    const handleSearchTermChange = (term) => {
+        setSearchTerm(term)
+    }
+
+    const handleLocationChange = (term) => {
+        setLocation(term)
+    }
+
+    const handleTimelineChange = (newTimeline) => {
+        setTimeline(newTimeline)
+    }
+    
+    const handleStyleChange = (newStyles) => {
+        setartStyles(newStyles)
+        // console.log(newStyles)
+
+    }
+
+    useEffect(()=>{
+        onStateChange({searchTerm, artStyles, location, clientRating, timeline, hourlyRange})
+    }, [searchTerm, artStyles, location, clientRating, timeline, hourlyRange])
+
+
     return(
         
         <div className={styles.filtercontainer}>
@@ -38,43 +77,34 @@ const JobFilter = () => {
 
             <div className={styles.filter}>
                 <label htmlFor="search">Search</label>
-                <input type="text" id='search' placeholder='Search...'/>
+                <input type="text" id='search' placeholder='Search...'  
+                value={searchTerm} onChange={(e)=>handleSearchTermChange(e.target.value)}/>
+
             </div>
 
             <div className={styles.filter}>
                 <label htmlFor="style">Style</label>
-                <input 
-                    type="text" 
-                    id='style' 
-                    placeholder='Enter style...' 
-                    value = {newStyle}
-                    onKeyDown={handleKeyDown}
-                    onChange={(e)=>setNewStyle(e.target.value)}/>
-                    <StyleInputs keys={artStyles} onDelete={handleStyleDelete} />
+                <StyleInputs keys={artStyles}  onChange={handleStyleChange} />
             </div>
 
             <div className={styles.filter}>
                 <label htmlFor="location">Location</label>
-                <input type="text" id='location' placeholder='Enter location...' />
+                {/* <input type="text" id='location' placeholder='Enter location...' /> */}
+                <LocationInput location={location} onChange={handleLocationChange}/>
             </div>
 
             <div className={styles.filter}>
                 <label htmlFor="rating">Client Rating</label>
-                <ClientRating/>
+                <ClientRating values={ratings} selectedValues={clientRating} onSelect = {handleRatingSelect} />
             </div>
 
             <div className={styles.filter}>
-                <label htmlFor="sort">Sort By</label>
-                <select className={styles.sort_by} id="sort" name="sort">
-                    <option value="Recent Post">Recent Post</option>
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                </select>
+                <Timeline timeline={timeline} onChange={handleTimelineChange}/>
             </div>
 
             <div className={styles.filter}>
                 <label htmlFor="rate">Hourly Rate</label>
-                <HourlyRate/>
+                <HourlyRate values={hourlyRates} selectedValues={hourlyRange} onSelect={handleRangeSelect}/>
             </div>
         </div>
         
