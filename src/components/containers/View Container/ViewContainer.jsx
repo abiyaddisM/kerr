@@ -7,11 +7,8 @@ function ViewContainer({images}){
                 return<img key={(index)} src={img} className={styles.img}/>
                     
             })}
-
         </div>
     );
-
-
 }
 
 export default ViewContainer
