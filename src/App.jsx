@@ -12,6 +12,10 @@ import {PublicRoutes} from "./utils/PublicRoutes.jsx";
 import {AuthProvider} from "./utils/AuthContext.jsx";
 import {SignUpPage} from "./pages/Sign Up Page/SignUpPage.jsx";
 import ViewPage from "./pages/View Page/ViewPage.jsx";
+import LibraryContainer from './components/containers/Library Container/LibraryContainer.jsx';
+import LibraryPage from './pages/Library Page/LibraryPage.jsx';
+import PortfolioPage from './pages/Portfolio Page/PortfolioPage.jsx';
+import ProfilePage from './pages/Profile Page/ProfilePage.jsx';
 function App () {
 
   return (
@@ -25,9 +29,13 @@ function App () {
                   <Route path='/' element={<ArtPage/>}/>
                   <Route path='/jobs' element={<JobPage/>}/>
                   <Route path='/user-jobs' element={<UserJobPage/>}/>
+                  <Route path='/library' element={<LibraryPage/>}/>
                   <Route path='/chat' element={<ChatPage/>}/>
-                  <Route path='/other' element={<ViewPage/>}/>
-                  <Route path='/chat/:id' element={<ChatPage/>}/>
+                  <Route path='/view' element={<ViewPage/>}/>
+                  {/* <Route path='/art/:id' element={<ViewPage />} /> */}
+                  {/* <Route path='/chat/:id' element={<ChatPage/>}/> */}
+                  <Route path='/portfolio' element= {<PortfolioPage/>}/>
+                  <Route path='/profile' element= {<ProfilePage/>}/>
               </Route>
 
               <Route element={<PublicRoutes/>}>
