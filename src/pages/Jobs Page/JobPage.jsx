@@ -4,7 +4,8 @@ import JobContainer from "../../components/containers/JobContainer/JobContainer"
 import TopBar from "../../components/general/Top Bar/TopBar";
 import Notification from "../../components/general/Notification/Notification";
 import './JobPage.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 
@@ -27,7 +28,7 @@ const user = [
 ]
 
 
-const jobs = [
+let jobs = [
     {
         id: '1',
         title: 'Tech Start Up Logo Design',
@@ -81,7 +82,25 @@ const jobs = [
 
 
 
+
 const JobPage = () => {
+
+    // const [jobs, setJobs] = useState([])
+
+//     useEffect (()=>{
+//         const fetchJobs = async () =>{
+//             try{
+//             const res = await axios.get('https://auth.bizawit.com/api/v1/job')
+//             setJobs(res.data[0])
+//             console.log(res)
+
+
+//             }catch(e){console.log(e)}
+//     }
+//     fetchJobs();
+
+// },[])
+    
     
     const [filteredJobs, setFilteredJobs] = useState(jobs);
 
@@ -142,13 +161,14 @@ const JobPage = () => {
 
     return(
         <div className="jobpage">
+            <div className="jobcontainer">
+                <JobContainer jobs={jobs}/>
+            </div>
             <div className="jobfilter">
                 <JobFilter  onStateChange={handleJobFilter}
                  />
             </div>
-            <div className="jobcontainer">
-                <JobContainer jobs={filteredJobs}/>
-            </div>
+            
         </div>
     )
 }

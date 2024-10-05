@@ -170,7 +170,7 @@
     flex-direction: column;
     gap: 10px;
     justify-self: end;
-
+    
 
 }
 
@@ -189,6 +189,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+    width: 100%;
 
 }
 

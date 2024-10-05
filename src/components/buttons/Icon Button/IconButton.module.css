@@ -1,9 +1,19 @@
 .container{
     display: flex;
     width: fit-content;
-    border-radius: 50%;
+    height: auto;
     cursor: pointer;
+    
+    gap: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 34px;
+    padding: 8px 8px 8px 20px;
     transition: background-color 0.3s ease;
+    align-items: center;
+}
 
-
+p{
+    text-wrap: nowrap;
+    font-size: 13px;
+    font-weight: 600;
 }

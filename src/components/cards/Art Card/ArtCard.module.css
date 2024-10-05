@@ -43,10 +43,12 @@
     font-weight: 400;
     line-height: 14.4px;
     color: var(--text-dark-gray-color);
-    
-    
-  
-    
+    text-wrap: wrap;
+    display: -webkit-box;
+    -webkit-line-clamp:1; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
 }
 
 p.art_title{

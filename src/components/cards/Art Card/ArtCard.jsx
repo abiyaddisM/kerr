@@ -2,15 +2,18 @@
 import ProfileImage from '../../general/Profile Image/ProfileImage';
 import styles from './ArtCard.module.css';
 import dot from '../../../assets/icons/dot.svg'
+import { useNavigate } from 'react-router-dom';
 
 
 
-const ArtCard = ({art: {id, image, title, userName, userImage, views, postDate} }) => {
+const ArtCard = ({art: {id, images, title, userName, userImage, views, postDate}, onClick}) => {
+    const navigate = useNavigate()
 
-    function handleArtClicked(id){
+    function handleArtClicked(art){
         //expad the art in new window
-        console.log(id);
-
+        console.log(art.id);
+        onClick(art);
+        
     }
 
     
@@ -54,9 +57,9 @@ const ArtCard = ({art: {id, image, title, userName, userImage, views, postDate} 
 
     return (
         <div className={styles.art_card}
-            onClick={()=>handleArtClicked(id)}>
+            onClick={handleArtClicked}>
             
-            <img src={image} className={styles.art_image} alt="art" />
+            <img src={images[0]} className={styles.art_image} alt="art" />
             
             <div className={styles.art_caption}>
                 

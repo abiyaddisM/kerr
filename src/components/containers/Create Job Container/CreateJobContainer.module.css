@@ -1,3 +1,105 @@
 .container{
     width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 7fr;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.job_form{
+    width: 100%;
+    display: grid;
+    height: 100%;
+    gap: 10px;
+}
+
+.job_info{
+    grid-row: 1;
+    display: grid;
+    gap: 10px;
+    padding: 10px 5px;
+    border: 1px solid var(--border-color);
+}
+legend{
+    font-size: 16px;
+    color: var(--text-heavy-color);
+    font-weight: 600;
+}
+
+label{
+    font-size: 14px;
+        color: var(--text-heavy-color);
+}
+.description{
+    height: fit-content;
+    text-wrap: wrap;
+}
+
+input{
+    padding: 12px;
+    font-size: 14px;
+}
+
+textarea{
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.checks{
+    /* display: flex; */
+    /* justify-content: space-around; */
+}
+
+.checkboxLabel {
+    display: flex;
+    
+    /* justify-content: left; */
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkboxLabel input {
+    width: 10%;
+    padding: 0;
+}   
+
+
+
+.buttons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-self: flex-end;
+}
+
+.buttons .btn,
+.buttons .btn2 {
+    padding: 10px 35px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-color: var(--background-color);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.buttons .btn:hover {
+    background-color: var(--gray-200);
+    color: inherit;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+
+}
+
+.buttons .btn2 {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+
+}
+
+.buttons .btn2:hover {
+    background-color: var(--gray-200);
+    color: var(--primary-color);
+    /* filter: invert(100%); */
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }

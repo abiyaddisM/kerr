@@ -1,0 +1,41 @@
+.container {
+    /* width: auto; */
+    max-width: 300px ;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    background-color: var(--bacground-color);
+    /* box-sizing: border-box; */
+
+    /* Include padding in the width */
+}
+
+.list{
+    padding: 8px 0px;
+}
+
+.notification {
+    /* border: 1px solid var(--border-color); */
+    border-radius: 5px;
+    background-color: var(--background-color);
+    width: 250px;
+    /* Ensure it takes full width */
+    padding: 8px 0px;
+    /* box-sizing: border-box; */
+    /* Include padding and border in width */
+}
+.notification:hover{
+    background-color: var(--border-color);
+}
+
+.message{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-medium-color);
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: wrap;
+}

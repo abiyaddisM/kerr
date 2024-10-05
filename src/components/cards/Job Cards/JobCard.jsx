@@ -1,14 +1,23 @@
 import styles from './JobCard.module.css';
-import arrowrightIcon from '../../../assets/icons/arrow-rightIcon.svg';
 import RatingStars from '../../general/RatingStars/RatingStars.jsx';
 import ProfileImage from '../../general/Profile Image/ProfileImage.jsx';
+import { ArrowCircleRight2 } from 'iconsax-react';
+import { PopUp } from '../../pops/Pop Up/PopUp.jsx';
+import { useState } from 'react';
+import ApplyContainer from '../../containers/Apply Container/ApplyContainer.jsx';
+import ContactContainer from '../../containers/Contact Container/ContactContainer.jsx';
 
 // eslint-disable-next-line react/prop-types
 const JobCard = ({ job }) => {
     const { user, title, hourlyrate, description, rating, totalPrice, successrate } = job;
 
+    const [isApplyOpen, setIsApplyOpen] = useState(false)
+    const [isContactOpen, setIsContactOpen] = useState(false)
+
+
     const handleApplyClicked = () => {
         // navigates to apply window
+
     }
 
     const handleContactClicked = () => {
@@ -27,13 +36,27 @@ const JobCard = ({ job }) => {
                     </div>
 
                     <div className={styles.buttons}>
-                        <button className={styles.apply} onClick={handleApplyClicked}>
+                        <PopUp
+                        component={<button className={styles.apply} onClick={handleApplyClicked}>
                             Apply
-                        </button>
-                        <button className={styles.contact} onClick={handleContactClicked}>
+                        </button>}
+                        state={isApplyOpen}
+                        setState={setIsApplyOpen}
+                        >
+                            <ApplyContainer setIsOpen={setIsApplyOpen}/>
+                        </PopUp>
+                        <PopUp
+
+                        component={<button className={styles.contact} onClick={handleContactClicked}>
                             Contact
-                            <img src={arrowrightIcon} alt="" />
-                        </button>
+                            <ArrowCircleRight2 size="18px" variant="Bulk" color="var(--dark-border-color"/>
+                            {/* <img src={arrowrightIcon} alt="" /> */}
+                        </button>}
+                        state={isContactOpen}
+                        setState={setIsContactOpen}
+                        >
+                            <ContactContainer/>
+                        </PopUp>
                     </div>
                 </div>
 

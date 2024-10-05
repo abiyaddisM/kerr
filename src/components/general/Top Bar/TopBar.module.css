@@ -13,7 +13,7 @@
     padding: 8px 20px;
     display: flex;
     gap: 10px;
-    
+    cursor: pointer;
 
 }
 .searchbar input{
@@ -21,4 +21,5 @@
     outline: none;
     background-color: transparent;
     color: var(--text--dark-gray-color);
+    /* cursor: pointer; */
 }

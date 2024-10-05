@@ -11,6 +11,7 @@ import { IconButton } from '../../components/buttons/Icon Button/IconButton';
 import addIcon from '../../assets/icons/add.svg'
 import plusIcon from '../../assets/icons/plusIcon.svg'
 import arrowrightIcon from '../../assets/icons/arrowrightIcon.svg'
+import { AddCircle, ArrowCircleRight, ArrowCircleRight2 } from 'iconsax-react';
 
 
 
@@ -184,12 +185,22 @@ const UserJobPage = () => {
 
         <div className="bid_buttons">
           <PopUp 
-            component={<IconButton src={plusIcon} term='Create Job' onClick={()=>handlePopup('Create Job')}/>} 
+            component={
+              <IconButton 
+              src={<AddCircle size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
+              term={'Create Job'}>
+              </IconButton>
+            } 
             state={isCreateJobOpen} setState={setIsCreateJobOpen}>
-              <CreateJobContainer/>
+              <CreateJobContainer setIsOpen={setIsCreateJobOpen}/>
           </PopUp>
           <PopUp 
-            component={<IconButton src={arrowrightIcon} term='View Bids' onClick={()=>handlePopup('View Bids')}/>}
+            component={
+            <IconButton 
+            src={<ArrowCircleRight2 size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
+            term={'View Bids'}>
+            </IconButton>
+          }
             state={isViewBidsOpen} setState={setIsViewBidsOpen}>
               <ViewBidsContainer/>
           </PopUp>

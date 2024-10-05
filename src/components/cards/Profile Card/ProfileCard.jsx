@@ -8,12 +8,13 @@ const ProfileCard = ({user}) => {
 
     return (
         <div className={styles.container}
-        // onClick={() => navigate(`/profile/${user.id}`)}
+        onClick={() => navigate(`/profile`)}
         >
             <ProfileImage 
             userId={user.id}
             src={user.image}
             size='42px'
+
             />
             <p className={styles.name}>{user.name}</p>
         </div>

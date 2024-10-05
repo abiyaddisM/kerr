@@ -70,18 +70,6 @@ const JobFilter = ({onStateChange}) => {
     return(
         
         <div className={styles.filtercontainer}>
-            <div className={styles.title}>
-                <p>Filter</p>
-                <p>Advanced</p>
-            </div>
-
-            <div className={styles.filter}>
-                <label htmlFor="search">Search</label>
-                <input type="text" id='search' placeholder='Search...'  
-                value={searchTerm} onChange={(e)=>handleSearchTermChange(e.target.value)}/>
-
-            </div>
-
             <div className={styles.filter}>
                 <label htmlFor="style">Style</label>
                 <StyleInputs keys={artStyles}  onChange={handleStyleChange} />
