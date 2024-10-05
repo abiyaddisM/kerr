@@ -2,7 +2,7 @@ import styles from './PopOver.module.css'
 import {useEffect, useRef, useState} from "react";
 import { motion,AnimatePresence  } from 'framer-motion';
 // eslint-disable-next-line react/prop-types
-export function PopOver({component,children,left = false}) {
+export function PopOver({component,children,left = true}) {
     const [state,setState] = useState(false);
     const componentRef = useRef(null);
 
