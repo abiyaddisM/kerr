@@ -5,7 +5,6 @@ import {useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../utils/AuthContext.jsx";
 import {Loading} from "../../components/general/Loading/Loading.jsx";
-import * as PropTypes from "prop-types";
 import {TextInput} from "../../components/inputs/Text Input/TextInput.jsx";
 import {Link} from "react-router-dom";
 
@@ -19,13 +18,14 @@ export const LoginPage = () => {
     function _login(){
         setIsLoading(true)
        setTimeout(()=>{
-           axios.post('http://localhost:3000/api/v1/auth',{username:username,password:password})
+           axios.post('https://auth.bizawit.com/api/v1/auth',{username:username,password:password})
                .then((res)=>{
                    // eslint-disable-next-line react-hooks/rules-of-hooks
                    login(res.data.token)
                    setIsLoading(false)
                })
                .catch((error)=>{
+                   alert("problem")
                    console.log(error.message)
                    setIsLoading(false)
                })
@@ -47,7 +47,7 @@ export const LoginPage = () => {
                         <PasswordInput value={password} onChange={setPassword} onEnterKeyPress={_login}/>
                             <button onClick={_login} className={styles.button}>Login</button>
                         <div className={styles.line}></div>
-                        <p className={styles.sign_up_p}>Don't have an account? <b><Link style={{textDecoration:"none",color:"black"}} to={'/sign-up'}>Sign Up</Link></b></p>
+                        <p className={styles.sign_up_p}>Don't have an account? <b><Link style={{textDecoration:"none",color:"black"}} to={"/sign-up"}>Sign Up</Link></b></p>
                     </div>
                 </main>
                 <div className={styles.image_container}>

@@ -100,7 +100,7 @@ export function InputContainer({onClick,userID,chatID}) {
 }
 function sendMessageToServer(userID,chatID,inputValue,imageUrls){
     const data = {userID:userID,chatID:chatID,messageText:inputValue,messageImage:{images:imageUrls.length === 0 ? [] : ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyXeKDN29AmZgZPLS7n0Bepe8QmVappBwZCeA3XWEbWNdiDFB']},messageType:'normal'};
-    axios.post('http://localhost:3000/api/v1/message',data)
+    axios.post('https://auth.bizawit.com/api/v1/message',data)
         .then((response)=>{
             console.log(response)
         })

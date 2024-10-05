@@ -8,7 +8,7 @@ import {useAuth} from "../../../utils/AuthContext.jsx";
 import {useParams} from "react-router-dom";
 import {More, Star1} from "iconsax-react";
 
-const SOCKET_SERVER_URL = "http://localhost:3000";
+const SOCKET_SERVER_URL = "https://auth.bizawit.com";
 // eslint-disable-next-line react/prop-types
 export function MessageContainer({messages,setMessages,chats,chatMessages}) {
     const [name,setName]=useState('');
@@ -54,7 +54,7 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
 
     useEffect(()=>{
         const fetchMessages = () => {
-            axios.get('http://localhost:3000/api/v1/message', {
+            axios.get('https://auth.bizawit.com/api/v1/message', {
                 params:{
                     chatID:id,
                     page: 1,

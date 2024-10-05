@@ -15,6 +15,7 @@ import ViewPage from "./pages/View Page/ViewPage.jsx";
 import LibraryContainer from './components/containers/Library Container/LibraryContainer.jsx';
 import LibraryPage from './pages/Library Page/LibraryPage.jsx';
 import PortfolioPage from './pages/Portfolio Page/PortfolioPage.jsx';
+import ProfilePage from './pages/Profile Page/ProfilePage.jsx';
 function App () {
 
   return (

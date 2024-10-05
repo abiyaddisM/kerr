@@ -1,8 +1,10 @@
-import './ProfilePage.css'
+import style from './ProfilePage.module.css'
+import ProfilePageContainer from '../../components/containers/Profile Page Container/ProfilePageContainer';
 
 const ProfilePage = () => {
     return (
-        <div className="profile-page">
+        <div className={style.container}>
+            <ProfilePageContainer/>
 
         </div>
     )

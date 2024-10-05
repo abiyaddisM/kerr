@@ -27,7 +27,7 @@ function ChatPage(){
     }
 
     useEffect(()=>{
-        axios.get('http://localhost:3000/api/v1/chat',{params:{userID:userID}})
+        axios.get('https://auth.bizawit.com/api/v1/chat',{params:{userID:userID}})
             .then((res=>{
                 setChats(res.data[0])
                 console.log('From chat',res.data[0]);

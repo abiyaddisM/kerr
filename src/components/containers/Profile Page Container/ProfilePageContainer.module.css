@@ -1,0 +1,176 @@
+.container{ 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px;
+    
+    
+    
+
+}
+
+.profilecontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: #E0E4E8;
+    padding: 20px;
+
+}
+
+.porifile_pic{
+    width: 113px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+
+}
+
+.username{
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38px;
+
+}
+
+.address{
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+
+}
+
+.profile_info{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex; 
+    gap: 25px;
+}
+
+.Rating{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Ratingcontainer{
+    width: fit-content;
+
+}
+
+
+.top{
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #656565;
+    margin-bottom: 5px;
+}
+
+.bottom{
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.profile_Buttons{
+    display: flex;
+    gap: 10px;
+}
+
+.pbuttons{
+    background-color: transparent;
+    padding: 8px 20px 8px 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E0E4E8;
+    border-radius: 27px;
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #000000;
+}
+
+.filter_buttons{
+    display: flex;
+    justify-content: start;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: #E0E4E8;
+    width: fit-content;
+    padding: 5px;
+    gap: 5px;
+
+}
+
+.fbuttons{
+    width: 120px;
+    background-color: transparent;
+    padding: 10px 20px 10px 20px;
+    border: none;
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #000000;
+
+}
+
+.post_container{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: #E0E4E8;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    overflow:scroll;
+
+}
+
+.post_container::-webkit-scrollbar {
+    display: none;
+}
+
+.pics{
+    width: 338px;
+    border-radius: 20px;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    
+    
+    
+    
+}
+
+.job_container{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: #E0E4E8;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    overflow:scroll;
+
+}
+
+.job_container::-webkit-scrollbar {
+    display: none;
+}
+
+.selected{
+    background-color: var(--border-color);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--dark-border-color);
+    border-radius: 27px;
+}
