@@ -32,10 +32,9 @@ function App () {
                   <Route path='/library' element={<LibraryPage/>}/>
                   <Route path='/chat' element={<ChatPage/>}/>
                   <Route path='/view' element={<ViewPage/>}/>
-                  {/* <Route path='/art/:id' element={<ViewPage />} /> */}
+                  <Route path='/art/:id' element={<ViewPage />} />
                   {/* <Route path='/chat/:id' element={<ChatPage/>}/> */}
                   <Route path='/portfolio' element= {<PortfolioPage/>}/>
-                  <Route path='/profile' element= {<ProfilePage/>}/>
               </Route>
 
               <Route element={<PublicRoutes/>}>

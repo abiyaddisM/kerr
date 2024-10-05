@@ -1,0 +1,50 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.share{
+    display: grid;
+    /* display: flex; */
+    grid-template-rows: minmax(200px, 2fr) 1fr 1fr;
+    gap: 10px;
+    /* flex-direction: column; */
+}
+
+.share>div {
+    /* align-items: center; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* height: 100%; */
+}
+
+.internal_share{
+
+}
+
+.external_share{
+
+}
+.app_buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.share .link_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid var(--dark-border-color);
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-light-color);
+    height: fit-content;
+    background-color: var(--background-color);
+    
+}

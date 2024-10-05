@@ -2,7 +2,7 @@ import styles from './CommandButton.module.css';
 
 const CommandButton = ({ commandTerm, selected = false, onClick }) => {
   return (
-    <button
+    <button 
       className={`${styles.button} ${selected ? styles.selected : ''}`}
       onClick={() => onClick(commandTerm)}
     >

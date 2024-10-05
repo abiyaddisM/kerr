@@ -9,6 +9,7 @@ import libraryIcon from '../../../assets/icons/libraryIcon.svg'
 import styles from './Sidebar.module.css';
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import { Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
 
 
 const routeMap = {
@@ -44,7 +45,8 @@ const SideBar = () => {
                 className={`${styles.button} ${selected === 'home' ? styles.selected : ''}`}
                 onClick={() => handleClick('home', '/')}
             >
-                <img src={homeIcon} alt="Home" />
+                {/* <img src={homeIcon} alt="Home" /> */}
+                <Home variant={selected !== 'home'? '' :"Bold"} color="var(--primary-color)"/>
                 <p className={styles.label}>Home</p>
             </button>
             
@@ -52,7 +54,8 @@ const SideBar = () => {
                 className={`${styles.button} ${selected === 'jobs' ? styles.selected : ''}`}
                 onClick={() => handleClick('jobs', '/jobs')}
             >
-                <img src={briefcaseIcon} alt="Job Listing" />
+                {/* <img src={briefcaseIcon} alt="Job Listing" /> */}
+                <Briefcase variant={selected !== 'jobs'? '' :"Bold"} color="var(--primary-color)"/>
                 <p className={styles.label}>Job Listing</p>
 
             </button>
@@ -67,16 +70,19 @@ const SideBar = () => {
                 className={`${styles.button} ${selected === 'user-jobs' ? styles.selected : ''}`}
                 onClick={() => handleClick('user-jobs', '/user-jobs')}
             >
-                <img src={documentIcon} alt="User Jobs" />
+                {/* WHATS THE ICON?? */}
+                {/* <img src={documentIcon} alt="User Jobs" /> */}
+                <ClipboardText variant={selected !== 'user-jobs'? '' :"Bold"} color="var(--primary-color)"/>
                 <p className={styles.label}>My Project</p>
 
             </button>
 
             <button
                 className={`${styles.button} ${selected === 'chats' ? styles.selected : ''}`}
-                onClick={() => handleClick('chats', '/chat')}
+                onClick={() => handleClick('chat', '/chat')}
             >
-                <img src={messageIcon} alt="Chats" />
+                <Message variant={selected !== 'chat'? '' :"Bold"} color="var(--primary-color)"/>
+                {/* <img src={messageIcon} alt="Chats" /> */}
                 <p className={styles.label}>Chat</p>
 
             </button>
@@ -90,7 +96,8 @@ const SideBar = () => {
                 className={`${styles.button} ${selected === 'portfolio' ? styles.selected : ''}`}
                 onClick={() => handleClick('portfolio', '/portfolio')}
             >
-                <img src={brushIcon} alt="Portfolio" />
+                {/* <img src={brushIcon} alt="Portfolio" /> */}
+                <BrushSquare variant={selected !== 'portfolio'? '' :"Bold"} color="var(--primary-color)"/>
                 <p className={styles.label}>Portfolio</p>
 
             </button>
@@ -99,7 +106,8 @@ const SideBar = () => {
                 className={`${styles.button} ${selected === 'library' ? styles.selected : ''}`}
                 onClick={() => handleClick('library', '/library')}
             >
-                <img src={libraryIcon} alt="Library" />
+                {/* <img src={libraryIcon} alt="Library" /> */}
+                <VideoSquare variant={selected !== 'library'? '' :"Bold"} color="var(--primary-color)"/>
                 <p className={styles.label}>Library</p>
 
             </button>
