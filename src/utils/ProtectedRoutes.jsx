@@ -3,8 +3,7 @@ import PrivateLayout from "../layouts/Private Layout/PrivateLayout.jsx";
 import {useAuth} from "./AuthContext.jsx";
 
 export const ProtectedRoutes = () => {
-    // const { isAuthenticated } = useAuth();
-    const isAuthenticated = true;
+    const { isAuthenticated } = useAuth();
     return isAuthenticated
         ?
         <PrivateLayout>
