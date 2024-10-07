@@ -33,7 +33,8 @@ function App () {
                   <Route path='/chat' element={<ChatPage/>}/>
                   <Route path='/view' element={<ViewPage/>}/>
                   <Route path='/art/:id' element={<ViewPage />} />
-                  {/* <Route path='/chat/:id' element={<ChatPage/>}/> */}
+                  <Route path='/chat/:id' element={<ChatPage/>}/>
+                  <Route path='/profile' element= {<ProfilePage/>}/>
                   <Route path='/portfolio' element= {<PortfolioPage/>}/>
               </Route>
 

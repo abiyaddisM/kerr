@@ -4,21 +4,40 @@ import style from './ProfilePageContainer.module.css'
 import { PopUp } from '../../pops/Pop Up/PopUp'
 import RatingStars from '../../general/RatingStars/RatingStars'
 import { PopOver } from '../../pops/Pop Over/PopOver'
+import { useNavigate } from 'react-router-dom'
 
 const keywords=["post","job"]
 function ProfilePageContainer(){
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
+    const [isDeleted, setIsDeleted] = useState(false);
+    const [isclosed, setIsClosed] = useState(false);
+
+    const navigate=useNavigate();
     
 
     function handleCatageorySelect(index){
         setCategory(keywords[index])
         console.log(Category)
+    }
 
+    const handleDelete = () => {
+        setTimeout(() => {
+            setIsDeleted(true);
+        }, 2000);
 
         
 
+
+      };
+    
+
+    function goToChat(){
+        navigate('/chat')
+
     }
+
+
         return(
         <div className={style.container}>
             <div className={style.profilecontainer}>
@@ -81,9 +100,28 @@ function ProfilePageContainer(){
                             <RatingStars star={1}></RatingStars>
                         </div> 
 
-                </div>
+                        </div>
                     </PopOver>
-                    <button className={style.pbuttons}>Message</button>
+                    <button onClick={goToChat} className={style.pbuttons}>Message</button>
+                    <PopOver left={true} component={<button className={style.pbuttons} state={isclosed} setState={setIsClosed}>Delete</button>}>
+                    {!isDeleted ? 
+                        (<>
+                        <div className={style.delbtncon}>
+                        <div className={style.delcon}>
+                            <p className={style.deltext}>This action will delete "something" permanently.</p>
+                            <p className={style.deltext}>Do you want to continue?</p>
+                        </div>
+                        <div className={style.ynbtncon}>
+                                <button className={style.ynbtn}>Cancel</button>
+                            <button className={style.ynbtn} onClick={handleDelete} >Delete</button>     
+                        </div>
+
+                        </div>
+                        </>):(<p>Deleted Succesfully!</p>)
+                        
+                        
+                    }
+                    </PopOver>
 
                 </div>
             </div>
