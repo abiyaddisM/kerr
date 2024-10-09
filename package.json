@@ -16,6 +16,7 @@
     "date-fns": "^4.1.0",
     "firebase": "^10.12.5",
     "framer-motion": "^11.3.28",
+    "html2pdf.js": "^0.10.2",
     "iconsax-react": "^0.0.8",
     "jwt-decode": "^4.0.0",
     "prop-types": "^15.8.1",
