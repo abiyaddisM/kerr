@@ -36,6 +36,7 @@ function App () {
                   <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/view' element={<ViewPage/>}/>
                   <Route path='/art/:id' element={<ViewPage />} />
+                  <Route path='/profile' element= {<ProfilePage/>}/>
                   <Route path='/portfolio' element= {<PostPage/>}/>
                   <Route path='/profile/:id' element= {<ProfilePage/>}/>
               </Route>
