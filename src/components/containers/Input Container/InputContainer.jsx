@@ -7,6 +7,7 @@ import {useRef, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import {Add, Paperclip2, Send2} from "iconsax-react";
+import {Utils} from "../../../utils/utils.js";
 
 // eslint-disable-next-line react/prop-types
 export function InputContainer({onClick,userID,chatID}) {
@@ -17,12 +18,15 @@ export function InputContainer({onClick,userID,chatID}) {
     //ref for file explorer call
     const fileInputRef = useRef(null);
 
-    const sendMessage = ()=>{
+    const sendMessage = async ()=>{
         onClick({message:inputValue,images: {images:imageUrls}});
-        sendMessageToServer(userID,Number(chatID),inputValue,imageUrls);
+        const newImageUrl = await Utils.uploadImages(imageUrls)
+
+        sendMessageToServer(userID,Number(chatID),inputValue,newImageUrl);
         setImageUrl([]);
         setInputValue('')
     }
+
     //for sending messages on enter key press
     const sendMessageOnEnter = (event)=>{
         if(event.key === 'Enter')
@@ -70,11 +74,11 @@ export function InputContainer({onClick,userID,chatID}) {
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />
-                <IconButton backgroundColor={'transparent'} backgroundColorHover={'#F4F7F9'} padding={'6px'} src={paperclipIcon} onClick={handleFileClick}>
+                <IconButton backgroundColor={'transparent'} backgroundColorHover={'var(--highlight-color)'} padding={'6px'} src={paperclipIcon} onClick={handleFileClick}>
                     <Paperclip2 size="28" color="var(--secondary-color)"/>
 
                 </IconButton>
-                <IconButton backgroundColor={'transparent'} backgroundColorHover={'#F4F7F9'} padding={'6px'} src={addIcon}>
+                <IconButton backgroundColor={'transparent'} backgroundColorHover={'var(--highlight-color)'} padding={'6px'} src={addIcon}>
                     <Add size="28" color="var(--secondary-color)"/>
                 </IconButton>
                 <input
@@ -90,6 +94,7 @@ export function InputContainer({onClick,userID,chatID}) {
                     border={'1px solid var(--border-color)'}
                     padding={'8px'}
                     src={sendIcon}
+                    backgroundColorHover={'var(--highlight-color)'}
                     onClick={sendMessage}
                 >
                     <Send2 size="24" color="var(--secondary-color)"/>
@@ -99,7 +104,8 @@ export function InputContainer({onClick,userID,chatID}) {
     )
 }
 function sendMessageToServer(userID,chatID,inputValue,imageUrls){
-    const data = {userID:userID,chatID:chatID,messageText:inputValue,messageImage:{images:imageUrls.length === 0 ? [] : ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyXeKDN29AmZgZPLS7n0Bepe8QmVappBwZCeA3XWEbWNdiDFB']},messageType:'normal'};
+    console.log(imageUrls)
+    const data = {userID:userID,chatID:chatID,messageText:inputValue,messageImage:{images:imageUrls},messageType:'normal'};
     axios.post('https://auth.bizawit.com/api/v1/message',data)
         .then((response)=>{
             console.log(response)

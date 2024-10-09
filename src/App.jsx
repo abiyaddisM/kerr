@@ -16,6 +16,7 @@ import LibraryContainer from './components/containers/Library Container/LibraryC
 import LibraryPage from './pages/Library Page/LibraryPage.jsx';
 import PortfolioPage from './pages/Portfolio Page/PortfolioPage.jsx';
 import ProfilePage from './pages/Profile Page/ProfilePage.jsx';
+import {PostPage} from "./pages/Post Page/PostPage.jsx";
 function App () {
 
   return (
@@ -27,14 +28,16 @@ function App () {
 
               <Route element={<ProtectedRoutes/>}>
                   <Route path='/' element={<ArtPage/>}/>
+                  <Route path='/post' element= {<PostPage/>}/>
                   <Route path='/jobs' element={<JobPage/>}/>
                   <Route path='/user-jobs' element={<UserJobPage/>}/>
                   <Route path='/library' element={<LibraryPage/>}/>
                   <Route path='/chat' element={<ChatPage/>}/>
+                  <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/view' element={<ViewPage/>}/>
                   <Route path='/art/:id' element={<ViewPage />} />
-                  {/* <Route path='/chat/:id' element={<ChatPage/>}/> */}
-                  <Route path='/portfolio' element= {<PortfolioPage/>}/>
+                  <Route path='/portfolio' element= {<PostPage/>}/>
+                  <Route path='/profile/:id' element= {<ProfilePage/>}/>
               </Route>
 
               <Route element={<PublicRoutes/>}>
