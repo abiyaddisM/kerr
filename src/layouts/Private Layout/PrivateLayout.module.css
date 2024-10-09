@@ -20,6 +20,11 @@
     align-items: center;
     position: relative;
     overflow: visible;
+    width: 68px;
+}
+.side_bar_wrapper{
+    position: absolute;
+
 }
 .search_bar{
     grid-area: searchbar;

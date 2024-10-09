@@ -55,6 +55,7 @@
     font-weight: 500;
     color: #000000;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .porifile_pic{
@@ -192,6 +193,9 @@
     width: 100%;
 
 }
+
+
+
 
 
 

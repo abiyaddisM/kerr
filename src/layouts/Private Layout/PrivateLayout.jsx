@@ -6,8 +6,10 @@ import styles from './PrivateLayout.module.css'
 const PrivateLayout = ({children}) => {
     return (
         <div className={styles.layout}>
-            <div className={styles.side_bar} l>
-                <SideBar/>
+            <div className={styles.side_bar} >
+                <div className={styles.side_bar_wrapper}>
+                    <SideBar/>
+                </div>
             </div>
             <div className={styles.search_bar}>
                 <TopBar/>
