@@ -5,6 +5,7 @@ const ProfilePage = () => {
     return (
         <div className={style.container}>
             <ProfilePageContainer/>
+            
 
         </div>
     )

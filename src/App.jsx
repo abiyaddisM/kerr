@@ -14,8 +14,11 @@ import {SignUpPage} from "./pages/Sign Up Page/SignUpPage.jsx";
 import ViewPage from "./pages/View Page/ViewPage.jsx";
 import LibraryContainer from './components/containers/Library Container/LibraryContainer.jsx';
 import LibraryPage from './pages/Library Page/LibraryPage.jsx';
-import PortfolioPage from './pages/Portfolio Page/PortfolioPage.jsx';
+import PostPage from './pages/Post Page/PostPage.jsx';
 import ProfilePage from './pages/Profile Page/ProfilePage.jsx';
+import ProfilePageContainer from './components/containers/Profile Page Container/ProfilePageContainer.jsx';
+import JobDetailPage from './pages/Job Detail Page/JobDetailPage.jsx';
+import ContractPage from './pages/Contract Page/ContractPage.jsx';
 function App () {
 
   return (
@@ -33,8 +36,12 @@ function App () {
                   <Route path='/chat' element={<ChatPage/>}/>
                   <Route path='/view' element={<ViewPage/>}/>
                   <Route path='/art/:id' element={<ViewPage />} />
-                  {/* <Route path='/chat/:id' element={<ChatPage/>}/> */}
-                  <Route path='/portfolio' element= {<PortfolioPage/>}/>
+                  <Route path='/chat/:id' element={<ChatPage/>}/>
+                  <Route path='/profile' element={<ProfilePage/>}/>
+                  <Route path='/profile:id' element={<ProfilePage/>}/>
+                  <Route path='/job/:job_id' element={<JobDetailPage/>}/>
+                  <Route path='/contract' element={<ContractPage/>}/>
+                  <Route path='/post' element= {<PostPage/>}/>
               </Route>
 
               <Route element={<PublicRoutes/>}>

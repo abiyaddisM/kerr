@@ -11,8 +11,8 @@ const CreateJobContainer = ({setIsOpen}) => {
             jobTitle: event.target.job_title.value,
             jobDescription: event.target.job_description.value,
             jobPrice: parseFloat(event.target.job_price.value),
-            jobNegotiation: true,
-            jobPublic: false
+            jobNegotiation: event.target.isNegotiable.checked,
+            jobPublic: event.target.isPublic.checked,
         }
 
         console.log(newJob)

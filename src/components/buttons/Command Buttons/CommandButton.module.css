@@ -14,7 +14,7 @@
 
 .button:hover{
     outline: 1px solid var(--border-color);
-
+    
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out ;
 }
 

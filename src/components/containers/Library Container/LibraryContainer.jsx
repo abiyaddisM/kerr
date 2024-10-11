@@ -107,7 +107,7 @@ function LibraryContainer(){
         {/* {arts.map((value)=>{
             return <ArtCard key={value.id} art={value} className={styles.art_card}/>
         })} */}
-        <ArtContainer arts={arts}/>
+        <ArtContainer arts={arts} />
     </div>
 
     );

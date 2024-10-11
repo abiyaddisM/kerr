@@ -9,7 +9,7 @@ import libraryIcon from '../../../assets/icons/libraryIcon.svg'
 import styles from './Sidebar.module.css';
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import { Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
+import { Additem, AddSquare, Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
 
 
 const routeMap = {
@@ -79,9 +79,9 @@ const SideBar = () => {
 
             <button
                 className={`${styles.button} ${selected === 'chats' ? styles.selected : ''}`}
-                onClick={() => handleClick('chat', '/chat')}
+                onClick={() => handleClick('chats', '/chat')}
             >
-                <Message variant={selected !== 'chat'? '' :"Bold"} color="var(--primary-color)"/>
+                <Message variant={selected !== 'chats'? '' :"Bold"} color="var(--primary-color)"/>
                 {/* <img src={messageIcon} alt="Chats" /> */}
                 <p className={styles.label}>Chat</p>
 
@@ -93,12 +93,12 @@ const SideBar = () => {
             <div className={styles.buttons}>
 
             <button
-                className={`${styles.button} ${selected === 'portfolio' ? styles.selected : ''}`}
-                onClick={() => handleClick('portfolio', '/portfolio')}
+                className={`${styles.button} ${selected === 'post' ? styles.selected : ''}`}
+                onClick={() => handleClick('post', '/post')}
             >
                 {/* <img src={brushIcon} alt="Portfolio" /> */}
-                <BrushSquare variant={selected !== 'portfolio'? '' :"Bold"} color="var(--primary-color)"/>
-                <p className={styles.label}>Portfolio</p>
+                <AddSquare variant={selected !== 'post'? '' :"Bold"} color="var(--primary-color)"/>
+                <p className={styles.label}>New Post</p>
 
             </button>
 
