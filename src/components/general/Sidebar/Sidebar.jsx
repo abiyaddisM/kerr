@@ -33,9 +33,10 @@ const SideBar = () => {
 
     return (
         <div className={styles.sidebar}>
-            <img src={logo} className={styles.kerrlogo} alt="Logo"/>
+                <img src={logo} className={styles.kerrlogo} alt="Logo"/>
+
             <div className={styles.buttons}>
-                <button
+            <button
                     className={`${styles.button} ${selected === 'home' ? styles.selected : ''}`}
                     onClick={() => handleClick('home', '/')}
                 >

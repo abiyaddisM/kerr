@@ -8,7 +8,6 @@ export class Utils{
                 const response = await fetch(url);
                 const blob = await response.blob();
                 console.log(blob)
-
                 const formData = new FormData();
                 formData.append('file', blob);
                 const res = await axios.post('https://auth.bizawit.com/api/v1/upload',formData,{
