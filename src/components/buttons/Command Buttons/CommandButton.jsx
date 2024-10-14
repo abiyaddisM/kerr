@@ -4,7 +4,7 @@ const CommandButton = ({ commandTerm, selected = false, onClick }) => {
   return (
     <button 
       className={`${styles.button} ${selected ? styles.selected : ''}`}
-      onClick={() => onClick(commandTerm)}
+      onClick={onClick}
     >
       {commandTerm}
     </button>

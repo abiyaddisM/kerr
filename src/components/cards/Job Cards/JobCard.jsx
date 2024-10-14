@@ -6,14 +6,22 @@ import { PopUp } from '../../pops/Pop Up/PopUp.jsx';
 import { useState } from 'react';
 import ApplyContainer from '../../containers/Apply Container/ApplyContainer.jsx';
 import ContactContainer from '../../containers/Contact Container/ContactContainer.jsx';
+import VerifyContainer from '../../containers/Verify Container/VerifyContainer.jsx';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-const JobCard = ({ job }) => {
+const JobCard = ({ job, onClick=()=>{}, onDelete=(id)=>{}, personalAccess=false}) => {
     const { user, title, hourlyrate, description, rating, totalPrice, successrate } = job;
 
     const [isApplyOpen, setIsApplyOpen] = useState(false)
     const [isContactOpen, setIsContactOpen] = useState(false)
 
+    const handleJobClicked = (job) => {
+        
+        onClick(job)
+    // console.log('j')
+    }
 
     const handleApplyClicked = () => {
         // navigates to apply window
@@ -24,17 +32,25 @@ const JobCard = ({ job }) => {
         // navigates to message
     }
 
+    const handleDelete = (id) => {
+        try{
+         onDelete(id)
+
+            // .then 
+        }catch(e){console.log(e)}
+    }
+
     return (
         <div className={styles.jobcard}>
-            <ProfileImage userId={user.id} src={user.image} size='46px' />
+            <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
 
             <div className={styles.jobcard_content}>
                 <div className={styles.line1}>
                     <div className={styles.nameaddress}>
-                        <p className={styles.names}>{user.name}</p> {/* Access name from user object */}
+                        <p className={styles.names}>{job.full_name}</p> {/* Access name from user object */}
                         <p className={styles.address}>Ethiopia, Summit</p>
                     </div>
-
+                    {!personalAccess ?
                     <div className={styles.buttons}>
                         <PopUp
                         component={<button className={styles.apply} onClick={handleApplyClicked}>
@@ -43,11 +59,12 @@ const JobCard = ({ job }) => {
                         state={isApplyOpen}
                         setState={setIsApplyOpen}
                         >
-                            <ApplyContainer setIsOpen={setIsApplyOpen}/>
+                            <ApplyContainer setIsOpen={setIsApplyOpen} jobID={job.jobID}/>
                         </PopUp>
                         <PopUp
 
-                        component={<button className={styles.contact} onClick={handleContactClicked}>
+                        component={
+                        <button className={styles.contact} onClick={handleContactClicked}>
                             Contact
                             <ArrowCircleRight2 size="18px" variant="Bulk" color="var(--dark-border-color"/>
                             {/* <img src={arrowrightIcon} alt="" /> */}
@@ -58,15 +75,32 @@ const JobCard = ({ job }) => {
                             <ContactContainer/>
                         </PopUp>
                     </div>
+                    :
+                    <div className={styles.buttons}>
+                        {/* <PopUp
+                        component={ */}
+                        <button className={styles.apply} onClick={()=>handleDelete(job.job_id)}>
+                            Delete
+                        </button>
+                        {/* }
+                        state={isApplyOpen}
+                        setState={setIsApplyOpen}
+                        >
+                         <VerifyContainer/>   
+                        </PopUp> */}
+                    </div>
+                    }
                 </div>
+                
 
                 <p className={styles.role}>
-                    {title}
+                    {job.job_title}
                     <span className={styles.rate}>{hourlyrate} <span>Birr/hr</span></span>
                 </p>
 
                 <ul className={styles.keywords}>
-                    {job.keywords.map((k, index)=>
+                    {job.tags &&
+                    job.tags.split(',').map((k, index)=>
                     <li className={styles.key}
                         key={index}>
                         {k}</li>
@@ -75,7 +109,7 @@ const JobCard = ({ job }) => {
 
                 <div className={styles.description}>
                     <p className={styles.jobdescription}>
-                        {description}
+                        {job.job_description}
                     </p>
                 </div>
 
@@ -95,6 +129,12 @@ const JobCard = ({ job }) => {
                             <span>%</span>
                         </p>
                         <span>job success</span>
+                    </p>
+                    
+                    <p 
+                    className={styles.details_link} 
+                    onClick={handleJobClicked}>
+                        Details...
                     </p>
                 </div>
             </div>

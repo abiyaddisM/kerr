@@ -1,3 +1,58 @@
 .container{
     width: 100%;
+    overflow: hidden;
+    scrollbar-width: none;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+
+    gap: 10px;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.switch_views{
+    padding: 5px 10px;
+    width: fit-content;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.switch_views .btn{
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+/* .switch_views .btn:hover {
+    background-color: var(--secondary-color);
+} */
+
+.switch_views .selected{
+    background-color: var(--secondary-color);
+    color: var(--text-counter-color);
+}
+
+.content{
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.scrollable-row::-webkit-scrollbar {
+    display: none;
+}
+
+.sent_bids , .received_bids{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.job_summary{
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 10px;
+    width: 100%;
 }

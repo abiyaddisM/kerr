@@ -6,7 +6,7 @@ const ProfileImage = ({userId, src, size='28px'}) => {
     const navigate = useNavigate();
 
     function handelProfileClick(id){
-        navigate(`/profile`)
+        navigate(`/profile`);
     }
     return(
             <img 

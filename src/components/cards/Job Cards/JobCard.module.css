@@ -216,3 +216,12 @@
     }
     
 }
+
+.details_link{
+    cursor: pointer;
+    color: var(--text-heavy-color);
+    font-size: 13px;
+    font-weight: 500;
+    align-items: center;
+    justify-self: end;
+}
