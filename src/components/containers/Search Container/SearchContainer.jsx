@@ -1,3 +1,4 @@
+import axios from 'axios'
 import CommandButton from '../../buttons/Command Buttons/CommandButton'
 import ButtonGroup from '../../buttons/Button Group/ButtonGroup'
 import RadioButtons from '../../buttons/RadioButtons/RadioButtons'
@@ -6,7 +7,7 @@ import styles from './SearchContainer.module.css'
 import ArtContainer from '../Art Container/ArtContainer'
 import ProfileContainer from '../Profile Container/ProfileContainer'
 import JobContainer from '../JobContainer/JobContainer'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
@@ -158,57 +159,57 @@ const profiles = [
     }
 ]
 
-const jobs = [
-  {
-      id: '1',
-      title: 'Tech Start Up Logo Design',
-      description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
-      rating: 3,
-      user: profiles[1],
-      keywords: ['Portrait', 'Futuristic', '3D', 'Sketch', 'Oil'],
-      hourlyrate: 650,
-      totalPrice: 3000,
-      successrate: 80
+// const jobs = [
+//   {
+//       id: '1',
+//       title: 'Tech Start Up Logo Design',
+//       description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
+//       rating: 3,
+//       user: profiles[1],
+//       keywords: ['Portrait', 'Futuristic', '3D', 'Sketch', 'Oil'],
+//       hourlyrate: 650,
+//       totalPrice: 3000,
+//       successrate: 80
       
 
-  },
-  {
-      id: '2',
-      title: 'Tech Start Up Logo Design',
-      description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
-      rating: 5,
-      user: profiles[0],
-      keywords: ['Futuristic', '3D', 'Sketch', 'Oil'],
-      hourlyrate: 170,
-      totalPrice: 3000,
-      successrate: 60
+//   },
+//   {
+//       id: '2',
+//       title: 'Tech Start Up Logo Design',
+//       description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
+//       rating: 5,
+//       user: profiles[0],
+//       keywords: ['Futuristic', '3D', 'Sketch', 'Oil'],
+//       hourlyrate: 170,
+//       totalPrice: 3000,
+//       successrate: 60
 
 
-  }, 
-  {
-      id: '3',
-      title: 'Tech Start Up Logo Design',
-      description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
-      rating: 2,
-      user: profiles[2],
-      keywords: ['Realistic', 'Sketch', 'Oil'],
-      hourlyrate: 950,
-      totalPrice: 3000,
-      successrate: 90
+//   }, 
+//   {
+//       id: '3',
+//       title: 'Tech Start Up Logo Design',
+//       description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
+//       rating: 2,
+//       user: profiles[2],
+//       keywords: ['Realistic', 'Sketch', 'Oil'],
+//       hourlyrate: 950,
+//       totalPrice: 3000,
+//       successrate: 90
 
-  },
-  {
-      id: '4',
-      title: 'Tech Start Up Logo Design',
-      description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
-      rating: 2,
-      user: profiles[2],
-      keywords: ['Realistic', 'Portrait', '3D', 'Oil'],
-      hourlyrate: 950,
-      totalPrice: 3000,
-      successrate: 90
-  },
-]
+//   },
+//   {
+//       id: '4',
+//       title: 'Tech Start Up Logo Design',
+//       description: 'We are seeking a talented digital artist to create a realistic portrait that embodies a futuristic vibe with a cool color palette. The portrait should seamlessly blend realistic human features with elements that evoke a sense of advanced technology and forward-thinking aesthetics. The overall color tone should convey a sense of calmness and sophistication. The artwork should evoke a sense of the future, incorporating modern and high-tech elements',
+//       rating: 2,
+//       user: profiles[2],
+//       keywords: ['Realistic', 'Portrait', '3D', 'Oil'],
+//       hourlyrate: 950,
+//       totalPrice: 3000,
+//       successrate: 90
+//   },
+// ]
 
 
 
@@ -218,9 +219,15 @@ const jobs = [
 
 const SearchContainer = ({closeSearch}) => {
 
+
+
     const keywords=['Post', 'Profile', 'Job']
     const [category, setCategory] = useState(keywords[0])
     const [searchTerm, setSearchTerm] = useState('')
+
+    const [jobs, setJobs] = useState([])
+
+
 
     function handleCategorySelect(index) {
         setCategory(keywords[index])
@@ -242,11 +249,26 @@ const SearchContainer = ({closeSearch}) => {
         return profiles.filter(profile => profile.name.toLowerCase().includes(searchTerm.toLowerCase()))
       }
       else{
-        return jobs.filter(job => 
-          job.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm.toLowerCase()))||
-          job.title.toLowerCase().includes(searchTerm.toLowerCase()))
+        return jobs.filter(job => {
+    // Split the tags string into an array if it exists; otherwise, use an empty array
+    const keywordsArray = job.tags ? job.tags.split(',').map(keyword => keyword.trim().toLowerCase()) : [];
+
+    return keywordsArray.some(keyword => keyword.includes(searchTerm.toLowerCase())) ||
+           job.job_title.toLowerCase().includes(searchTerm.toLowerCase());
+});
+
       }
     }
+
+    const fetchJobs = async () =>{
+            try{
+            const res = await axios.get('https://auth.bizawit.com/api/v1/job')
+            setJobs(res.data[0])
+            console.log(jobs)
+
+
+            }catch(e){console.log(e)}
+      }
   
 
     const buttons = keywords.map((k, index)=>{
@@ -260,6 +282,11 @@ const SearchContainer = ({closeSearch}) => {
     function handleResultClick(){
       closeSearch()
     }
+
+    useEffect(()=>{
+      if (category === 'Job')
+        fetchJobs()
+    },[category])
   
     return (
         
@@ -280,7 +307,7 @@ const SearchContainer = ({closeSearch}) => {
             <div className={styles.search_result} onClick={handleResultClick}>
                 {category === keywords[0] && <ArtContainer arts={searchCategory(category, searchTerm)}/>}
                 {category === keywords[1] && <ProfileContainer profiles={searchCategory(category, searchTerm)}/> }
-                {category === keywords[2] && <JobContainer jobs={searchCategory(category, searchTerm)}/> }
+                {category === keywords[2] && <JobContainer jobs={searchCategory(category, searchTerm)} /> }
             </div>
             
         </div>

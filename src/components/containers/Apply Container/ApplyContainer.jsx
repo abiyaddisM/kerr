@@ -4,7 +4,7 @@ import styles from './ApplyContainer.module.css'
 import { useState } from 'react';
 import axios from 'axios';
 
-const ApplyContainer = ({setIsOpen}) => {
+const ApplyContainer = ({setIsOpen, jobID}) => {
 
     const [fieldsFilled, setFieldsFilled] = useState(false);
 
@@ -14,14 +14,15 @@ const ApplyContainer = ({setIsOpen}) => {
         
         const application = {
             userID: 1,
-            jobID: 5,
+            jobID: jobID,
             bidPitch: event.target.bidPitch.value ,
-            bidCounter:  parseFloat(event.target.bidCounterPitch.value)
+            bidCounterPitch:  parseFloat(event.target.bidCounterPitch.value)
         }
 
         axios.post('https://auth.bizawit.com/api/v1/job-bid', application)
         .then(res=>{
             console.log('posted', res.data)
+            // setIsOpen(false)
         })
         .catch(err=>{
             console.error(err)

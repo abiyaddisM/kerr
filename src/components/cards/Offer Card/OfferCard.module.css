@@ -1,0 +1,97 @@
+.job_link {
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: auto;
+    height: fit-content;
+    padding: 10px 5px;
+    gap: 5px;
+}
+
+
+.job_description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0px 0 10px 0;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 0 10px 0 0;
+}
+
+.job_info {
+    color: var(--text-medium-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    p,
+    link {
+        font-size: 15px;
+        font-weight: 500;
+    }
+}
+
+.job_title {
+    font-size: 22px;
+    color: var(--text-heavy-color);
+    font-weight: 600;
+}
+
+
+.go_to_job {
+    color: var(--text-light-color);
+    text-decoration: none;
+    display: inline;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 0;
+    font-size: 14px;
+    z-index: 100;
+}
+
+.go_to_job:hover {
+    text-decoration: underline;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-self: flex-end;
+}
+
+.buttons .btn,
+.buttons .btn2 {
+    padding: 6px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-color: var(--background-color);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.buttons .btn:hover {
+    background-color: var(--gray-200);
+    color: inherit;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+
+}
+
+.buttons .btn2 {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+
+}
+
+.buttons .btn2:hover {
+    background-color: var(--gray-200);
+    color: var(--primary-color);
+    /* filter: invert(100%); */
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}

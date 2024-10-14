@@ -15,7 +15,7 @@ const Notification = () => {
     const {logout, user} = useAuth();
     return (
         <div className={styles.notification}>
-           <PopOver component=
+           <PopOver left={false} component=
            {<img src={bellIcon} alt=""/>}
         //    {<Notification/>}
            >

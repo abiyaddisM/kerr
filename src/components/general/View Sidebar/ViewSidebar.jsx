@@ -5,6 +5,7 @@ import {ArrowLeft,ImportCurve,Share} from "iconsax-react"
 import { PopUp } from "../../pops/Pop Up/PopUp";
 import ShareContainer from "../../containers/Share Container/ShareContainer";
 import SaveContainer from "../../containers/Save Container/SaveContainer";
+import axios from "axios";
 
 
 
@@ -12,6 +13,8 @@ function ViewSidebar({artInfo}){
     const navigate = useNavigate();
     const [save, setSave] = useState(false);
     const [share, setShare] = useState(false);
+
+    const url = "https://auth.bizawit.com/api/v1/post"
     
     function handleBackButtonClicked(){
         navigate(-1)
@@ -23,6 +26,13 @@ function ViewSidebar({artInfo}){
 
     function handleSaveClick(){
         // save the art to the user's collection
+        const post = {
+            userID: 1,
+            postID: artInfo.art_id
+        }
+        axios.post(url, post)
+        .then(res=>console.log(res.data))
+        .catch(err=>console.error(err))
         
     }
 
@@ -97,12 +107,13 @@ function ViewSidebar({artInfo}){
                 </PopUp> 
                 <PopUp component={
                     <button className={styles.social_buttons}
-                    onClick={handleSaveClick}
+                    // onClick={handleSaveClick}
                 ><ImportCurve size="20" color="#000000"/>Save
-                </button>}
+                </button>
+                }
                 state={save} setState={setSave}>
-                    <SaveContainer/>
-                </PopUp>
+                    <SaveContainer setIsOpen={setSave} id={artInfo.id}/>
+                </PopUp> 
                 
 
             </div>

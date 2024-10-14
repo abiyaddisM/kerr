@@ -1,8 +1,211 @@
-.container{
+.container {
     width: 100%;
-
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 15px;
+    padding: 10px 5px;
+    height: fit-content;
+    overflow: hidden; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
-.job{
-    border: none;
+/* Hide scrollbar for WebKit browsers */
+.container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+/* The rest of your CSS */
+.back_button {
+    background-color: transparent;
+    border-color: transparent;
+    align-self: self-start;
+    display: flex;
+    cursor: pointer;
+    /* justify-content: center;
+    align-items: center; */
+    gap: 8px;
+    font-family: "barlow", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.title {
+    display: grid;
+    grid-template-rows: 4fr auto;
+    gap: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px 10px;
+}
+
+.date {}
+
+.keywords {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    justify-content: start;
+    align-items: start;
+}
+
+.key {
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-medium-color);
+    border-radius: 12px;
+    padding: 5px 10px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5px 8px 5px;
+    gap: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.job_description {
+    color: var(--text-light-color);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.state{
+    padding: 15px 0;
+}
+
+.state p {
+    color: var(--text-medium-color);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.isPublic p {
+    color: var(--text-medium-color);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.price {
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.price_info .h3 {
+    color: var(--text-medium-color);
+    gap: 20px;
+}
+
+.job_price {
+    color: var(--text-heavy-color);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.contact_link {
+    color: var(--text-medium-color);
+}
+
+.contact_link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.posted_by {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user_info {}
+
+.profile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.buttons {
+    width: fit-content;
+    display: flex;
+    gap: 10px;
+    justify-self: flex-end;
+    /* align-self: flex-end; */
+    padding: 30px 10px;
+}
+
+.buttons .btn,
+.buttons .btn2 {
+    padding: 10px 35px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-color: var(--background-color);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.buttons .btn {
+    outline: 1px solid var(--border-color);
+    color: var(--text-medium-color);
+    background-color: transparent;
+    border-radius: 34px;
+    /* padding: 8px 8px 8px 20px; */
+    gap: 10px;
+}
+
+.buttons .btn:hover {
+    background-color: var(--gray-200);
+    color: inherit;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.buttons .btn2 {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.buttons .btn2:hover {
+    background-color: var(--gray-200);
+    color: var(--primary-color);
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.popup{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+
+
+.posted_by, .bids, .offers{
+    display: grid;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.received_bids, .sent_offers{
+    display: grid;
+    grid-template-rows: auto;
+    gap: 10px;
 }

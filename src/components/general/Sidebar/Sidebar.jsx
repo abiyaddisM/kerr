@@ -3,7 +3,7 @@ import horizontalLine from '../../../assets/icons/horizontalLine.svg'
 import styles from './Sidebar.module.css';
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import { Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
+import { Additem, AddSquare, Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
 
 
 const routeMap = {
@@ -86,25 +86,25 @@ const SideBar = () => {
 
             <div className={styles.buttons}>
 
-                <button
-                    className={`${styles.button} ${selected === 'portfolio' ? styles.selected : ''}`}
-                    onClick={() => handleClick('portfolio', '/portfolio')}
-                >
-                    {/* <img src={brushIcon} alt="Portfolio" /> */}
-                    <BrushSquare variant={selected !== 'portfolio' ? '' : "Bold"} color="var(--primary-color)"/>
-                    <p className={styles.label}>Portfolio</p>
+            <button
+                className={`${styles.button} ${selected === 'post' ? styles.selected : ''}`}
+                onClick={() => handleClick('post', '/post')}
+            >
+                {/* <img src={brushIcon} alt="Portfolio" /> */}
+                <AddSquare variant={selected !== 'post'? '' :"Bold"} color="var(--primary-color)"/>
+                <p className={styles.label}>New Post</p>
 
-                </button>
+            </button>
+           
+             <button
+                className={`${styles.button} ${selected === 'library' ? styles.selected : ''}`}
+                onClick={() => handleClick('library', '/library')}
+            >
+                {/* <img src={libraryIcon} alt="Library" /> */}
+                <VideoSquare variant={selected !== 'library'? '' :"Bold"} color="var(--primary-color)"/>
+                <p className={styles.label}>Library</p>
 
-                <button
-                    className={`${styles.button} ${selected === 'library' ? styles.selected : ''}`}
-                    onClick={() => handleClick('library', '/library')}
-                >
-                    {/* <img src={libraryIcon} alt="Library" /> */}
-                    <VideoSquare variant={selected !== 'library' ? '' : "Bold"} color="var(--primary-color)"/>
-                    <p className={styles.label}>Library</p>
-
-                </button>
+            </button>
             </div>
         </div>
     );

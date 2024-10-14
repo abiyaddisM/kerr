@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import JobCard from "../../cards/Job Cards/JobCard.jsx";
 import { PopUp } from "../../pops/Pop Up/PopUp.jsx";
 import styles from './JobContainer.module.css'
@@ -10,15 +11,23 @@ const JobContainer = ({jobs}) => {
     // const [jobs, setJobs] = useState([]);
     const [openDetails, setOpenDetails] = useState(false)
 
+    const navigate = useNavigate();
+
+    const handleJobClick = (job) => {
+      console.log(job.job_id)  
+      navigate(`/job/${job.job_id}`);
+    }
+
     return(
         <div className={styles.jobContainer}>
             {jobs.length !== 0? 
-            (jobs.map((j)=>{
+            (   
+                jobs.map((j)=>{
                 return( 
                 // <PopUp 
                 // component={
                 
-                <JobCard key={j.user_id} job={j}/>
+                <JobCard key={j.job_id} job={j} onClick={()=>handleJobClick(j)}/>
             // } 
                 // state={openDetails} setState={setOpenDetails}>
                     // <JobDetailContainer job={j}/>

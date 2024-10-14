@@ -202,7 +202,7 @@ const UserJobPage = () => {
             </IconButton>
           }
             state={isViewBidsOpen} setState={setIsViewBidsOpen}>
-              <ViewBidsContainer/>
+              <ViewBidsContainer userID={1}/>
           </PopUp>
         </div>
         

@@ -2,6 +2,8 @@ import styles from "./ViewPage.module.css"
 import ViewContainer from "../../components/containers/View Container/ViewContainer";
 import ViewSidebar from "../../components/general/View Sidebar/ViewSidebar";
 import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function ViewPage(){
     // const images=[
@@ -16,6 +18,24 @@ function ViewPage(){
     const arts = location.state?.art || {};
     // const images = arts.map((art)=> art.image)
     console.log(arts)
+
+    const [art, setArt] = useState({})
+
+    // useEffect(()=>{
+    //     const fetchArt = async () =>{
+    //         const url = "https://auth.bizawit.com/api/v1/post"
+    //         try{
+    //         const response = await axios.get(url, {
+    //             params: {
+    //                 id: id
+    //             }
+    //         })
+    //             console.log(response.data)
+    //         } 
+    //         catch(err){ console.error(err)}
+        
+    //     }
+    // },[])
 
 
     return(

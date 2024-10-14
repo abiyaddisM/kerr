@@ -85,21 +85,22 @@ let jobs = [
 
 const JobPage = () => {
 
-    // const [jobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState([])
 
-//     useEffect (()=>{
-//         const fetchJobs = async () =>{
-//             try{
-//             const res = await axios.get('https://auth.bizawit.com/api/v1/job')
-//             setJobs(res.data[0])
-//             console.log(res)
+    useEffect (()=>{
+        const fetchJobs = async () =>{
+            try{
+            const res = await axios.get('https://auth.bizawit.com/api/v1/job')
+            setJobs(res.data[0])
+            console.log(res)
 
 
-//             }catch(e){console.log(e)}
-//     }
-//     fetchJobs();
+            }catch(e){console.log(e)}
+    }
+    fetchJobs();
+    console.log(jobs)
 
-// },[])
+},[])
     
     
     const [filteredJobs, setFilteredJobs] = useState(jobs);

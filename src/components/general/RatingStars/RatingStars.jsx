@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './RatingStars.module.css'
 
-const RatingStars = ({star}) => {
+const RatingStars = ({star, rate=()=>{}}) => {
     const [rating, setRating] = useState(star);
     const [hoverIndex, setHoverIndex] = useState(null)
 
