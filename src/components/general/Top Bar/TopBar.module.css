@@ -10,16 +10,13 @@
     height: fit-content;
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 8px 20px;
+    padding: 12px 20px;
     display: flex;
     gap: 10px;
     cursor: pointer;
 
 }
-.searchbar input{
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: var(--text--dark-gray-color);
-    /* cursor: pointer; */
+.searchbar p{
+    color: var(--text-light-color);
+    font-weight: 400;
 }

@@ -19,6 +19,7 @@ import ProfilePage from './pages/Profile Page/ProfilePage.jsx';
 import ProfilePageContainer from './components/containers/Profile Page Container/ProfilePageContainer.jsx';
 import JobDetailPage from './pages/Job Detail Page/JobDetailPage.jsx';
 import ContractPage from './pages/Contract Page/ContractPage.jsx';
+//import {PostPage} from "./pages/Post Page/PostPage.jsx";
 function App () {
 
   return (
@@ -30,10 +31,12 @@ function App () {
 
               <Route element={<ProtectedRoutes/>}>
                   <Route path='/' element={<ArtPage/>}/>
+                  <Route path='/post' element= {<PostPage/>}/>
                   <Route path='/jobs' element={<JobPage/>}/>
                   <Route path='/user-jobs' element={<UserJobPage/>}/>
                   <Route path='/library' element={<LibraryPage/>}/>
                   <Route path='/chat' element={<ChatPage/>}/>
+                  <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/view' element={<ViewPage/>}/>
                   <Route path='/art/:id' element={<ViewPage />} />
                   <Route path='/chat/:id' element={<ChatPage/>}/>

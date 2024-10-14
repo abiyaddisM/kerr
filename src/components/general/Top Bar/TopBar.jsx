@@ -11,7 +11,7 @@ const TopBar = () => {
     
     const search = (<div className={styles.searchbar}>
         <img src={searchIcon} alt="" />
-        <input type="search" placeholder='Search'/>
+        <p>Search</p>
     </div>)
     return(
         <div className={styles.container}>

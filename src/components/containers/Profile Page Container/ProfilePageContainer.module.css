@@ -133,6 +133,65 @@
     color: #000000;
 }
 
+.delbtncon{
+    width: 100%;
+    
+    
+}
+
+.delcon{
+    text-wrap: wrap;
+    /* background-color: aqua; */
+    width: fit-content;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.deltext{
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #000000;
+    overflow: hidden;
+    width: 100%;
+   
+    
+    
+}
+
+.ynbtncon{
+    display: flex;
+    justify-content: end;
+    padding: 8px 20px 8px 20px;
+    margin-bottom: 10px;
+    gap: 10px;
+    
+}
+
+.ynbtn{
+    background-color: transparent;
+    padding: 4px 10px 4px 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#E0E4E8 ;
+    border-radius: 27px;
+    font-family:"barlow", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #000000;
+}
+
+.ynbtn:hover{
+    border-color: #E0E4E8;
+    color: white;
+    background-color: #000000;
+
+}
+
+
+
 .filter_buttons{
     display: flex;
     justify-content: start;

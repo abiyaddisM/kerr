@@ -120,10 +120,11 @@ const ProfilePageContainer = ({isPersonal=true})=>{
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
     const [content, setContent] = useState([])
-
     const [jobs, setJobs] = useState([])
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState([])
+
+    const navigate=useNavigate();
     
     const fetchPosts = () =>{
         setPosts(arts)
@@ -150,6 +151,7 @@ const ProfilePageContainer = ({isPersonal=true})=>{
     }    
     }
 
+
     const selectPost = (e, id) => {
         // const updatedPost = posts.filter((post)=> post.id !== id)
         // setPosts(updatedPost)
@@ -161,7 +163,15 @@ const ProfilePageContainer = ({isPersonal=true})=>{
             setSelectedPost([...selectedPost, id])
         console.log(selectedPost)
 
+
+      };
+    
+
+    function goToChat(){
+        navigate('/chat')
+
     }
+
 
     const saveSelection=()=> {
         const url = "https://auth.bizawit.com/api/v1/gallery"
@@ -249,7 +259,27 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
                             <RatingStars star={1}></RatingStars>
 
-                </div>
+                        </div>
+                    </PopOver>
+                    <button onClick={goToChat} className={style.pbuttons}>Message</button>
+                    <PopOver left={true} component={<button className={style.pbuttons} state={isclosed} setState={setIsClosed}>Delete</button>}>
+                    {!isDeleted ? 
+                        (<>
+                        <div className={style.delbtncon}>
+                        <div className={style.delcon}>
+                            <p className={style.deltext}>This action will delete "something" permanently.</p>
+                            <p className={style.deltext}>Do you want to continue?</p>
+                        </div>
+                        <div className={style.ynbtncon}>
+                                <button className={style.ynbtn}>Cancel</button>
+                            <button className={style.ynbtn} onClick={handleDelete} >Delete</button>     
+                        </div>
+
+                        </div>
+                        </>):(<p>Deleted Succesfully!</p>)
+                        
+                        
+                    }
                     </PopOver>
                 </div>
                 }
