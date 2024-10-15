@@ -14,12 +14,12 @@ import {SignUpPage} from "./pages/Sign Up Page/SignUpPage.jsx";
 import ViewPage from "./pages/View Page/ViewPage.jsx";
 import LibraryContainer from './components/containers/Library Container/LibraryContainer.jsx';
 import LibraryPage from './pages/Library Page/LibraryPage.jsx';
-import PostPage from './pages/Post Page/PostPage.jsx';
+// import PostPage from './pages/Post Page/PostPage.jsx';
 import ProfilePage from './pages/Profile Page/ProfilePage.jsx';
 import ProfilePageContainer from './components/containers/Profile Page Container/ProfilePageContainer.jsx';
 import JobDetailPage from './pages/Job Detail Page/JobDetailPage.jsx';
 import ContractPage from './pages/Contract Page/ContractPage.jsx';
-//import {PostPage} from "./pages/Post Page/PostPage.jsx";
+import {PostPage} from "./pages/Post Page/PostPage.jsx";
 function App () {
 
   return (

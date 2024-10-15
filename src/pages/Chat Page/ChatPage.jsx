@@ -13,6 +13,7 @@ import {number} from "prop-types";
 function ChatPage(){
     const [messages,setMessages] = useState([]);
     const [chats,setChats] = useState([]);
+    const [chatLoading,setChatLoading] = useState(false);
     const {user} = useAuth()
     const userID = user.id;
     const {id} = useParams();
@@ -27,10 +28,13 @@ function ChatPage(){
     }
 
     useEffect(()=>{
+        setChatLoading(true)
         axios.get('https://auth.bizawit.com/api/v1/chat',{params:{userID:userID}})
             .then((res=>{
-                setChats(res.data[0])
-                console.log('From chat',res.data[0]);
+                setTimeout(()=>{
+                    setChats(res.data[0])
+                    setChatLoading(false)
+                },3000)
             }))
             .catch((error)=>{
                 console.log(error);
@@ -42,7 +46,7 @@ function ChatPage(){
             {/*<IconButton src={themeIcon} padding={'5px'} backgroundColor={'transparent'} backgroundColorHover={'transparent'} onClick={changeTheme}/>*/}
 
             <div className={styles.chat_container}>
-                <ChatContainer chats={chats}/>
+                <ChatContainer chats={chats} isLoading={chatLoading}/>
             </div>
             {id ? (
                 <>

@@ -16,8 +16,6 @@ export const PostPage = () => {
 
 
     const post = async () => {
-        alert("dd")
-        console.log("dd")
         if(imageUrls.length <= 0)
             return
         const newImageUrl = await Utils.uploadImages(imageUrls);
@@ -30,8 +28,10 @@ export const PostPage = () => {
 
         }
         console.log(newImageUrl)
-        axios.post("http://localhost:3000/api/v1/post", postData).then(res=>{
-            alert("hey")
+        axios.post("https://auth.bizawit.com/api/v1/post", postData).then(res=>{
+             setImageUrl([])
+            setTitle('')
+            setDescription('')
         }).catch(err=>{
             alert("problem")
         })

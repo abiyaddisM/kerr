@@ -1,12 +1,32 @@
 .container{
     border: 1px var(--border-color) solid;
     border-radius: 20px;
-    overflow: hidden;
-    padding: 10px 0;
+    overflow: scroll;
+    padding: 10px 10px;
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+.loading{
+    min-height: 67px;
+    width: 100%;
+    background: linear-gradient(110deg, rgb(250, 250, 250) 8%, rgb(255, 255, 255) 18%, rgb(250, 250, 250) 33%);
+    border-radius: 12px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+    padding: 1px;
+}
+.inner_loading{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 12px;
 
+}
 
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
