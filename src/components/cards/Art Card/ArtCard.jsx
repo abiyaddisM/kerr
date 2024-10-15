@@ -8,7 +8,7 @@ import {NotificationCircle, TickCircle, TickSquare} from "iconsax-react";
 
 
 
-const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, hideCaption=false}) => {
+const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=false}) => {
     
     const {id, images, title, userName, userImage, views, postDate} = art
     const navigate = useNavigate()
@@ -68,7 +68,7 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, hideCaption=fal
         <div className={styles.art_card}
             onClick={handleArtClicked}>
                 <div className={styles.image_container}>
-                    {hideCaption &&
+                    {selectMode &&
                     (selected?
                     <TickCircle className={styles.tick} color="var(--highlight-color)" onClick={handleSelect}/>
                     :
@@ -79,7 +79,7 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, hideCaption=fal
                 </div>
             
             
-            {/* {!hideCaption && */}
+            {/* {!selectMode && */}
             <div className={styles.art_caption}>
                 
                 <ProfileImage src={userImage} />

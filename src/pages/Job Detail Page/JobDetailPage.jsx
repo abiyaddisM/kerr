@@ -1,7 +1,7 @@
 import { useLocation, useParams } from 'react-router-dom'
 import JobDetailContainer from '../../components/containers/Job Details Container/JobDetailContainer'
 import JobContainer from '../../components/containers/JobContainer/JobContainer'
-import styles from './JobDetailPage'
+import styles from './JobDetailPage.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 

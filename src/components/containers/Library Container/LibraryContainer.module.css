@@ -5,3 +5,8 @@
     width: auto;
     
 }
+.selectButton{
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}

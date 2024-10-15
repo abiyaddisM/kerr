@@ -8,6 +8,7 @@
     overflow: hidden; 
     scrollbar-width: none; 
     -ms-overflow-style: none; 
+    
 }
 
 /* Hide scrollbar for WebKit browsers */

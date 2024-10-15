@@ -7,9 +7,10 @@ import RatingStars from '../../general/RatingStars/RatingStars'
 import { PopOver } from '../../pops/Pop Over/PopOver'
 import { useNavigate } from 'react-router-dom'
 import ArtCard from '../../cards/Art Card/ArtCard'
+import ProfileImage from '../../general/Profile Image/ProfileImage'
 import JobContainer from '../JobContainer/JobContainer'
 import JobCard from '../../cards/Job Cards/JobCard'
-import {BookSaved, NotificationCircle, TickCircle, TickSquare, Trash} from "iconsax-react";
+import {BookSaved, NotificationCircle, TickCircle, GalleryRemove, MouseCircle, Trash} from "iconsax-react";
 
 
 
@@ -123,7 +124,9 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
     const [jobs, setJobs] = useState([])
     const [posts, setPosts] = useState([])
+    const [selectMode, setSelectMode] = useState(false)
     const [selectedPost, setSelectedPost] = useState([])
+    const [selectedJob, setSelectedJob] = useState([])
     
     const fetchPosts = () =>{
         setPosts(arts)
@@ -133,22 +136,10 @@ const ProfilePageContainer = ({isPersonal=true})=>{
             try{
             const res = await axios.get('https://auth.bizawit.com/api/v1/job')
             setJobs(res.data[0])
-            console.log(res)
             }catch(e){console.log(e)}
     }
 
-    const deleteJob = async (id) => {
-        try{
-            const updatedContent = jobs.filter((job)=> job.job_id !== id)
-            await setJobs(updatedContent)
-            console.log(id)
-            // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
 
-        }catch (error) {
-        console.error("Error deleting job:", error);
-        // setContent(content)
-    }    
-    }
 
     const selectPost = (e, id) => {
         // const updatedPost = posts.filter((post)=> post.id !== id)
@@ -163,30 +154,23 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
     }
 
-    const saveSelection=()=> {
-        const url = "https://auth.bizawit.com/api/v1/gallery"
-        selectedPost.forEach(post => {
-            const  data = {
-                "post_id": post,
-                "user_id":1
-            }
-            // axios.post(url, data)
-            // .then(res=>console.log(res.data))
-            // .catch(err=>console.log(err))
-        }
-    );
-    }
-
-    const deleteSelection=()=>{
+    const selectJob = (e, id) => {
+        e.stopPropagation()
+        if(selectedJob.includes(id))
+            setSelectedJob(selectedJob.filter(jid=> id!==jid))
+        else
+            setSelectedJob([...selectedJob, id])
+        console.log(selectedJob)
 
     }
+
 
     const navigate = useNavigate()
 
     useEffect (()=>{
         if(Category === 'job'){
             fetchJobs()
-            console.log('ji')}
+        }
         else
             fetchPosts()
     }, [Category])
@@ -195,6 +179,8 @@ const ProfilePageContainer = ({isPersonal=true})=>{
         setCategory('')
         setCategory(keywords[index])
         setSelectedPost([])
+        setSelectedJob([])
+        setSelectMode(false)
         console.log(Category)
     }
 
@@ -207,6 +193,54 @@ const ProfilePageContainer = ({isPersonal=true})=>{
       console.log(art.id)  
       navigate(`/art/${art.id}`, {state: {art}});
     }
+
+    const handleJobClicked = (jobId) => {
+        // console.log(job)
+        navigate(`/job/${jobId}`)
+    }
+
+    const deleteJob = async (id) => {
+    try{
+        const updatedContent = jobs.filter((job)=> job.job_id !== id)
+        await setJobs(updatedContent)
+        console.log(id)
+        // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
+
+    }catch (error) {
+    console.error("Error deleting job:", error);
+    // setContent(content)
+}    
+}
+
+    const deletePost = async (id) => {
+        try{
+            const updatedContent = jobs.filter((job)=> job.job_id !== id)
+            await setJobs(updatedContent)
+            console.log(id)
+            // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
+
+        }catch (error) {
+        console.error("Error deleting job:", error);
+        // setContent(content)
+    }    
+    }
+    
+    const deleteSelection=()=>{
+        if(Category === "post"){
+            selectedPost?.length > 0
+                selectedPost.map(p=>{
+                    deletePost(p)
+                }) 
+            }
+        else{
+            selectedJob?.length > 0
+                selectedJob.map(p=>{
+                    deletePost(p)
+                }) 
+            }
+    }
+
+
 
         return(
         <div className={style.container}>
@@ -263,14 +297,30 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                 </RadioButtons>
             </div>
 
-            {selectedPost.length !== 0 &&
+                      <div className={style.selectButton}>
+              { (!selectMode || (selectedPost.length === 0 && selectedJob.length === 0)) ?
+
+              <MouseCircle size={"25px"} 
+                color="var(--secondary-color)"
+                variant = {selectMode? 'Bulk' : 'Outline'} 
+                onClick={()=>{
+                    setSelectMode(!selectMode)}}/>
+                :
+                <Trash size={"25px"} 
+                color="var(--secondary-color)"
+                variant='Outline'
+                onClick={deleteSelection}/>
+            }
+        </div>
+
+            {/* {selectedPost.length !== 0 &&
                 <div className={style.icon_buttons}>
-                    <BookSaved variant='Broken' onClick={saveSelection}/>
+                    <Trash variant='Broken' onClick={deleteSelection}/>
                     {Category==="job" &&
                     <Trash variant='Broken' onClick={deleteSelection}/>
                     }
                 </div>
-            }
+            } */}
             </div>
             
 
@@ -288,14 +338,16 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                     posts.map((art)=>
 
                     // <ArtCard key={art.id} art={art} hideCaption={true} onClick={()=>handlePostClick(art)} selected={selectedPost.includes(art.id)} onSelect={(e)=>selectPost(e,art.id)}/>)}
+                    
                     <div key={art.id} className={style.art_card}
                             onClick={()=>handlePostClick(art)}>
                         <div className={style.image_container}>
-                        {selectedPost.includes(art.id)?
+                        {selectMode &&( 
+                        selectedPost.includes(art.id)?
                         <TickCircle className={style.tick} color="var(--highlight-color)" onClick={(e)=>selectPost(e,art.id)}/>
                         :
                         <NotificationCircle className={style.tick} color="var(--highlight-color)" onClick={(e)=>selectPost(e,art.id)} />
-                        }
+                        )}
                         <img src={art.images[0]} className={style.art_image} alt="art" />
 
                         </div>
@@ -306,15 +358,62 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
             {Category==="job" && 
                 <div className={style.job_container}>
-                    {setJobs &&
+                    {jobs &&
                     // <JobContainer jobs={content}/>
                     jobs.length > 0 &&
-                    (jobs.map((job)=> <JobCard key={job.id} job={job} personalAccess={true} onDelete={()=>deleteJob(job.job_id)}/>))
-                    }
-            </div>}
+                    (jobs.map((job)=> 
+                    // <JobCard key={job.id} job={job} onDelete={()=>deleteJob(job.job_id)}/>
+                    
 
-           
-            {/* </div> */}
+                    <div key={job.job_id} className={style.jobcard} 
+                    onClick={()=>handleJobClicked(job.job_id)}>
+                         {selectMode &&( 
+                    selectedJob.includes(job.job_id)?
+                    <TickCircle className={style.tick} size={"20px"} color="var(--dark-border-color)" onClick={(e)=>selectJob(e,job.job_id)}/>
+                    :
+                    <NotificationCircle className={style.tick} size={"20px"} color="var(--dark-border-color)" onClick={(e)=>selectJob(e,job.job_id)} />
+                    )}
+                    <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
+
+                <div className={style.jobcard_content}>
+                    <div className={style.line1}>
+                        <div className={style.nameaddress}>
+                            <p className={style.names}>{job.full_name}</p> {/* Access name from user object */}
+                            <p className={style.address}>Ethiopia, Summit</p>
+                        </div>
+                        
+                    </div>
+                    
+
+                    <p className={style.role}>
+                        {job.job_title}
+                        <span className={style.rate}>{"200"} <span>Birr/hr</span></span>
+                    </p>
+
+                    {/* <ul className={style.keywords}>
+                        {job.tags &&
+                        job.tags.split(',').map((k, index)=>
+                        <li className={style.key}
+                            key={index}>
+                            {k}</li>
+                    )}
+                    </ul> */}
+
+                    <div className={style.description}>
+                        <p className={style.jobdescription}>
+                            {job.job_description}
+                        </p>
+                    </div>
+                   
+
+                    
+                    
+                </div>
+                
+                </div>
+                    ))}
+                </div>}
+
             
 
 
