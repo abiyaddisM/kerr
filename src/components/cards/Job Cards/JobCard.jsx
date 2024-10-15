@@ -11,7 +11,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-const JobCard = ({ job, onClick=()=>{}, onDelete=(id)=>{}, personalAccess=false}) => {
+const JobCard = ({ job, onClick=()=>{}}) => {
     const { user, title, hourlyrate, description, rating, totalPrice, successrate } = job;
 
     const [isApplyOpen, setIsApplyOpen] = useState(false)
@@ -32,16 +32,17 @@ const JobCard = ({ job, onClick=()=>{}, onDelete=(id)=>{}, personalAccess=false}
         // navigates to message
     }
 
-    const handleDelete = (id) => {
-        try{
-         onDelete(id)
+    // const handleDelete = (id) => {
+    //     try{
+    //      onDelete(id)
 
-            // .then 
-        }catch(e){console.log(e)}
-    }
+    //         // .then 
+    //     }catch(e){console.log(e)}
+    // }
 
     return (
-        <div className={styles.jobcard}>
+        <div className={styles.jobcard} 
+                    onClick={handleJobClicked}>
             <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
 
             <div className={styles.jobcard_content}>
@@ -50,46 +51,7 @@ const JobCard = ({ job, onClick=()=>{}, onDelete=(id)=>{}, personalAccess=false}
                         <p className={styles.names}>{job.full_name}</p> {/* Access name from user object */}
                         <p className={styles.address}>Ethiopia, Summit</p>
                     </div>
-                    {!personalAccess ?
-                    <div className={styles.buttons}>
-                        <PopUp
-                        component={<button className={styles.apply} onClick={handleApplyClicked}>
-                            Apply
-                        </button>}
-                        state={isApplyOpen}
-                        setState={setIsApplyOpen}
-                        >
-                            <ApplyContainer setIsOpen={setIsApplyOpen} jobID={job.jobID}/>
-                        </PopUp>
-                        <PopUp
-
-                        component={
-                        <button className={styles.contact} onClick={handleContactClicked}>
-                            Contact
-                            <ArrowCircleRight2 size="18px" variant="Bulk" color="var(--dark-border-color"/>
-                            {/* <img src={arrowrightIcon} alt="" /> */}
-                        </button>}
-                        state={isContactOpen}
-                        setState={setIsContactOpen}
-                        >
-                            <ContactContainer/>
-                        </PopUp>
-                    </div>
-                    :
-                    <div className={styles.buttons}>
-                        {/* <PopUp
-                        component={ */}
-                        <button className={styles.apply} onClick={()=>handleDelete(job.job_id)}>
-                            Delete
-                        </button>
-                        {/* }
-                        state={isApplyOpen}
-                        setState={setIsApplyOpen}
-                        >
-                         <VerifyContainer/>   
-                        </PopUp> */}
-                    </div>
-                    }
+                    
                 </div>
                 
 
@@ -114,7 +76,7 @@ const JobCard = ({ job, onClick=()=>{}, onDelete=(id)=>{}, personalAccess=false}
                 </div>
 
                 <div className={styles.ratings}>
-                    <RatingStars star={rating} />
+                    {/* <RatingStars star={rating} /> */}
 
                     <p className={styles.payment}>
                         <p>
@@ -131,13 +93,15 @@ const JobCard = ({ job, onClick=()=>{}, onDelete=(id)=>{}, personalAccess=false}
                         <span>job success</span>
                     </p>
                     
-                    <p 
+                    {/* <p 
                     className={styles.details_link} 
                     onClick={handleJobClicked}>
                         Details...
-                    </p>
+                    </p> */}
                 </div>
             </div>
+
+
         </div>
     )
 }

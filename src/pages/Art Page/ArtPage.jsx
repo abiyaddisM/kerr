@@ -4,6 +4,8 @@ import ArtContainer from '../../components/containers/Art Container/ArtContainer
 import './ArtPage.css'
 import { useState } from 'react'
 import RadioButtons from '../../components/buttons/RadioButtons/RadioButtons'
+import { GalleryAdd, MouseCircle } from 'iconsax-react'
+import axios from 'axios'
 
 
 const image1 = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28"
@@ -164,8 +166,12 @@ const arts = [
 const ArtPage = () =>{
   const keywords = ['Trending', 'Recent', 'All Time Popular', 'Most Views', 'Oldest']
 
+    const [selectActivate, setSelectActivate] = useState(false)
+    const [selectedPost, setSelectedPost] = useState([])
+
 
     const [types, setTypes] = useState(keywords[0])
+
     function handleTypeSelect(index){
       setTypes(keywords[index])
     }
@@ -205,6 +211,22 @@ const ArtPage = () =>{
       return posts
     }
 
+    function addToGallery(){
+      
+      selectedPost.map(p=>{
+        const post = {
+        userID: 1,
+        postID: p.id
+      }
+      axios.post('https://auth.bizawit.com/api/v1/gallery', post )
+      .then(resp=>console.log(resp))
+      .catch(err=>console.error(err))
+    }) 
+    console.log(selectedPost)
+    }
+
+    
+
     return(
         <div className='art_page'>
             <div className='keywords'>
@@ -215,7 +237,8 @@ const ArtPage = () =>{
             border = {true}
             />
             </div>
-            <ArtContainer arts={filterArts(types)}/>
+            <ArtContainer arts={filterArts(types)}  />
+
         </div>
     )
 }

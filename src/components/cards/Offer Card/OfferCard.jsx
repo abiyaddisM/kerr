@@ -1,6 +1,7 @@
 import BidCard from '../Bid Card/BidCard'
 import { Link, useNavigate } from 'react-router-dom'
 import ProfileCard from '../Profile Card/ProfileCard'
+import ProfileImage from '../../general/Profile Image/ProfileImage'
 import styles from './OfferCard.module.css'
 
 const OfferCard = ({offer, recieved=false}) => {
@@ -28,13 +29,27 @@ const OfferCard = ({offer, recieved=false}) => {
         navigate(`/contract`, {state: user})
     }
     return (
-        
+
         <div className={styles.offerCard}>
             {!recieved ?
-            <ProfileCard user={user}/>
+            
+            <Link to={'/profile'} className={styles.container}>
+                <div className={styles.profile}>
+                    <ProfileImage 
+            userId={offer.user_id}
+            src={offer.profile_picture}
+            size='42px'/>
+            <div className={styles.user_detail}>
+                <p className={styles.name}>{offer.first_name+" "+offer.last_name}</p>
+                <p className={styles.username}>@{offer.username}</p>
+            </div>
+            </div>
+            {/* <p>{offer.created_at}</p> */}
+            
+        </Link>
         :
             // <BidCard bid={offer}/>
-            <div className={styles.job_link}>
+            <Link to={`/job/${offer.job_id}`} className={styles.job_link} >
 
             <div className={styles.job_description}>
                 <div className={styles.top}>
@@ -79,9 +94,10 @@ const OfferCard = ({offer, recieved=false}) => {
                     <button className={styles.btn2} type="button" onClick={handleAccept}><p>Accept</p></button>
 
                 </div>
-            </div>
+            </Link>
             }
         </div>
+
     )
 }
 

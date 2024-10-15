@@ -12,7 +12,11 @@
     background-color: var(--background-color);
     border-radius: 20px;
     width: auto;
-   
+    cursor: pointer;
+}
+
+.jobcard:hover{
+    border: 1px solid var(--dark-border-color);
 }
 
 .profile_image{

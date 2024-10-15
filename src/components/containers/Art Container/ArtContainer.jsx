@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ArtCard from '../../cards/Art Card/ArtCard.jsx'
 import { PopUp } from '../../pops/Pop Up/PopUp.jsx'
 import styles from './ArtContainer.module.css'
@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const ArtContainer = ({arts}) => {
+const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPost=()=>{}}) => {
 
     
-    
+    // const [selectedPost, setSelectedPost] = useState([])
+
     const navigate = useNavigate();
 
     const handleArtClick = (art) => {
@@ -19,6 +20,25 @@ const ArtContainer = ({arts}) => {
       
       navigate(`/art/${art.id}`, {state: {art}});
     }
+
+    const selectPost = (e, id) => {
+        // const updatedPost = posts.filter((post)=> post.id !== id)
+        // setPosts(updatedPost)
+        
+        e.stopPropagation()
+        if(selectedPost.includes(id))
+            setSelectedPost(selectedPost.filter(postId => postId !== id))
+        else
+            setSelectedPost([...selectedPost, id])
+        // console.log(selectedPost)
+
+    }
+
+
+    useEffect(()=>{
+      console.log(selectedPost)
+
+    }, [selectedPost])
   
     
     return(
@@ -27,7 +47,7 @@ const ArtContainer = ({arts}) => {
             (arts.map((a)=>{
                 return (
                 // <PopUp key={a.id} component={
-                <ArtCard key={a.id} art={a} className={styles.art_card} onClick={()=>handleArtClick(a)}/>
+                <ArtCard key={a.id} art={a} className={styles.art_card} onClick={()=>handleArtClick(a)} selectMode={selectMode} selected={selectMode && selectedPost.includes(a.id)} onSelect={(e)=>selectPost(e, a.id)}/>
                 // } state={isClicked} setState={setIsClicked}>
                   
                   // <ViewPage arts={[clickedArt]} />
