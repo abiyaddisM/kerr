@@ -1,14 +1,8 @@
 import logo from '../../../assets/icons/logo.svg'
-import homeIcon from '../../../assets/icons/homeIcon.svg'
-import briefcaseIcon from '../../../assets/icons/briefcaseIcon.svg'
-import documentIcon from '../../../assets/icons/documentIcon.svg'
-import messageIcon from '../../../assets/icons/messageIcon.svg'
 import horizontalLine from '../../../assets/icons/horizontalLine.svg'
-import brushIcon from '../../../assets/icons/brushIcon.svg'
-import libraryIcon from '../../../assets/icons/libraryIcon.svg'
 import styles from './Sidebar.module.css';
 import {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import { Additem, AddSquare, Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
 
 
@@ -23,94 +17,106 @@ const routeMap = {
 
 const SideBar = () => {
     const [selected, setSelected] = useState('');
-    const [hover, setHover] = useState('')
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        const currentPath = location.pathname;
-        setSelected(routeMap[currentPath] || '');
+        setSelected(location.pathname);
     }, [location.pathname]);
 
-    const handleClick = (name, route) => {
-        setSelected(name);
-        navigate(route);
-    };
+
 
     return (
         <div className={styles.sidebar}>
-            <img src={logo} className={styles.kerrlogo} alt="Logo" />
-            <div className={styles.buttons}>
-            <button
-                className={`${styles.button} ${selected === 'home' ? styles.selected : ''}`}
-                onClick={() => handleClick('home', '/')}
-            >
-                {/* <img src={homeIcon} alt="Home" /> */}
-                <Home variant={selected !== 'home'? '' :"Bold"} color="var(--primary-color)"/>
-                <p className={styles.label}>Home</p>
-            </button>
-            
-            <button
-                className={`${styles.button} ${selected === 'jobs' ? styles.selected : ''}`}
-                onClick={() => handleClick('jobs', '/jobs')}
-            >
-                {/* <img src={briefcaseIcon} alt="Job Listing" /> */}
-                <Briefcase variant={selected !== 'jobs'? '' :"Bold"} color="var(--primary-color)"/>
-                <p className={styles.label}>Job Listing</p>
+                <img src={logo} className={styles.kerrlogo} alt="Logo"/>
 
-            </button>
+            <div className={styles.buttons}>
+
+                <NavLink
+                    to={`/`}
+                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                    style={{textDecoration: 'none', display: 'block'}}
+                >
+                    <button className={styles.button}>
+                        <p className={styles.label}>Home</p>
+                        <Home variant={selected !== '/' ? '' : "Bold"} color="var(--primary-color)"/>
+                    </button>
+                </NavLink>
+
+                <NavLink
+                    to={`/jobs`}
+                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                    style={{textDecoration: 'none', display: 'block'}}
+                >
+                    <button className={styles.button}>
+
+                    <Briefcase variant={selected !== '/jobs' ? '' : "Bold"} color="var(--primary-color)"/>
+                    <p className={styles.label}>Job Listing</p>
+
+                    </button>
+                </NavLink>
+
+
 
             </div>
-            
-            
-            <img src={horizontalLine} className={styles.hr} alt="" />
+
+            <div className={styles.line}></div>
             <div className={styles.buttons}>
 
-            <button
-                className={`${styles.button} ${selected === 'user-jobs' ? styles.selected : ''}`}
-                onClick={() => handleClick('user-jobs', '/user-jobs')}
-            >
-                {/* WHATS THE ICON?? */}
-                {/* <img src={documentIcon} alt="User Jobs" /> */}
-                <ClipboardText variant={selected !== 'user-jobs'? '' :"Bold"} color="var(--primary-color)"/>
-                <p className={styles.label}>My Project</p>
+                <NavLink
+                    to={`/user-jobs`}
+                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                    style={{textDecoration: 'none', display: 'block'}}
+                >
+                    <button className={styles.button}>
 
-            </button>
+                        <ClipboardText variant={selected !== '/user-jobs' ? '' : "Bold"} color="var(--primary-color)"/>
+                        <p className={styles.label}>My Project</p>
 
-            <button
-                className={`${styles.button} ${selected === 'chats' ? styles.selected : ''}`}
-                onClick={() => handleClick('chats', '/chat')}
-            >
-                <Message variant={selected !== 'chats'? '' :"Bold"} color="var(--primary-color)"/>
-                {/* <img src={messageIcon} alt="Chats" /> */}
-                <p className={styles.label}>Chat</p>
+                    </button>
+                </NavLink>
 
-            </button>
+                <NavLink
+                    to={`/chat`}
+                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                    style={{textDecoration: 'none', display: 'block'}}
+                >
+                    <button className={styles.button}>
+                        <Message variant={!selected.includes("/chat") ? '' : "Bold"} color="var(--primary-color)"/>
+                        <p className={styles.label}>Chat</p>
+
+                    </button>
+                </NavLink>
+
             </div>
+            <div className={styles.line}></div>
 
-            <img src={horizontalLine} className={styles.hr} alt="" />
 
             <div className={styles.buttons}>
+                <NavLink
+                    to={`/post`}
+                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                    style={{textDecoration: 'none', display: 'block'}}
+                >
+                    <button className={styles.button}>
 
-            <button
-                className={`${styles.button} ${selected === 'post' ? styles.selected : ''}`}
-                onClick={() => handleClick('post', '/post')}
-            >
-                {/* <img src={brushIcon} alt="Portfolio" /> */}
-                <AddSquare variant={selected !== 'post'? '' :"Bold"} color="var(--primary-color)"/>
-                <p className={styles.label}>New Post</p>
+                        <AddSquare variant={selected !== '/post'? '' :"Bold"} color="var(--primary-color)"/>
+                        <p className={styles.label}>New Post</p>
+                    </button>
+                </NavLink>
 
-            </button>
+                <NavLink
+                    to={`/library`}
+                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                    style={{textDecoration: 'none', display: 'block'}}
+                >
+                    <button className={styles.button}>
 
-            <button
-                className={`${styles.button} ${selected === 'library' ? styles.selected : ''}`}
-                onClick={() => handleClick('library', '/library')}
-            >
-                {/* <img src={libraryIcon} alt="Library" /> */}
-                <VideoSquare variant={selected !== 'library'? '' :"Bold"} color="var(--primary-color)"/>
-                <p className={styles.label}>Library</p>
+                        <VideoSquare variant={selected !== '/library'? '' :"Bold"} color="var(--primary-color)"/>
+                        <p className={styles.label}>Library</p>
+                    </button>
+                </NavLink>
 
-            </button>
             </div>
         </div>
     );

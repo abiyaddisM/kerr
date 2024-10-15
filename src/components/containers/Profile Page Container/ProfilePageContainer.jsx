@@ -28,96 +28,96 @@ const image3 =  "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cybe
 const image4 = "https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg"
 const arts = [
     {
-    id: 1,
-    images:[image2, image1],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 7300,
-    saves: 100,
-    postId: 1,
-    postDate: new Date('2024-03-17')
-  },
-  {
-    id: 2,
-    images:[image1, image4],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 695,
-    saves: 100,
-    postId: 3,
-    postDate: new Date('2024-07-17')
-  },
-  {
-    id: 3,
-    images:[image3, image4, image1, image2],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 800,
-    saves: 100,
-    postId: 2,
-    postDate: new Date('2024-08-17')
-  },
-  {
-    id: 4,
-    images:[image1, image3, image2],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 250,
-    saves: 100,
-    postId: 1,
-    postDate: new Date('2023-06-16')
-  },
-  {
-    id: 5,
-    images:[image4, image1],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 5395,
-    saves: 100,
-    postId: 4,
-    postDate: new Date('2022-01-03')
-  },
-  {
-    id: 6,
-    images:[image3, image2],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 1234,
-    saves: 100,
-    postId: 3,
-    postDate: new Date('2024-06-10')
-  },
-  {
-    id: 7,
-    images:[image2, image3, image4],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 230,
-    saves: 100,
-    postId: 2,
-    postDate: new Date('2023-10-17')
-  }]
+        id: 1,
+        images:[image2, image1],
+        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 7300,
+        saves: 100,
+        postId: 1,
+        postDate: new Date('2024-03-17')
+    },
+    {
+        id: 2,
+        images:[image1, image4],
+        title: 'See of the eye',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 695,
+        saves: 100,
+        postId: 3,
+        postDate: new Date('2024-07-17')
+    },
+    {
+        id: 3,
+        images:[image3, image4, image1, image2],
+        title: 'See of the eye',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 800,
+        saves: 100,
+        postId: 2,
+        postDate: new Date('2024-08-17')
+    },
+    {
+        id: 4,
+        images:[image1, image3, image2],
+        title: 'See of the eye',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 250,
+        saves: 100,
+        postId: 1,
+        postDate: new Date('2023-06-16')
+    },
+    {
+        id: 5,
+        images:[image4, image1],
+        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 5395,
+        saves: 100,
+        postId: 4,
+        postDate: new Date('2022-01-03')
+    },
+    {
+        id: 6,
+        images:[image3, image2],
+        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 1234,
+        saves: 100,
+        postId: 3,
+        postDate: new Date('2024-06-10')
+    },
+    {
+        id: 7,
+        images:[image2, image3, image4],
+        title: 'See of the eye',
+        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
+        userName: 'some guy',
+        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
+        views: 230,
+        saves: 100,
+        postId: 2,
+        postDate: new Date('2023-10-17')
+    }]
 
 
 const keywords=["post","job"]
 
 
 const ProfilePageContainer = ({isPersonal=true})=>{
-    
+
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
     const [content, setContent] = useState([])
@@ -128,23 +128,26 @@ const ProfilePageContainer = ({isPersonal=true})=>{
     const [selectedPost, setSelectedPost] = useState([])
     const [selectedJob, setSelectedJob] = useState([])
     
+
     const fetchPosts = () =>{
         setPosts(arts)
     }
 
     const fetchJobs = async () =>{
-            try{
+        try{
             const res = await axios.get('https://auth.bizawit.com/api/v1/job')
             setJobs(res.data[0])
             }catch(e){console.log(e)}
+
     }
+
 
 
 
     const selectPost = (e, id) => {
         // const updatedPost = posts.filter((post)=> post.id !== id)
         // setPosts(updatedPost)
-        
+
         e.stopPropagation()
         if(selectedPost.includes(id))
             setSelectedPost(selectedPost.filter(postId => postId !== id))
@@ -161,6 +164,7 @@ const ProfilePageContainer = ({isPersonal=true})=>{
         else
             setSelectedJob([...selectedJob, id])
         console.log(selectedJob)
+
 
     }
 
@@ -190,8 +194,8 @@ const ProfilePageContainer = ({isPersonal=true})=>{
     }
 
     const handlePostClick = (art) => {
-      console.log(art.id)  
-      navigate(`/art/${art.id}`, {state: {art}});
+        console.log(art.id)
+        navigate(`/art/${art.id}`, {state: {art}});
     }
 
     const handleJobClicked = (jobId) => {
@@ -243,9 +247,10 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
 
         return(
+
         <div className={style.container}>
             <div className={style.profilecontainer}>
-            <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+                <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
                 <p className={style.username}>Yom Fisseha</p>
                 <p className={style.address}>@YOMMMM</p>
 
@@ -270,22 +275,22 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
                 </div>
                 {!isPersonal &&
-                <div className={style.profile_Buttons}>
-                    <PopOver left={true} component={<button className={style.pbuttons}>Rate</button>} state={Rate} setState={setRate}>
-                        <div className={style.Ratingcontainer}>
+                    <div className={style.profile_Buttons}>
+                        <PopOver left={true} component={<button className={style.pbuttons}>Rate</button>} state={Rate} setState={setRate}>
+                            <div className={style.Ratingcontainer}>
 
-                        <div className={style.profilecontainer}>
-                        <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
-                            <p className={style.username}>Yom Fisseha</p>
-                            <p className={style.address}>@YOMMMM</p>
+                                <div className={style.profilecontainer}>
+                                    <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+                                    <p className={style.username}>Yom Fisseha</p>
+                                    <p className={style.address}>@YOMMMM</p>
 
-                        </div>
+                                </div>
 
-                            <RatingStars star={1}></RatingStars>
+                                <RatingStars star={1}></RatingStars>
 
-                </div>
-                    </PopOver>
-                </div>
+                            </div>
+                        </PopOver>
+                    </div>
                 }
             </div>
 
@@ -321,12 +326,13 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                     }
                 </div>
             } */}
+
             </div>
-            
+
 
 
             {/* <div className={style.content_container}> */}
-                {Category==="post" && 
+            {Category==="post" &&
                 <div className={style.post_container}>
                     {/* <img className={style.pics} src="https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945ec02ec5bc05d1e20f89bd1b87f22cd62a" alt="" />
                     <img className={style.pics} src="https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg"alt="" />
@@ -353,10 +359,11 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                         </div>
                     </div>)
                 }
+
                 </div>
             }
 
-            {Category==="job" && 
+            {Category==="job" &&
                 <div className={style.job_container}>
                     {jobs &&
                     // <JobContainer jobs={content}/>
@@ -415,6 +422,7 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                 </div>}
 
             
+
 
 
         </div>

@@ -2,12 +2,15 @@
     display: flex;
     height: fit-content;
     width: 100%;
+    z-index: 10;
+
 }
 
 
 .component_container{
     display: flex;
     width: 100%;
+
 }
 .cover{
     position: fixed;
@@ -18,8 +21,9 @@
     background: rgba(0, 0, 0, 0.50);
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 20px;
-    z-index: 10;
+
 }
     
 .child_container{
@@ -31,8 +35,10 @@
     padding: 30px;
     box-sizing: border-box;
     display: flex;
-    width: 60vw;
-    height: 90vh;
+    width: 100%;
+    max-width: 1000px;
+    height: 100vh;
+    max-height: 800px;
 }
 
 
