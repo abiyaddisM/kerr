@@ -98,7 +98,7 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
         <div className={style.container}>
             <div className={style.info_container}>
                 <div className={style.left_container}>
-                    <img className={style.profile_image} src={profilePicture} alt=""/>
+                    <img className={style.profile_image} src={`https://auth.bizawit.com/api/v1/upload/600/${profilePicture}`} alt=""/>
                     <div className={style.stat_container}>
                             <h2 className={style.title}>{name}</h2>
                             <span><p className={style.status}>Online</p></span>

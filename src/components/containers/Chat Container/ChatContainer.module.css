@@ -15,8 +15,7 @@
     border-radius: 12px;
     background-size: 200% 100%;
     animation: 1.5s shine linear infinite;
-    padding: 1px;
-}
+    }
 .inner_loading{
     width: 100%;
     height: 100%;
