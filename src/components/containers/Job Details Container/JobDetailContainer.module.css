@@ -1,11 +1,12 @@
 .container {
     width: 100%;
     display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 15px;
-    padding: 10px 5px;
+    grid-template-rows: auto;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
     height: fit-content;
-    overflow: hidden; 
+    /* overflow: hidden;  */
     scrollbar-width: none; 
     -ms-overflow-style: none; 
     
@@ -23,26 +24,76 @@
     align-self: self-start;
     display: flex;
     cursor: pointer;
-    /* justify-content: center;
-    align-items: center; */
-    gap: 8px;
-    font-family: "barlow", Helvetica, sans-serif;
-    font-size: 14px;
+    gap: 5px;
+
+}
+
+.user_info {
+    display: grid;
+    gap: 10px;
+}
+
+.profile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.username{
+    color: var(--text-medium-color);
     font-weight: 500;
-    color: #000000;
-    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.location{
+    color: var(--text-light-color);
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.user_status{
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+.user_field{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 5px;
+}
+
+.date{
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.job{
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    gap: 10px;
 }
 
 .title {
-    display: grid;
-    grid-template-rows: 4fr auto;
-    gap: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 20px 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 16px;
+    
 }
 
-.date {}
+.job_description {
+    color: var(--text-light-color);
+    font-weight: 400;
+    font-size: 14px;
+}
 
 .keywords {
     list-style: none;
@@ -67,20 +118,26 @@
     font-weight: 600;
 }
 
-.description {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 5px 8px 5px;
-    gap: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
+.freelancer{
+    font-size: 15px;
+    font-weight: 500;
+
 }
 
-.job_description {
-    color: var(--text-light-color);
-    font-weight: 400;
-    font-size: 14px;
+
+.buttons{
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    
+    
 }
+
+.buttons .pop{
+    /* width: fit-content; */
+}
+
+
 
 .state{
     padding: 15px 0;
@@ -132,22 +189,16 @@
     gap: 20px;
 }
 
-.user_info {}
 
-.profile {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
 
-.buttons {
+
+/* .buttons {
     width: fit-content;
     display: flex;
     gap: 10px;
-    justify-self: flex-end;
-    /* align-self: flex-end; */
+    
     padding: 30px 10px;
-}
+} */
 
 .buttons .btn,
 .buttons .btn2 {

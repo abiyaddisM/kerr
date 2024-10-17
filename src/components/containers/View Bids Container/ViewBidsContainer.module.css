@@ -1,24 +1,44 @@
 .container{
     width: 100%;
-    overflow: hidden;
+    /* height: fit-content; */
+    /* padding: 30px; */
+    /* overflow: hidden; */
     scrollbar-width: none;
     display: grid;
     grid-template-rows: auto auto 1fr;
-
     gap: 10px;
 }
 
 .buttons{
     width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10px;
+}
+
+.back_button {
+    background-color: transparent;
+    border-color: transparent;
+    /* align-self: self-start; */
     display: flex;
-    justify-content: center;
+    cursor: pointer;
+    gap: 5px;
+    margin-top: -10px;
+
 }
 
 .switch_views{
     padding: 5px 10px;
-    width: fit-content;
+    width: 100%;
     border: 1px solid var(--border-color);
     border-radius: 20px;
+
+}
+.radios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .switch_views .btn{
@@ -33,13 +53,14 @@
 } */
 
 .switch_views .selected{
-    background-color: var(--secondary-color);
-    color: var(--text-counter-color);
+    background-color: var(--highlight-color);
+    color: var(--text-heavy-color);
 }
 
 .content{
-    overflow-y: auto;
+    overflow-y: scroll;
     scrollbar-width: none;
+    width: 50vw;
 }
 .scrollable-row::-webkit-scrollbar {
     display: none;

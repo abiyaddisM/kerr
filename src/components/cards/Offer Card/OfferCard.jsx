@@ -12,7 +12,7 @@ const OfferCard = ({offer, recieved=false}) => {
         }
 
     const navigate = useNavigate()
-        async function handleReject() {
+    async function handleReject() {
 
 
     }
@@ -28,74 +28,72 @@ const OfferCard = ({offer, recieved=false}) => {
         
         navigate(`/contract`, {state: user})
     }
+
+    function handleOfferClick(){
+        if(recieved)
+            navigate(`/job/${offer.job_id}`)
+        else
+            navigate(`profile/${offer.user_id}`)
+    }
+
+    const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${offer.profile_picture}`;
+
     return (
 
-        <div className={styles.offerCard}>
+        <div className={styles.container} 
+            // onClick={handleOfferClick}
+            >
+            <div className={styles.profile}>
+                <ProfileImage 
+                    userId={offer.user_id}
+                    src={profilePic}
+                    size='42px'/>
+            </div>
+
+            <div  className={styles.content}>
+
             {!recieved ?
             
-            <Link to={'/profile'} className={styles.container}>
-                <div className={styles.profile}>
-                    <ProfileImage 
-            userId={offer.user_id}
-            src={offer.profile_picture}
-            size='42px'/>
+  
             <div className={styles.user_detail}>
                 <p className={styles.name}>{offer.first_name+" "+offer.last_name}</p>
                 <p className={styles.username}>@{offer.username}</p>
             </div>
-            </div>
-            {/* <p>{offer.created_at}</p> */}
+            :
             
-        </Link>
-        :
-            // <BidCard bid={offer}/>
-            <Link to={`/job/${offer.job_id}`} className={styles.job_link} >
+            <div to={`/job/${offer.job_id}`} className={styles.offer_info} >
 
-            <div className={styles.job_description}>
-                <div className={styles.top}>
+                <p className={styles.name}>{offer.first_name+" "+offer.last_name}</p>
                 <p className={styles.job_title}>{offer.job_title}: </p>
-                 <p className={styles.additional_info}>
-                    {offer.job_negotiation !==0 && 
-                        <p>Negotiating</p>
-                    }
-                    {
-                    (offer.job_public !== 0 &&
-                        <p>Public Job</p>
-                    )
-                }
-                </p>
+                <p className={styles.job_description}>{offer.job_description} </p>
 
-                </div>
-                <div className={styles.job_info}>
-                    
-                    <p>{offer.job_description} </p>
-                    
-                    <Link to={`/job/${offer.job_id}`}
-                    className={styles.go_to_job}>Go to Job...</Link>
-                   
-
-                </div>
-             </div> 
             
 
-                <p className={styles.job_price}>
+                {/* <p className={styles.job_price}>
                     Price:
                     {offer.job_price}
-                </p>
+                </p> */}
 
-               <div className={styles.buttons}>
+                <div className={styles.bottom}>
+                    <p className={styles.more}>View more</p>
+                     <div className={styles.buttons}>
                     {/* <PopUp component={ */}
-                       <button className={styles.btn} type='button' onClick={handleReject}>Reject</button>
+                       <button className={styles.btn} type='button' onClick={handleReject}>Decline</button>
                     {/* // } */}
                     {/* state={reject} setState={setReject}>
                         <VerifyContainer />
                     </PopUp> */}
                     
-                    <button className={styles.btn2} type="button" onClick={handleAccept}><p>Accept</p></button>
+                        <button className={styles.btn} type="button" onClick={handleAccept}><p>Accept</p></button>
+
+                    </div>
+                
 
                 </div>
-            </Link>
+              
+            </div>
             }
+        </div>
         </div>
 
     )

@@ -1,11 +1,12 @@
 .bidCard {
     border: 1px solid var(--border-color);
+    width: auto;
     border-radius: 20px;
     display: grid;
-    grid-template-rows:  auto ;
+    grid-template-rows: 1fr auto 1fr ;
     height: fit-content;
-    padding: 10px 5px;
-    gap: 5px;
+    padding: 20px;
+    gap: 10px;
 }
 
 .profile {
@@ -14,25 +15,26 @@
     gap: 10px;
 }
 
-.pitch {
+.pitch_info{
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 8px 2px;
-    /* align-self: flex-start;
     height: fit-content;
-    overflow: visible; */
+    /* grid-template-rows: auto 1fr; */
+    flex-direction: column;
+    gap: 10px;
 }
 
-.pitch_title{
-    font-size: 18px;
+.pitch {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-medium-color);
+
 }
 
-.bid_pitch{
-
-}
-.price_text{
-
+.price{
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-medium-color);
 }
 .pitch_text {
     font-size: 14px;
@@ -44,40 +46,32 @@
     white-space: normal;
     word-wrap: break-word;
 }
+
+
 .expanded {
     -webkit-line-clamp: unset;
     white-space: normal;
     overflow: visible;
     display: block;
 }
-.job_link{
-   
-}
+
 .job_description{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 0px 0 10px 0;
+    padding: 0px 0 10px 0; */
 }
-.top   {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    padding: 0 10px 0 0;
-}
+
+
 .job_info{
     color: var(--text-medium-color);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    p, link{
-        font-size: 15px;
-        font-weight: 500;
-    }
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-light-color);
 }
 
 .job_title{
-    font-size: 22px;
+    font-size: 14px;
     color: var(--text-heavy-color);
     font-weight: 600;
 }
@@ -105,12 +99,12 @@
     align-self: flex-end;
 }
 
-.buttons .btn,
-.buttons .btn2 {
+.buttons .btn {
     padding: 6px 20px;
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: 20px;
     background-color: var(--background-color);
+    color: var(--text-light-color);
     font-size: 14px;
     font-weight: 600;
 }
@@ -122,15 +116,22 @@
 
 }
 
-.buttons .btn2 {
-    background-color: var(--primary-color);
-    color: var(--background-color);
 
+
+
+
+.buttons2{
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-light-color);
+    font-size: 14px;
+    font-weight: 600;
 }
-
-.buttons .btn2:hover {
-    background-color: var(--gray-200);
-    color: var(--primary-color);
-    /* filter: invert(100%); */
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+.cancel_button{
+    background-color: var(--background-color);
+    border: none;
+    border-radius: 20px;
+    color: var(--text-medium-color);
+    font-size: 14px;
+    font-weight: 600;
 }

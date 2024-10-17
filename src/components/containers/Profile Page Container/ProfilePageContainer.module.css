@@ -1,15 +1,15 @@
 .container{ 
     display: grid;
-        /* flex-direction: column; */
-        grid-template-rows: auto;
-        padding: 10px, 0px;
-        gap: 10px;
-        width: auto;
-        height: fit-content;
-        overflow: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
+    /* flex-direction: column; */
+    grid-template-rows: auto auto minmax(0, 1fr);
+    padding: 10px, 0px;
+    gap: 10px;
+    width: auto;
+    height: fit-content;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 
         .art_card {
             border-radius: 18px;
@@ -45,8 +45,9 @@
         }
 
 .profilecontainer{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 25px;
     justify-content: start;
     border-style: solid;
     border-width: 1px;
@@ -54,6 +55,12 @@
     border-color: #E0E4E8;
     padding: 20px;
 
+}
+
+.profile{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
 }
 
 .porifile_pic{
@@ -81,8 +88,6 @@
 }
 
 .profile_info{
-    margin-top: 25px;
-    margin-bottom: 25px;
     display: flex; 
     gap: 25px;
 }
@@ -229,7 +234,7 @@
     border-style: solid;
     border-width: 1px;
     border-radius: 20px;
-    border-color: #E0E4E8;
+    border-color: var(--border-color);
     padding: 20px;
     display: flex;
     gap: 10px;
@@ -248,9 +253,9 @@
     border-style: solid;
     border-width: 1px;
     border-radius: 20px;
-    border-color: #E0E4E8;
+    border-color: var(--border-color);
     padding: 20px;
-    display: flex;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -290,10 +295,10 @@
 }
 
 .selected{
-    background-color: var(--border-color);
+    background-color: var(--highlight-color);
     border-style: solid;
     border-width: 1px;
-    border-color: var(--dark-border-color);
+    border-color: var(--border-color);
     border-radius: 27px;
 }
 
