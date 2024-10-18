@@ -1,3 +1,7 @@
 .container{
-    height: 100vh;
+    /* height: 100%; */
+    /* overflow: scroll; */
+    overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
 }

@@ -2,30 +2,39 @@ import styles from "./ViewPage.module.css"
 import ViewContainer from "../../components/containers/View Container/ViewContainer";
 import ViewSidebar from "../../components/general/View Sidebar/ViewSidebar";
 import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function ViewPage(){
-    // const images=[
-    //     "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28",
-    //     "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg",
-    //     "https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg"
-    // ]
-
-
     const {id} = useParams()
-    const location = useLocation();
-    const arts = location.state?.art || {};
-    // const images = arts.map((art)=> art.image)
-    console.log(arts)
+    const [images, setImages] = useState([]);
+
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        axios.get(`https://auth.bizawit.com/api/v1/post/${id}`).then(res=>{
+            console.log("My shitt",res.data.data[0])
+            setData(res.data.data[0]);
+            setImages(res.data.data[0].post_image.image);
+            console.log("ss",images)
+        })
+    }, []);
 
 
     return(
         <div className={styles.container}>
             
             <div className={styles.img_container}>
-                <ViewContainer images={arts.images}/>
+                <ViewContainer images={images}/>
             </div>
             <div className={styles.sidebar_container}>
-                <ViewSidebar artInfo={arts}/>
+                <ViewSidebar
+                    description={data.post_caption}
+                    views={data.view} saves={data.view}
+                    title={data.post_title}
+                    profilePicture={data.profile_picture}
+                    username={data.first_name + " " + data.last_name}
+                    id={data.id}/>
             </div>
         </div>
     );

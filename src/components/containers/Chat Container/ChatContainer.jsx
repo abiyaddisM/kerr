@@ -6,8 +6,12 @@ import {useAuth} from "../../../utils/AuthContext.jsx";
 import {useEffect, useState} from "react";
 import formatDateTime from "../../../services/formatTimeService.js";
 import {NavLink, useNavigate} from "react-router-dom";
-export function ChatContainer({chats}) {
+export function ChatContainer({chats, isLoading}) {
     const {user} = useAuth();
+    const load = [];
+    for (let i = 0; i < 11  ; i++) {
+        load.push(<div className={styles.loading}></div>)
+    }
     return (
            <div className={styles.container}>
                {/* eslint-disable-next-line react/prop-types */}
@@ -25,6 +29,7 @@ export function ChatContainer({chats}) {
                            />
                       )
                }))}
+               {isLoading && load}
            </div>
 
     )

@@ -93,8 +93,6 @@
     border-color: #E0E4E8;
     border-radius: 20px;
     padding: 20px;
-    
-    
 
 }
 
@@ -109,7 +107,7 @@
 .bottom{
     font-family:"barlow", Helvetica, sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     color: #000000;
 }
 

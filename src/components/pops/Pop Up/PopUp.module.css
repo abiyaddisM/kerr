@@ -1,8 +1,9 @@
 .parent_container{
     display: flex;
-    height: fit-content;
+    height: 100%;
     width: 100%;
     z-index: 10;
+
 
 }
 
@@ -10,6 +11,7 @@
 .component_container{
     display: flex;
     width: 100%;
+
 }
 .cover{
     position: fixed;
@@ -20,7 +22,9 @@
     background: rgba(0, 0, 0, 0.50);
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 20px;
+
 }
     
 .child_container{
@@ -32,8 +36,10 @@
     padding: 30px;
     box-sizing: border-box;
     display: flex;
-    width: 60vw;
-    height: 90vh;
+    width: 100%;
+    max-width: 1000px;
+    height: fit-content;
+    max-height: 90vh;
 }
 
 

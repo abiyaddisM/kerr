@@ -1,3 +1,4 @@
+
 import styles from './PostPage.module.css';
 import {ArrowLeft, Add, ArrowSwapVertical} from "iconsax-react";
 import {useRef, useState} from "react";
@@ -15,8 +16,6 @@ export const PostPage = () => {
 
 
     const post = async () => {
-        alert("dd")
-        console.log("dd")
         if(imageUrls.length <= 0)
             return
         const newImageUrl = await Utils.uploadImages(imageUrls);
@@ -25,12 +24,14 @@ export const PostPage = () => {
             postTitle:title,
             postCaption:description,
             postThumbnail:newImageUrl[0],
-            postImage: {images:newImageUrl},
+            postImage: {image:newImageUrl},
 
         }
         console.log(newImageUrl)
-        axios.post("http://localhost:3000/api/v1/post", postData).then(res=>{
-            alert("hey")
+        axios.post("https://auth.bizawit.com/api/v1/post", postData).then(res=>{
+             setImageUrl([])
+            setTitle('')
+            setDescription('')
         }).catch(err=>{
             alert("problem")
         })
@@ -83,7 +84,7 @@ export const PostPage = () => {
 
                 <div className={styles.profile_info}>
                     <input type="text" placeholder="Title" className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} />
-                    <textarea placeholder="Description" rows="12" className={styles.input} value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <textarea placeholder="Description" rows="12" className={`${styles.input} ${styles.text_area}`} value={description} onChange={(e) => setDescription(e.target.value)} />
                 </div>
                 <div className={styles.button_container}>
                     <button className={styles.social_buttons} onClick={handleFileClick}>

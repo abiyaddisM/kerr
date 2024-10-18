@@ -13,9 +13,18 @@
     display: none;
 }
 .keywords{
-    width: fit-content;
-}
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
 
+    justify-content: space-between;
+    align-items: center;
+}
+.mode{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
 @media (max-width: 500px){
     .keywords{
         width: 100vw;

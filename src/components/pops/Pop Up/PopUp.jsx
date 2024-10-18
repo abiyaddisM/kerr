@@ -42,12 +42,15 @@ export function PopUp({component=null,children,state,setState}) {
                                
                                     {children}
                                     <div className={styles.closeButtonWrapper}>
-                                    <img
+                                    {/* <img
                                         className={styles.closeButton}
                                         src={closeIcon}
                                         alt="Close"
                                         onClick={closePopUp}
-                                    />
+                                    /> */}
+                                    {/* <button className={styles.back_button} onClick={closePopUp} >
+                                        <ArrowLeft size="20px" color="var(--primary-color)" /> Back
+                                    </button> */}
                                 </div>
                                 </div>
                                </motion.div>

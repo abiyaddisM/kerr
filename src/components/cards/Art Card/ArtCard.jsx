@@ -3,17 +3,26 @@ import ProfileImage from '../../general/Profile Image/ProfileImage';
 import styles from './ArtCard.module.css';
 import dot from '../../../assets/icons/dot.svg'
 import { useNavigate } from 'react-router-dom';
+import CommandButton from '../../buttons/Command Buttons/CommandButton';
+import {NotificationCircle, TickCircle, TickSquare} from "iconsax-react";
 
 
 
-const ArtCard = ({art: {id, images, title, userName, userImage, views, postDate}, onClick}) => {
+const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=false}) => {
+    
+    const {id, images, title, userName, userImage, views, postDate} = art
     const navigate = useNavigate()
+    
 
     function handleArtClicked(art){
         //expad the art in new window
-        console.log(art.id);
+        // console.log(art);
         onClick(art);
         
+    }
+
+    function handleSelect(id){
+        onSelect(id);
     }
 
     
@@ -58,27 +67,39 @@ const ArtCard = ({art: {id, images, title, userName, userImage, views, postDate}
     return (
         <div className={styles.art_card}
             onClick={handleArtClicked}>
+                <div className={styles.image_container}>
+                    {selectMode &&
+                    (selected?
+                    <TickCircle className={styles.tick} color="var(--highlight-color)" onClick={handleSelect}/>
+                    :
+                    <NotificationCircle className={styles.tick} color="var(--highlight-color)" onClick={handleSelect} />)
+                    }
+                    <img src={`https://auth.bizawit.com/api/v1/upload/600/${images[0]}`} className={styles.art_image} alt="art" />
+
+                </div>
             
-            <img src={images[0]} className={styles.art_image} alt="art" />
             
+            {/* {!selectMode && */}
             <div className={styles.art_caption}>
                 
-                <ProfileImage src={userImage} />
+                <ProfileImage src={`https://auth.bizawit.com/api/v1/upload/600/${userImage}`} />
 
                 <div className={styles.art_description}>
                     <p className={styles.art_title}>{title}</p>
                     <p>{userName}</p>
                     <div className={styles.post_info}>
                         <p>{viewCount} views</p>
-                        <img src={dot
-                        } alt="" />
+                        <img src={dot} alt="" />
                         <p>{calculateDuration()}</p>
                     </div>
 
                 </div>
 
             </div>
+           
+{/* // } */}
         </div>
+
     );
 }
 

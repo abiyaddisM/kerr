@@ -3,7 +3,8 @@ import {useEffect, useRef, useState} from "react";
 import {ArrowDown2} from "iconsax-react";
 
 
-export const DropDownInput = ({onChange,placeholder = 'Null',data}) => {
+// eslint-disable-next-line react/prop-types
+export const DropDownInput = ({onChange,placeholder = 'Null',data,value,name}) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null); // Reference to the dropdown element
     const [selected,setSelected] = useState(-1);
@@ -26,15 +27,18 @@ export const DropDownInput = ({onChange,placeholder = 'Null',data}) => {
         <>
             <div className={styles.dropdown} ref={dropdownRef}>
                 <button onClick={toggleDropdown} className={styles.dropdown_toggle}>
-                    {selected === -1 ? placeholder : <p style={{color:'var(--text-heavy-color)'}}>{data[selected].value}</p>}
+                    {!value ? placeholder : <p style={{color:'var(--text-heavy-color)'}}>{value}</p>}
                     <ArrowDown2 size="16 " color="var(--secondary-color)" className={isOpen ? styles.dropdown_toggle_rotate:styles.dropdown_toggle_rotate_smooth}/>
                 </button>
                 {isOpen && (
                     <ul className={styles.dropdown_menu}>
                         {data && data.map((val,index)=>{
-                            onChange && selected === index && onChange(val.key);
                             return (
-                                <li key={val.key}><button onClick={()=>setSelected(index)} className={index === selected ? styles.button_active:styles.button}>{val.value}</button></li>
+                                <li key={val.key}><button onClick={()=> {
+                                    setSelected(index);
+                                    setIsOpen(false)
+                                    onChange({value:data[index].value,name:name})
+                                }} className={index === selected ? styles.button_active:styles.button}>{val.value}</button></li>
                             )
                         })}
                     </ul>

@@ -1,15 +1,53 @@
 .container{
-    width: 100%;
+    width: 60vw;
+    height: 40vh;
+    /* height: fit-content; */
+    /* padding: 30px; */
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+}
+
+
+.back_button {
+    background-color: transparent;
+    border-color: transparent;
+    align-self: self-start;
+    display: flex;
+    cursor: pointer;
+    gap: 5px;
+    margin-top: -10px;
+
+}
+
+.application{
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr ;
     gap: 10px;
 }
-.form{
-    display: grid;
-    height: 100%;
-}
-.pitch_text{
+
+
+.pitch_text, .counter_pitch{
     width: 100%;
+    
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 20px;
+    color: var(--text-light-color);
+}
+
+.pitch_text:focus, .counter_pitch:focus{
+    outline: none;
+    border: 1px solid var(--dark-border-color);
+    color: var(--primary-color);
+}
+
+.pitch_text:active,
+.counter_pitch:active {
+    outline: none;
+    border: 1px solid var(--dark-border-color);
+    color: var(--primary-color);
 }
 
 
