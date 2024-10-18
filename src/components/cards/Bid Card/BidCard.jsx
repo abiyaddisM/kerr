@@ -60,90 +60,57 @@ const BidCard = ({bid, received=false}) => {
     //     console.log(bid)
     // }, [])
 
+    const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${bid.profile_picture}`
+
+
     return (
         <div className={styles.bidCard}>
             {/* <div className={styles.date}>
                 {bid.created_at}
             </div> */}
-
-            {received &&
+            <div>
+            {received ?
             <div className={styles.profile}>
                 <ProfileImage 
-            userId={user.id}
-            src={bid.profile_picture}
-            size='30px'/> 
-            <p className={styles.user_name}>{user.name}</p>
+                    userId={user.id}
+                    src={profilePic}
+                    size='30px'/> 
+                <p className={styles.user_name}>{user.name}</p>
             </div>
+            :
+            <div className={styles.title_container}>
+                <p className={styles.job_title}>{bid.job_title} </p>
+                {/* <p className={styles.job_info}>{bid.job_description} </p> */}
+
+            </div>
+            
         }
+        </div>
 
-            <div className={styles.job_link}>
-
-            <div className={styles.job_description}>
-                <div className={styles.top}>
-                <p className={styles.job_title}>{bid.job_title}: </p>
-                 <p className={styles.additional_info}>
-                    {bid.job_negotiation !==0 && 
-                        <p>Negotiating</p>
-                    }
-        {!received &&
-
-                    (bid.job_public !== 0 &&
-                        <p>Public Job</p>
-                    )
-                }
-                </p>
-
-                </div>
-                <div className={styles.job_info}>
+        {/* {!received && */}
+        {/* <div className={styles.job_info}> */}
                     
-                    <p>{bid.job_description} </p>
                     
-                    <Link to={`/job/${bid.job_id}`}
-                    className={styles.go_to_job}>Go to Job...</Link>
+                    {/* <Link to={`/job/${bid.job_id}`}
+                    className={styles.go_to_job}>Go to Job...</Link> */}
                    
 
-                </div>
-             </div> 
-            
+        {/* </div> */}
 
-                <p className={styles.job_price}>
-                    Price:
-                    {bid.job_price}
-                </p>
+        {/* } */}
+        <div className={styles.pitch_info}>
+            <p className={styles.pitch}>
+                {bid.bid_pitch}
+            </p>
+            {/* <p className={styles.price}>
+                {bid.bid_counter_price}
 
-               
-            </div>
-        
-        <div>
-            <div className={`${styles.pitch_text} ${isExpanded ? styles.expanded : ''}`}>
-                <div className={styles.pitch}>
-                    <p className={styles.pitch_title}>
-                        Pitch information:
-                    </p>
-                    <p className={styles.bid_pitch}>
-                        {bid.bid_pitch}
+            </p> */}
 
-                    </p>
-                    <p className={styles.price_text}>
-                        {bid.bid_counter_price}
-                    </p>
-
-                    
-                </div>
-            </div>
-            {!isExpanded && (
-            <button className={styles.expandBtn} onClick={() => setIsExpanded(true)}>
-                Show pitch
-            </button>
-            )}
-            {isExpanded && (
-            <button className={styles.expandBtn} onClick={() => setIsExpanded(false)}>
-                Hide pitch
-            </button>
-            )}
         </div>
+
         
-    {received &&
+    {received ?
             <div className={styles.buttons}>
                     {/* <PopUp component={ */}
                        <button className={styles.btn} type='button' onClick={handleReject}>Reject</button>
@@ -152,12 +119,23 @@ const BidCard = ({bid, received=false}) => {
                         <VerifyContainer />
                     </PopUp> */}
                     
-                    <button className={styles.btn2} type="button" onClick={handleAccept}><p>Accept</p></button>
+                    <button className={styles.btn} type="button" onClick={handleAccept}><p>Accept</p></button>
 
-                </div>
+            </div>
+            :
+            <div className={styles.buttons2}>
+                <p>
+                    Pending
+                </p>
+                <button className={styles.cancel_button}>
+                    Cancel
+                </button>
+
+            </div>
 }
 
         </div>
+
     )
 }
 

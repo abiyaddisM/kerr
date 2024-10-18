@@ -1,24 +1,29 @@
 .container {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
     align-items: center;
     width: 100%;
-    padding: 10px 20px;
+    height: fit-content;
+    padding: 20px;
     border: 1px solid var(--border-color);
     border-radius: 20px;
     text-decoration: none;
 }
 
-.offerCard:hover {
+.container:hover {
     border-color: var(--dark-border-color);
     /* transform: scale(1.01); */
 }
 
 .profile{
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    /* width: fit-content; */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start; */
+    height: 100%;
+    
+    /* gap: 10px; */
 }
 
 .user_detail {
@@ -31,7 +36,7 @@
     color: var(--text-medium-color);
     font-weight: 500;
 
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .user_detail .username {
@@ -39,26 +44,11 @@
     font-size: 12px;
     /* text-decoration: none; */
 }
-.job_link {
-    *{
-        text-decoration: none;
-    }
-    text-decoration: none;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
+.offer_info {
     display: grid;
-    grid-template-rows: auto;
-    height: fit-content;
-    /* width: auto; */
-    padding: 10px 20px; 
-    gap: 5px;
-}
-.job_link{
-    text-decoration: none;
-}
-
-.job_link:hover {
-    border-color: var(--dark-border-color);
+    grid-template-rows: auto auto 1fr auto ;
+    width: auto;
+    gap: 10px;
 }
 
 
@@ -90,25 +80,27 @@
 }
 
 .job_title {
-    font-size: 22px;
-    color: var(--text-heavy-color);
-    font-weight: 600;
-}
-
-
-.go_to_job {
-    color: var(--text-light-color);
-    text-decoration: none;
-    display: inline;
-    cursor: pointer;
-    margin-left: 5px;
-    padding: 0;
     font-size: 14px;
-    z-index: 100;
+    color: var(--text-heavy-color);
+    font-weight: 500;
 }
 
-.go_to_job:hover {
-    text-decoration: underline;
+.job_description{
+    font-size: 14px;
+    color: var(--text-medium-color);
+    font-weight: 400;
+}
+
+
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.more{
+    color: var(--text-light-color);
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .buttons {
@@ -119,12 +111,12 @@
     align-self: flex-end;
 }
 
-.buttons .btn,
-.buttons .btn2 {
+.buttons .btn{
     padding: 6px 20px;
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: 20px;
     background-color: var(--background-color);
+    color: var(--text-light-color);
     font-size: 14px;
     font-weight: 600;
 }
@@ -136,11 +128,6 @@
 
 }
 
-.buttons .btn2 {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-
-}
 
 .buttons .btn2:hover {
     background-color: var(--gray-200);

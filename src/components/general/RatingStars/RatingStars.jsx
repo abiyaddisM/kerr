@@ -1,35 +1,41 @@
-import { useState } from 'react';
-import styles from './RatingStars.module.css'
+import { useEffect, useState } from 'react';
+import styles from './RatingStars.module.css';
 
-const RatingStars = ({star, rate=()=>{}}) => {
+const RatingStars = ({ star, rate = () => {}, rateAllow = false }) => {
     const [rating, setRating] = useState(star);
-    const [hoverIndex, setHoverIndex] = useState(null)
+    const [hoverIndex, setHoverIndex] = useState(null);
 
     const handleClick = (index) => {
-        setRating(prevRating => {
-            const newRating = prevRating === index + 1 ? 0 : index + 1;
-            console.log(newRating);
-            return newRating;
-        });
-        // console.log(rating)
-    }
+        if (rateAllow) {
+            const newRating = rating === index + 1 ? 0 : index + 1;
+            setRating(newRating);
+            rate(newRating); // Call the rate function when rating is changed
+        }
+    };
 
     const handleMouseEnter = (index) => {
-        setHoverIndex(index)
+        if (rateAllow) {
+            setHoverIndex(index);
+        }
     };
 
     const handleMouseLeave = () => {
-        setHoverIndex(null)
-    }
+        if(rateAllow){
+        setHoverIndex(null);
+        }
+    };
+
+    useEffect(()=>{
+        setRating(star)
+    },[star])
 
     return (
-        <div className={styles.rating_stars}>
-            { Array.from({ length: 5 }, (_, index) => (
+        <div className={`${styles.rating_stars} ${rateAllow ? '' : styles.noHover}`}>
+            {Array.from({ length: 5 }, (_, index) => (
                 <svg
                     key={index}
                     className={`${styles.star} 
-                    ${rating > index? styles.filled : ''}
-                    ${hoverIndex > index ? styles.hover : ''}`}
+                    ${hoverIndex !== null ? (hoverIndex >= index ? styles.hover : '') : (rating > index ? styles.filled : '')}`}
                     width="14"
                     height="13"
                     viewBox="0 0 14 13"
@@ -47,7 +53,7 @@ const RatingStars = ({star, rate=()=>{}}) => {
                 </svg>
             ))}
         </div>
-    )
-}
+    );
+};
 
 export default RatingStars;

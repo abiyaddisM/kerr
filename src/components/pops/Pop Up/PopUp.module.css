@@ -1,8 +1,9 @@
 .parent_container{
     display: flex;
-    height: fit-content;
+    height: 100%;
     width: 100%;
     z-index: 10;
+
 
 }
 
@@ -37,8 +38,8 @@
     display: flex;
     width: 100%;
     max-width: 1000px;
-    height: 100vh;
-    max-height: 800px;
+    height: fit-content;
+    max-height: 90vh;
 }
 
 

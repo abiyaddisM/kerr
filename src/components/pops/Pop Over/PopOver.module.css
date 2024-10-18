@@ -1,6 +1,7 @@
 .parent_container{
     display: flex;
     height: fit-content;
+    z-index: 2;
 
 }
 .cover{
@@ -27,6 +28,7 @@
     border-radius: 10px;
     max-width: 300px;
     width: 100%;
+    
 }
 
 .motion_container{

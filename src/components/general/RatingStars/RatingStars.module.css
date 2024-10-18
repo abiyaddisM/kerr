@@ -9,20 +9,25 @@
 .star {
     width: 14px;
     height: 13px;
-    fill: var(--background-color); 
+    fill: var(--background-color);
     cursor: pointer;
-    transition: fill 0.3s ease; 
+    transition: fill 0.3s ease;
 }
 
-.star:hover {
-    fill: var(--border-color); 
+/* Hover styles only apply when rateAllow is true */
+.rating_stars:not(.noHover) .star:hover {
+    fill: var(--border-color);
 }
+
 .star.hover {
-    fill: var(--border-color); 
+    fill: var(--border-color);
 }
 
 .star.filled {
-    fill: var(--dark-border-color); 
+    fill: var(--dark-border-color);
+    cursor: auto;
 }
 
-
+.star.filled:hover {
+    text-decoration: none;
+}

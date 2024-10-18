@@ -45,13 +45,13 @@ function handleCopyClick(){
                 <div className={style.internal_share}>
                     <ProfileContainer profiles={profiles}/>
                 </div>
-                <div className={style.external_share}>
+                {/* <div className={style.external_share}>
                     <div className={style.app_buttons}>
                         <Whatsapp size={"50px"}/>
                         <Snapchat size={"50px"} variant="Bold"/>
 
                     </div>
-                </div>
+                </div> */}
                 <div className={style.link_box}>
                     <a href={currentUrl} target="_blank" >{currentUrl}</a>
                     <Copy size={"30px"} onClick={handleCopyClick}/>

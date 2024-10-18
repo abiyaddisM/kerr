@@ -1,67 +1,94 @@
-import { func } from 'prop-types';
 import CommandButton from '../../buttons/Command Buttons/CommandButton';
-import styles from './ApplyContainer.module.css'
+import styles from './ApplyContainer.module.css';
+import { ArrowLeft } from "iconsax-react";
 import { useState } from 'react';
 import axios from 'axios';
 
-const ApplyContainer = ({setIsOpen, jobID}) => {
+const ApplyContainer = ({ setIsOpen, jobID }) => {
+    const [pitch, setPitch] = useState('');
+    const [price, setPrice] = useState('');
+    const [submitAllowed, setSubmitAllowed] = useState(false);
 
-    const [fieldsFilled, setFieldsFilled] = useState(false);
+    function validate(pitch, price) {
+        return pitch.trim() !== '' && !isNaN(price) && price > 0;
+    }
 
+    function handleSubmit(event) {
+        event.preventDefault();
 
-    function submitApplication(event){
-        event.preventDefault()
-        
+        if (validate(pitch, price)) {
+            submitApplication(pitch, price);
+        } else {
+            Window.alert("Please fill in all fields correctly.");
+        }
+    }
+
+    function submitApplication(pitch, price) {
         const application = {
             userID: 1,
             jobID: jobID,
-            bidPitch: event.target.bidPitch.value ,
-            bidCounterPitch:  parseFloat(event.target.bidCounterPitch.value)
-        }
+            bidPitch: pitch,
+            bidCounterPitch: price,
+        };
 
         axios.post('https://auth.bizawit.com/api/v1/job-bid', application)
-        .then(res=>{
-            console.log('posted', res.data)
-            // setIsOpen(false)
-        })
-        .catch(err=>{
-            console.error(err)
-        })
+            .then(res => {
+                console.log('posted', res.data);
+                setIsOpen(false); // Close the form on success
+            })
+            .catch(err => {
+                console.error(err);
+            });
     }
 
-    function handleCancelClick(){
-        setIsOpen(false)
+    function handleCancelClick() {
+        setIsOpen(false);
     }
 
-    return(
+    function handleInputChange(e) {
+        const { name, value } = e.target;
+
+        if (name === 'counterPrice') {
+            const updatedPrice = parseFloat(value);
+            setPrice(updatedPrice);
+            setSubmitAllowed(validate(pitch, updatedPrice));
+        } else {
+            setPitch(value);
+            setSubmitAllowed(validate(value, price));
+        }
+    }
+
+    return (
         <div className={styles.container}>
-            <h2>Apply</h2>
-
-            <form className={styles.form} onSubmit={submitApplication}>
-                <input type='text' className={styles.pitch_text} name='bidPitch' required/>
-                  <input
+            <button className={styles.back_button} onClick={handleCancelClick}>
+                <ArrowLeft size="20px" color="var(--primary-color)" /> Back
+            </button>
+            <div className={styles.application}>
+                <input
                     type='number'
-                    name='bidCounterPitch'  // Set the name attribute for counter pitch
-                    className={styles.pitch_text}
+                    className={styles.counter_pitch}
+                    name='counterPrice'
                     required
-                    placeholder="Enter your counter offer"
+                    placeholder='Counter Price'
+                    value={price}
+                    onChange={handleInputChange}
                 />
-                
-            <div className={styles.buttons}>
-
-                    <button className={styles.btn} type='button' onClick={handleCancelClick}>Cancel</button>
-                    <button className={styles.btn2} type="submit"><p>Apply</p></button>
-
-                </div>
-            </form>
-            
-            {/* <div className={styles.buttons}> */}
-                {/* <button className={styles.btn} disabled={!fieldsFilled} onClick={sendApplication}>Apply</button> */}
-                {/* <CommandButton commandTerm={'Apply'} /> */}
-                {/* <CommandButton commandTerm={'Cancel'} onClick={handleCancelClick}/> */}
-            {/* </div> */}
+                <textarea
+                    className={styles.pitch_text}
+                    name='bidPitch'
+                    required
+                    placeholder="Pitch"
+                    value={pitch}
+                    onChange={handleInputChange}
+                />
+            </div>
+            <CommandButton 
+                commandTerm={"Send"} 
+                onClick={handleSubmit} 
+                disabled={!submitAllowed} 
+            />
         </div>
-    )
-}
+    );
+};
 
 export default ApplyContainer;

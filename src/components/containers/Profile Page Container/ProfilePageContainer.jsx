@@ -14,13 +14,7 @@ import {BookSaved, NotificationCircle, TickCircle, GalleryRemove, MouseCircle, T
 
 
 
-const images = [
-    "https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945ec02ec5bc05d1e20f89bd1b87f22cd62a",
-    "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg",
-    "https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg",
-    "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg",
-    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28"
-]
+
 
 const image1 = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28"
 const image2 = 'https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945ec02ec5bc05d1e20f89bd1b87f22cd62a'
@@ -116,11 +110,11 @@ const arts = [
 const keywords=["post","job"]
 
 
-const ProfilePageContainer = ({isPersonal=true})=>{
+const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
-    const [content, setContent] = useState([])
+    const [user, setUser] = useState({})
 
     const [jobs, setJobs] = useState([])
     const [posts, setPosts] = useState([])
@@ -128,6 +122,8 @@ const ProfilePageContainer = ({isPersonal=true})=>{
     const [selectedPost, setSelectedPost] = useState([])
     const [selectedJob, setSelectedJob] = useState([])
     
+    const navigate = useNavigate()
+
 
     const fetchPosts = () =>{
         setPosts(arts)
@@ -145,8 +141,6 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
 
     const selectPost = (e, id) => {
-        // const updatedPost = posts.filter((post)=> post.id !== id)
-        // setPosts(updatedPost)
 
         e.stopPropagation()
         if(selectedPost.includes(id))
@@ -168,31 +162,6 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
     }
 
-
-    const navigate = useNavigate()
-
-    useEffect (()=>{
-        if(Category === 'job'){
-            fetchJobs()
-        }
-        else
-            fetchPosts()
-    }, [Category])
-
-    function handleCatageorySelect(index){
-        setCategory('')
-        setCategory(keywords[index])
-        setSelectedPost([])
-        setSelectedJob([])
-        setSelectMode(false)
-        console.log(Category)
-    }
-
-    function goToChat(){
-        const id = 2
-        navigate(`/chat`)
-    }
-
     const handlePostClick = (art) => {
         console.log(art.id)
         navigate(`/art/${art.id}`, {state: {art}});
@@ -203,6 +172,15 @@ const ProfilePageContainer = ({isPersonal=true})=>{
         navigate(`/job/${jobId}`)
     }
 
+    function handleCatageorySelect(index){
+        setCategory('')
+        setCategory(keywords[index])
+        setSelectedPost([])
+        setSelectedJob([])
+        setSelectMode(false)
+        console.log(Category)
+    }
+
     const deleteJob = async (id) => {
     try{
         const updatedContent = jobs.filter((job)=> job.job_id !== id)
@@ -211,10 +189,9 @@ const ProfilePageContainer = ({isPersonal=true})=>{
         // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
 
     }catch (error) {
-    console.error("Error deleting job:", error);
-    // setContent(content)
-}    
-}
+    console.error("Error deleting job:", error);}    
+    }
+
 
     const deletePost = async (id) => {
         try{
@@ -225,7 +202,6 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
         }catch (error) {
         console.error("Error deleting job:", error);
-        // setContent(content)
     }    
     }
     
@@ -246,13 +222,56 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
 
 
+    const rateUser = () => {
+
+    }
+
+    
+    function goToChat(){
+        const id = 2
+        // navigate(`/chat/${id}`)
+    }
+
+
+
+
+    useEffect(()=>{
+        const fetchUserInfo = async () =>{
+            try{
+                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}`)
+                setUser(response.data[0][0])
+            }
+            catch(error) {console.error(error)}
+        }
+
+        fetchUserInfo()
+        console.log(user)
+    }, [])
+
+
+    useEffect (()=>{
+        if(Category === 'job'){
+            fetchJobs()
+        }
+        else
+            fetchPosts()
+    }, [Category])
+
+    
+
+
+
+
         return(
 
         <div className={style.container}>
             <div className={style.profilecontainer}>
-                <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
-                <p className={style.username}>Yom Fisseha</p>
-                <p className={style.address}>@YOMMMM</p>
+                <div className={style.profile}>
+                    <img className={style.porifile_pic} src={`https://auth.bizawit.com/api/v1/upload/original/${user.profile_picture}`} alt="" />
+                    <p className={style.username}>{user.first_name + " " + user.last_name}</p>
+                    <p className={style.address}>@{user.username}</p>
+                </div>
+
 
                 <div className={style.profile_info}>
                     <div className={style.Rating}>
@@ -274,19 +293,39 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                     </div>
 
                 </div>
-                {!isPersonal &&
+                {!isPersonal ?
                     <div className={style.profile_Buttons}>
                         <PopOver left={true} component={<button className={style.pbuttons}>Rate</button>} state={Rate} setState={setRate}>
                             <div className={style.Ratingcontainer}>
 
-                                <div className={style.profilecontainer}>
+                                {/* <div className={style.profilecontainer}>
+                                    <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+                                    <p className={style.username}>Yom Fisseha</p>
+                                    <p className={style.address}>@YOMMMM</p>
+
+                                </div> */}
+
+                                <RatingStars rateAllow={true} rate={rateUser}></RatingStars>
+
+                            </div>
+                        </PopOver>
+                        <button className={style.pbuttons} onClick={goToChat}>Message</button>
+                    </div>
+                    :
+                    <div className={style.profile_Buttons}>
+                        <button className={style.pbuttons} onClick={goToChat}>Edit</button>
+
+                        <PopOver left={true} component={<button className={style.pbuttons}>Log Out</button>} state={Rate} setState={setRate}>
+                            <div className={style.Ratingcontainer}>
+
+                                <div className={style.logout}>
                                     <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
                                     <p className={style.username}>Yom Fisseha</p>
                                     <p className={style.address}>@YOMMMM</p>
 
                                 </div>
 
-                                <RatingStars star={1}></RatingStars>
+                                {/* <RatingStars rateAllow={true} rate={rateUser}></RatingStars> */}
 
                             </div>
                         </PopOver>
@@ -302,7 +341,8 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                 </RadioButtons>
             </div>
 
-                      <div className={style.selectButton}>
+            {!isPersonal &&
+            <div className={style.selectButton}>
               { (!selectMode || (selectedPost.length === 0 && selectedJob.length === 0)) ?
 
               <MouseCircle size={"25px"} 
@@ -316,16 +356,10 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                 variant='Outline'
                 onClick={deleteSelection}/>
             }
-        </div>
+            </div>
+            }
 
-            {/* {selectedPost.length !== 0 &&
-                <div className={style.icon_buttons}>
-                    <Trash variant='Broken' onClick={deleteSelection}/>
-                    {Category==="job" &&
-                    <Trash variant='Broken' onClick={deleteSelection}/>
-                    }
-                </div>
-            } */}
+
 
             </div>
 
@@ -334,16 +368,9 @@ const ProfilePageContainer = ({isPersonal=true})=>{
             {/* <div className={style.content_container}> */}
             {Category==="post" &&
                 <div className={style.post_container}>
-                    {/* <img className={style.pics} src="https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945ec02ec5bc05d1e20f89bd1b87f22cd62a" alt="" />
-                    <img className={style.pics} src="https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg"alt="" />
-                    <img className={style.pics} src="https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg"alt="" />
-                    <img className={style.pics} src="https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg"alt="" />
-                    <img className={style.pics} src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28"alt="" /> */}
 
-                    {posts && posts.length>0 &&
+                    {posts && posts.length>0 ?
                     posts.map((art)=>
-
-                    // <ArtCard key={art.id} art={art} hideCaption={true} onClick={()=>handlePostClick(art)} selected={selectedPost.includes(art.id)} onSelect={(e)=>selectPost(e,art.id)}/>)}
                     
                     <div key={art.id} className={style.art_card}
                             onClick={()=>handlePostClick(art)}>
@@ -358,7 +385,9 @@ const ProfilePageContainer = ({isPersonal=true})=>{
 
                         </div>
                     </div>)
-                }
+                    :
+                    <div className={style.nothing}>No art posted</div>
+                    }
 
                 </div>
             }
@@ -366,10 +395,10 @@ const ProfilePageContainer = ({isPersonal=true})=>{
             {Category==="job" &&
                 <div className={style.job_container}>
                     {jobs &&
-                    // <JobContainer jobs={content}/>
-                    jobs.length > 0 &&
+                    
+                    jobs.length > 0 ?
                     (jobs.map((job)=> 
-                    // <JobCard key={job.id} job={job} onDelete={()=>deleteJob(job.job_id)}/>
+                    
                     
 
                     <div key={job.job_id} className={style.jobcard} 
@@ -380,7 +409,7 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                     :
                     <NotificationCircle className={style.tick} size={"20px"} color="var(--dark-border-color)" onClick={(e)=>selectJob(e,job.job_id)} />
                     )}
-                    <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
+                    <ProfileImage userId={job.user_id} src={ `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`} size='46px' />
 
                 <div className={style.jobcard_content}>
                     <div className={style.line1}>
@@ -397,14 +426,6 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                         <span className={style.rate}>{"200"} <span>Birr/hr</span></span>
                     </p>
 
-                    {/* <ul className={style.keywords}>
-                        {job.tags &&
-                        job.tags.split(',').map((k, index)=>
-                        <li className={style.key}
-                            key={index}>
-                            {k}</li>
-                    )}
-                    </ul> */}
 
                     <div className={style.description}>
                         <p className={style.jobdescription}>
@@ -418,7 +439,11 @@ const ProfilePageContainer = ({isPersonal=true})=>{
                 </div>
                 
                 </div>
-                    ))}
+                    ))
+                :
+                <div className={style.nothing}>No jobs posted</div>
+
+                }
                 </div>}
 
             
