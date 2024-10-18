@@ -1,21 +1,11 @@
-import { useEffect } from 'react'
-import styles from './ContractPage.module.css'
-import ContractContainer from '../../components/containers/Contract Container/ContractContainer'
-import { useLocation } from 'react-router-dom'
+import style from './ContractPage.module.css'
+import ContractContainer from '../../components/containers/Contract Container/ContractContainer';
 
 const ContractPage = () => {
+    return (
+        <div className={style.container}>
+            <ContractContainer/>
 
-    // useEffect(()=>{
-    //     const getUsers = () =>{
-            
-    //     }
-    // })
-    const location = useLocation();
-    const typ = location.state?.type || {}
-
-    return(
-        <div className={styles.container}>
-            <ContractContainer type={'Termination'} reciever={typ}/>
         </div>
     )
 }
