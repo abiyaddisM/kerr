@@ -1,27 +1,37 @@
 .art_card{
-    border-radius: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     position: relative;
+    aspect-ratio: 16/9;
+    outline: 2px solid transparent;
+    cursor: pointer;
+    border-radius: 20px;
+    transition:  0.2s;
 }
-/* .art_card:hover{
-    transform: scale(1.04);
-    transition: ease-in-out 0.3s;
-} */
+ .art_card:hover{
+    transition:  0.2s;
+     .art_image{
+         transition:  0.2s;
+     }
+ }
 
 .image_container{
     background-color: var(--highlight-color);
     height: 100%;
     border-radius: 20px 20px 0px 0px;
     overflow: hidden;
+    width: 100%;
 }
 
 .art_image{
     width:100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
+    transition:  0.2s;
+
 }
 .tick{
     position: absolute;

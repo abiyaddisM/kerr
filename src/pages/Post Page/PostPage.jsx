@@ -24,7 +24,7 @@ export const PostPage = () => {
             postTitle:title,
             postCaption:description,
             postThumbnail:newImageUrl[0],
-            postImage: {images:newImageUrl},
+            postImage: {image:newImageUrl},
 
         }
         console.log(newImageUrl)
@@ -84,7 +84,7 @@ export const PostPage = () => {
 
                 <div className={styles.profile_info}>
                     <input type="text" placeholder="Title" className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} />
-                    <textarea placeholder="Description" rows="12" className={styles.input} value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <textarea placeholder="Description" rows="12" className={`${styles.input} ${styles.text_area}`} value={description} onChange={(e) => setDescription(e.target.value)} />
                 </div>
                 <div className={styles.button_container}>
                     <button className={styles.social_buttons} onClick={handleFileClick}>

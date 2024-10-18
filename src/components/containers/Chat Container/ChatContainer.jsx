@@ -10,9 +10,7 @@ export function ChatContainer({chats, isLoading}) {
     const {user} = useAuth();
     const load = [];
     for (let i = 0; i < 11  ; i++) {
-        load.push(<div className={styles.loading}>
-            {/*<div className={styles.inner_loading}></div>*/}
-        </div>)
+        load.push(<div className={styles.loading}></div>)
     }
     return (
            <div className={styles.container}>

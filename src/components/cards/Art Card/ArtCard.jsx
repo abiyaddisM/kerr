@@ -74,7 +74,7 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=fals
                     :
                     <NotificationCircle className={styles.tick} color="var(--highlight-color)" onClick={handleSelect} />)
                     }
-                    <img src={images[0]} className={styles.art_image} alt="art" />
+                    <img src={`https://auth.bizawit.com/api/v1/upload/600/${images[0]}`} className={styles.art_image} alt="art" />
 
                 </div>
             
@@ -82,15 +82,14 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=fals
             {/* {!selectMode && */}
             <div className={styles.art_caption}>
                 
-                <ProfileImage src={userImage} />
+                <ProfileImage src={`https://auth.bizawit.com/api/v1/upload/600/${userImage}`} />
 
                 <div className={styles.art_description}>
                     <p className={styles.art_title}>{title}</p>
                     <p>{userName}</p>
                     <div className={styles.post_info}>
                         <p>{viewCount} views</p>
-                        <img src={dot
-                        } alt="" />
+                        <img src={dot} alt="" />
                         <p>{calculateDuration()}</p>
                     </div>
 

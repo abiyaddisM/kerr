@@ -1,19 +1,22 @@
 import { useAuth } from "../../utils/AuthContext.jsx";
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import { Loading } from "../../components/general/Loading/Loading.jsx";
 import styles from "./SignUpPage.module.css";
 import logo from "../../assets/icons/logo.svg";
 import { TextInput } from "../../components/inputs/Text Input/TextInput.jsx";
 import { PasswordInput } from "../../components/inputs/Password Input/PasswordInput.jsx";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { motion, AnimatePresence } from 'framer-motion';
 import {DropDownInput} from "../../components/inputs/Drop Down Input/DropDownInput.jsx";
+import {Utils} from "../../utils/utils.js";
 
 export const SignUpPage = () => {
     const [page, setPage] = useState(0);
     const [title, setTitle] = useState('Welcome, Nice to Meet You!');
     const [direction,setDirection] = useState(0);
+    const [profileUrl,setProfileUrl] = useState('');
+    const navigate = useNavigate();
     const [formData,setFormData] = useState({
         username:'',
         password:'',
@@ -22,6 +25,11 @@ export const SignUpPage = () => {
         firstName:'',
         lastName:'',
         phone:'',
+        gender:'',
+        location:'',
+        industry:'',
+        experience:'',
+        profilePicture:''
 
     })
     const handleChange = (target) => {
@@ -44,11 +52,13 @@ export const SignUpPage = () => {
                 setTitle('Professional Life?');
                 break;
             case 3:
-                setTitle('Finalize Your Registration');
+                setTitle('Add A Picture');
                 break;
             default:
                 setTitle('');
         }
+        console.log(formData);
+
     }, [page]);
     function moveForward(){
         setDirection(1)
@@ -65,7 +75,17 @@ export const SignUpPage = () => {
 
         },1)
     }
+    const fileInputRef = useRef(null);
 
+    const handleFileClick = () => {
+        fileInputRef.current.click();
+    };
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setProfileUrl(URL.createObjectURL(file))
+        }
+    };
     const getPages = () => {
         switch (page) {
             case 0:
@@ -97,7 +117,7 @@ export const SignUpPage = () => {
                         <TextInput placeholder={'First Name'} value={formData.firstName} onChange={handleChange} getTarget={true} name={'firstName'}/>
                         <TextInput placeholder={'Last Name'} value={formData.lastName} onChange={handleChange} getTarget={true} name={'lastName'} />
                         <TextInput placeholder={'Phone Number'} value={formData.phone} onChange={handleChange} getTarget={true} name={'phone'} />
-                        <DropDownInput placeholder={'Gender'} data={[{key: 'f',value: 'Female'},{key:'m',value:'Male'}]}/>
+                        <DropDownInput placeholder={'Gender'} data={[{key: 'f',value: 'Female'},{key:'m',value:'Male'}]} value={formData.gender} name="gender" onChange={handleChange}/>
                     </motion.div>
                 );
             case 2:
@@ -110,32 +130,70 @@ export const SignUpPage = () => {
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         className={styles.input_container}
                     >
-                        <TextInput placeholder={'Username'} value={username} onChange={(e) => setUsername(e.target.value)} />
-                        <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <TextInput placeholder={'Location'} value={formData.location} onChange={handleChange} getTarget={true} name={'location'}/>
+                        <TextInput placeholder={'Industry'} value={formData.industry} onChange={handleChange} getTarget={true} name={'industry'}/>
+                        <DropDownInput placeholder={'Experience'}  value={formData.experience} name="experience" onChange={handleChange}
+                                       data={[
+                                           {key:'0',value: 'No Experience'},
+                                           {key:'1',value:'Less than 1 year'},
+                                           {key:'2',value:'1 year'},
+                                           {key:'3',value:'2 - 3 year'},
+                                           {key:'4',value:'4 - 6 year'},
+                                           {key:'5',value:'More than 6 year'},
+                                       ]}
+                        />
                     </motion.div>
                 );
             case 3:
                 return (
                     <motion.div
                         key="page3"
-                        initial={{ translateX: direction === 1 ? '50vw': '-50vw', opacity: 0 }}
-                        animate={{ translateX: 0, opacity: 1 }}
-                        exit={{ translateX: direction === 1 ?  '-50vw' : '50vw', opacity: 0 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        initial={{translateX: direction === 1 ? '50vw' : '-50vw', opacity: 0}}
+                        animate={{translateX: 0, opacity: 1}}
+                        exit={{translateX: direction === 1 ? '-50vw' : '50vw', opacity: 0}}
+                        transition={{type: 'spring', stiffness: 300, damping: 30}}
                         className={styles.bottom_container}
                     >
-                        <TextInput placeholder={'Industries'} value={username} onChange={(e) => setUsername(e.target.value)} />
-                        <TextInput placeholder={'Years of Experience'} value={username} onChange={(e) => setUsername(e.target.value)} />
+                        <div className={styles.picture_container}>
+                            <img className={styles.picture} src={profileUrl} alt=""/>
+                        </div>
+                        <button className={styles.button} onClick={handleFileClick} >Add</button>
+
                     </motion.div>
                 );
             default:
                 return null;
         }
     }
-
+    const upload = async () => {
+        const [url] = await Utils.uploadImages([profileUrl]);
+        console.log(url)
+        setFormData(
+            {
+                ...formData,
+                profilePicture: url
+            }
+        )
+    }
+    const submit = async () =>{
+       profileUrl !== "" && await upload();
+       axios.post("https://auth.bizawit.com/api/v1/user",formData)
+           .then(() => {
+               navigate('/login');
+           }).catch(()=>{
+               alert("error")
+       })
+    }
 
     return (
+
         <>
+            <input
+                type="file"
+                ref={fileInputRef}
+                style={{display: 'none'}}
+                onChange={handleFileChange}
+            />
             {/*<Loading state={isLoading}/>*/}
 
             <div className={styles.container}>
@@ -144,22 +202,28 @@ export const SignUpPage = () => {
                 </div>
                 <main className={styles.main_container}>
                     <div className={styles.top_container}>
-                        <img className={styles.logo} src={logo} alt="" />
+                        <img className={styles.logo} src={logo} alt=""/>
                         <h1 className={styles.title}>{title}</h1>
                         <p className={styles.sub_title}>To continue, please enter your details</p>
                     </div>
                     <div className={styles.bottom_container}>
-                       <div className={styles.transition_container}>
-                           <AnimatePresence mode={"wait"}>
-                               {getPages()}
-                           </AnimatePresence>
-                       </div>
+                        <div className={styles.transition_container}>
+                            <AnimatePresence mode={"wait"}>
+                                {getPages()}
+                            </AnimatePresence>
+                        </div>
                         <div className={styles.button_container}>
                             {page > 0 && (<button className={styles.button} onClick={moveBackward}>Back</button>)}
-                            <button className={styles.button} onClick={moveForward}>Next</button>
+                            {page < 3 ?<button className={styles.button} onClick={moveForward}>Next</button>
+                                :<button className={styles.button} onClick={submit}>Sign Up </button>
+                        }
+
                         </div>
                         <div className={styles.line}></div>
-                        <p className={styles.sign_up_p}>Already have an account? <b><Link to={'/login'} style={{ textDecoration: "none", color: "black" }}>Login</Link></b></p>
+                        <p className={styles.sign_up_p}>Already have an account? <b><Link to={'/login'} style={{
+                            textDecoration: "none",
+                            color: "black"
+                        }}>Login</Link></b></p>
                     </div>
                 </main>
             </div>

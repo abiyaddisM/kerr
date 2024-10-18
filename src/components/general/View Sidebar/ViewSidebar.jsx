@@ -9,7 +9,8 @@ import axios from "axios";
 
 
 
-function ViewSidebar({artInfo}){
+// eslint-disable-next-line react/prop-types
+function ViewSidebar({username,views,saves,title,id,description,profilePicture}){
     const navigate = useNavigate();
     const [save, setSave] = useState(false);
     const [share, setShare] = useState(false);
@@ -28,7 +29,7 @@ function ViewSidebar({artInfo}){
         // save the art to the user's collection
         const post = {
             userID: 1,
-            postID: artInfo.art_id
+            postID: id
         }
         axios.post(url, post)
         .then(res=>console.log(res.data))
@@ -43,9 +44,9 @@ function ViewSidebar({artInfo}){
                     <button className={styles.back_button} onClick={handleBackButtonClicked}>
                         <ArrowLeft size="20" color="#000000"/>Back</button>
                     <div className={styles.profile_container}>
-                        <img className={styles.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+                        <img className={styles.porifile_pic} src={`https://auth.bizawit.com/api/v1/upload/600/${profilePicture}`} alt="" />
                         <div className={styles.user_address}>
-                            <p className={styles.username}>{artInfo.userName}</p>
+                            <p className={styles.username}>{username}</p>
                             <p className={styles.address}>Ethiopia,  Addis Ababa</p>
                         </div>
                         
@@ -63,36 +64,23 @@ function ViewSidebar({artInfo}){
 
                     <div className={styles.view}>
                         <p className={styles.top}>View</p>
-                        <p className={styles.bottom}>{artInfo.views} views</p>
+                        <p className={styles.bottom}>{views} views</p>
 
                     </div>
 
                     <div className={styles.save}>
                         <p className={styles.top}>Save</p>
-                        <p className={styles.bottom}>{artInfo.saves} saves</p>
+                        <p className={styles.bottom}>{saves} saves</p>
 
                     </div>
 
                 </div>
 
                 <div className={styles.description}>
-                    <h1 className={styles.title}>Night CIty</h1>
-                    <p className={styles.paragraph}>{artInfo.title}</p>
+                    <h1 className={styles.title}>{title}</h1>
+                    <p className={styles.paragraph}>{description}</p>
 
                 </div>
-
-                <div className={styles.tags}>
-                    {artInfo.tags.map((tag, index)=>
-                    <button key={index} className={styles.tag_buttons}>
-                        {tag}
-                    </button>
-
-                    )}
-                    {/* <button className={styles.tag_buttons}>Neon</button>
-                    <button className={styles.tag_buttons}>Futuristic</button>
-                    <button className={styles.tag_buttons}>Landscape</button> */}
-                </div>
-
             </div>
 
             <div className={styles.button_container}>
@@ -112,7 +100,7 @@ function ViewSidebar({artInfo}){
                 </button>
                 }
                 state={save} setState={setSave}>
-                    <SaveContainer setIsOpen={setSave} id={artInfo.id}/>
+                    {/*<SaveContainer setIsOpen={setSave} id={id}/>*/}
                 </PopUp> 
                 
 

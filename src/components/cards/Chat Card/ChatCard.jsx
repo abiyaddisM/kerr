@@ -12,7 +12,7 @@ function ChatCard({image,state,name,lastSentMessage,lastSentTime,onClick,chatID}
         >
             <div className={styles.container} onClick={onClick}>
                 <div className={styles.image_container}>
-                    <img className={styles.image} src={image} alt=""/>
+                    <img className={styles.image} src={`https://auth.bizawit.com/api/v1/upload/600/${image}`} alt=""/>
                     <div className={state ? `${styles.indicator} ${styles.indicator_on}` : `${styles.indicator} ${styles.indicator_off}`}/>
                 </div>
                 <div className={styles.info_container}>
