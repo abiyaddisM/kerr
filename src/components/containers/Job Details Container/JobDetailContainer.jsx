@@ -180,6 +180,7 @@ const JobDetailContainer = ({ job, isOwner = false, isContracted = false }) => {
                 <CommandButton commandTerm={"Request Completion"} onClick={()=>openPopup('complete')} />
                 <CommandButton commandTerm={"Request Cancellation"} onClick={()=>openPopup('terminate')} />
                 <CommandButton commandTerm={"View bids and offers"} onClick={()=>openPopup('view-bids')} />
+                
             </div>
 
             {/* Render active pop-up based on activePopup state */}

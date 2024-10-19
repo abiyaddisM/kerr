@@ -17,7 +17,7 @@ const ProfileImage = ({userId, src='', size='28px'}) => {
         const fetchPicture = async () => {
             try {
                 const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${userId}`);
-                setUser(response.data[0][0]);
+                console.log()(response.data[0][0]);
             } catch (error) {
                 console.error(error);
             }
@@ -30,7 +30,7 @@ const ProfileImage = ({userId, src='', size='28px'}) => {
     return(
             <img 
             className={styles.profile_image}
-            src={src || `https://auth.bizawit.com/api/v1/upload/original/${user.profile_picture}`} 
+            src={`https://auth.bizawit.com/api/v1/upload/600/${src}`} 
             style={{ width:size, height:size }}
             onClick={()=>handelProfileClick(userId)}
         />

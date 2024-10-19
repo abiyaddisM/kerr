@@ -31,7 +31,7 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
 
 
     useEffect(()=>{
-      console.log(selectedPost)
+    //   console.log(selectedPost)
 
     }, [selectedPost])
   
@@ -45,7 +45,7 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
         <div className={styles.art_container}>
           {!isLoading ?
             (arts.map((value)=>{
-                    console.log(value)
+                    // console.log(value)
                     const newCard = {
                         id: value.id,
                         images:[value.post_thumbnail],

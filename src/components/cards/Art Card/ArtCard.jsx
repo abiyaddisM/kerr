@@ -82,7 +82,9 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=fals
             {/* {!selectMode && */}
             <div className={styles.art_caption}>
                 
-                <ProfileImage src={`https://auth.bizawit.com/api/v1/upload/600/${userImage}`} />
+                <ProfileImage 
+                src={`https://auth.bizawit.com/api/v1/upload/600/${userImage}`} 
+                />
 
                 <div className={styles.art_description}>
                     <p className={styles.art_title}>{title}</p>

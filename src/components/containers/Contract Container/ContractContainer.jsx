@@ -7,6 +7,7 @@ import Signature from '../../general/signature/signature';
 
 function ContractContainer(){
     const contractRef = useRef();
+    
     const downloadPdf = () => {
         const element = contractRef.current; 
         html2pdf()
