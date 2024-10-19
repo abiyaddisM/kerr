@@ -11,6 +11,7 @@ import ProfileImage from '../../general/Profile Image/ProfileImage'
 import JobContainer from '../JobContainer/JobContainer'
 import JobCard from '../../cards/Job Cards/JobCard'
 import {BookSaved, NotificationCircle, TickCircle, GalleryRemove, MouseCircle, Trash} from "iconsax-react";
+import {useAuth} from "../../../utils/AuthContext.jsx";
 
 
 
@@ -115,6 +116,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
     const [user, setUser] = useState({})
+    const {logout} = useAuth();
 
     const [jobs, setJobs] = useState([])
     const [posts, setPosts] = useState([])
@@ -314,21 +316,8 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                     :
                     <div className={style.profile_Buttons}>
                         <button className={style.pbuttons} onClick={goToChat}>Edit</button>
+                        <button className={style.pbuttons} onClick={logout}>Log Out</button>
 
-                        <PopOver left={true} component={<button className={style.pbuttons}>Log Out</button>} state={Rate} setState={setRate}>
-                            <div className={style.Ratingcontainer}>
-
-                                <div className={style.logout}>
-                                    <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
-                                    <p className={style.username}>Yom Fisseha</p>
-                                    <p className={style.address}>@YOMMMM</p>
-
-                                </div>
-
-                                {/* <RatingStars rateAllow={true} rate={rateUser}></RatingStars> */}
-
-                            </div>
-                        </PopOver>
                     </div>
                 }
             </div>

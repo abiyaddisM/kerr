@@ -28,10 +28,7 @@ const Notification = () => {
            </PopOver>
 
             {/* <PopOver component={ */}
-                <ProfileImage 
-                src={`https://auth.bizawit.com/api/v1/upload/600/${user.profile_picture}`} 
-                // userId={1}
-                />
+                <ProfileImage src={user.profile_picture} userId={1}/>
                 {/* }/> */}
 
             
