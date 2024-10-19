@@ -34,7 +34,7 @@ function ChatPage(){
                 setTimeout(()=>{
                     setChats(res.data[0])
                     setChatLoading(false)
-                },3000)
+                },0)
             }))
             .catch((error)=>{
                 console.log(error);

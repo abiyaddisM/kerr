@@ -19,7 +19,6 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
     const scrollView = useRef();
     const [socket, setSocket] = useState(null);
 
-
     useEffect(() => {
         const newSocket = io(SOCKET_SERVER_URL);
         setSocket(newSocket);

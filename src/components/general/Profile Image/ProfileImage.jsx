@@ -31,7 +31,6 @@ const ProfileImage = ({userId, src='', size='28px'}) => {
             <img 
             className={styles.profile_image}
             src={src || `https://auth.bizawit.com/api/v1/upload/original/${user.profile_picture}`} 
-            alt="Profile Image"
             style={{ width:size, height:size }}
             onClick={()=>handelProfileClick(userId)}
         />

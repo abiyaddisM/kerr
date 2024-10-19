@@ -29,7 +29,7 @@ const ArtPage = () =>{
             console.log("The Art",res.data.data)
             setArts(res.data.data)
             setIsLoading(false)
-          },3000);
+          },0);
         })
   }, []);
 

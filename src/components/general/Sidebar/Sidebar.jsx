@@ -51,7 +51,7 @@ const SideBar = () => {
                     <button className={styles.button}>
 
                     <Briefcase variant={selected !== '/jobs' ? '' : "Bold"} color="var(--primary-color)"/>
-                    <p className={styles.label}>Job Listing</p>
+                    <p className={styles.label}>Listing</p>
 
                     </button>
                 </NavLink>
@@ -101,7 +101,7 @@ const SideBar = () => {
                     <button className={styles.button}>
 
                         <AddSquare variant={selected !== '/post'? '' :"Bold"} color="var(--primary-color)"/>
-                        <p className={styles.label}>New Post</p>
+                        <p className={styles.label}>Post</p>
                     </button>
                 </NavLink>
 

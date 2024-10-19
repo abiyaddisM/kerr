@@ -33,6 +33,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
 }
 .select_chat span{
     padding: 5px 20px;

@@ -74,7 +74,7 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=fals
                     :
                     <NotificationCircle className={styles.tick} color="var(--highlight-color)" onClick={handleSelect} />)
                     }
-                    <img src={`https://auth.bizawit.com/api/v1/upload/600/${images[0]}`} className={styles.art_image} alt="art" />
+                    <img src={`https://auth.bizawit.com/api/v1/upload/600/${images[0]}`} className={styles.art_image} />
 
                 </div>
             

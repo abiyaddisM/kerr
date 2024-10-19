@@ -3,12 +3,15 @@ import PrivateLayout from "../layouts/Private Layout/PrivateLayout.jsx";
 import {useAuth} from "./AuthContext.jsx";
 
 export const ProtectedRoutes = () => {
+
     const { isAuthenticated } = useAuth();
+
     return isAuthenticated
         ?
         <PrivateLayout>
             <Outlet/>
         </PrivateLayout>
         :
-        <Navigate to={'/login'}/>
+        <Navigate to={isAuthenticated ? location.state?.from?.pathname : '/login'} replace />
+
 }

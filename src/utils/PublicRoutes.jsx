@@ -6,7 +6,7 @@ export const PublicRoutes = () => {
 
     return isAuthenticated
         ?
-            <Navigate to={'/'}/>
+            <Navigate to={'/'} replace />
         :
             <Outlet/>
 }

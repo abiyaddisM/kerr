@@ -38,8 +38,7 @@ function App () {
                   <Route path='/library' element={<ContractPage/>}/>
                   <Route path='/chat' element={<ChatPage/>}/>
                   <Route path='/chat/:id' element={<ChatPage/>}/>
-                  <Route path='/view' element={<ViewPage/>}/>
-
+                  <Route path='/art/:id' element={<ViewPage/>}/>
                   <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/profile' element={<ProfilePage/>}/>
                   <Route path='/profile:id' element={<ProfilePage/>}/>
@@ -47,9 +46,9 @@ function App () {
                   <Route path='/contract' element={<ContractPage/>}/>
                   <Route path='/post' element= {<PostPage/>}/>
               </Route>
-
               <Route element={<PublicRoutes/>}>
                   <Route path='/login' element={<LoginPage/>}/>
+                  {/*<Route path='/' element={<LoginPage/>}/>*/}
                   <Route path='/sign-up' element={<SignUpPage/>}/>
               </Route>
 
