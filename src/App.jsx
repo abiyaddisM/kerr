@@ -20,6 +20,7 @@ import ProfilePageContainer from './components/containers/Profile Page Container
 import JobDetailPage from './pages/Job Detail Page/JobDetailPage.jsx';
 import ContractPage from './pages/Contract Page/ContractPage.jsx';
 import {PostPage} from "./pages/Post Page/PostPage.jsx";
+import LandingPage from './pages/Landing page/LandingPage.jsx';
 
 function App () {
 
@@ -50,6 +51,7 @@ function App () {
                   <Route path='/login' element={<LoginPage/>}/>
                   {/*<Route path='/' element={<LoginPage/>}/>*/}
                   <Route path='/sign-up' element={<SignUpPage/>}/>
+                  <Route path='/landing-page' element={<LandingPage/>}/>
               </Route>
 
           </Routes>
