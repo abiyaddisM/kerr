@@ -203,7 +203,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
         })
     }
     return (
-        <>
+        
             <div className={style.container}>
                 <button className={style.back_button} onClick={handleBackButtonClicked}>
                     <ArrowLeft size="20px" color="var(--primary-color)"/> Back
@@ -291,6 +291,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             <p>No pending applications on this job. Apply?</p>
              }
             </div>
+            }
 
 
 
@@ -312,11 +313,12 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 
                 </>
                 }
-                {isClient && 
+                {(isClient && !isContracted) &&
                 <>
                 <CommandButton commandTerm={"View bids and offers"} onClick={()=>openPopup('view-bids')} />
                 <CommandButton commandTerm={"Offer Job"} onClick={()=>openPopup('offer-job')} />
                 </>
+                    }
 
                 {
                     isClient && deliver &&
@@ -343,7 +345,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             {/*The Pop Upssss*/}
 
                
-        </>
+        
 
 
      
@@ -364,7 +366,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 }}/>
                 // :
                 // <BidCard  setIsOpen={setIsViewBidsOpen} />
-}
+                }
             </PopUp>
 
             <PopUp
@@ -409,10 +411,8 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             </div>
             
         </div>
+        
     );
-
-)
-    ;
 
 };
 
