@@ -42,8 +42,9 @@ function App () {
                   <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/profile' element={<ProfilePage/>}/>
                   <Route path='/profile/:id' element={<ProfilePage/>}/>
-                  <Route path='/job/:job_id' element={<JobDetailPage/>}/>
                   
+                  <Route path='/job/:id' element={<JobDetailPage/>}/>
+                  <Route path='/contract' element={<ContractPage/>}/>
                   <Route path='/post' element= {<PostPage/>}/>
               </Route>
               <Route element={<PublicRoutes/>}>

@@ -219,18 +219,19 @@ const UserJobPage = () => {
           <PopUp 
             component={
                <button className='buttons2'>
-              {<AddCircle size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
               <p>{'Create Job'}</p>
+              {<AddCircle size="20px" variant="Bulk" color="var(--dark-border-color)"/>}
               </button>
             } 
             state={isCreateJobOpen} setState={setIsCreateJobOpen}>
               <CreateJobContainer setIsOpen={setIsCreateJobOpen}/>
           </PopUp>
+
           <PopUp 
             component={
             <button className='buttons2'>
-            {<ArrowCircleRight2 size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
             <p>{'View Bids'}</p>
+            {<ArrowCircleRight2 size="20px" variant="Bulk" color="var(--dark-border-color)"/>}
             </button>
           }
             state={isViewBidsOpen} setState={setIsViewBidsOpen}>

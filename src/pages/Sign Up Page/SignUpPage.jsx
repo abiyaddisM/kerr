@@ -167,23 +167,24 @@ export const SignUpPage = () => {
     }
     const upload = async () => {
         const [url] = await Utils.uploadImages([profileUrl]);
-        console.log(url)
-        setFormData(
-            {
-                ...formData,
-                profilePicture: url
-            }
-        )
-    }
-    const submit = async () =>{
-       profileUrl !== "" && await upload();
-       axios.post("https://auth.bizawit.com/api/v1/user",formData)
-           .then(() => {
-               navigate('/login');
-           }).catch(()=>{
-               alert("error")
-       })
-    }
+        return {
+            ...formData,
+            profilePicture: url,
+        };
+    };
+
+    const submit = async () => {
+        const updatedFormData = await upload();
+        console.log("last one", updatedFormData);
+
+        axios.post("https://auth.bizawit.com/api/v1/user",updatedFormData)
+            .then(() => {
+                navigate('/login');
+            }).catch(()=>{
+            alert("error")
+        })
+    };
+
 
     return (
 

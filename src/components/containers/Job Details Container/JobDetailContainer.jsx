@@ -5,7 +5,7 @@ import ApplyContainer from '../../containers/Apply Container/ApplyContainer.jsx'
 import ContactContainer from '../../containers/Contact Container/ContactContainer.jsx';
 import ProfileImage from '../../general/Profile Image/ProfileImage';
 import style from './JobDetailContainer.module.css';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import ViewBidsContainer from '../View Bids Container/ViewBidsContainer.jsx';
 import RatingStars from '../../general/RatingStars/RatingStars.jsx';
@@ -28,6 +28,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
     const [offers, setOffers] = useState([])
     const [appliedBid, setAppliedBid] = useState(null)
     const {user} = useAuth()
+    const {id} = useParams()
 
 
     const navigate = useNavigate();
@@ -127,12 +128,11 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
 
 
     useEffect(() => {
-
         fetchBids();
         fetchOffers();
         console.log(job.id)
 
-    }, [job.id]);
+    }, [id]);
 
     useEffect(()=>{
         fetchBids()
@@ -246,10 +246,10 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 <CommandButton commandTerm={"Contact"} onClick={()=>openPopup('contact')} />
                 </>
                 )}
-                
-                {isFreelancer &&
+
+                {job.freelance_id && job.freelance_id === user.id &&
                 <>
-                <CommandButton commandTerm={"Request Completion"} onClick={()=>openPopup('complete')} />
+                <CommandButton commandTerm={"Deliver"} onClick={()=>openPopup('complete')} />
                 <CommandButton commandTerm={"Request Cancellation"} onClick={()=>openPopup('terminate')} />
                 </>
                 }
@@ -268,6 +268,8 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             <PopUp
                 state={isApplyOpen}
                 setState={setIsApplyOpen}
+                height={'fit-content'}
+                width={'fit-content'}
             >
                 {!hasApplied &&
                 <ApplyContainer setIsOpen={closePopup} jobID={job.id} is_negotiable={job.job_negotiation == 1} job_price={job.job_price} onSuccess={()=>{
@@ -282,6 +284,8 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             <PopUp
                 state={isContactOpen}
                 setState={setIsContactOpen}
+                height={'fit-content'}
+                width={'fit-content'}
             >
                 <ContactContainer />
             </PopUp>
@@ -289,14 +293,18 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             <PopUp
                 state={isCompleteOpen}
                 setState={setIsCompleteOpen}
+                height={'fit-content'}
+                maxWidth={500}
             >
-                    <JobCompletionContainer  jobID={job.id} setIsOpen={setIsCompleteOpen} />
+                    <JobCompletionContainer  jobID={id} setIsOpen={setIsCompleteOpen} />
 
             </PopUp>
 
             <PopUp
                 state={isTerminateOpen}
                 setState={setIsTerminateOpen}
+                height={'fit-content'}
+                width={'fit-content'}
             >
                 <JobTerminateContainer  jobID={job.id} setIsOpen={setIsTerminateOpen} />
 
@@ -305,12 +313,16 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             <PopUp
                 state={isViewBidsOpen}
                 setState={setIsViewBidsOpen}
+                height={'fit-content'}
+                width={'fit-content'}
             >
                 <ViewBidsContainer jobID={job.id} setIsOpen={setIsViewBidsOpen} />
             </PopUp>
             <PopUp
             state={offerJob}
             setState={setOfferJob}>
+                height={'fit-content'}
+                width={'fit-content'}
                 <ProfileContainer profiles={[]} setIsOpen={setOfferJob} search={true} />
             </PopUp>
         </div>
