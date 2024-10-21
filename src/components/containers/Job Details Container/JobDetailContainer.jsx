@@ -313,7 +313,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 
                 </>
                 }
-                {isClient && 
+                {(isClient && !isContracted) &&
                 <>
                 <CommandButton commandTerm={"View bids and offers"} onClick={()=>openPopup('view-bids')} />
                 <CommandButton commandTerm={"Offer Job"} onClick={()=>openPopup('offer-job')} />
