@@ -125,7 +125,7 @@ const SearchContainer = ({closeSearch}) => {
 
     function searchCategory (category, searchTerm){
       if(category === 'Post'){
-        return posts.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
+        return posts.filter(post => post.post_title.toLowerCase().includes(searchTerm.toLowerCase()))
       }
       else if(category === 'Profile'){
         return users.filter(profile => profile.name.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -146,7 +146,7 @@ const SearchContainer = ({closeSearch}) => {
             console.log("job")
 
             try{
-            const res = await axios.get(`http://localhost:3000/api/v1/search/job?search=${searchTerm}`)
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/job?search=${searchTerm}`)
             setJobs(res.data.data)
             console.log(jobs)
 
@@ -159,9 +159,9 @@ const SearchContainer = ({closeSearch}) => {
    const fetchPost = async () =>{
             console.log("post")
             try{
-            const res = await axios.get(`http://localhost:3000/api/v1/search/post?search=${searchTerm}`)
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/post?search=${searchTerm}`)
             setPosts(res.data.data)
-            // console.log(jobs)
+            setIsLoading(false)
 
 
             }catch(e){console.log(e)}
@@ -169,7 +169,7 @@ const SearchContainer = ({closeSearch}) => {
       
      const fetchUser = async () =>{
             try{
-            const res = await axios.get(`http://localhost:3000/api/v1/search/user?search=${searchTerm}`)
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm}`)
             setUsers(res.data.data)
             console.log(jobs)
 

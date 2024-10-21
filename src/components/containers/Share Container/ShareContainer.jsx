@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-const ShareContainer = ({ id }) => {
+const ShareContainer = ({ id , onProfileClick=()=>{}}) => {
     const [location, setLocation] = useState('');
     const [profiles, setProfiles] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -35,6 +35,9 @@ const ShareContainer = ({ id }) => {
     }
 
     function goToMessage(profileId) {
+
+
+
         navigate(`/chat/${profileId}`)
     }
 
@@ -42,7 +45,7 @@ const ShareContainer = ({ id }) => {
     useEffect(()=>{
         const fetchUser = async () =>{
             try{
-            const res = await axios.get(`http://localhost:3000/api/v1/search/user?search=${searchTerm }`)
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm }`)
             const filteredProfiles = res.data.data.filter(profile=> profile.id !== user.id)
             setProfiles(filteredProfiles);
             }catch(e){console.log(e)}
@@ -61,7 +64,6 @@ const ShareContainer = ({ id }) => {
                 <div className={style.internal_share}>
                     <ProfileContainer 
                     profiles={profiles}
-                    share={true}
                     onProfileClick={(profileId)=>goToMessage(profileId)}
                      />
                 </div>

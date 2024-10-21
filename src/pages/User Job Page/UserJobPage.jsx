@@ -163,7 +163,7 @@ const UserJobPage = () => {
     const response = await axios.get(url, 
       {
         params:{
-          userID : user.id,
+          userID : 1,
           page: 1
         }
       }
@@ -177,15 +177,15 @@ const UserJobPage = () => {
   },[user.id])
 
   
-  const filteredJobs = jobs.filter(job => {
+  const filteredJobs = jobs2.filter(job => {
     const typeFilter = (selectedType === 'Contracted' && !job.isAssigned) ||
     (selectedType === 'Unassigned' && job.isAssigned);
 
     // job.isAssigned === (selectedType === 'Contracted');
     const statusFilter = selectedStatus === 'All' || 
-    (selectedStatus === 'Active' && job.isActive === true) ||
-    (selectedStatus === 'Cancelled' && job.isActive === false) ||
-    (selectedStatus === 'Completed' && job.isActive === undefined);
+    (selectedStatus === 'Active' && job.contract_state === 1) ||
+    (selectedStatus === 'Cancelled' && job.contract_state === 3) ||
+    (selectedStatus === 'Completed' && job.contract_state === 2);
     
     return statusFilter &&  typeFilter;
   });
@@ -217,6 +217,8 @@ const UserJobPage = () => {
 
         <div className="bid_buttons">
           <PopUp 
+            maxHeight={550}
+            maxWidth={1000}
             component={
                <button className='buttons2'>
               <p>{'Create Job'}</p>
@@ -228,6 +230,8 @@ const UserJobPage = () => {
           </PopUp>
 
           <PopUp 
+          maxHeight={550}
+            maxWidth={800}
             component={
             <button className='buttons2'>
             <p>{'View Bids'}</p>
@@ -242,7 +246,7 @@ const UserJobPage = () => {
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
       {filteredJobs.length !== 0?
-        <UserJobsContainer userJobs={jobs2} /> 
+        <UserJobsContainer userJobs={filteredJobs} /> 
       :
       <div className="no_jobs">
         No jobs found

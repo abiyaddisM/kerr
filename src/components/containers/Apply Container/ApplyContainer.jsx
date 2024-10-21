@@ -4,16 +4,18 @@ import { ArrowLeft } from "iconsax-react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../utils/AuthContext';
-import {useParams} from "react-router-dom";
+
+import { useParams } from 'react-router-dom';
+
 
 const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSuccess }) => {
     const [pitch, setPitch] = useState('');
-    const [price, setPrice] = useState( job_price? String(job_price) : '');
+    const [price, setPrice] = useState( job_price);
     const [submitAllowed, setSubmitAllowed] = useState(false);
     const {user} = useAuth();
     const {id} = useParams()
 
-    useEffect(()=>console.log(jobID),[])
+    useEffect(()=>console.log(user.id),[])
 
     function validate(pitch, price) {
         return pitch.trim() !== '' && !isNaN(price) && price > 0;
@@ -84,6 +86,7 @@ const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSu
                 :
                 <p className={styles.price}>
                     The price of this listing is fixed
+                    <p>Br.{job_price}</p>
                 </p>
                 
                 }

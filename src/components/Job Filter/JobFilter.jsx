@@ -81,10 +81,10 @@ const JobFilter = ({onStateChange}) => {
                 <LocationInput location={location} onChange={handleLocationChange}/>
             </div>
 
-            <div className={styles.filter}>
+            {/* <div className={styles.filter}>
                 <label htmlFor="rating">Client Rating</label>
                 <ClientRating values={ratings} selectedValues={clientRating} onSelect = {handleRatingSelect} />
-            </div>
+            </div> */}
 
             <div className={styles.filter}>
                 <Timeline timeline={timeline} onChange={handleTimelineChange}/>
