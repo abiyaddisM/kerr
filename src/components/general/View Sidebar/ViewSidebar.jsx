@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ViewSidebar.module.css"
 import {ArrowLeft,ImportCurve,Share} from "iconsax-react"
 import { PopUp } from "../../pops/Pop Up/PopUp";
 import ShareContainer from "../../containers/Share Container/ShareContainer";
 import SaveContainer from "../../containers/Save Container/SaveContainer";
 import axios from "axios";
+import ProfileImage from "../Profile Image/ProfileImage";
 
 
 
 // eslint-disable-next-line react/prop-types
-function ViewSidebar({username,views,saves,title,id,description,profilePicture}){
+function ViewSidebar({username,views,saves,title,id,description,profilePicture, userid}){
     const navigate = useNavigate();
     const [save, setSave] = useState(false);
     const [share, setShare] = useState(false);
@@ -37,6 +38,8 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
         
     }
 
+    
+
     return(
         <div className={styles.container}>
             <div className={styles.desc_container}>
@@ -44,7 +47,7 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
                     <button className={styles.back_button} onClick={handleBackButtonClicked}>
                         <ArrowLeft size="20" color="#000000"/>Back</button>
                     <div className={styles.profile_container}>
-                        <img className={styles.porifile_pic} src={`https://auth.bizawit.com/api/v1/upload/600/${profilePicture}`} alt="" />
+                        <ProfileImage className={styles.porifile_pic} userId={userid} src={profilePicture} alt="" />
                         <div className={styles.user_address}>
                             <p className={styles.username}>{username}</p>
                             <p className={styles.address}>Ethiopia,  Addis Ababa</p>
@@ -91,7 +94,7 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
                 </button>} 
                 state={share} setState={setShare}
                 >
-                    <ShareContainer/>
+                    <ShareContainer id={id}/>
                 </PopUp> 
                 <PopUp component={
                     <button className={styles.social_buttons}

@@ -1,11 +1,20 @@
 .container{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,1fr);
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* grid-template-rows: repeat(auto-fill,1fr); */
     gap: 20px;
     align-items: center;
-    padding: 20px 0px;
+    padding: 10px 0 ;
 }
-
+.searchContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .empty{
     display: flex;
     justify-content: center;

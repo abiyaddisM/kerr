@@ -43,7 +43,10 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
     }
     return(
         <div className={styles.art_container}>
-          {!isLoading ?
+          {!arts ? 
+          <h1>No Arts Container</h1>
+          :
+          !isLoading ?
             (arts.map((value)=>{
                     // console.log(value)
                     const newCard = {

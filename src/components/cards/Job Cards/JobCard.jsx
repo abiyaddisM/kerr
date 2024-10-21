@@ -46,7 +46,7 @@ const JobCard = ({ job, onClick=()=>{}}) => {
     return (
         <div className={styles.jobcard} 
                     onClick={handleJobClicked}>
-            <ProfileImage userId={job.user_id} src={profilePic} size='46px' />
+            <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
 
             <div className={styles.jobcard_content}>
                 <div className={styles.line1}>

@@ -37,6 +37,7 @@ function ViewPage(){
                     title={data.post_title}
                     profilePicture={data.profile_picture}
                     username={data.first_name + " " + data.last_name}
+                    userid = {data.user_id}
                     id={data.id}/>
             </div>
         </div>

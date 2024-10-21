@@ -1,13 +1,17 @@
 import CommandButton from '../../buttons/Command Buttons/CommandButton';
 import styles from './ApplyContainer.module.css';
 import { ArrowLeft } from "iconsax-react";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../../utils/AuthContext';
 
-const ApplyContainer = ({ setIsOpen, jobID }) => {
+const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSuccess }) => {
     const [pitch, setPitch] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState( job_price? String(job_price) : '');
     const [submitAllowed, setSubmitAllowed] = useState(false);
+    const {user} = useAuth();
+
+    useEffect(()=>console.log(jobID),[])
 
     function validate(pitch, price) {
         return pitch.trim() !== '' && !isNaN(price) && price > 0;
@@ -25,7 +29,7 @@ const ApplyContainer = ({ setIsOpen, jobID }) => {
 
     function submitApplication(pitch, price) {
         const application = {
-            userID: 1,
+            userID: user.id,
             jobID: jobID,
             bidPitch: pitch,
             bidCounterPitch: price,
@@ -39,6 +43,7 @@ const ApplyContainer = ({ setIsOpen, jobID }) => {
             .catch(err => {
                 console.error(err);
             });
+        onSuccess()
     }
 
     function handleCancelClick() {
@@ -64,6 +69,7 @@ const ApplyContainer = ({ setIsOpen, jobID }) => {
                 <ArrowLeft size="20px" color="var(--primary-color)" /> Back
             </button>
             <div className={styles.application}>
+                {is_negotiable?
                 <input
                     type='number'
                     className={styles.counter_pitch}
@@ -73,6 +79,13 @@ const ApplyContainer = ({ setIsOpen, jobID }) => {
                     value={price}
                     onChange={handleInputChange}
                 />
+                :
+                <p className={styles.price}>
+                    The price of this listing is fixed
+                </p>
+                
+                }
+
                 <textarea
                     className={styles.pitch_text}
                     name='bidPitch'

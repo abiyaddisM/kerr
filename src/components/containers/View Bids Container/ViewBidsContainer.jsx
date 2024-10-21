@@ -11,6 +11,7 @@ import { ArrowLeft } from 'iconsax-react';
 
 const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
+    
     const [view, setView] = useState('bids')
     const [bids, setBids] = useState([])
     const [offers, setOffers] = useState([])
@@ -23,11 +24,32 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         
     }
 
+    const removeBid = async (id) => {
+        
+        setBids(prev=> prev.filter((b)=>b.id !== id))
+        try{
+        const url = `https://auth.bizawit.com/api/v1/job-bid/${id}`
+        await axios.delete(url)
+    } catch(error) {console.error(error)}
+    }
+
+    const removeOffer = async (id) => {
+        
+        setOffers(prev=> prev.filter((o)=>o.id !== id))
+        
+        try{
+            const url = `https://auth.bizawit.com/api/v1/job-offer/${id}`
+            await axios.delete(url)
+        } catch(error) {console.error(error)}
+   
+        
+    }
+
 
 
 
     const fetchJobBids = async () => {
-        console.log(isJobs)
+        // console.log(isJobs)
 
         const url = `https://auth.bizawit.com/api/v1/job/${jobID}/job-bid`
 
@@ -41,7 +63,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchUserBids = async () => {
-        console.log(isJobs)
+        // console.log(isJobs)
 
         const url = `https://auth.bizawit.com/api/v1/job-bid`
 
@@ -81,7 +103,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchUserOffers = async () => {
-        console.log(isJobs)
+        // console.log(isJobs)
         const url = `https://auth.bizawit.com/api/v1/job-offer`
         try {
             const response = await axios.get(url, {
@@ -92,7 +114,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                     'Content-Type' : 'application/json',
                 }
             })
-            console.log(response.data)
+            // console.log(response.data)
             setOffers(response.data.data)
 
         }
@@ -118,6 +140,8 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         // console.log(bids)
 
     }, [view])
+
+    
 
 
 
@@ -155,6 +179,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                                 {/* <p>{bid.created_at}</p> */}
                             <BidCard bid={bid}
                                     received={isJobs}
+                                    onDelete={()=>removeBid(bid.id)}
                             />
                             </div>)
                             // <BidCard key={index} bid={bid}/>
@@ -163,7 +188,11 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                          :
                         (
                             <div className={styles.empty}>
-                                <p>No bids sent</p>
+                                {userID!==null?
+                                <p>No bids sent</p>:
+                                <p>No bids received</p>
+
+                                }
                             </div>
                         )
                     
@@ -178,12 +207,17 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                         offers.map((offer, index) => (
                             <div key={index}>
                                 {/* <p>{bid.created_at}</p> */}
-                            <OfferCard offer={offer} recieved={!isJobs}/>
+                            <OfferCard offer={offer} recieved={!isJobs}
+                            onDelete={()=>removeOffer(offer.id)}/>
                             </div>)
 
                         ):(
                             <div className={styles.empty}>
+                                {userID===null?
+                                <p>No offers sent</p>:
                                 <p>No offers received</p>
+
+                                }
                             </div>
                         )
                     

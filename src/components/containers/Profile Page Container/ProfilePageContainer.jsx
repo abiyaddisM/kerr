@@ -115,8 +115,8 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
-    const [user, setUser] = useState({})
-    const {logout} = useAuth();
+    const [profile, setProfile] = useState({})
+    const {logout, user} = useAuth();
 
     const [jobs, setJobs] = useState([])
     const [posts, setPosts] = useState([])
@@ -126,14 +126,20 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     
     const navigate = useNavigate()
 
+    
 
-    const fetchPosts = () =>{
-        setPosts(arts)
+    const fetchPosts = async () =>{
+        console.log(user.id)
+        try{
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/user/${user.id}/post`)
+            console.log(res.data.data)
+        }
+        catch(e){console.error(e)}
     }
 
     const fetchJobs = async () =>{
         try{
-            const res = await axios.get('https://auth.bizawit.com/api/v1/job')
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/job`)
             setJobs(res.data[0])
             }catch(e){console.log(e)}
 
@@ -240,14 +246,14 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     useEffect(()=>{
         const fetchUserInfo = async () =>{
             try{
-                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}`)
-                setUser(response.data[0][0])
+                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${user.id}`)
+                setProfile(response.data[0][0])
             }
             catch(error) {console.error(error)}
         }
 
         fetchUserInfo()
-        console.log(user)
+        console.log(isPersonal)
     }, [])
 
 
@@ -257,7 +263,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         }
         else
             fetchPosts()
-    }, [Category])
+    }, [Category, posts])
 
     
 
@@ -269,9 +275,9 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         <div className={style.container}>
             <div className={style.profilecontainer}>
                 <div className={style.profile}>
-                    <img className={style.porifile_pic} src={`https://auth.bizawit.com/api/v1/upload/original/${user.profile_picture}`} alt="" />
-                    <p className={style.username}>{user.first_name + " " + user.last_name}</p>
-                    <p className={style.address}>@{user.username}</p>
+                    <ProfileImage size='113px' src={profile.profile_picture} alt="" />
+                    <p className={style.username}>{profile.first_name + " " + profile.last_name}</p>
+                    <p className={style.address}>@{profile.username}</p>
                 </div>
 
 
@@ -300,13 +306,6 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                         <PopOver left={true} component={<button className={style.pbuttons}>Rate</button>} state={Rate} setState={setRate}>
                             <div className={style.Ratingcontainer}>
 
-                                {/* <div className={style.profilecontainer}>
-                                    <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
-                                    <p className={style.username}>Yom Fisseha</p>
-                                    <p className={style.address}>@YOMMMM</p>
-
-                                </div> */}
-
                                 <RatingStars rateAllow={true} rate={rateUser}></RatingStars>
 
                             </div>
@@ -330,7 +329,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                 </RadioButtons>
             </div>
 
-            {!isPersonal &&
+            {isPersonal &&
             <div className={style.selectButton}>
               { (!selectMode || (selectedPost.length === 0 && selectedJob.length === 0)) ?
 

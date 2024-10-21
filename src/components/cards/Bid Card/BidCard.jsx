@@ -28,7 +28,7 @@ const job =    {
         successrate: 90
     }
 
-const BidCard = ({bid, received=false}) => {
+const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
     const url = 'https://auth.bizawit.com/api/v1/job-offer'
     const [isExpanded, setIsExpanded] = useState(false);
     const [jobVisible, setJobVisible] = useState(false)
@@ -39,12 +39,21 @@ const BidCard = ({bid, received=false}) => {
 
     
     
-    async function handleReject() {
+    async function  handleReject() {
+        onDelete()    
+    }
 
+    async function  handleCancel() {
+        try{
+        const url = `https://auth.bizawit.com/api/v1/job-bid/${bid.id}`
+        await axios.delete(url)
+    } catch(error) {console.error(error)}
+        
 
     }
 
     async function handleAccept(){
+        // const url = `https://auth.bizawit.com/api/v1/job-bid/`
         // const offer = {
         //     user_id: 1,
         //     job_id: bid.job_id
@@ -60,7 +69,7 @@ const BidCard = ({bid, received=false}) => {
     //     console.log(bid)
     // }, [])
 
-    const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${bid.profile_picture}`
+    
 
 
     return (
@@ -73,9 +82,9 @@ const BidCard = ({bid, received=false}) => {
             <div className={styles.profile}>
                 <ProfileImage 
                     userId={user.id}
-                    src={profilePic}
+                    src={bid.profile_picture}
                     size='30px'/> 
-                <p className={styles.user_name}>{user.name}</p>
+                <p className={styles.user_name}>{bid.first_name + " " + bid.last_name}</p>
             </div>
             :
             <div className={styles.title_container}>
@@ -127,7 +136,7 @@ const BidCard = ({bid, received=false}) => {
                 <p>
                     Pending
                 </p>
-                <button className={styles.cancel_button}>
+                <button className={styles.cancel_button} onClick={handleReject}>
                     Cancel
                 </button>
 

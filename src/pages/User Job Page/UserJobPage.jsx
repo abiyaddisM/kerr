@@ -2,7 +2,7 @@ import './UserJobPage.css';
 import UserJobsContainer from '../../components/containers/User Jobs Container/UserJobsContainer';
 import ButtonGroup from '../../components/buttons/Button Group/ButtonGroup'
 import RadioButtons from '../../components/buttons/RadioButtons/RadioButtons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CommandButton from '../../components/buttons/Command Buttons/CommandButton';
 import CreateJobContainer from '../../components/containers/Create Job Container/CreateJobContainer'
 import ViewBidsContainer from '../../components/containers/View Bids Container/ViewBidsContainer'
@@ -12,6 +12,8 @@ import addIcon from '../../assets/icons/add.svg'
 import plusIcon from '../../assets/icons/plusIcon.svg'
 import arrowrightIcon from '../../assets/icons/arrowrightIcon.svg'
 import { AddCircle, ArrowCircleRight, ArrowCircleRight2 } from 'iconsax-react';
+import axios from 'axios';
+import { useAuth } from '../../utils/AuthContext';
 
 
 
@@ -129,6 +131,7 @@ const UserJobPage = () => {
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [isViewBidsOpen, setIsViewBidsOpen] = useState(false);
 
+
   function handlePopup(button) {
     console.log(button)
     if (button === 'Create Job') {
@@ -145,6 +148,35 @@ const UserJobPage = () => {
     setSelectedStatus(keywords2[index]);
   }
 
+  function closePopUp(){
+    setIsViewBidsOpen(false)
+  }
+
+  const {user} = useAuth()
+
+  const [jobs2, setJobs2] = useState([])
+
+  useEffect(()=>{
+    const fetchJobs = async ()=>{
+    const url = `https://auth.bizawit.com/api/v1/job-contract`
+    try{
+    const response = await axios.get(url, 
+      {
+        params:{
+          userID : user.id,
+          page: 1
+        }
+      }
+    )
+    setJobs2(response.data.data)
+  }
+  catch(error) {console.error(error)}
+  }
+  fetchJobs()
+  console.log(jobs2)
+  },[user.id])
+
+  
   const filteredJobs = jobs.filter(job => {
     const typeFilter = (selectedType === 'Contracted' && !job.isAssigned) ||
     (selectedType === 'Unassigned' && job.isAssigned);
@@ -186,30 +218,30 @@ const UserJobPage = () => {
         <div className="bid_buttons">
           <PopUp 
             component={
-              <IconButton 
-              src={<AddCircle size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
-              term={'Create Job'}>
-              </IconButton>
+               <button className='buttons2'>
+              {<AddCircle size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
+              <p>{'Create Job'}</p>
+              </button>
             } 
             state={isCreateJobOpen} setState={setIsCreateJobOpen}>
               <CreateJobContainer setIsOpen={setIsCreateJobOpen}/>
           </PopUp>
           <PopUp 
             component={
-            <IconButton 
-            src={<ArrowCircleRight2 size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
-            term={'View Bids'}>
-            </IconButton>
+            <button className='buttons2'>
+            {<ArrowCircleRight2 size="20px" variant="Bulk" color="var(--dark-border-color)"/>} 
+            <p>{'View Bids'}</p>
+            </button>
           }
             state={isViewBidsOpen} setState={setIsViewBidsOpen}>
-              <ViewBidsContainer userID={1}/>
+              <ViewBidsContainer userID={1} setIsOpen={closePopUp}/>
           </PopUp>
         </div>
         
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
       {filteredJobs.length !== 0?
-        <UserJobsContainer userJobs={filteredJobs} /> 
+        <UserJobsContainer userJobs={jobs2} /> 
       :
       <div className="no_jobs">
         No jobs found

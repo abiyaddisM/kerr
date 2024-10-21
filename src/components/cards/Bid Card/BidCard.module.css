@@ -134,4 +134,5 @@
     color: var(--text-medium-color);
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
 }

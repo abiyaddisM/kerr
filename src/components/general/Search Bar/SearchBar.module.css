@@ -19,3 +19,11 @@
     color: var(--text--dark-gray-color);
     width: 100%;
 }
+
+.searchbar input:focus{
+    border: none;
+    outline: none;
+    .searchbar{
+        border: 1px solid var(--dark-border-color);
+    }
+}

@@ -10,22 +10,23 @@ const ProfileImage = ({userId, src='', size='28px'}) => {
     const navigate = useNavigate();
 
     function handelProfileClick(id){
-        navigate(`/profile`);
+        navigate(`/profile/${id}`);
     }
 
     useEffect(() => {
-        const fetchPicture = async () => {
-            try {
-                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${userId}`);
-                console.log()(response.data[0][0]);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+        console.log(userId)
+        // const fetchPicture = async () => {
+        //     try {
+        //         const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${userId}`);
+        //         console.log()(response.data[0][0]);
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // };
 
-        if (!src) {
-            fetchPicture();
-        }
+        // if (!src) {
+        //     fetchPicture();
+        // }
     }, [src, userId]);
     return(
             <img 

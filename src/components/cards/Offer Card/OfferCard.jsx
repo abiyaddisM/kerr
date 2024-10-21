@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import ProfileCard from '../Profile Card/ProfileCard'
 import ProfileImage from '../../general/Profile Image/ProfileImage'
 import styles from './OfferCard.module.css'
+import axios from 'axios'
 
-const OfferCard = ({offer, recieved=false}) => {
+const OfferCard = ({offer, recieved=false, onDelete=()=>{}}) => {
     const user = {
             id: offer.user_id,
             image: offer.profile_picture,
@@ -12,8 +13,18 @@ const OfferCard = ({offer, recieved=false}) => {
         }
 
     const navigate = useNavigate()
-    async function handleReject() {
+    
 
+    async function  handleReject() {
+        onDelete()
+    }
+
+        async function  handleCancel() {
+        try{
+        const url = `https://auth.bizawit.com/api/v1/job-bid/${bid.id}`
+        await axios.delete(url)
+    } catch(error) {console.error(error)}
+        
 
     }
 
@@ -46,7 +57,7 @@ const OfferCard = ({offer, recieved=false}) => {
             <div className={styles.profile}>
                 <ProfileImage 
                     userId={offer.user_id}
-                    src={profilePic}
+                    src={offer.profile_picture}
                     size='42px'/>
             </div>
 
@@ -75,7 +86,9 @@ const OfferCard = ({offer, recieved=false}) => {
                 </p> */}
 
                 <div className={styles.bottom}>
-                    <p className={styles.more}>View more</p>
+                    <p className={styles.more} 
+                    // onClick={navigate(`/job/${offer.job_id}`)}
+                    >View more</p>
                      <div className={styles.buttons}>
                     {/* <PopUp component={ */}
                        <button className={styles.btn} type='button' onClick={handleReject}>Decline</button>
