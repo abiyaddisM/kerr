@@ -119,7 +119,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     const {logout, user} = useAuth();
 
     const [jobs, setJobs] = useState([])
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     const [selectMode, setSelectMode] = useState(false)
     const [selectedPost, setSelectedPost] = useState([])
     const [selectedJob, setSelectedJob] = useState([])
@@ -131,16 +131,16 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     const fetchPosts = async () =>{
         console.log(user.id)
         try{
-            const res = await axios.get(`https://auth.bizawit.com/api/v1/user/${user.id}/post`)
-            console.log(res.data.data)
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}/post`)
+            setPosts(res.data.data)
         }
         catch(e){console.error(e)}
     }
 
     const fetchJobs = async () =>{
         try{
-            const res = await axios.get(`https://auth.bizawit.com/api/v1/job`)
-            setJobs(res.data[0])
+            const res = await axios.get(`http://localhost:3000/api/v1/user/${id}/job`)
+            setJobs(res.data.data)
             }catch(e){console.log(e)}
 
     }
@@ -194,7 +194,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         const updatedContent = jobs.filter((job)=> job.job_id !== id)
         await setJobs(updatedContent)
         console.log(id)
-        // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
+        await axios.delete(`https://localhost:3000/api/v1/job/${id}`);
 
     }catch (error) {
     console.error("Error deleting job:", error);}    
@@ -203,31 +203,30 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     const deletePost = async (id) => {
         try{
-            const updatedContent = jobs.filter((job)=> job.job_id !== id)
-            await setJobs(updatedContent)
+            const updatedContent = posts.filter((post)=> post.id !== id)
+            await setPosts(updatedContent)
             console.log(id)
-            // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
+            await axios.delete(`http://localhost:3000/api/v1/post/${id}`);
 
         }catch (error) {
-        console.error("Error deleting job:", error);
+        console.error("Error deleting post:", error);
     }    
     }
     
-    const deleteSelection=()=>{
-        if(Category === "post"){
-            selectedPost?.length > 0
-                selectedPost.map(p=>{
-                    deletePost(p)
-                }) 
-            }
-        else{
-            selectedJob?.length > 0
-                selectedJob.map(p=>{
-                    deletePost(p)
-                }) 
-            }
+const deleteSelection = async () => {
+    if (Category === "post" && selectedPost.length > 0) {
+        await Promise.all(selectedPost.map(async (postId) => {
+            await deletePost(postId);
+        }));
+    } else if (Category === "job" && selectedJob.length > 0) {
+        await Promise.all(selectedJob.map(async (jobId) => {
+            await deleteJob(jobId);
+        }));
     }
-
+    // Reset selected items after deletion
+    setSelectedPost([]);
+    setSelectedJob([]);
+};
 
 
     const rateUser = () => {
@@ -246,7 +245,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     useEffect(()=>{
         const fetchUserInfo = async () =>{
             try{
-                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${user.id}`)
+                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}`)
                 setProfile(response.data[0][0])
             }
             catch(error) {console.error(error)}
@@ -263,7 +262,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         }
         else
             fetchPosts()
-    }, [Category, posts])
+    }, [Category, posts, jobs])
 
     
 
@@ -357,7 +356,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
             {Category==="post" &&
                 <div className={style.post_container}>
 
-                    {posts && posts.length>0 ?
+                    {(posts && posts.length>0) ?
                     posts.map((art)=>
                     
                     <div key={art.id} className={style.art_card}
@@ -369,7 +368,8 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                         :
                         <NotificationCircle className={style.tick} color="var(--highlight-color)" onClick={(e)=>selectPost(e,art.id)} />
                         )}
-                        <img src={art.images[0]} className={style.art_image} alt="art" />
+                        <img src={`https://auth.bizawit.com/api/v1/upload/600/${art.post_thumbnail}`} className={style.art_image} alt="art" />
+                        
 
                         </div>
                     </div>)
@@ -397,13 +397,13 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                     :
                     <NotificationCircle className={style.tick} size={"20px"} color="var(--dark-border-color)" onClick={(e)=>selectJob(e,job.job_id)} />
                     )}
-                    <ProfileImage userId={job.user_id} src={ `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`} size='46px' />
+                    <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
 
                 <div className={style.jobcard_content}>
                     <div className={style.line1}>
                         <div className={style.nameaddress}>
-                            <p className={style.names}>{job.full_name}</p> {/* Access name from user object */}
-                            <p className={style.address}>Ethiopia, Summit</p>
+                            <p className={style.names}>{job.first_name + " " + job.last_name}</p> {/* Access name from user object */}
+                            <p className={style.address}>{job.location}</p>
                         </div>
                         
                     </div>
@@ -411,7 +411,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
                     <p className={style.role}>
                         {job.job_title}
-                        <span className={style.rate}>{"200"} <span>Birr/hr</span></span>
+                        <span className={style.rate}>{job.job_price} <span>Birr/hr</span></span>
                     </p>
 
 
