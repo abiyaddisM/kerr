@@ -4,7 +4,9 @@ import { ArrowLeft } from "iconsax-react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../utils/AuthContext';
+
 import { useParams } from 'react-router-dom';
+
 
 const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSuccess }) => {
     const [pitch, setPitch] = useState('');

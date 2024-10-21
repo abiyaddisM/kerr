@@ -12,100 +12,8 @@ import JobContainer from '../JobContainer/JobContainer'
 import JobCard from '../../cards/Job Cards/JobCard'
 import {BookSaved, NotificationCircle, TickCircle, GalleryRemove, MouseCircle, Trash} from "iconsax-react";
 import {useAuth} from "../../../utils/AuthContext.jsx";
+import CommandButton from "../../buttons/Command Buttons/CommandButton.jsx";
 
-
-
-
-
-const image1 = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28"
-const image2 = 'https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945ec02ec5bc05d1e20f89bd1b87f22cd62a'
-const image3 =  "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg"
-const image4 = "https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg"
-const arts = [
-    {
-        id: 1,
-        images:[image2, image1],
-        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 7300,
-        saves: 100,
-        postId: 1,
-        postDate: new Date('2024-03-17')
-    },
-    {
-        id: 2,
-        images:[image1, image4],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 695,
-        saves: 100,
-        postId: 3,
-        postDate: new Date('2024-07-17')
-    },
-    {
-        id: 3,
-        images:[image3, image4, image1, image2],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 800,
-        saves: 100,
-        postId: 2,
-        postDate: new Date('2024-08-17')
-    },
-    {
-        id: 4,
-        images:[image1, image3, image2],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 250,
-        saves: 100,
-        postId: 1,
-        postDate: new Date('2023-06-16')
-    },
-    {
-        id: 5,
-        images:[image4, image1],
-        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 5395,
-        saves: 100,
-        postId: 4,
-        postDate: new Date('2022-01-03')
-    },
-    {
-        id: 6,
-        images:[image3, image2],
-        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 1234,
-        saves: 100,
-        postId: 3,
-        postDate: new Date('2024-06-10')
-    },
-    {
-        id: 7,
-        images:[image2, image3, image4],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 230,
-        saves: 100,
-        postId: 2,
-        postDate: new Date('2023-10-17')
-    }]
 
 
 const keywords=["post","job"]
@@ -205,8 +113,10 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         try{
             const updatedContent = posts.filter((post)=> post.id !== id)
             await setPosts(updatedContent)
+
             console.log(id)
             await axios.delete(`https://auth.bizawit.com/api/v1/post/${id}`);
+
 
         }catch (error) {
         console.error("Error deleting post:", error);
@@ -235,8 +145,12 @@ const deleteSelection = async () => {
 
     
     function goToChat(){
-        const id = 2
-        // navigate(`/chat/${id}`)
+        axios.post('https://auth.bizawit.com/api/v1/chat',{user1ID:1,user2ID:3}).then(
+            res => {
+                console.log("ME",res)
+            }
+        )
+        // navigate(`/chat/3`)
     }
 
 
@@ -257,12 +171,13 @@ const deleteSelection = async () => {
 
 
     useEffect (()=>{
+        console.log("ss")
         if(Category === 'job'){
             fetchJobs()
         }
         else
             fetchPosts()
-    }, [Category, posts, jobs])
+    }, [<Category></Category>, jobs])
 
     
 
@@ -309,12 +224,14 @@ const deleteSelection = async () => {
 
                             </div>
                         </PopOver>
-                        <button className={style.pbuttons} onClick={goToChat}>Message</button>
+                        <CommandButton commandTerm={"Message"} onClick={goToChat}/>
+
                     </div>
                     :
                     <div className={style.profile_Buttons}>
-                        <button className={style.pbuttons} onClick={goToChat}>Edit</button>
-                        <button className={style.pbuttons} onClick={logout}>Log Out</button>
+                        <CommandButton commandTerm={"Edit"} onClick={goToChat}/>
+                        <CommandButton commandTerm={"logout"} onClick={logout}/>
+
 
                     </div>
                 }
