@@ -12,6 +12,7 @@ import JobContainer from '../JobContainer/JobContainer'
 import JobCard from '../../cards/Job Cards/JobCard'
 import {BookSaved, NotificationCircle, TickCircle, GalleryRemove, MouseCircle, Trash} from "iconsax-react";
 import {useAuth} from "../../../utils/AuthContext.jsx";
+import CommandButton from "../../buttons/Command Buttons/CommandButton.jsx";
 
 
 
@@ -309,12 +310,14 @@ const deleteSelection = async () => {
 
                             </div>
                         </PopOver>
-                        <button className={style.pbuttons} onClick={goToChat}>Message</button>
+                        <CommandButton commandTerm={"Message"} onClick={goToChat}/>
+
                     </div>
                     :
                     <div className={style.profile_Buttons}>
-                        <button className={style.pbuttons} onClick={goToChat}>Edit</button>
-                        <button className={style.pbuttons} onClick={logout}>Log Out</button>
+                        <CommandButton commandTerm={"Edit"} onClick={goToChat}/>
+                        <CommandButton commandTerm={"logout"} onClick={logout}/>
+
 
                     </div>
                 }
