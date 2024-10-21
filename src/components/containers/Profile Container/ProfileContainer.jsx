@@ -10,25 +10,24 @@ const ProfileContainer = ({profiles=[], searchTerm='', onProfileClick=()=>{}, sh
     const navigate = useNavigate();
 
 
-    // useEffect(()=>{
-    //        const fetchUser = async () =>{
-    //         try{
-    //         const res = await axios.get(`http://localhost:3000/api/v1/search/user?search=${searchTerm}`)
-    //         setUsers(res.data.data)
-            
+    useEffect(()=>{
+        console.log(share)
+           const fetchUser = async () =>{
+            try{
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm}`)
+            setUsers(res.data.data)
 
+            }catch(e){console.log(e)}
+         }
+         if(profiles.length === 0)
+            fetchUser()
+        else
+            setUsers(profiles)
+    })
 
-    //         }catch(e){console.log(e)}
-    //      }
-    //      if(profiles.length === 0)
-    //         fetchUser()
-    //     else
-    //         setUsers(profiles)
-    // })
-
-    // const handleProfileClick = (id) => {
-    //     onProfileClick(id)
-    // }
+    const handleProfileClick = (id) => {
+        onProfileClick(id)
+    }
 
     const handleProfileClicked = (id) => {
         if (share)
@@ -44,16 +43,18 @@ const ProfileContainer = ({profiles=[], searchTerm='', onProfileClick=()=>{}, sh
 
     return (
         <div className={`${styles.container} ${!profiles? styles.empty: ''}`}>
-            {
-            // <div className={styles.searchContainer}>
-            //     <SearchBar focus={true}/>
-            // </div>
+            {share &&
+            <div className={styles.searchContainer}>
+                <SearchBar focus={true}/>
+            </div>
 }
-            {profiles? 
+            <div className={styles.content}>
+
+            {users? 
             (
-                profiles.map((profile) => 
+                users.map((profile) => 
                 <ProfileCard 
-                // onClick={()=>handleProfileClicked(profile.id)}
+                onClick={()=>handleProfileClick(profile.id)}
                 key={profile.id}
                 user={profile}/>
             )
@@ -61,6 +62,8 @@ const ProfileContainer = ({profiles=[], searchTerm='', onProfileClick=()=>{}, sh
                 <h1>No profiles available.</h1>
 
             )}
+            </div>
+
         </div>
     )
 }

@@ -27,11 +27,12 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
             setSelectedPost(selectedPost.filter(postId => postId !== id))
         else
             setSelectedPost([...selectedPost, id])
+
     }
 
 
     useEffect(()=>{
-    //   console.log(selectedPost)
+      console.log(arts)
 
     }, [selectedPost])
   

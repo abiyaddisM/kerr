@@ -4,22 +4,23 @@ import ArtContainer from "../Art Container/ArtContainer.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GalleryAdd, GalleryRemove, MouseCircle } from 'iconsax-react'
+import { useActionData } from "react-router-dom";
+import { useAuth } from "../../../utils/AuthContext.jsx";
 
 
 
-function LibraryContainer({arts}){
+function LibraryContainer({arts, selectedPost, setSelectedPost, onDelete}){
 
       
       const [selectActivate, setSelectActivate] = useState(false)
-      const [selectedPost, setSelectedPost] = useState([])
-
-
-
       
 
-      function removeFromGallery(){
+    const removeFromGallery = () => {
+      onDelete()
+      setSelectActivate(false)
+      setSelectedPost([])
+    }
 
-      }
 
     return(
 

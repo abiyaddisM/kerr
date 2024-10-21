@@ -32,7 +32,7 @@ const UserJobCard = ({job, onClick}) =>{
                         {
                             job.contract_state == 1 ? 'Active':
                             job.contract_state == 2 ? 'Completed':
-                            'Completed'
+                            'Cancelled'
                         }    
                     </p>
                 </div>

@@ -139,7 +139,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     const fetchJobs = async () =>{
         try{
-            const res = await axios.get(`http://localhost:3000/api/v1/user/${id}/job`)
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}/job`)
             setJobs(res.data.data)
             }catch(e){console.log(e)}
 
@@ -206,7 +206,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
             const updatedContent = posts.filter((post)=> post.id !== id)
             await setPosts(updatedContent)
             console.log(id)
-            await axios.delete(`http://localhost:3000/api/v1/post/${id}`);
+            await axios.delete(`https://auth.bizawit.com/api/v1/post/${id}`);
 
         }catch (error) {
         console.error("Error deleting post:", error);

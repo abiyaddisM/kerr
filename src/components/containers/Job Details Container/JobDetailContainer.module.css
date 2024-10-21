@@ -94,6 +94,7 @@
     color: var(--text-light-color);
     font-weight: 400;
     font-size: 14px;
+    flex-wrap: wrap;
 }
 
 .keywords {
