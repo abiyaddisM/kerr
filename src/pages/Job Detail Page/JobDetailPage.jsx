@@ -12,7 +12,7 @@ const JobDetailPage = () => {
     // const job = location.state?.job || {}
     
     const {user} = useAuth()
-    const {job_id} = useParams()
+    const {id} = useParams()
     const [job, setJob] = useState(null)
     const [applied, setApplied] = useState(false)
     const [appliedBid, setAppliedBid] = useState(null)
@@ -21,7 +21,7 @@ const JobDetailPage = () => {
         const fetchJobDetails = async () => {
             
             try{
-                const url = `https://auth.bizawit.com/api/v1/job/${job_id}`
+                const url = `https://auth.bizawit.com/api/v1/job/${id}`
                 const response = await axios.get(url)
                 setJob(response.data.data[0])
             }
@@ -33,7 +33,7 @@ const JobDetailPage = () => {
 
     const fetchBids = async () => {
         try{
-            const url = `https://auth.bizawit.com/api/v1/job/${job_id}/job-bid`
+            const url = `https://auth.bizawit.com/api/v1/job/${id}/job-bid`
             const response = await axios.get(url)
             setApplied(response.data.data.some(bid => bid.user_id === user.id))
         }
@@ -42,7 +42,7 @@ const JobDetailPage = () => {
         fetchJobDetails();
         fetchBids();
         
-    }, [job_id, user.id])
+    }, [id, user.id])
 
     return (
         <div className={styles.container}>

@@ -8,8 +8,8 @@
     height: fit-content;
     /* overflow: hidden;  */
     scrollbar-width: none; 
-    -ms-overflow-style: none; 
-    
+    -ms-overflow-style: none;
+    border-radius: 20px;
 }
 
 /* Hide scrollbar for WebKit browsers */
@@ -25,6 +25,7 @@
     display: flex;
     cursor: pointer;
     gap: 5px;
+    align-items: center;
 
 }
 

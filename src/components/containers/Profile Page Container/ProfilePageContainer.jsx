@@ -246,7 +246,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
     useEffect(()=>{
         const fetchUserInfo = async () =>{
             try{
-                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${user.id}`)
+                const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}`)
                 setProfile(response.data[0][0])
             }
             catch(error) {console.error(error)}

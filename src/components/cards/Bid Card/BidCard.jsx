@@ -28,7 +28,7 @@ const job =    {
         successrate: 90
     }
 
-const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
+const BidCard = ({bid, received=false}) => {
     const url = 'https://auth.bizawit.com/api/v1/job-offer'
     const [isExpanded, setIsExpanded] = useState(false);
     const [jobVisible, setJobVisible] = useState(false)
@@ -39,21 +39,12 @@ const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
 
     
     
-    async function  handleReject() {
-        onDelete()    
-    }
+    async function handleReject() {
 
-    async function  handleCancel() {
-        try{
-        const url = `https://auth.bizawit.com/api/v1/job-bid/${bid.id}`
-        await axios.delete(url)
-    } catch(error) {console.error(error)}
-        
 
     }
 
     async function handleAccept(){
-        // const url = `https://auth.bizawit.com/api/v1/job-bid/`
         // const offer = {
         //     user_id: 1,
         //     job_id: bid.job_id
@@ -69,7 +60,6 @@ const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
     //     console.log(bid)
     // }, [])
 
-    
 
 
     return (
@@ -79,15 +69,15 @@ const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
             </div> */}
             <div>
             {received ?
-            <div className={styles.profile}>
-                <ProfileImage 
-                    userId={user.id}
-                    src={bid.profile_picture}
-                    size='30px'/> 
-                <p className={styles.user_name}>{bid.first_name + " " + bid.last_name}</p>
-            </div>
-            :
-            <div className={styles.title_container}>
+                <div className={styles.profile}>
+                    <ProfileImage
+                        userId={user.id}
+                        src={bid.profile_picture}
+                        size='30px'/>
+                    <p className={styles.user_name}>{bid.first_name + " " + bid.last_name}</p>
+                </div>
+                :
+                <div className={styles.title_container}>
                 <p className={styles.job_title}>{bid.job_title} </p>
                 {/* <p className={styles.job_info}>{bid.job_description} </p> */}
 
@@ -136,7 +126,7 @@ const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
                 <p>
                     Pending
                 </p>
-                <button className={styles.cancel_button} onClick={handleReject}>
+                <button className={styles.cancel_button}>
                     Cancel
                 </button>
 
