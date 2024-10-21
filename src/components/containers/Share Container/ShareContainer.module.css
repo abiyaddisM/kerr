@@ -1,6 +1,6 @@
 .container {
     display: flex;
-        /* grid-template-columns: auto; */
+    padding: 20px;
     flex-direction: column;
     gap: 10px;
     width: 100%;

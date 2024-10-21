@@ -52,10 +52,10 @@ const JobCard = ({ job, onClick=()=>{}}) => {
                 <div className={styles.line1}>
                     <div className={styles.nameaddress}>
                         <p className={styles.names}>{job.full_name}</p> 
-                        <p className={styles.address}>Ethiopia, Summit</p>
+                        <p className={styles.address}>{job.location}</p>
                     </div>
                     <p className={styles.price}>
-                        {job.job_price || "Free"}
+                        Br.{job.job_price} 
                     </p>
                     
                 </div>

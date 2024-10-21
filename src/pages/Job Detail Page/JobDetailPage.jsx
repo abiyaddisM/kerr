@@ -18,8 +18,9 @@ const JobDetailPage = () => {
     const [appliedBid, setAppliedBid] = useState(null)
 
     useEffect(()=>{
-        const fetchJobDetails = async () => {
             
+
+        const fetchJobDetails = async () => {
             try{
                 const url = `https://auth.bizawit.com/api/v1/job/${id}`
                 const response = await axios.get(url)
@@ -32,27 +33,34 @@ const JobDetailPage = () => {
     
 
     const fetchBids = async () => {
+        console.log(user.id )
         try{
-            const url = `https://auth.bizawit.com/api/v1/job/${id}/job-bid`
-            const response = await axios.get(url)
-            setApplied(response.data.data.some(bid => bid.user_id === user.id))
+            const url = `https://auth.bizawit.com/api/v1/job-bid`
+            const response = await axios.get(url, {
+                params: {
+                    userID: user.id,
+                    type: 'sender'
+                },
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+            });
+            
+            setApplied(response.data.data.some(bid => bid.job_id == id))
+            const userBid = response.data.data.find(bid => bid.user_id === user.id);
+            setAppliedBid(userBid || null);
         }
         catch(error){console.error(error)}
     }
         fetchJobDetails();
         fetchBids();
         
-    }, [id, user.id])
+    }, [id])
 
     return (
         <div className={styles.container}>
             {job?
-            <JobDetailContainer 
-            job={job} 
-            isClient={user.id == job.client_id} 
-            isFreelancer={user.id == job.freelance_id} 
-            hasApplied={applied} 
-            setHasApplied={setApplied}/>
+            <JobDetailContainer job={job} isClient={user.id == job.client_id} isFreelancer={user.id == job.freelance_id} isContracted={job.client_id && job.freelance_id} hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid}/>
             :
             <p>Job not found</p> 
             }
