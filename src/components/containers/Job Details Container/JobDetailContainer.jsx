@@ -16,7 +16,7 @@ import ProfileContainer from '../Profile Container/ProfileContainer.jsx';
 import { useAuth } from '../../../utils/AuthContext.jsx';
 import BidCard from '../../cards/Bid Card/BidCard.jsx';
 
-const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasApplied=false, setHasApplied=()=>{} }) => {
+const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasApplied=false, setHasApplied=()=>{}, isContracted=false }) => {
     const [activePopup, setActivePopup] = useState(null);
     const [isApplyOpen, setIsApplyOpen] = useState(false)
     const [isContactOpen, setIsContactOpen] = useState(false)
@@ -130,6 +130,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
     useEffect(() => {
         fetchBids();
         fetchOffers();
+        console.log(job.id)
 
     }, [id]);
 
@@ -188,8 +189,12 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                     </ul>
                 </div>
             </div>
+
+
             {(isClient || isFreelancer) ?
             <div className={style.user_info}>
+                {isContracted ?
+                <>
                 Freelancer
                 <div className={style.profile}>
                     <ProfileImage userId={job.freelance_id} src={job.freelance_profile_picture} size='46px' />
@@ -201,7 +206,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 <div className={style.user_status}>
                     <div className={style.user_field}>
                         Rating
-                        <RatingStars star={job.freelance_rating || 3} />
+                        <RatingStars star={job.freelance_rating || 0} />
                     </div>
                     <div className={style.user_field}>
                         Job Completed
@@ -212,6 +217,10 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                         <p className={style.date}>{job.created_at || "20/12/24"}</p>
                     </div>
                 </div>
+                </>
+                :
+                <p>Applications is still open</p>
+                }
             </div>
             :
             <div className={style.applied_bid}>
@@ -222,7 +231,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 </>
             )
              :
-            <p>No pending applications on this job</p>
+            <p>No pending applications on this job. Apply?</p>
              }
             </div>
 
@@ -235,10 +244,9 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 <CommandButton commandTerm={"Apply"} onClick={()=>openPopup('apply')} />
                 }
                 <CommandButton commandTerm={"Contact"} onClick={()=>openPopup('contact')} />
-
-
                 </>
                 )}
+
                 {job.freelance_id && job.freelance_id === user.id &&
                 <>
                 <CommandButton commandTerm={"Deliver"} onClick={()=>openPopup('complete')} />

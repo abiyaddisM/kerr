@@ -50,7 +50,7 @@ const JobDetailPage = () => {
             <JobDetailContainer 
             job={job} 
             isClient={user.id == job.client_id} 
-            isFreelancer={user.id == job.frlance_id} 
+            isFreelancer={user.id == job.freelance_id} 
             hasApplied={applied} 
             setHasApplied={setApplied}/>
             :

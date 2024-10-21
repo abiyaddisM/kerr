@@ -3,6 +3,7 @@ import styles from './CreateJobContainer.module.css';
 import { ArrowLeft } from 'iconsax-react';
 import StyleInputs from '../../Job Filter/StyleInputs/StyleInputs';
 import { useState } from 'react';
+import { useAuth } from '../../../utils/AuthContext';
 
 const CreateJobContainer = ({ setIsOpen }) => {
     const [title, setTitle] = useState('');
@@ -13,6 +14,7 @@ const CreateJobContainer = ({ setIsOpen }) => {
     const [price, setPrice] = useState(0);
     const [isNegotiable, setIsNegotiable] = useState(false);
     const [errors, setErrors] = useState({});
+    const {user} = useAuth()
 
     function submitJob(event) {
         event.preventDefault();
@@ -24,7 +26,7 @@ const CreateJobContainer = ({ setIsOpen }) => {
         }
         
         const newJob = {
-            userID: 1,
+            userID: user.id,
             jobTitle: title,
             jobDescription: description,
             jobPrice: price,

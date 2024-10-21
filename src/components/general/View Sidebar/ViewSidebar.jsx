@@ -7,6 +7,7 @@ import ShareContainer from "../../containers/Share Container/ShareContainer";
 import SaveContainer from "../../containers/Save Container/SaveContainer";
 import axios from "axios";
 import ProfileImage from "../Profile Image/ProfileImage";
+import { useAuth } from "../../../utils/AuthContext";
 
 
 
@@ -15,8 +16,9 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture, 
     const navigate = useNavigate();
     const [save, setSave] = useState(false);
     const [share, setShare] = useState(false);
+    const {user} = useAuth()
 
-    const url = "https://auth.bizawit.com/api/v1/post"
+    // const url = "https://auth.bizawit.com/api/v1/post"
     
     function handleBackButtonClicked(){
         navigate(-1)
@@ -27,9 +29,9 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture, 
     }
 
     function handleSaveClick(){
-        // save the art to the user's collection
+        const url = `https://auth.bizawit.com/api/v1/gallery`
         const post = {
-            userID: 1,
+            userID: user.id,
             postID: id
         }
         axios.post(url, post)
@@ -96,15 +98,15 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture, 
                 >
                     <ShareContainer id={id}/>
                 </PopUp> 
-                <PopUp component={
+                {/* <PopUp component={ */}
                     <button className={styles.social_buttons}
-                    // onClick={handleSaveClick}
+                    onClick={handleSaveClick}
                 ><ImportCurve size="20" color="#000000"/>Save
                 </button>
-                }
-                state={save} setState={setSave}>
+                {/* } */}
+                {/* state={save} setState={setSave}> */}
                     {/*<SaveContainer setIsOpen={setSave} id={id}/>*/}
-                </PopUp> 
+                {/* </PopUp>  */}
                 
 
             </div>
