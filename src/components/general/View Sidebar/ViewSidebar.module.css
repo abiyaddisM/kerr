@@ -192,6 +192,9 @@
 
 }
 
+.social_buttons:hover{
+    background-color: var(--highlight-color);
+}
 
 
 

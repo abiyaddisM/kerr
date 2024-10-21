@@ -17,128 +17,6 @@ const image2 = 'https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945e
 const image3 =  "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg"
 const image4 = "https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg"
 
-const posts = [
-    {
-    id: 1,
-    images:[image2, image1],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 7300,
-    saves: 100,
-    postId: 1,
-    postDate: new Date('2024-03-17')
-  },
-  {
-    id: 2,
-    images:[image1, image4],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 695,
-    saves: 100,
-    postId: 3,
-    postDate: new Date('2024-07-17')
-  },
-  {
-    id: 3,
-    images:[image3, image4, image1, image2],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 800,
-    saves: 100,
-    postId: 2,
-    postDate: new Date('2024-08-17')
-  },
-  {
-    id: 4,
-    images:[image1, image3, image2],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 250,
-    saves: 100,
-    postId: 1,
-    postDate: new Date('2023-06-16')
-  },
-  {
-    id: 5,
-    images:[image4, image1],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 5395,
-    saves: 100,
-    postId: 4,
-    postDate: new Date('2022-01-03')
-  },
-  {
-    id: 6,
-    images:[image3, image2],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 1234,
-    saves: 100,
-    postId: 3,
-    postDate: new Date('2024-06-10')
-  },
-  {
-    id: 7,
-    images:[image2, image3, image4],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 230,
-    saves: 100,
-    postId: 2,
-    postDate: new Date('2023-10-17')
-  },
-  {
-    id: 8,
-    images:[image1, image3, image4],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 9898,
-    saves: 100,
-    postId: 4,
-    postDate: new Date('2024-09-10')
-  },
-  {
-    id: 9,
-    images:[image3],
-    title: 'See of the eye',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 1833,
-    saves: 100,
-    postId: 5,
-    postDate: new Date('2020-12-20')
-  },
-  {
-    id: 10,
-    images:[image4],
-    title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-    tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-    userName: 'some guy',
-    userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-    views: 2999,
-    saves: 100,
-    postId: 1,
-    postDate: new Date('2024-09-17')
-  }
-]
 
 
 const profiles = [
@@ -220,12 +98,17 @@ const profiles = [
 const SearchContainer = ({closeSearch}) => {
 
 
+    const [isLoading,setIsLoading] = useState(true);
+
 
     const keywords=['Post', 'Profile', 'Job']
     const [category, setCategory] = useState(keywords[0])
     const [searchTerm, setSearchTerm] = useState('')
 
     const [jobs, setJobs] = useState([])
+    const [posts, setPosts] = useState([])
+    const [users, setUsers] = useState([])
+
 
 
 
@@ -238,7 +121,6 @@ const SearchContainer = ({closeSearch}) => {
       const value = event.target.value
       setSearchTerm(value)
       searchCategory(category, value)
-      // setResultClicked(false)
     }
 
     function searchCategory (category, searchTerm){
@@ -246,7 +128,7 @@ const SearchContainer = ({closeSearch}) => {
         return posts.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
       }
       else if(category === 'Profile'){
-        return profiles.filter(profile => profile.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        return users.filter(profile => profile.name.toLowerCase().includes(searchTerm.toLowerCase()))
       }
       else{
         return jobs.filter(job => {
@@ -261,9 +143,34 @@ const SearchContainer = ({closeSearch}) => {
     }
 
     const fetchJobs = async () =>{
+            console.log("job")
+
             try{
-            const res = await axios.get('https://auth.bizawit.com/api/v1/job')
-            setJobs(res.data[0])
+            const res = await axios.get(`http://localhost:3000/api/v1/search/job?search=${searchTerm}`)
+            setJobs(res.data.data)
+            console.log(jobs)
+
+
+            }catch(e){console.log(e)}
+      }
+
+      
+
+   const fetchPost = async () =>{
+            console.log("post")
+            try{
+            const res = await axios.get(`http://localhost:3000/api/v1/search/post?search=${searchTerm}`)
+            setPosts(res.data.data)
+            // console.log(jobs)
+
+
+            }catch(e){console.log(e)}
+      }   
+      
+     const fetchUser = async () =>{
+            try{
+            const res = await axios.get(`http://localhost:3000/api/v1/search/user?search=${searchTerm}`)
+            setUsers(res.data.data)
             console.log(jobs)
 
 
@@ -286,7 +193,11 @@ const SearchContainer = ({closeSearch}) => {
     useEffect(()=>{
       if (category === 'Job')
         fetchJobs()
-    },[category])
+      else if(category === 'Post')
+        fetchPost()
+      else if(category === 'Profile')
+        fetchUser()
+    },[category, searchTerm])
   
     return (
         
@@ -305,9 +216,9 @@ const SearchContainer = ({closeSearch}) => {
                 </RadioButtons>
             </div>
             <div className={styles.search_result} onClick={handleResultClick}>
-                {category === keywords[0] && <ArtContainer arts={searchCategory(category, searchTerm)}/>}
-                {category === keywords[1] && <ProfileContainer profiles={searchCategory(category, searchTerm)}/> }
-                {category === keywords[2] && <JobContainer jobs={searchCategory(category, searchTerm)} /> }
+                {category === keywords[0] && <ArtContainer arts={posts} isLoading={isLoading}/>}
+                {category === keywords[1] && <ProfileContainer profiles={users}/> }
+                {category === keywords[2] && <JobContainer jobs={jobs} /> }
             </div>
             
         </div>

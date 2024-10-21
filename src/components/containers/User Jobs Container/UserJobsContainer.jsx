@@ -1,14 +1,30 @@
+import { useEffect } from 'react'
 import UserJobCard from '../../cards/User Job Card/UserJobCard.jsx'
 import styles from './UserJobsContainer.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const UserJobsContainer = ({userJobs}) => {
+    
+    const navigate = useNavigate()
+
+    const handleJobClick = (job) => {
+      console.log(job.job_id)  
+      navigate(`/job/${job.job_id}`);
+    }
+
     return (
         <div className={styles.container}>
-            {userJobs.map((job, index)=>(
+            {userJobs.length?
+            userJobs.map((job)=>(
                 <UserJobCard  
-                key={index}
-                job={job}/>
-            ))}
+                key={job.id}
+                job={job}
+                onClick={()=>handleJobClick(job)}
+                />
+            ))
+            :
+            <div>No jobs found</div>
+        }
         </div>
     )
 }

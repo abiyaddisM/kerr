@@ -28,7 +28,9 @@ const Notification = () => {
            </PopOver>
 
             {/* <PopOver component={ */}
-                <ProfileImage src={user.profile_picture} userId={1}/>
+                <ProfileImage src={user.profile_picture} 
+                userId={user.id}
+                />
                 {/* }/> */}
 
             

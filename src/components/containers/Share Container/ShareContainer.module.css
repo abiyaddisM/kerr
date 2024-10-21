@@ -1,6 +1,13 @@
 .container {
-    width: fit-content;
-    height: fit-content;
+    display: flex;
+        /* grid-template-columns: auto; */
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 
@@ -8,43 +15,31 @@
 .share{
     display: grid;
     /* display: flex; */
-    grid-template-rows: minmax(200px, 2fr) 1fr 1fr;
-    gap: 10px;
+    grid-template-rows: auto ;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     /* flex-direction: column; */
 }
 
-.share>div {
-    /* align-items: center; */
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    /* height: 100%; */
-}
 
-.internal_share{
-
-}
-
-.external_share{
-
-}
-.app_buttons{
-    display: flex;
-    gap: 20px;
-}
-
-.share .link_box{
+.link_box{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
     width: 100%;
     border: 1px solid var(--dark-border-color);
     border-radius: 20px;
-    padding: 15px 30px;
+    padding: 15px;
     font-size: 20px;
     font-weight: 600;
     color: var(--text-light-color);
     height: fit-content;
     background-color: var(--background-color);
     
+}
+.link{
+    text-decoration: none ;
+    color: var(--text-light-color);
+    font-weight: 600;font-size: 15px;
 }
