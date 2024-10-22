@@ -145,12 +145,13 @@ const deleteSelection = async () => {
 
     
     function goToChat(){
-        axios.post('https://auth.bizawit.com/api/v1/chat',{user1ID:1,user2ID:3}).then(
+        axios.post('https://auth.bizawit.com/api/v1/chat',{user1ID:id,user2ID:user.id}).then(
             res => {
-                console.log("ME",res)
+                const {id} = res.data.data[0]
+                navigate(`/chat/${id}`)
             }
         )
-        // navigate(`/chat/3`)
+
     }
 
 

@@ -33,6 +33,7 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
             socket.on('message', (msg) => {
                 if(msg.chat_id === Number(id)){
                     setMessages(prevItems => [...prevItems, msg]);
+                    console.log(msg);
                 }
                 if(msg.chat_id in chatMessages){
                     chatMessages[msg.chat_id].push(msg);
@@ -88,7 +89,6 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
     const message = messages.map((value,index,array)=>{
         if(value){
             const visibility = index === array.length - 1 || array[index + 1].id !== value.id;
-            console.log(value.message_image.images)
             return <MessageCard
                 key = {index}
                 time={formatDateTime(value.created_at)}

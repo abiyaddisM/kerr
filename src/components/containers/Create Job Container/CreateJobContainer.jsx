@@ -32,9 +32,10 @@ const CreateJobContainer = ({ setIsOpen }) => {
             jobPrice: price,
             jobNegotiation: isNegotiable,
             jobPublic: selectedType === 'Public',
+            tag:tags
         };
 
-        console.log(newJob);
+        console.log(newJob,tags);
 
         axios.post('https://auth.bizawit.com/api/v1/job', newJob)
             .then(res => {
