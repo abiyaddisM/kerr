@@ -23,25 +23,7 @@ const JobCard = ({ job, onClick=()=>{}}) => {
     // console.log('j')
     }
 
-    const handleApplyClicked = () => {
-        // navigates to apply window
 
-    }
-
-    const handleContactClicked = () => {
-        // navigates to message
-    }
-
-    // const handleDelete = (id) => {
-    //     try{
-    //      onDelete(id)
-
-    //         // .then 
-    //     }catch(e){console.log(e)}
-    // }
-
-    const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`
-    useEffect(()=>console.log(job),[])
 
     return (
         <div className={styles.jobcard} 

@@ -89,7 +89,10 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture, 
             </div>
 
             <div className={styles.button_container}>
-                <PopUp component={
+                <PopUp 
+                maxHeight={500}
+                maxWidth={600}
+                component={
                 <button className={styles.social_buttons}
                     onClick={handleShareClick}
                 ><Share size="20" color="#000000"/>Share
