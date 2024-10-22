@@ -3,17 +3,20 @@ import ProfileCard from '../../cards/Profile Card/ProfileCard';
 import SearchBar from '../../general/Search Bar/SearchBar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ProfileContainer = ({profiles=[], searchTerm='', onProfileClick=()=>{}, share=false}) => {
     const [users, setUsers] =useState([])
     const navigate = useNavigate();
+    const {id} = useParams()
 
 
     useEffect(()=>{
-        console.log(share)
+            
            const fetchUser = async () =>{
+            
             try{
+                const url = `https://auth.bizawit.com/api/v1/job/${id}/job-offer`
             const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm}`)
             setUsers(res.data.data)
 
@@ -25,7 +28,9 @@ const ProfileContainer = ({profiles=[], searchTerm='', onProfileClick=()=>{}, sh
             setUsers(profiles)
     })
 
+
     const handleProfileClick = (id) => {
+        navigate(`/profile/${id}`)
         onProfileClick(id)
     }
 

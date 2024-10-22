@@ -28,7 +28,8 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
     const [deliver, setDeliver] = useState({})
     const [bids, setBids] = useState([])
     const [offers, setOffers] = useState([])
-    const [appliedBid, setAppliedBid] = useState(null)   
+    const [appliedBid, setAppliedBid] = useState(null) 
+    const [offeredUser, setOfferedUser]   = useState(null)
     const {user} = useAuth()
     const {id} = useParams()
 
@@ -90,6 +91,22 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
         closePopup(); // Close the pop-up after handling the request
     };
 
+    const handleJobOffer = (userID) => {
+        const application = {
+            userID: userID,
+            jobID: id
+        }
+
+        axios.post('https://auth.bizawit.com/api/v1/job-offer', application)
+            .then(res => {
+                console.log('posted', res.data);
+                closeAllPopups()
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
     const fetchBids = async () => {
         const url = `https://auth.bizawit.com/api/v1/job/${id}/job-bid`;
         try {
@@ -111,6 +128,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
     };
 
     useEffect(()=>{
+        console.log(isContracted)
         axios.get(`https://auth.bizawit.com/api/v1/job/${id}/complete`).then((res) => {
             setDeliver(res.data.data[0])
         }).catch(err=>{
@@ -143,10 +161,29 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                     'Content-Type' : 'application/json',
                 },
             });
-            const userBid = response.data.data.find(bid => bid.user_id === user.id);
+            const userBid = response.data.data.find(bid => bid.job_id == id);
+
             setAppliedBid(userBid || null);
         }
         catch(error){console.error(error)}   
+    }
+
+    const fetchOfferedUsers= async () =>{
+        try{
+            const url = `https://auth.bizawit.com/api/v1/job-offer`
+            const response = await axios.get(url, {
+                params: {
+                    userID: user.id,
+                    type: 'sender'
+                },
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                });
+            const offeredUser = response.data.data.find(offer => offer.user_id === user.id);
+            setOfferedUser(offeredUser || null);
+            }
+            catch(error){console.error(error)}
     }
 
     useEffect(() => {
@@ -173,6 +210,14 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
         console.log(profilePic)
     }, [activePopup])
 
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
 
 
     const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`
@@ -224,7 +269,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                         </div>
                         <div className={style.user_field}>
                             Created at
-                            <p className={style.date}>{job.created_at || "20/12/24"}</p>
+                            <p className={style.date}>{formatDate(job.created_at) || "20/12/24"}</p>
                         </div>
                     </div>
                 </div>
@@ -288,7 +333,11 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 </>
             )
              :
-            <p>No pending applications on this job. Apply?</p>
+             isContracted ? 
+                <p>This job is contracted</p>
+                :
+                <p>No pending applications on this job. Apply?</p>
+             
              }
             </div>
             }
@@ -300,7 +349,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             <div className={style.buttons}>
                 {(!isClient && !isFreelancer) &&(
                 <>
-                {!hasApplied &&
+                {(!hasApplied && !isContracted) &&
                 <CommandButton commandTerm={"Apply"} onClick={()=>openPopup('apply')} />
                 }
                 <CommandButton commandTerm={"Contact"} onClick={()=>openPopup('contact')} />
@@ -321,7 +370,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                     }
 
                 {
-                    isClient && deliver &&
+                    (isClient && isContracted && deliver) &&
                     <div className={style.deliver_container}>
                         <div className={style.deliver_header}>
                             <InfoCircle size="24" color="var(--secondary-color)"/>
@@ -395,8 +444,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 maxWidth={800}
                 state={isViewBidsOpen}
                 setState={setIsViewBidsOpen}
-                height={'fit-content'}
-                width={'fit-content'}
+              
             >
                 <ViewBidsContainer jobID={id} setIsOpen={setIsViewBidsOpen} />
             </PopUp>
@@ -405,8 +453,8 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
             maxWidth={800}
             state={offerJob}
             setState={setOfferJob}>
-                <ShareContainer id={user.id}/>
-                {/* <ProfileContainer setIsOpen={setOfferJob} share={true} /> */}
+                {/* <ShareContainer id={user.id}/> */}
+                <ProfileContainer setIsOpen={setOfferJob} share={true} onProfileClick={handleJobOffer} />
             </PopUp>
             </div>
             

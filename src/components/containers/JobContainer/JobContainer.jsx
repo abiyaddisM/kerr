@@ -14,8 +14,8 @@ const JobContainer = ({jobs}) => {
     const navigate = useNavigate();
 
     const handleJobClick = (job) => {
-      console.log(job.job_id)  
       navigate(`/job/${job.job_id}`);
+      console.log(job)
     }
 
     return(

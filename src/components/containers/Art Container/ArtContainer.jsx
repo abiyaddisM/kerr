@@ -18,7 +18,7 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
     const handleArtClick = (art) => {
       console.log(art.id)  
       
-      navigate(`/art/${art.id}`, {state: {art}});
+      navigate(`/art/${art.id}`);
     }
 
     const selectPost = (e, id) => {

@@ -10,6 +10,14 @@ const UserJobCard = ({job, onClick}) =>{
         onClick(id)
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
     return (
         <div className={styles.job_card} onClick={goToJob}>
 
@@ -40,7 +48,7 @@ const UserJobCard = ({job, onClick}) =>{
                 <p className={styles.description}>{job.job_description}</p>
                 <div className={styles.messages}>
                     {/* <p>{' unread messages' }</p> */}
-                    <p>{job.created_at}</p>
+                    <p>{formatDate(job.created_at)}</p>
                 </div>
 
             </div>

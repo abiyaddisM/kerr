@@ -54,7 +54,7 @@ const BidCard = ({bid, received=false, onDelete=()=>{}}) => {
             {received ?
                 <div className={styles.profile}>
                     <ProfileImage
-                        userId={user.id}
+                        userId={bid.id}
                         src={bid.profile_picture}
                         size='30px'/>
                     <p className={styles.user_name}>{bid.first_name + " " + bid.last_name}</p>

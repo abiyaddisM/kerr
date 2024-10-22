@@ -47,7 +47,7 @@ const OfferCard = ({offer, recieved=false, onDelete=()=>{}}) => {
             navigate(`profile/${offer.user_id}`)
     }
 
-    const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${offer.profile_picture}`;
+    
 
     return (
 
@@ -69,6 +69,9 @@ const OfferCard = ({offer, recieved=false, onDelete=()=>{}}) => {
             <div className={styles.user_detail}>
                 <p className={styles.name}>{offer.first_name+" "+offer.last_name}</p>
                 <p className={styles.username}>@{offer.username}</p>
+                <button className={styles.cancel_button} onClick={handleReject}>
+                    Cancel
+                </button>
             </div>
             :
             

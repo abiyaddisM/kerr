@@ -33,7 +33,7 @@ const JobDetailPage = () => {
     
 
     const fetchBids = async () => {
-        console.log(user.id )
+        console.log(id )
         try{
             const url = `https://auth.bizawit.com/api/v1/job-bid`
             const response = await axios.get(url, {
@@ -47,8 +47,10 @@ const JobDetailPage = () => {
             });
             
             setApplied(response.data.data.some(bid => bid.job_id == id))
-            const userBid = response.data.data.find(bid => bid.user_id === user.id);
+            const userBid = response.data.data.find(bid => bid.job_id == id);
             setAppliedBid(userBid || null);
+            console.log(userBid)
+            console.log(response.data.data)
         }
         catch(error){console.error(error)}
     }
@@ -60,7 +62,7 @@ const JobDetailPage = () => {
     return (
         <div className={styles.container}>
             {job?
-            <JobDetailContainer job={job} isClient={user.id == job.client_id} isFreelancer={user.id == job.freelance_id} isContracted={job.client_id && job.freelance_id} hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid}/>
+            <JobDetailContainer job={job} isClient={user.id == job.client_id} isFreelancer={user.id == job.freelance_id} isContracted={job.client_id !== null && job.freelance_id!==null} hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid}/>
             :
             <p>Job not found</p> 
             }

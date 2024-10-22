@@ -163,7 +163,7 @@ const UserJobPage = () => {
     const response = await axios.get(url, 
       {
         params:{
-          userID : 1,
+          userID : user.id,
           page: 1
         }
       }

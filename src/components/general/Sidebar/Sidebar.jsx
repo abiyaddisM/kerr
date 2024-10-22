@@ -4,6 +4,7 @@ import styles from './Sidebar.module.css';
 import {useEffect, useState} from "react";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import { Additem, AddSquare, Briefcase, Brush, BrushSquare, ClipboardText, Home, Message, VideoSquare } from 'iconsax-react'
+import { useAuth } from '../../../utils/AuthContext';
 
 
 const routeMap = {
@@ -24,7 +25,7 @@ const SideBar = () => {
         setSelected(location.pathname);
     }, [location.pathname]);
 
-
+    const {user} = useAuth()
 
     return (
         <div className={styles.sidebar}>
