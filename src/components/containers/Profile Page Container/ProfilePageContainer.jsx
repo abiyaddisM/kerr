@@ -199,7 +199,7 @@ const deleteSelection = async () => {
                 <div className={style.profile_info}>
                     <div className={style.Rating}>
                         <p className={style.top}>Rating</p>
-                        <p className={style.bottom}>Not Rated Yet</p>
+                        <p className={style.bottom}><RatingStars star={profile.rating} rateAllow={false} rate={rateUser}></RatingStars></p>
 
                     </div>
 
@@ -230,8 +230,8 @@ const deleteSelection = async () => {
                     </div>
                     :
                     <div className={style.profile_Buttons}>
-                        <CommandButton commandTerm={"Edit"} onClick={goToChat}/>
-                        <CommandButton commandTerm={"logout"} onClick={logout}/>
+                        {/* <CommandButton commandTerm={"Edit"} onClick={goToChat}/> */}
+                        <CommandButton commandTerm={"Logout"} onClick={logout}/>
 
 
                     </div>

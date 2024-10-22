@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import OfferCard from '../../cards/Offer Card/OfferCard';
 import { ArrowLeft } from 'iconsax-react';
+import { useAuth } from '../../../utils/AuthContext';
 
 const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
@@ -19,6 +20,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
     //state for distinguishing between sent and recieved bids/offers, default is sent
     const [isJobs, setIsJobs] = useState(!!jobID)
+    const {user} = useAuth()
 
     function handleSwitch(){
         setView(view === 'bids' ? 'offers' : 'bids')
@@ -35,6 +37,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
     }
 
     const removeOffer = async (id) => {
+        console.log(id)
         
         setOffers(prev=> prev.filter((o)=>o.id !== id))
         
@@ -72,7 +75,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         try {
             const response = await axios.get(url, {
                 params: {
-                    userID: userID,
+                    userID: user.id,
                     type: 'sender'
                 },
                 headers: {
@@ -110,7 +113,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         try {
             const response = await axios.get(url, {
                 params:{
-                    userID: userID
+                    userID: user.id
                 },
                 headers:{
                     'Content-Type' : 'application/json',

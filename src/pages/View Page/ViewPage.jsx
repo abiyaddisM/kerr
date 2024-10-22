@@ -31,7 +31,7 @@ function ViewPage(){
             </div>
             <div className={styles.sidebar_container}>
                 <ViewSidebar
-                    description={data.post_caption}
+                    description={data.post_description}
                     views={data.view + 1}
                     saves={data.view}
                     title={data.post_title}

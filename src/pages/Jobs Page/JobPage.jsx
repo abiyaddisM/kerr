@@ -19,7 +19,7 @@ const JobPage = () => {
             try{
             const res = await axios.get('https://auth.bizawit.com/api/v1/job')
             setJobs(res.data[0])
-            console.log(res)
+            console.log(res.data[0])
 
 
             }catch(e){console.log(e)}
