@@ -22,108 +22,6 @@ const keywords1 = ['Contracted', 'Unassigned'];
 const keywords2 = ['All', 'Active', 'Completed', 'Cancelled'];
 const keywords3 = ['Create Job', 'View Bids'];
 
-const user = [
-  {
-      id: '1',
-      image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-      name: 'Aaron Mesfin'
-  },
-  {
-      id:'2',
-      image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-      name: 'Some Guy'
-  },
-  {
-      id: '3',
-      image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-      name: 'Kate Smith'
-  }
-]
-
-const jobs = [
-  {
-  id: 1,
-  user: user[0],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 3,
-  date:'24/3/2024',
-  isAssigned: false,
-  isActive: true
-},
-{
-  id: 2,
-  user: user[2],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 3,
-  date:'24/3/2024',
-  isAssigned: false,
-  isActive: false
-},
-{
-  id: 3,
-  user: user[1],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 3,
-  date:'24/3/2024',
-  isAssigned: false,
-  isActive: true
-  
-},
-{
-  id: 4,
-  user: user[0],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 3,
-  date:'24/3/2024',
-  isAssigned: false
-
-},
-{
-  id: 5,
-  user: user[2],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 3,
-  date:'24/3/2024',
-  isAssigned: false,
-
-},
-{
-  id: 6,
-  user: user[2],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 0,
-  date:'24/3/2024', 
-  isAssigned: false,
-  isActive: false
-
-},
-{
-  id: 7,
-  user: user[0],
-  location:'Addis Ababa, Ethiopia',
-  jobTitle:'Some Drawing',
-  jobDescription: 'A 6 piece billboard render for 2017 Ethiopian new years',
-  messages: 0,
-  date:'24/3/2024',
-  isAssigned: false
-
-},
-
-
-]
-
 const UserJobPage = () => {
 
   const [selectedType, setSelectedType] = useState(keywords1[0]);
@@ -163,7 +61,7 @@ const UserJobPage = () => {
     const response = await axios.get(url, 
       {
         params:{
-          userID : 1,
+          userID : user.id,
           page: 1
         }
       }

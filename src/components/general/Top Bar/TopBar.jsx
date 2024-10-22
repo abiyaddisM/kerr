@@ -17,8 +17,8 @@ const TopBar = () => {
         <div className={styles.container}>
 
             <PopUp 
-            maxHeight={600}
-            maxWidth={1000}
+            maxHeight={800}
+            maxWidth={800}
             component={search} state={state} setState={setState}>
                 <SearchContainer closeSearch={()=>setState(false)}/>
             </PopUp>

@@ -15,6 +15,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
     const [view, setView] = useState('bids')
     const [bids, setBids] = useState([])
     const [offers, setOffers] = useState([])
+    const {id} = useParams();
 
     //state for distinguishing between sent and recieved bids/offers, default is sent
     const [isJobs, setIsJobs] = useState(!!jobID)
@@ -88,11 +89,12 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchJobOffers = async () => {
-        console.log(isJobs)
 
-        const url = `https://auth.bizawit.com/api/v1/job/${jobID}/job-offer`
+        const url = `https://auth.bizawit.com/api/v1/job/${id}/job-offer`
         try{
             const response = await axios.get(url)
+            console.log(response.data.data)
+
             setOffers(response.data.data)
             
         }
