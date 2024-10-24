@@ -12,100 +12,8 @@ import JobContainer from '../JobContainer/JobContainer'
 import JobCard from '../../cards/Job Cards/JobCard'
 import {BookSaved, NotificationCircle, TickCircle, GalleryRemove, MouseCircle, Trash} from "iconsax-react";
 import {useAuth} from "../../../utils/AuthContext.jsx";
+import CommandButton from "../../buttons/Command Buttons/CommandButton.jsx";
 
-
-
-
-
-const image1 = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec7d26b1-d557-47c1-a877-6050004d2fc2/dbb7hcs-1f9e8f0a-c4c7-4fc9-baf6-9e075ce86e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjN2QyNmIxLWQ1NTctNDdjMS1hODc3LTYwNTAwMDRkMmZjMlwvZGJiN2hjcy0xZjllOGYwYS1jNGM3LTRmYzktYmFmNi05ZTA3NWNlODZlMzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-7-iEaeDDddcIw8RSKsKr7t8JpLF4DYv6ZQzuOVtQ28"
-const image2 = 'https://www.figma.com/file/vZYRjuWSbqwcIf0GbaUT3g/image/d223945ec02ec5bc05d1e20f89bd1b87f22cd62a'
-const image3 =  "https://img3.wallspic.com/previews/4/6/0/4/6/164064/164064-cyberpunk_city-cyberpunk_2077-cyberpunk-science_fiction-digital_art-x750.jpg"
-const image4 = "https://as1.ftcdn.net/v2/jpg/05/09/30/34/1000_F_509303404_Y49y3nSzoBInfbyCYTka4LAfyPGpXp8w.jpg"
-const arts = [
-    {
-        id: 1,
-        images:[image2, image1],
-        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 7300,
-        saves: 100,
-        postId: 1,
-        postDate: new Date('2024-03-17')
-    },
-    {
-        id: 2,
-        images:[image1, image4],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 695,
-        saves: 100,
-        postId: 3,
-        postDate: new Date('2024-07-17')
-    },
-    {
-        id: 3,
-        images:[image3, image4, image1, image2],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 800,
-        saves: 100,
-        postId: 2,
-        postDate: new Date('2024-08-17')
-    },
-    {
-        id: 4,
-        images:[image1, image3, image2],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 250,
-        saves: 100,
-        postId: 1,
-        postDate: new Date('2023-06-16')
-    },
-    {
-        id: 5,
-        images:[image4, image1],
-        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 5395,
-        saves: 100,
-        postId: 4,
-        postDate: new Date('2022-01-03')
-    },
-    {
-        id: 6,
-        images:[image3, image2],
-        title: 'A cyberpunk-themed artwork often presents a dystopian future where advanced technology merges with a decaying urban landscape.',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 1234,
-        saves: 100,
-        postId: 3,
-        postDate: new Date('2024-06-10')
-    },
-    {
-        id: 7,
-        images:[image2, image3, image4],
-        title: 'See of the eye',
-        tags: ['3D', 'Futuristic', 'Neon', 'Landscape'],
-        userName: 'some guy',
-        userImage:'//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        views: 230,
-        saves: 100,
-        postId: 2,
-        postDate: new Date('2023-10-17')
-    }]
 
 
 const keywords=["post","job"]
@@ -115,26 +23,32 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     const[Category,setCategory]=useState("post")
     const[Rate,setRate]=useState(false)
-    const [user, setUser] = useState({})
-    const {logout} = useAuth();
+    const [profile, setProfile] = useState({})
+    const {logout, user} = useAuth();
 
     const [jobs, setJobs] = useState([])
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     const [selectMode, setSelectMode] = useState(false)
     const [selectedPost, setSelectedPost] = useState([])
     const [selectedJob, setSelectedJob] = useState([])
     
     const navigate = useNavigate()
 
+    
 
-    const fetchPosts = () =>{
-        setPosts(arts)
+    const fetchPosts = async () =>{
+        console.log(user.id)
+        try{
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}/post`)
+            setPosts(res.data.data)
+        }
+        catch(e){console.error(e)}
     }
 
     const fetchJobs = async () =>{
         try{
-            const res = await axios.get('https://auth.bizawit.com/api/v1/job')
-            setJobs(res.data[0])
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}/job`)
+            setJobs(res.data.data)
             }catch(e){console.log(e)}
 
     }
@@ -197,31 +111,32 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     const deletePost = async (id) => {
         try{
-            const updatedContent = jobs.filter((job)=> job.job_id !== id)
-            await setJobs(updatedContent)
+            const updatedContent = posts.filter((post)=> post.id !== id)
+            await setPosts(updatedContent)
+
             console.log(id)
-            // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
+            await axios.delete(`https://auth.bizawit.com/api/v1/post/${id}`);
+
 
         }catch (error) {
-        console.error("Error deleting job:", error);
+        console.error("Error deleting post:", error);
     }    
     }
     
-    const deleteSelection=()=>{
-        if(Category === "post"){
-            selectedPost?.length > 0
-                selectedPost.map(p=>{
-                    deletePost(p)
-                }) 
-            }
-        else{
-            selectedJob?.length > 0
-                selectedJob.map(p=>{
-                    deletePost(p)
-                }) 
-            }
+const deleteSelection = async () => {
+    if (Category === "post" && selectedPost.length > 0) {
+        await Promise.all(selectedPost.map(async (postId) => {
+            await deletePost(postId);
+        }));
+    } else if (Category === "job" && selectedJob.length > 0) {
+        await Promise.all(selectedJob.map(async (jobId) => {
+            await deleteJob(jobId);
+        }));
     }
-
+    // Reset selected items after deletion
+    setSelectedPost([]);
+    setSelectedJob([]);
+};
 
 
     const rateUser = () => {
@@ -230,8 +145,13 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
     
     function goToChat(){
-        const id = 2
-        // navigate(`/chat/${id}`)
+        axios.post('https://auth.bizawit.com/api/v1/chat',{user1ID:id,user2ID:user.id}).then(
+            res => {
+                const {id} = res.data.data[0]
+                navigate(`/chat/${id}`)
+            }
+        )
+
     }
 
 
@@ -241,23 +161,24 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         const fetchUserInfo = async () =>{
             try{
                 const response = await axios.get(`https://auth.bizawit.com/api/v1/user/${id}`)
-                setUser(response.data[0][0])
+                setProfile(response.data[0][0])
             }
             catch(error) {console.error(error)}
         }
 
         fetchUserInfo()
-        console.log(user)
+        console.log(isPersonal)
     }, [])
 
 
     useEffect (()=>{
+        console.log("ss")
         if(Category === 'job'){
             fetchJobs()
         }
         else
             fetchPosts()
-    }, [Category])
+    }, [Category, jobs])
 
     
 
@@ -269,16 +190,16 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         <div className={style.container}>
             <div className={style.profilecontainer}>
                 <div className={style.profile}>
-                    <img className={style.porifile_pic} src={`https://auth.bizawit.com/api/v1/upload/original/${user.profile_picture}`} alt="" />
-                    <p className={style.username}>{user.first_name + " " + user.last_name}</p>
-                    <p className={style.address}>@{user.username}</p>
+                    <ProfileImage size='113px' src={profile.profile_picture} alt="" />
+                    <p className={style.username}>{profile.first_name + " " + profile.last_name}</p>
+                    <p className={style.address}>@{profile.username}</p>
                 </div>
 
 
                 <div className={style.profile_info}>
                     <div className={style.Rating}>
                         <p className={style.top}>Rating</p>
-                        <p className={style.bottom}>Not Rated Yet</p>
+                        <p className={style.bottom}><RatingStars star={profile.rating} rateAllow={false} rate={rateUser}></RatingStars></p>
 
                     </div>
 
@@ -300,23 +221,18 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                         <PopOver left={true} component={<button className={style.pbuttons}>Rate</button>} state={Rate} setState={setRate}>
                             <div className={style.Ratingcontainer}>
 
-                                {/* <div className={style.profilecontainer}>
-                                    <img className={style.porifile_pic} src="https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
-                                    <p className={style.username}>Yom Fisseha</p>
-                                    <p className={style.address}>@YOMMMM</p>
-
-                                </div> */}
-
                                 <RatingStars rateAllow={true} rate={rateUser}></RatingStars>
 
                             </div>
                         </PopOver>
-                        <button className={style.pbuttons} onClick={goToChat}>Message</button>
+                        <CommandButton commandTerm={"Message"} onClick={goToChat}/>
+
                     </div>
                     :
                     <div className={style.profile_Buttons}>
-                        <button className={style.pbuttons} onClick={goToChat}>Edit</button>
-                        <button className={style.pbuttons} onClick={logout}>Log Out</button>
+                        {/* <CommandButton commandTerm={"Edit"} onClick={goToChat}/> */}
+                        <CommandButton commandTerm={"Logout"} onClick={logout}/>
+
 
                     </div>
                 }
@@ -330,7 +246,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                 </RadioButtons>
             </div>
 
-            {!isPersonal &&
+            {isPersonal &&
             <div className={style.selectButton}>
               { (!selectMode || (selectedPost.length === 0 && selectedJob.length === 0)) ?
 
@@ -358,7 +274,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
             {Category==="post" &&
                 <div className={style.post_container}>
 
-                    {posts && posts.length>0 ?
+                    {(posts && posts.length>0) ?
                     posts.map((art)=>
                     
                     <div key={art.id} className={style.art_card}
@@ -370,7 +286,8 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                         :
                         <NotificationCircle className={style.tick} color="var(--highlight-color)" onClick={(e)=>selectPost(e,art.id)} />
                         )}
-                        <img src={art.images[0]} className={style.art_image} alt="art" />
+                        <img src={`https://auth.bizawit.com/api/v1/upload/600/${art.post_thumbnail}`} className={style.art_image} alt="art" />
+                        
 
                         </div>
                     </div>)
@@ -398,12 +315,12 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                     :
                     <NotificationCircle className={style.tick} size={"20px"} color="var(--dark-border-color)" onClick={(e)=>selectJob(e,job.job_id)} />
                     )}
-                    <ProfileImage userId={job.user_id} src={ `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`} size='46px' />
+                    <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
 
                 <div className={style.jobcard_content}>
                     <div className={style.line1}>
                         <div className={style.nameaddress}>
-                            <p className={style.names}>{job.full_name}</p> {/* Access name from user object */}
+                            <p className={style.names}>{job.first_name + " " + job.last_name}</p> {/* Access name from user object */}
                             <p className={style.address}>{job.location}</p>
                         </div>
                         
@@ -412,7 +329,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
 
                     <p className={style.role}>
                         {job.job_title}
-                        <span className={style.rate}>{"200"} <span>Birr/hr</span></span>
+                        <span className={style.rate}>{job.job_price} <span>Birr/hr</span></span>
                     </p>
 
 

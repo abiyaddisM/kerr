@@ -1,65 +1,76 @@
-import { useLocation } from 'react-router-dom'
-import style from './ShareContainer.module.css'
-import { Copy, Snapchat, Whatsapp } from 'iconsax-react'
-import ProfileContainer from '../Profile Container/ProfileContainer'
+import { useLocation, useNavigate } from 'react-router-dom';
+import style from './ShareContainer.module.css';
+import { Copy, Snapchat, Whatsapp } from 'iconsax-react';
+import ProfileContainer from '../Profile Container/ProfileContainer';
+import { useEffect, useState } from 'react';
+import SearchBar from '../../general/Search Bar/SearchBar';
+import { useAuth } from '../../../utils/AuthContext';
+import axios from 'axios';
 
 
-const profiles = [
-    {
-        id: '1',
-        image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        name: 'Aaron Mesfin'
-    },
-    {
-        id:'2',
-        image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        name: 'Some Guy'
-    },
-    {
-        id: '3',
-        image: '//miro.medium.com/v2/resize:fit:1400/0*0fClPmIScV5pTLoE.jpg',
-        name: 'Kate Smith'
+
+const ShareContainer = ({ id , onProfileClick=()=>{}}) => {
+    const [location, setLocation] = useState('');
+    const [profiles, setProfiles] = useState([])
+    const [searchTerm, setSearchTerm] = useState('')
+    const {user} = useAuth()
+
+
+    const navigate = useNavigate()
+
+   
+
+    function handleSearch (event){
+        setSearchTerm(event.target.value)
     }
-]
 
-
-const ShareContainer = () => {
-
-const location = useLocation()
-const currentUrl = window.location.href
-
-function handleCopyClick(){
-     navigator.clipboard.writeText(currentUrl)
+    function handleCopyClick() {
+        navigator.clipboard.writeText(location)
             .then(() => {
-                alert('URL copied to clipboard! You can paste it elsewhere.');
+                console.log('Copied to clipboard:', location);
             })
             .catch(err => {
                 console.error('Failed to copy: ', err);
             });
-}
+    }
+
+    function goToMessage(profileId) {
+
+
+
+        navigate(`/chat/${profileId}`)
+    }
+
+
+    useEffect(()=>{
+        const fetchUser = async () =>{
+            try{
+            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm }`)
+            const filteredProfiles = res.data.data.filter(profile=> profile.id !== user.id)
+            setProfiles(filteredProfiles);
+            }catch(e){console.log(e)}
+      }
+      fetchUser()
+    },[searchTerm])
 
     return (
         <div className={style.container}>
-            <h1>Share Art</h1>
+            <SearchBar
+              searchTerm={searchTerm}
+              onChange={handleSearch}
+              focus = {true}
+            />
             <div className={style.share}>
                 <div className={style.internal_share}>
-                    <ProfileContainer profiles={profiles}/>
+                    <ProfileContainer 
+                    profiles={profiles}
+                    onProfileClick={(profileId)=>goToMessage(profileId)}
+                     />
                 </div>
-                {/* <div className={style.external_share}>
-                    <div className={style.app_buttons}>
-                        <Whatsapp size={"50px"}/>
-                        <Snapchat size={"50px"} variant="Bold"/>
-
-                    </div>
-                </div> */}
-                <div className={style.link_box}>
-                    <a href={currentUrl} target="_blank" >{currentUrl}</a>
-                    <Copy size={"30px"} onClick={handleCopyClick}/>
-                </div>
-
+                
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ShareContainer
+export default ShareContainer;

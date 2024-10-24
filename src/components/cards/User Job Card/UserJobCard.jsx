@@ -24,11 +24,11 @@ const UserJobCard = ({job, onClick, assigned}) =>{
 
 
     return (
-        <div className={styles.job_card}>
+        <div className={styles.job_card} onClick={goToJob}>
 
             <ProfileImage 
-                userId ={user.id}
-                src={user.image}
+                userId ={job.id}
+                src={job.profile_picture}
                 size='46px'/>
 
             <div className={styles.details}>
@@ -52,20 +52,20 @@ const UserJobCard = ({job, onClick, assigned}) =>{
                         styles.cancelled
                     }>
                         {
-                            isActive === true? 'Active':
-                            isActive === false? 'Cancelled':
-                            'Completed'
+                            job.contract_state == 1 ? 'Active':
+                            job.contract_state == 2 ? 'Completed':
+                            'Cancelled'
                         }    
                     </p>
                     }
                     
                     
                 </div>
-                <p className={styles.title}>{jobTitle}</p>
-                <p className={styles.description}>{jobDescription}</p>
+                <p className={styles.title}>{job.job_title}</p>
+                <p className={styles.description}>{job.job_description}</p>
                 <div className={styles.messages}>
-                    <p>{messages>0 && messages+ ' unread messages' }</p>
-                    <p>{date}</p>
+                    {/* <p>{' unread messages' }</p> */}
+                    <p>{formatDate(job.created_at)}</p>
                 </div>
 
             </div>

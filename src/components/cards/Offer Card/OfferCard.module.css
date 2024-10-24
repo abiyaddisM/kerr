@@ -135,3 +135,15 @@
     /* filter: invert(100%); */
     filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }
+
+.cancel_button {
+    display: flex;
+    justify-content: end;
+    background-color: var(--background-color);
+    border: none;
+    border-radius: 20px;
+    color: var(--text-medium-color);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}

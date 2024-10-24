@@ -25,13 +25,14 @@ export function PopOver({component,children,left = false}) {
     return (
         <div className={styles.parent_container}>
             <div className={styles.container} >
-                <div className={styles.component_container} onClick={()=>{setState(!state)}} ref={componentRef}>
+                <div className={styles.component_container} onClick={()=>{setState(!state)}} >
                     {component}
                 </div>
                 <AnimatePresence>
                 {state && (
                     <motion.div
                     className={styles.motion_container}
+                    ref={componentRef}
                     style={!left?{right:0}:{left:0}}
                     key="child_container"
                     initial={{ opacity: 0 }}

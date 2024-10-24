@@ -1,11 +1,11 @@
 .container {
-    width: fit-content;
     height: fit-content;
     /* height: fit-content; */
     /* padding: 30px; */
     display: grid;
     grid-template-rows: auto 1fr auto;
-    gap: 20px;
+    gap: 10px;
+    padding: 20px;
 }
 
 
@@ -14,15 +14,15 @@
     border-color: transparent;
     align-self: self-start;
     display: flex;
+    align-items: center;
     cursor: pointer;
     gap: 5px;
-    margin-top: -10px;
 
 }
 
 .verify{
     color: var(--text-medium-color);
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     display: grid;
     grid-template-rows: auto auto;
@@ -32,6 +32,67 @@
 
 .verify p{
     color: var(--text-heavy-color);
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
+}
+.upload_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    gap: 10px;
+}
+.upload_container h1 {
+    font-size: 16px;
+    font-weight: 500;
+}
+.upload_container p {
+    font-weight: 500;
+    color: var(--text-light-color);
+}
+.upload_container button {
+    padding: 8px 15px;
+    background: white;
+    border: var(--border-color) 2px solid;
+    border-radius: 10px;
+    color: var(--text-medium-color);
+    font-weight: 500;
+    cursor: pointer;
+}
+.disclaimer{
+    font-weight: 400;
+}
+.image_container{
+    width: 100%;
+    background: var(--highlight-color);
+    height: 189px;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+}
+.image{
+    height: 100%;
+}
+.input{
+    font-size: 12px ;
+    border: 1px solid var(--border-color);
+}
+.button_container{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.button{
+    padding: 8px 15px;
+    background: white;
+    border: var(--border-color) 2px solid;
+    border-radius: 12px;
+    color: var(--text-medium-color);
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
 }

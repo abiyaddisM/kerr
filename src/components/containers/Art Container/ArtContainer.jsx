@@ -15,10 +15,8 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
 
     const handleArtClick = (art) => {
       console.log(art.id)  
-    //   if(selectMode)
-        // selectPost(art.id)
-    //  else
-        navigate(`/art/${art.id}`);
+      
+      navigate(`/art/${art.id}`);
     }
 
 
@@ -28,11 +26,12 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
             setSelectedPost(selectedPost.filter(postId => postId !== id))
         else
             setSelectedPost([...selectedPost, id])
+
     }
 
 
     useEffect(()=>{
-    //   console.log(selectedPost)
+      console.log(arts)
 
     }, [selectedPost])
   
@@ -45,7 +44,10 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
 
     return(
         <div className={styles.art_container}>
-          {!isLoading ?
+          {!arts ? 
+          <h1>No Arts Container</h1>
+          :
+          !isLoading ?
             (arts.map((value)=>{
                     const newCard = {
                         id: value.id,

@@ -1,21 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ViewSidebar.module.css"
 import {ArrowLeft,ImportCurve,Share} from "iconsax-react"
 import { PopUp } from "../../pops/Pop Up/PopUp";
 import ShareContainer from "../../containers/Share Container/ShareContainer";
 import SaveContainer from "../../containers/Save Container/SaveContainer";
 import axios from "axios";
+import ProfileImage from "../Profile Image/ProfileImage";
+import { useAuth } from "../../../utils/AuthContext";
 
 
 
 // eslint-disable-next-line react/prop-types
-function ViewSidebar({username,views,saves,title,id,description,profilePicture}){
+function ViewSidebar({username,views,saves,title,id,description,profilePicture, userid}){
     const navigate = useNavigate();
     const [save, setSave] = useState(false);
     const [share, setShare] = useState(false);
+    const {user} = useAuth()
 
-    const url = "https://auth.bizawit.com/api/v1/post"
+    // const url = "https://auth.bizawit.com/api/v1/post"
     
     function handleBackButtonClicked(){
         navigate(-1)
@@ -26,9 +29,9 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
     }
 
     function handleSaveClick(){
-        // save the art to the user's collection
+        const url = `https://auth.bizawit.com/api/v1/gallery`
         const post = {
-            userID: 1,
+            userID: user.id,
             postID: id
         }
         axios.post(url, post)
@@ -37,6 +40,8 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
         
     }
 
+    
+
     return(
         <div className={styles.container}>
             <div className={styles.desc_container}>
@@ -44,7 +49,7 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
                     <button className={styles.back_button} onClick={handleBackButtonClicked}>
                         <ArrowLeft size="20" color="#000000"/>Back</button>
                     <div className={styles.profile_container}>
-                        <img className={styles.porifile_pic} src={`https://auth.bizawit.com/api/v1/upload/600/${profilePicture}`} alt="" />
+                        <ProfileImage className={styles.porifile_pic} userId={userid} src={profilePicture} alt="" />
                         <div className={styles.user_address}>
                             <p className={styles.username}>{username}</p>
                             <p className={styles.address}>Ethiopia,  Addis Ababa</p>
@@ -84,24 +89,27 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture})
             </div>
 
             <div className={styles.button_container}>
-                <PopUp component={
+                <PopUp 
+                maxHeight={500}
+                maxWidth={600}
+                component={
                 <button className={styles.social_buttons}
                     onClick={handleShareClick}
                 ><Share size="20" color="#000000"/>Share
                 </button>} 
                 state={share} setState={setShare}
                 >
-                    <ShareContainer/>
+                    <ShareContainer id={id}/>
                 </PopUp> 
-                <PopUp component={
+                {/* <PopUp component={ */}
                     <button className={styles.social_buttons}
-                    // onClick={handleSaveClick}
+                    onClick={handleSaveClick}
                 ><ImportCurve size="20" color="#000000"/>Save
                 </button>
-                }
-                state={save} setState={setSave}>
+                {/* } */}
+                {/* state={save} setState={setSave}> */}
                     {/*<SaveContainer setIsOpen={setSave} id={id}/>*/}
-                </PopUp> 
+                {/* </PopUp>  */}
                 
 
             </div>

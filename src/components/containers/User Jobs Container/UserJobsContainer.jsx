@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import UserJobCard from '../../cards/User Job Card/UserJobCard.jsx'
 import styles from './UserJobsContainer.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const UserJobsContainer = ({userJobs, assigned=true}) => {
     
@@ -13,7 +15,8 @@ const UserJobsContainer = ({userJobs, assigned=true}) => {
 
     return (
         <div className={styles.container}>
-            {userJobs.map((job, index)=>(
+            {userJobs.length?
+            userJobs.map((job)=>(
                 <UserJobCard  
                 key={job.id}
                 job={job}

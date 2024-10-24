@@ -33,6 +33,7 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
             socket.on('message', (msg) => {
                 if(msg.chat_id === Number(id)){
                     setMessages(prevItems => [...prevItems, msg]);
+                    console.log(msg);
                 }
                 if(msg.chat_id in chatMessages){
                     chatMessages[msg.chat_id].push(msg);
@@ -41,15 +42,23 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
             });
         }
     }, [socket]);
-    useEffect(()=>{
+    useEffect(() => {
+        if (id) {
+            // Find chatInfo by id
+            const chatInfo = chats.find(item => item.id === Number(id));
 
-        if(id){
-            // eslint-disable-next-line react/prop-types
-            const chatInfo = chats.find(item => item.id === Number(id))
-            setName(chatInfo.first_name + ' ' + chatInfo.last_name)
-            setProfilePicture(chatInfo.profile_picture)
+            // Check if chatInfo is defined before accessing its properties
+            if (chatInfo) {
+                setName(chatInfo.first_name + ' ' + chatInfo.last_name);
+                setProfilePicture(chatInfo.profile_picture);
+            } else {
+                // Handle the case where no matching chat is found (optional)
+                setName('');  // or set some default values
+                setProfilePicture('');
+            }
         }
-    },[id])
+    }, [id, chats]); // Added `chats` to dependencies if it changes over time
+
 
     useEffect(()=>{
         const fetchMessages = () => {
@@ -80,7 +89,6 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
     const message = messages.map((value,index,array)=>{
         if(value){
             const visibility = index === array.length - 1 || array[index + 1].id !== value.id;
-            console.log(value.message_image.images)
             return <MessageCard
                 key = {index}
                 time={formatDateTime(value.created_at)}
