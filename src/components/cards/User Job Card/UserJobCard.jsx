@@ -51,6 +51,7 @@ const UserJobCard = ({job, onClick, assigned}) =>{
                     </div>
                     {assigned &&
                     {assigned &&
+                    {assigned &&
                     <p className={
 
 
@@ -64,6 +65,7 @@ const UserJobCard = ({job, onClick, assigned}) =>{
                             'Completed'
                         }    
                     </p>
+                    }
                     }
                     }
                 </div>
