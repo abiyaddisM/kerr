@@ -4,8 +4,7 @@ import ProfileCard from '../Profile Card/ProfileCard'
 import ProfileImage from '../../general/Profile Image/ProfileImage'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-
+import { useEffect } from 'react'
 
 const UserJobCard = ({job, onClick, assigned}) =>{
 
@@ -20,6 +19,8 @@ const UserJobCard = ({job, onClick, assigned}) =>{
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     }
+    useEffect(()=>console.log(job))
+
     useEffect(()=>console.log(job))
 
     useEffect(()=>console.log(job))
@@ -41,17 +42,10 @@ const UserJobCard = ({job, onClick, assigned}) =>{
     ? `${job.first_name ?? ''} ${job.last_name ?? ''}`.trim() 
     : job.full_name ?? ''}
 </p>
-                        <p className={styles.name}>
-  {assigned 
-    ? `${job.first_name ?? ''} ${job.last_name ?? ''}`.trim() 
-    : job.full_name ?? ''}
-</p>
                         <p className={styles.location}>{job.location}</p>
                     </div>
-                   
                     {assigned &&
                     <p className={
-
 
                         job.contract_state == 1 ? styles.active:
                         job.contract_state == 2 ? styles.completed:
@@ -65,6 +59,7 @@ const UserJobCard = ({job, onClick, assigned}) =>{
                     </p>
                     }
                     
+                    }
                 </div>
                 <p className={styles.title}>{jobTitle}</p>
                 <p className={styles.description}>{jobDescription}</p>
