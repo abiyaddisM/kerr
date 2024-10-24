@@ -28,7 +28,7 @@ const UserJobPage = () => {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [isViewBidsOpen, setIsViewBidsOpen] = useState(false);
-
+  const [isLoading,setIsLoading] = useState(false);
 
   function handlePopup(button) {
     console.log(button)
@@ -56,6 +56,7 @@ const UserJobPage = () => {
 
   useEffect(()=>{
     const fetchJobs = async ()=>{
+      setIsLoading(true)
     const url = `https://auth.bizawit.com/api/v1/job-contract`
     try{
     const response = await axios.get(url, 
@@ -66,9 +67,13 @@ const UserJobPage = () => {
         }
       }
     )
-    setJobs2(response.data.data)
+     setTimeout(()=>{
+       setIsLoading(false)
+
+       setJobs2(response.data.data)
+     },1000)
   }
-  catch(error) {console.error(error)}
+  catch(error) {console.error(error);setIsLoading(false);}
   }
   fetchJobs()
   console.log(jobs2)
@@ -102,8 +107,6 @@ const UserJobPage = () => {
             selected={selectedType}
             border={true}
           />
-        
-        
           <RadioButtons 
             // className='status'
             keywords={keywords2}
@@ -143,8 +146,8 @@ const UserJobPage = () => {
         
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
-      {filteredJobs.length !== 0?
-        <UserJobsContainer userJobs={filteredJobs} /> 
+      {filteredJobs.length !== 0 || isLoading?
+        <UserJobsContainer userJobs={filteredJobs} isLoading={isLoading}/>
       :
       <div className="no_jobs">
         No jobs found

@@ -1,6 +1,6 @@
 
 import styles from './PostPage.module.css';
-import {ArrowLeft, Add, ArrowSwapVertical} from "iconsax-react";
+import {ArrowLeft, Add, ArrowSwapVertical, CloudAdd, Folder, AddSquare, InfoCircle} from "iconsax-react";
 import {useRef, useState} from "react";
 import axios from "axios";
 import {Utils} from "../../utils/utils.js";
@@ -13,9 +13,13 @@ export const PostPage = () => {
     const [description, setDescription] = useState('');
     const fileInputRef = useRef(null);
     const {user} = useAuth();
+    const [isPosting, setIsPosting] = useState(false);
 
 
     const post = async () => {
+        if(isPosting)
+            return
+        setIsPosting(true);
         if(imageUrls.length <= 0)
             return
         const newImageUrl = await Utils.uploadImages(imageUrls);
@@ -32,8 +36,9 @@ export const PostPage = () => {
              setImageUrl([])
             setTitle('')
             setDescription('')
+            setIsPosting(false)
         }).catch(err=>{
-            alert("problem")
+            setIsPosting(false)
         })
     }
 
@@ -56,9 +61,17 @@ export const PostPage = () => {
 
         <div className={styles.container}>
             <div className={styles.art_container}>
+                { isPosting &&
+                    <div className={styles.loader_container}>
+                        <div className={styles.loader}></div>
+                    </div>
+                }
                 {
-                    imageUrls.length === 0 && <div className={styles.select_chat}>
-                        <span>Add at least one Image</span>
+                    imageUrls.length === 0 && <div className={styles.upload_container}>
+                        <CloudAdd size="24" color="var(--secondary-color)"/>
+                        <h1>Choose a photo or drag & drop it here</h1>
+                        <p>JPEG, PNG, PDO and GIF formats, up to 50MB</p>
+                        <button onClick={handleFileClick}>Browse File</button>
                     </div>
                 }
                 {
@@ -83,16 +96,20 @@ export const PostPage = () => {
             <aside className={styles.side_container}>
 
                 <div className={styles.profile_info}>
-                    <input type="text" placeholder="Title" className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} />
-                    <textarea placeholder="Description" rows="12" className={`${styles.input} ${styles.text_area}`} value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <input type="text" placeholder="Title" className={styles.input} value={title}
+                           onChange={(e) => setTitle(e.target.value)}/>
+                    <textarea placeholder="Description" rows="8" className={`${styles.input} ${styles.text_area}`}
+                              value={description} onChange={(e) => setDescription(e.target.value)}/>
+                    
                 </div>
+
                 <div className={styles.button_container}>
                     <button className={styles.social_buttons} onClick={handleFileClick}>
-                        <Add size="20" color="#000000"/>Add Image
+                        <Folder variant="Bold"   size="20" color="var(--secondary-color)"/>Browse
                     </button>
                     <button className={styles.social_buttons} onClick={post}>
                         {/*<Share size="20" color="#000000"/>Post*/}
-                        <ArrowSwapVertical  size="20" color="#000000"/>
+                        <AddSquare variant="Bold"  size="20" color="var(--secondary-color)"/>
                         Post
                     </button>
                 </div>

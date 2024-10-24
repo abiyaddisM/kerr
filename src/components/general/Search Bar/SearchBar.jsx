@@ -6,7 +6,7 @@ const SearchBar = ({searchTerm, onChange, focus=false}) => {
     return (
         <div className={styles.searchbar}>
             <div className={styles.icon_container}>
-                <SearchNormal1 size="18" color="var(--secondary-color)"/>
+                <SearchNormal1 size="17" color="var(--secondary-color)"/>
             </div>
             <input
                 type="search" 

@@ -28,72 +28,130 @@ const SideBar = () => {
     const {user} = useAuth()
 
     return (
-        <div className={styles.sidebar}>
+        <>
+            <div className={styles.sidebar}>
                 <img src={logo} className={styles.kerrlogo} alt="Logo"/>
 
-            <div className={styles.buttons}>
+                <div className={styles.buttons}>
 
-                <NavLink
-                    to={`/`}
-                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
-                    style={{textDecoration: 'none', display: 'block'}}
-                >
-                    <button className={styles.button}>
-                        <p className={styles.label}>Home</p>
-                        <Home variant={selected !== '/' ? '' : "Bold"} color="var(--primary-color)"/>
-                    </button>
-                </NavLink>
+                    <NavLink
+                        to={`/`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+                            <p className={styles.label}>Home</p>
+                            <Home variant={selected !== '/' ? '' : "Bold"} color="var(--primary-color)"/>
+                        </button>
+                    </NavLink>
 
-                <NavLink
-                    to={`/jobs`}
-                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
-                    style={{textDecoration: 'none', display: 'block'}}
-                >
-                    <button className={styles.button}>
+                    <NavLink
+                        to={`/jobs`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
 
-                    <Briefcase variant={selected !== '/jobs' ? '' : "Bold"} color="var(--primary-color)"/>
-                    <p className={styles.label}>Listing</p>
+                            <Briefcase variant={selected !== '/jobs' ? '' : "Bold"} color="var(--primary-color)"/>
+                            <p className={styles.label}>Listing</p>
 
-                    </button>
-                </NavLink>
+                        </button>
+                    </NavLink>
 
 
+                </div>
 
+                <div className={styles.line}></div>
+                <div className={styles.buttons}>
+
+                    <NavLink
+                        to={`/user-jobs`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+
+                            <ClipboardText variant={selected !== '/user-jobs' ? '' : "Bold"}
+                                           color="var(--primary-color)"/>
+                            <p className={styles.label}>My Project</p>
+
+                        </button>
+                    </NavLink>
+
+                    <NavLink
+                        to={`/chat`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+                            <Message variant={!selected.includes("/chat") ? '' : "Bold"} color="var(--primary-color)"/>
+                            <p className={styles.label}>Chat</p>
+
+                        </button>
+                    </NavLink>
+
+                </div>
+                <div className={styles.line}></div>
+
+
+                <div className={styles.buttons}>
+                    <NavLink
+                        to={`/post`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+
+                            <AddSquare variant={selected !== '/post' ? '' : "Bold"} color="var(--primary-color)"/>
+                            <p className={styles.label}>Post</p>
+                        </button>
+                    </NavLink>
+
+                    <NavLink
+                        to={`/library`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+
+                            <VideoSquare variant={selected !== '/library' ? '' : "Bold"} color="var(--primary-color)"/>
+                            <p className={styles.label}>Library</p>
+                        </button>
+                    </NavLink>
+
+                </div>
             </div>
-
-            <div className={styles.line}></div>
-            <div className={styles.buttons}>
-
-                <NavLink
-                    to={`/user-jobs`}
-                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
-                    style={{textDecoration: 'none', display: 'block'}}
-                >
-                    <button className={styles.button}>
-
-                        <ClipboardText variant={selected !== '/user-jobs' ? '' : "Bold"} color="var(--primary-color)"/>
-                        <p className={styles.label}>My Project</p>
-
-                    </button>
-                </NavLink>
-
-                <NavLink
-                    to={`/chat`}
-                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
-                    style={{textDecoration: 'none', display: 'block'}}
-                >
-                    <button className={styles.button}>
-                        <Message variant={!selected.includes("/chat") ? '' : "Bold"} color="var(--primary-color)"/>
-                        <p className={styles.label}>Chat</p>
-
-                    </button>
-                </NavLink>
-
-            </div>
-            <div className={styles.line}></div>
+            {/*sssssssssssssssssssssssssssssssssssssssssss*/}
 
 
-            <div className={styles.buttons}>
+            <div className={styles.sidebar2}>
+
+
+                    <NavLink
+                        to={`/`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+                            <p className={styles.label}>Home</p>
+                            <Home variant={selected !== '/' ? '' : "Bold"} color="var(--primary-color)"/>
+                        </button>
+                    </NavLink>
+
+                    <NavLink
+                        to={`/jobs`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+
+                            <Briefcase variant={selected !== '/jobs' ? '' : "Bold"} color="var(--primary-color)"/>
+                            <p className={styles.label}>Listing</p>
+
+                        </button>
+                    </NavLink>
+
+
                 <NavLink
                     to={`/post`}
                     className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
@@ -101,25 +159,41 @@ const SideBar = () => {
                 >
                     <button className={styles.button}>
 
-                        <AddSquare variant={selected !== '/post'? '' :"Bold"} color="var(--primary-color)"/>
+                        <AddSquare variant={selected !== '/post' ? '' : "Bold"} color="var(--primary-color)"/>
                         <p className={styles.label}>Post</p>
                     </button>
                 </NavLink>
 
-                <NavLink
-                    to={`/library`}
-                    className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
-                    style={{textDecoration: 'none', display: 'block'}}
-                >
-                    <button className={styles.button}>
+                    <NavLink
+                        to={`/user-jobs`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
 
-                        <VideoSquare variant={selected !== '/library'? '' :"Bold"} color="var(--primary-color)"/>
-                        <p className={styles.label}>Library</p>
-                    </button>
-                </NavLink>
+                            <ClipboardText variant={selected !== '/user-jobs' ? '' : "Bold"}
+                                           color="var(--primary-color)"/>
+                            <p className={styles.label}>My Project</p>
+
+                        </button>
+                    </NavLink>
+
+
+
+                    <NavLink
+                        to={`/library`}
+                        className={({isActive}) => isActive ? `${styles.selected} ${styles.button_wrapper}` : styles.button_wrapper}
+                        style={{textDecoration: 'none', display: 'block'}}
+                    >
+                        <button className={styles.button}>
+
+                            <VideoSquare variant={selected !== '/library' ? '' : "Bold"} color="var(--primary-color)"/>
+                            <p className={styles.label}>Library</p>
+                        </button>
+                    </NavLink>
 
             </div>
-        </div>
+        </>
     );
 }
 
