@@ -300,7 +300,10 @@ const SearchContainer = ({closeSearch}) => {
             <div className={styles.filter_buttons}>
                 <RadioButtons
                     selected={category}
-                    onSelect={handleCategorySelect}>
+                    onSelect={handleCategorySelect}
+                    // keywords={keywords}
+                    >
+                      
                     {buttons}
                 </RadioButtons>
             </div>

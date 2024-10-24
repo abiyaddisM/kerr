@@ -145,7 +145,61 @@ const UserJobPage = () => {
     setSelectedStatus(keywords2[index]);
   }
 
-  const filteredJobs = jobs.filter(job => {
+  function closePopUp(){
+    setIsViewBidsOpen(false)
+  }
+
+  const {user} = useAuth()
+
+  const [jobs2, setJobs2] = useState([])
+
+  useEffect(()=>{
+    const fetchJobs = async ()=>{
+    setJobs2([])
+
+    const url = `https://auth.bizawit.com/api/v1/job-contract`
+    try{
+    const response = await axios.get(url, 
+      {
+        params:{
+          userID : user.id,
+          page: 1
+        }
+      }
+    )
+    setJobs2(response.data.data)
+  }
+  catch(error) {console.error(error)}
+  }
+
+  const fetchUassignedJobs = async () => {
+    setJobs2([])
+    try{
+      const url = `https://auth.bizawit.com/api/v1/user/${user.id}/job`
+      const response = await axios.get(url,
+        {
+          params : {
+            type: 1
+          }
+        }
+      )
+      setJobs2(response.data.data)
+      
+
+    }
+    catch(error) {console.error(error)}
+
+  }
+  if(selectedType === 'Contracted'){
+    fetchJobs()
+  }
+  else
+    fetchUassignedJobs()
+  console.log(jobs2)
+  },[selectedType])
+
+  
+  const filteredJobs = jobs2.filter(job => {
     const typeFilter = (selectedType === 'Contracted' && !job.isAssigned) ||
     (selectedType === 'Unassigned' && job.isAssigned);
 
@@ -173,7 +227,7 @@ const UserJobPage = () => {
             border={true}
           />
         
-        
+        {selectedType === 'Contracted' &&
           <RadioButtons 
             // className='status'
             keywords={keywords2}
@@ -181,6 +235,7 @@ const UserJobPage = () => {
             selected={selectedStatus}
             border={true}
           />
+        }
         </div>
 
         <div className="bid_buttons">
@@ -208,12 +263,9 @@ const UserJobPage = () => {
         
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
-      {filteredJobs.length !== 0?
-        <UserJobsContainer userJobs={filteredJobs} /> 
-      :
-      <div className="no_jobs">
-        No jobs found
-        </div>}
+      
+        <UserJobsContainer userJobs={jobs2} assigned={selectedType === 'Contracted'}/> 
+      
     </div>
   );
 };

@@ -2,8 +2,24 @@ import { element } from 'prop-types'
 import styles from './UserJobCard.module.css'
 import ProfileCard from '../Profile Card/ProfileCard'
 import ProfileImage from '../../general/Profile Image/ProfileImage'
+import { useEffect } from 'react'
 
-const UserJobCard = ({job: {user, location, jobTitle, jobDescription, messages, date, isActive}}) =>{
+const UserJobCard = ({job, onClick, assigned}) =>{
+
+    const goToJob = (id) =>{
+        onClick(id)
+    }
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+    useEffect(()=>console.log(job))
+
+
     return (
         <div className={styles.job_card}>
 
@@ -15,13 +31,19 @@ const UserJobCard = ({job: {user, location, jobTitle, jobDescription, messages, 
             <div className={styles.details}>
                 <div className={styles.user_details}>
                     <div className={styles.username}>
-                        <p className={styles.name}>{user.name}</p>
-                        <p className={styles.location}>{location}</p>
+                        <p className={styles.name}>
+  {assigned 
+    ? `${job.first_name ?? ''} ${job.last_name ?? ''}`.trim() 
+    : job.full_name ?? ''}
+</p>
+                        <p className={styles.location}>{job.location}</p>
                     </div>
+                    {assigned &&
                     <p className={
-                        isActive == true ? styles.active:
-                        isActive == false? styles.cancelled:
-                        styles.completed
+
+                        job.contract_state == 1 ? styles.active:
+                        job.contract_state == 2 ? styles.completed:
+                        styles.cancelled
                     }>
                         {
                             isActive === true? 'Active':
@@ -29,6 +51,7 @@ const UserJobCard = ({job: {user, location, jobTitle, jobDescription, messages, 
                             'Completed'
                         }    
                     </p>
+                    }
                 </div>
                 <p className={styles.title}>{jobTitle}</p>
                 <p className={styles.description}>{jobDescription}</p>

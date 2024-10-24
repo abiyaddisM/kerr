@@ -188,7 +188,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         const updatedContent = jobs.filter((job)=> job.job_id !== id)
         await setJobs(updatedContent)
         console.log(id)
-        // await axios.delete(`https://auth.bizawit.com/api/v2/job/${id}`);
+        await axios.delete(`https://auth.bizawit.com/api/v1/job/${id}`);
 
     }catch (error) {
     console.error("Error deleting job:", error);}    
@@ -404,7 +404,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
                     <div className={style.line1}>
                         <div className={style.nameaddress}>
                             <p className={style.names}>{job.full_name}</p> {/* Access name from user object */}
-                            <p className={style.address}>Ethiopia, Summit</p>
+                            <p className={style.address}>{job.location}</p>
                         </div>
                         
                     </div>
