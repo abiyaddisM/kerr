@@ -10,19 +10,33 @@ import {Add, Paperclip2, Send2} from "iconsax-react";
 import {Utils} from "../../../utils/utils.js";
 
 // eslint-disable-next-line react/prop-types
-export function InputContainer({onClick,userID,chatID}) {
+export function InputContainer({onClick,userID,chatID,chats,setChats}) {
     //state that is bound to the input
     const [inputValue, setInputValue] = useState('');
     //state for the image uploads
     const [imageUrls, setImageUrl] = useState([]);
     //ref for file explorer call
     const fileInputRef = useRef(null);
+    const [isSending, setIsSending] = useState(false);
 
     const sendMessage = async ()=>{
-        onClick({message:inputValue,images: {images:imageUrls}});
-        const newImageUrl = await Utils.uploadImages(imageUrls)
+        if(isSending)
+            return;
+        setIsSending(true);
+        const newImageUrl = await Utils.uploadImages(imageUrls);
+        onClick({message:inputValue,images: {images:newImageUrl}});
 
+        const index = chats.findIndex(item => item.id === Number(chatID));
+        const updatedItems = [...chats];
+        updatedItems[index] = { ...updatedItems[index], last_sent_time: new Date().toISOString(),last_sent_message:inputValue};
+        const newData = updatedItems.sort((a, b) => {
+            const dateA = new Date(a.last_sent_time);
+            const dateB = new Date(b.last_sent_time);
+            return dateB - dateA;
+        });
+        setChats(newData);
         sendMessageToServer(userID,Number(chatID),inputValue,newImageUrl);
+        setIsSending(false);
         setImageUrl([]);
         setInputValue('')
     }
@@ -59,11 +73,17 @@ export function InputContainer({onClick,userID,chatID}) {
                 &&
                 <div className={styles.image_container}>
                     {
-                        imageUrls.map((value,index)=>{
+                        imageUrls.map((value, index) => {
                             return (
-                                <img key={index} src={value} alt="" className={styles.image} onClick={()=>removeImage(index)}/>
+                                <img key={index} src={value} alt="" className={styles.image}
+                                     onClick={() => removeImage(index)}/>
                             )
                         })
+                    }
+                    { isSending &&
+                        <div className={styles.loader_container}>
+                            <div className={styles.loader}></div>
+                        </div>
                     }
                 </div>
             }
@@ -89,16 +109,18 @@ export function InputContainer({onClick,userID,chatID}) {
                     onChange={e=>{setInputValue(e.target.value)}} // Update state on input change
                     onKeyPress={sendMessageOnEnter}
                 />
-                <IconButton
-                    backgroundColor={'transparent'}
-                    border={'1px solid var(--border-color)'}
-                    padding={'8px'}
-                    src={sendIcon}
-                    backgroundColorHover={'var(--highlight-color)'}
-                    onClick={sendMessage}
-                >
-                    <Send2 size="24" color="var(--secondary-color)"/>
-                </IconButton>
+                {
+                        <IconButton
+                            backgroundColor={'transparent'}
+                            border={'1px solid var(--border-color)'}
+                            padding={'8px'}
+                            src={sendIcon}
+                            backgroundColorHover={'var(--highlight-color)'}
+                            onClick={sendMessage}
+                        >
+                            <Send2 size="24" color="var(--secondary-color)"/>
+                        </IconButton>
+                }
             </div>
         </>
     )

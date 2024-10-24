@@ -12,6 +12,8 @@ const JobCompletionContainer = ({setIsOpen, jobID}) => {
     const [message,setMessage] = useState('');
     const fileInputRef = useRef(null);
     const {user} = useAuth();
+    const [isPosting, setIsPosting] = useState(false);
+
     const handleFileClick = () => {
         fileInputRef.current.click();
     };
@@ -32,6 +34,7 @@ const JobCompletionContainer = ({setIsOpen, jobID}) => {
         return newUrl;
     };
     const handleJobComplete = async () => {
+        setIsPosting(true);
         const newUrl = await upload();
         const data = {
             userID: user.id,
@@ -39,6 +42,7 @@ const JobCompletionContainer = ({setIsOpen, jobID}) => {
             message:message
         }
         await axios.post(`https://auth.bizawit.com/api/v1/job/${jobID}/complete`, data)
+        setIsPosting(false)
         closePopUp();
     };
     return (
@@ -56,8 +60,12 @@ const JobCompletionContainer = ({setIsOpen, jobID}) => {
                     <div onClick={() => {
                         setUrl("")
                     }} className={style.image_container}>
+
                         <img src={url} alt="" className={style.image}/>
 
+                        { isPosting && <div className={style.loader_container}>
+                            <div className={style.loader}></div>
+                        </div>}
                     </div>
                     :
                     <div className={style.upload_container}>

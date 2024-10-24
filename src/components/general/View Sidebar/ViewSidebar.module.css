@@ -135,7 +135,10 @@
     font-size: 14px;
     color: #333333;
     line-height: 150%;
-
+    white-space: normal;  /* Allows text to wrap */
+    word-wrap: break-word; /* Breaks long words that exceed the container width */
+    overflow-wrap: break-word; /* Ensures long words wrap in modern browsers */
+    width: 100%;
 }
 
 .tags{

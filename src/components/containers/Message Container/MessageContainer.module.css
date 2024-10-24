@@ -40,7 +40,11 @@
     font-weight: 500;
     color: var(--text-heavy-color);
 }
-.status{
+.status_online{
+    font-size: 11px;
+    color: #31b831;
+}
+.status_offline{
     font-size: 11px;
     color: var(--text-medium-color);
 }

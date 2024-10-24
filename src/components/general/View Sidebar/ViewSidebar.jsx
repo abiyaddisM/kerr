@@ -95,7 +95,7 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture, 
                 component={
                 <button className={styles.social_buttons}
                     onClick={handleShareClick}
-                ><Share size="20" color="#000000"/>Share
+                ><Share variant={"Bold"} size="20" color="#000000"/>Share
                 </button>} 
                 state={share} setState={setShare}
                 >
@@ -104,7 +104,7 @@ function ViewSidebar({username,views,saves,title,id,description,profilePicture, 
                 {/* <PopUp component={ */}
                     <button className={styles.social_buttons}
                     onClick={handleSaveClick}
-                ><ImportCurve size="20" color="#000000"/>Save
+                ><ImportCurve variant={"Bold"} size="20" color="#000000"/>Save
                 </button>
                 {/* } */}
                 {/* state={save} setState={setSave}> */}

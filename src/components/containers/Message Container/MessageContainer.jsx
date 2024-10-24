@@ -7,41 +7,58 @@ import io from 'socket.io-client';
 import {useAuth} from "../../../utils/AuthContext.jsx";
 import {useParams} from "react-router-dom";
 import {More, Star1} from "iconsax-react";
+import {useSocket} from "../../../utils/SocketContext.jsx";
 
 const SOCKET_SERVER_URL = "https://auth.bizawit.com";
 // eslint-disable-next-line react/prop-types
-export function MessageContainer({messages,setMessages,chats,chatMessages}) {
+export function MessageContainer({messages,setMessages,chats,chatMessages,setChats}) {
     const [name,setName]=useState('');
+    const [isOnline,setIsOnline]=useState(false);
     const [profilePicture,setProfilePicture]=useState('');
     const {user} = useAuth();
     const {id} = useParams()
     const myId = user.id;
     const scrollView = useRef();
-    const [socket, setSocket] = useState(null);
+    const {socket} = useSocket();
+
 
     useEffect(() => {
-        const newSocket = io(SOCKET_SERVER_URL);
-        setSocket(newSocket);
-        newSocket.emit('set room', myId);
-
-        return () => {
-            newSocket.disconnect();
-        };
-    }, []);
-    useEffect(() => {
+        let prevMessage = -1;
         if (socket) {
-            socket.on('message', (msg) => {
-                if(msg.chat_id === Number(id)){
+            const handleMessage = (msg) => {
+                if(prevMessage === msg.id)
+                    return
+
+                prevMessage = msg.id;
+                const index = chats.findIndex(item => item.id === Number(msg.chat_id));
+                const updatedItems = [...chats];
+                updatedItems[index] = { ...updatedItems[index], last_sent_time: msg.created_at, last_sent_message:msg.message_text};
+                const newData = updatedItems.sort((a, b) => {
+                    const dateA = new Date(a.last_sent_time);
+                    const dateB = new Date(b.last_sent_time);
+                    return dateB - dateA;
+                });
+                setChats(newData);
+                if (msg.chat_id === Number(id)) {
                     setMessages(prevItems => [...prevItems, msg]);
                     console.log(msg);
                 }
-                if(msg.chat_id in chatMessages){
+                if (msg.chat_id in chatMessages) {
                     chatMessages[msg.chat_id].push(msg);
                 }
-                console.log(msg)
-            });
+                console.log(msg);
+            };
+
+            // Register the socket listener
+            socket.on('message', handleMessage);
+
+            // Clean up the event listener on component unmount or when socket changes
+            return () => {
+                socket.off('message', handleMessage);
+            };
         }
-    }, [socket]);
+    }, [socket, chatMessages]); // Make sure to include the necessary dependencies
+
     useEffect(() => {
         if (id) {
             // Find chatInfo by id
@@ -51,6 +68,7 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
             if (chatInfo) {
                 setName(chatInfo.first_name + ' ' + chatInfo.last_name);
                 setProfilePicture(chatInfo.profile_picture);
+                setIsOnline(chatInfo.isOnline)
             } else {
                 // Handle the case where no matching chat is found (optional)
                 setName('');  // or set some default values
@@ -108,7 +126,12 @@ export function MessageContainer({messages,setMessages,chats,chatMessages}) {
                     <img className={style.profile_image} src={`https://auth.bizawit.com/api/v1/upload/600/${profilePicture}`} alt=""/>
                     <div className={style.stat_container}>
                             <h2 className={style.title}>{name}</h2>
-                            <span><p className={style.status}>Online</p></span>
+                            <span>{
+                                isOnline ?
+                                    <p className={style.status_online}>Online</p>
+                                    :
+                                    <p className={style.status_offline}>Offline</p>
+                            }</span>
                     </div>
                 </div>
                 <div className={style.right_container}>

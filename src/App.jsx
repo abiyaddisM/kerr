@@ -20,12 +20,14 @@ import ProfilePageContainer from './components/containers/Profile Page Container
 import JobDetailPage from './pages/Job Detail Page/JobDetailPage.jsx';
 import ContractPage from './pages/Contract Page/ContractPage.jsx';
 import {PostPage} from "./pages/Post Page/PostPage.jsx";
+import {SocketProvider} from "./utils/SocketContext.jsx";
 
 function App () {
 
   return (
       <>
-      <AuthProvider>
+          <AuthProvider>
+              <SocketProvider>
         <Router>
 
           <Routes>
@@ -56,7 +58,8 @@ function App () {
           </Routes>
 
         </Router>
-      </AuthProvider>
+              </SocketProvider>
+          </AuthProvider>
       </>
 
   )
