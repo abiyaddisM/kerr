@@ -4,10 +4,9 @@ import ProfileCard from '../Profile Card/ProfileCard'
 import ProfileImage from '../../general/Profile Image/ProfileImage'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useEffect } from 'react'
 
-const UserJobCard = ({job, onClick, assigned}) =>{
+
+
 const UserJobCard = ({job, onClick, assigned}) =>{
 
     const goToJob = (id) =>{
@@ -49,8 +48,7 @@ const UserJobCard = ({job, onClick, assigned}) =>{
 </p>
                         <p className={styles.location}>{job.location}</p>
                     </div>
-                    {assigned &&
-                    {assigned &&
+                   
                     {assigned &&
                     <p className={
 
@@ -66,8 +64,7 @@ const UserJobCard = ({job, onClick, assigned}) =>{
                         }    
                     </p>
                     }
-                    }
-                    }
+                    
                 </div>
                 <p className={styles.title}>{jobTitle}</p>
                 <p className={styles.description}>{jobDescription}</p>
