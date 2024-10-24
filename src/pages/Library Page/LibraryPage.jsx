@@ -13,7 +13,7 @@ const LibraryPage = () => {
       const deleteArt = async (id) => {
         
         try{
-          const url = `http://localhost:3000/api/v1/gallery/${user.id}`
+          const url = `https://auth.bizawit.com/api/v1/gallery/${user.id}`
           const response = await axios.delete(url, {
             params: {postID: id}})
           console.log(response.data)
@@ -37,7 +37,7 @@ const LibraryPage = () => {
 
       useEffect(()=>{
         const fetchPosts = async () => {
-          const response = await axios.get(`http://localhost:3000/api/v1/gallery/${user.id}`)
+          const response = await axios.get(`https://auth.bizawit.com/api/v1/gallery/${user.id}`)
           setArts(response.data.data);
           
         }

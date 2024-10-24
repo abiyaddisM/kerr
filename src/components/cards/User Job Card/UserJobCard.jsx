@@ -4,7 +4,7 @@ import ProfileCard from '../Profile Card/ProfileCard'
 import ProfileImage from '../../general/Profile Image/ProfileImage'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+
 
 
 const UserJobCard = ({job, onClick, assigned}) =>{
