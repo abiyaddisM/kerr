@@ -28,7 +28,7 @@ const UserJobPage = () => {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [isViewBidsOpen, setIsViewBidsOpen] = useState(false);
-
+  const [isLoading,setIsLoading] = useState(false);
 
   function handlePopup(button) {
     console.log(button)
@@ -57,7 +57,7 @@ const UserJobPage = () => {
   useEffect(()=>{
     const fetchJobs = async ()=>{
     setJobs2([])
-
+      setIsLoading(true)
     const url = `https://auth.bizawit.com/api/v1/job-contract`
     try{
     const response = await axios.get(url, 
@@ -68,9 +68,13 @@ const UserJobPage = () => {
         }
       }
     )
-    setJobs2(response.data.data)
+     setTimeout(()=>{
+       setIsLoading(false)
+
+       setJobs2(response.data.data)
+     },1000)
   }
-  catch(error) {console.error(error)}
+  catch(error) {console.error(error);setIsLoading(false);}
   }
 
   const fetchUassignedJobs = async () => {
@@ -170,8 +174,14 @@ const UserJobPage = () => {
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
       
-        <UserJobsContainer userJobs={jobs2} assigned={selectedType === 'Contracted'}/> 
       
+      {filteredJobs.length !== 0 || isLoading?
+        <UserJobsContainer userJobs={jobs2} assigned={selectedType === 'Contracted'}/> 
+        <UserJobsContainer userJobs={filteredJobs} isLoading={isLoading}/>
+      :
+      <div className="no_jobs">
+        No jobs found
+        </div>}
     </div>
   );
 };

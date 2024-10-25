@@ -30,6 +30,7 @@
     flex-direction: column;
     gap: 4px;
     order: 1;
+    word-wrap: break-word;
 }
 .info_container_left{
     align-items: end;
@@ -55,5 +56,8 @@
     color: var(--text-medium-color);
     font-weight: 500;
     line-height: 150%;
-    word-break: break-word;
+    white-space: normal;  /* Allows text to wrap */
+    word-wrap: break-word; /* Breaks long words that exceed the container width */
+    overflow-wrap: break-word; /* Ensures long words wrap in modern browsers */
+    width: 100%;
 }

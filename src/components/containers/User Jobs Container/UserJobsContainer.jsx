@@ -3,8 +3,13 @@ import UserJobCard from '../../cards/User Job Card/UserJobCard.jsx'
 import styles from './UserJobsContainer.module.css'
 import { useNavigate } from 'react-router-dom'
 
-const UserJobsContainer = ({userJobs, assigned=true}) => {
-    
+const UserJobsContainer = ({userJobs,isLoading}) => {
+    const loadingCard = []
+    for(let i= 0; i< 20; i++){
+        loadingCard.push(
+            <div className={styles.loading_card}></div>
+        )
+    }
     const navigate = useNavigate()
 
     const handleJobClick = (job) => {
@@ -15,7 +20,7 @@ const UserJobsContainer = ({userJobs, assigned=true}) => {
 
     return (
         <div className={styles.container}>
-            {userJobs.length?
+            {!isLoading?
             userJobs.map((job)=>(
                 <UserJobCard  
                 key={job.id}
@@ -25,7 +30,7 @@ const UserJobsContainer = ({userJobs, assigned=true}) => {
                 />
             ))
             :
-            <div>No jobs found</div>
+            loadingCard
         }
         </div>
     )
