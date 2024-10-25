@@ -3,7 +3,7 @@ import UserJobCard from '../../cards/User Job Card/UserJobCard.jsx'
 import styles from './UserJobsContainer.module.css'
 import { useNavigate } from 'react-router-dom'
 
-const UserJobsContainer = ({userJobs,isLoading}) => {
+const UserJobsContainer = ({userJobs,isLoading,assigned}) => {
     const loadingCard = []
     for(let i= 0; i< 20; i++){
         loadingCard.push(
