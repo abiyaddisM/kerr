@@ -17,6 +17,7 @@ const UserJobsContainer = ({userJobs,isLoading}) => {
       navigate(`/job/${job.job_id}`);
     }
 
+
     return (
         <div className={styles.container}>
             {!isLoading?
@@ -25,6 +26,7 @@ const UserJobsContainer = ({userJobs,isLoading}) => {
                 key={job.id}
                 job={job}
                 onClick={()=>handleJobClick(job)}
+                assigned={assigned}
                 />
             ))
             :

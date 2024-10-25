@@ -40,7 +40,7 @@ const JobFilter = ({onStateChange}) => {
 
     const handleRangeSelect = (newSelected) => {
         setHourlyRange(newSelected)
-        // console.log(newSelected)
+        console.log(newSelected)
     }
 
     

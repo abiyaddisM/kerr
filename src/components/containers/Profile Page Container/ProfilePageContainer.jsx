@@ -102,7 +102,7 @@ const ProfilePageContainer = ({id, isPersonal=true})=>{
         const updatedContent = jobs.filter((job)=> job.job_id !== id)
         await setJobs(updatedContent)
         console.log(id)
-        await axios.delete(`https://localhost:3000/api/v1/job/${id}`);
+        await axios.delete(`https://auth.bizawit.com/api/v1/job/${id}`);
 
     }catch (error) {
     console.error("Error deleting job:", error);}    
@@ -178,7 +178,7 @@ const deleteSelection = async () => {
         }
         else
             fetchPosts()
-    }, [<Category></Category>, jobs])
+    }, [Category, jobs])
 
     
 

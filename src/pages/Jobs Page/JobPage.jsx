@@ -6,6 +6,7 @@ import Notification from "../../components/general/Notification/Notification";
 import './JobPage.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useFetcher } from "react-router-dom";
 
 
 
@@ -13,33 +14,35 @@ import axios from "axios";
 const JobPage = () => {
 
     const [jobs, setJobs] = useState([])
+    const [filteredJobs, setFilteredJobs] = useState([]);
+
 
     useEffect (()=>{
         const fetchJobs = async () =>{
             try{
             const res = await axios.get('https://auth.bizawit.com/api/v1/job')
             setJobs(res.data[0])
+            setFilteredJobs(res.data[0])
             console.log(res.data[0])
 
 
             }catch(e){console.log(e)}
     }
     fetchJobs();
-    console.log(jobs)
+    // console.log(jobs)
 
 },[])
     
     
-    const [filteredJobs, setFilteredJobs] = useState(jobs);
 
 
     const handleJobFilter = ({searchTerm, artStyles, location, clientRating, timeline, hourlyRange}) => {
         let updatedJobs = jobs;
 
-        console.log(searchTerm)
-        console.log(location)
+        
+        
         console.log(hourlyRange);
-        console.log(clientRating)
+        
         console.log(artStyles);
         console.log(timeline)
 
@@ -51,10 +54,12 @@ const JobPage = () => {
         }
 
         if(artStyles && artStyles.length > 0){
+            
             updatedJobs = jobs.filter(job => 
-                artStyles.some(style => 
-                    job.keywords.includes(style)
-                )
+                console.log(artStyles)
+                // artStyles.some(style => 
+                //     job.keywords.includes(style)
+                // )
             )
             console.log(updatedJobs)
 
@@ -66,31 +71,35 @@ const JobPage = () => {
             )
         }
 
-        // if(clientRating && clientRating.length > 0){
-        //     updatedJobs = jobs.filter(job => 
-        //         clientRating.includes(job.rating.toString())
-        //     )
-        // }
 
+        if(hourlyRange && hourlyRange.length > 0){
+            updatedJobs = jobs.filter(job => 
+                
+                hourlyRange.some(range => {
+                if(range === 'Any')
+                    return true;
 
-        // if(hourlyRange && hourlyRange.length > 0){
-        //     updatedJobs = jobs.filter(job => 
-        //         hourlyRange.some(range => {
-        //             const [lower, upper] = range
-        //             return job.hourlyrate >= lower && job.hourlyrate <= upper
-        //         }
-        //     ))
-        // }
+                const [lower, upper] = range.split(',').map(Number); // Split and convert to numbers
+                console.log(`Range: lower = ${lower}, upper = ${upper}`);
+                return job.job_price >= lower && job.job_price <= upper;
+                }
+            ))
+
+        }
 
         //ADD TIMELINE SEARCH
         setFilteredJobs(updatedJobs)
 
     }
 
+    useEffect(()=>{
+        console.log(filteredJobs)
+    },[filteredJobs])
+
     return(
         <div className="jobpage">
             <div className="jobcontainer">
-                <JobContainer jobs={jobs}/>
+                <JobContainer jobs={filteredJobs}/>
             </div>
             <div className="jobfilter">
                 <JobFilter  onStateChange={handleJobFilter}

@@ -2,9 +2,12 @@ import { element } from 'prop-types'
 import styles from './UserJobCard.module.css'
 import ProfileCard from '../Profile Card/ProfileCard'
 import ProfileImage from '../../general/Profile Image/ProfileImage'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const UserJobCard = ({job, onClick}) =>{
+
+
+const UserJobCard = ({job, onClick, assigned}) =>{
 
     const goToJob = (id) =>{
         onClick(id)
@@ -18,6 +21,8 @@ const UserJobCard = ({job, onClick}) =>{
         return `${day}/${month}/${year}`;
     }
 
+
+
     return (
         <div className={styles.job_card} onClick={goToJob}>
 
@@ -29,10 +34,19 @@ const UserJobCard = ({job, onClick}) =>{
             <div className={styles.details}>
                 <div className={styles.user_details}>
                     <div className={styles.username}>
-                        <p className={styles.name}>{job.first_name + " " + job.last_name}</p>
+                        <p className={styles.name}>
+
+  {assigned 
+    ? `${job.first_name ?? ''} ${job.last_name ?? ''}`.trim() 
+    : job.full_name ?? ''}
+</p>
                         <p className={styles.location}>{job.location}</p>
                     </div>
+                    {assigned &&
+                    
                     <p className={
+
+
                         job.contract_state == 1 ? styles.active:
                         job.contract_state == 2 ? styles.completed:
                         styles.cancelled
@@ -43,6 +57,9 @@ const UserJobCard = ({job, onClick}) =>{
                             'Cancelled'
                         }    
                     </p>
+                    }
+                    
+                    
                 </div>
                 <p className={styles.title}>{job.job_title}</p>
                 <p className={styles.description}>{job.job_description}</p>

@@ -56,6 +56,7 @@ const UserJobPage = () => {
 
   useEffect(()=>{
     const fetchJobs = async ()=>{
+    setJobs2([])
       setIsLoading(true)
     const url = `https://auth.bizawit.com/api/v1/job-contract`
     try{
@@ -75,9 +76,32 @@ const UserJobPage = () => {
   }
   catch(error) {console.error(error);setIsLoading(false);}
   }
-  fetchJobs()
+
+  const fetchUassignedJobs = async () => {
+    setJobs2([])
+    try{
+      const url = `https://auth.bizawit.com/api/v1/user/${user.id}/job`
+      const response = await axios.get(url,
+        {
+          params : {
+            type: 1
+          }
+        }
+      )
+      setJobs2(response.data.data)
+      
+
+    }
+    catch(error) {console.error(error)}
+
+  }
+  if(selectedType === 'Contracted'){
+    fetchJobs()
+  }
+  else
+    fetchUassignedJobs()
   console.log(jobs2)
-  },[user.id])
+  },[selectedType])
 
   
   const filteredJobs = jobs2.filter(job => {
@@ -107,6 +131,8 @@ const UserJobPage = () => {
             selected={selectedType}
             border={true}
           />
+        
+        {selectedType === 'Contracted' &&
           <RadioButtons 
             // className='status'
             keywords={keywords2}
@@ -114,6 +140,7 @@ const UserJobPage = () => {
             selected={selectedStatus}
             border={true}
           />
+        }
         </div>
 
         <div className="bid_buttons">
@@ -146,7 +173,10 @@ const UserJobPage = () => {
         
       </div>
       {/* <JobContainer job = {filteredJobs}/> */}
+      
+      
       {filteredJobs.length !== 0 || isLoading?
+        <UserJobsContainer userJobs={jobs2} assigned={selectedType === 'Contracted'}/> 
         <UserJobsContainer userJobs={filteredJobs} isLoading={isLoading}/>
       :
       <div className="no_jobs">

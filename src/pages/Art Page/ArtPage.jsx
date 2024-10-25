@@ -1,10 +1,8 @@
-import SearchBar from '../../components/general/Search Bar/SearchBar'
-import ButtonGroup from '../../components/buttons/Button Group/ButtonGroup'
+
 import ArtContainer from '../../components/containers/Art Container/ArtContainer'
 import './ArtPage.css'
 import {useEffect, useState} from 'react'
 import RadioButtons from '../../components/buttons/RadioButtons/RadioButtons'
-import { GalleryAdd, MouseCircle } from 'iconsax-react'
 import axios from 'axios'
 
 
@@ -12,8 +10,7 @@ import axios from 'axios'
 const ArtPage = () =>{
   const keywords = ['Trending', 'Recent', 'All Time Popular', 'Most Views', 'Oldest']
   const [isLoading,setIsLoading] = useState(true);
-  const [selectActivate, setSelectActivate] = useState(false)
-  const [selectedPost, setSelectedPost] = useState([])
+
   const [arts, setArts] = useState([])
 
 
@@ -66,23 +63,7 @@ const ArtPage = () =>{
           break;
       }
       return posts
-    }
-
-    function addToGallery(){
-      
-      selectedPost.map(p=>{
-        const post = {
-        userID: 1,
-        postID: p.id
-      }
-      axios.post('https://auth.bizawit.com/api/v1/gallery', post )
-      .then(resp=>console.log('resp'))
-      .catch(err=>console.error(err))
-    }) 
-    // console.log(selectedPost)
-    }
-
-    
+    }    
 
     return(
         <div className='art_page'>

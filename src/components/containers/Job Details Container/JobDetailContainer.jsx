@@ -454,7 +454,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                     state={offerJob}
                     setState={setOfferJob}>
                     {/* <ShareContainer id={user.id}/> */}
-                    <ProfileContainer setIsOpen={setOfferJob} share={true} onProfileClick={handleJobOffer} />
+                    <ProfileContainer setIsOpen={setOfferJob} onProfileClick={handleJobOffer} />
                 </PopUp>
             </div>
 

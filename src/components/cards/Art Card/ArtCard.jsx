@@ -15,8 +15,6 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=fals
     
 
     function handleArtClicked(art){
-        //expad the art in new window
-        // console.log(art);
         onClick(art);
         
     }
