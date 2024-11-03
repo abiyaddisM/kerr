@@ -14,14 +14,12 @@ const UserJobCard = ({job, onClick, assigned}) =>{
     }
 
     const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
+       return new Date(dateString).toLocaleDateString("en-GB", {
+           day: "2-digit",
+           month: "long",
+           year: "numeric"
+       });
     }
-
-
 
     return (
         <div className={styles.job_card} onClick={goToJob}>
@@ -63,9 +61,8 @@ const UserJobCard = ({job, onClick, assigned}) =>{
                 </div>
                 <p className={styles.title}>{job.job_title}</p>
                 <p className={styles.description}>{job.job_description}</p>
-                <div className={styles.messages}>
-                    {/* <p>{' unread messages' }</p> */}
-                    <p>{formatDate(job.created_at)}</p>
+                <div  className={styles.message}>
+                    <p className={styles.date}>{formatDate(job.created_at)}</p>
                 </div>
 
             </div>

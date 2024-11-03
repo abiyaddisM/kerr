@@ -62,7 +62,7 @@ const JobDetailPage = () => {
     return (
         <div className={styles.container}>
             {job?
-            <JobDetailContainer job={job} isClient={user.id == job.client_id} isFreelancer={user.id == job.freelance_id} isContracted={job.client_id !== null && job.freelance_id!==null} hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid}/>
+            <JobDetailContainer job={job} isPaid={job.contract_state === 2} isClient={user.id === job.client_id} isFreelancer={user.id === job.freelance_id} isContracted={job.client_id !== null && job.freelance_id!==null} hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid}/>
             :
             <p>Job not found</p> 
             }

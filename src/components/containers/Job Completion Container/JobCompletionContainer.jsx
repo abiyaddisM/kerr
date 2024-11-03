@@ -7,7 +7,7 @@ import * as user from "date-fns/locale";
 import {useAuth} from "../../../utils/AuthContext.jsx";
 import axios from "axios";
 
-const JobCompletionContainer = ({setIsOpen, jobID}) => {
+const JobCompletionContainer = ({setIsOpen, jobID,setDeliver}) => {
     const [url,setUrl] = useState('');
     const [message,setMessage] = useState('');
     const fileInputRef = useRef(null);
@@ -42,6 +42,7 @@ const JobCompletionContainer = ({setIsOpen, jobID}) => {
             message:message
         }
         await axios.post(`https://auth.bizawit.com/api/v1/job/${jobID}/complete`, data)
+        setDeliver(data)
         setIsPosting(false)
         closePopUp();
     };

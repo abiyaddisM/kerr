@@ -36,3 +36,14 @@
 }
 
 
+.icon{
+    /*display: none;*/
+    display: flex;
+}
+@media (min-width: 600px) {
+    .icon{
+        /*display: none;*/
+        background: red;
+        display: none;
+    }
+}

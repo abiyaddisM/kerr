@@ -32,7 +32,7 @@ function ViewPage(){
                 <ViewSidebar
                     description={data.post_caption}
                     views={data.view + 1}
-                    saves={data.view}
+                    saves={data.save}
                     title={data.post_title}
                     profilePicture={data.profile_picture}
                     username={data.first_name + " " + data.last_name}

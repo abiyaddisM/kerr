@@ -35,6 +35,13 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         await axios.delete(url)
     } catch(error) {console.error(error)}
     }
+    const acceptBid = async (index) => {
+        try{
+            const url = `https://auth.bizawit.com/api/v1/job/${id}/job-contract`
+            await axios.post(url,{clientID:user.id, freelanceID:bids[index].user_id, price:bids[index].bid_counter_price ? bids[index].bid_counter_price : -1})
+            setIsOpen(false)
+        } catch(error) {console.error(error)}
+    }
 
     const removeOffer = async (id) => {
         console.log(id)
@@ -157,7 +164,6 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
     return(
         <div className={styles.container}>
 
-          
             <div className={styles.buttons}>
                 <button className={styles.back_button} onClick={closePopUp}>
                     <ArrowLeft size="20px" color="var(--primary-color)" /> 
@@ -185,6 +191,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                             <BidCard bid={bid}
                                     received={isJobs}
                                     onDelete={()=>removeBid(bid.id)}
+                                     onAccept={()=>acceptBid(index)}
                             />
                             </div>)
                             // <BidCard key={index} bid={bid}/>

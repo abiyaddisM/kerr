@@ -98,9 +98,7 @@ export function InputContainer({onClick,userID,chatID,chats,setChats}) {
                     <Paperclip2 size="28" color="var(--secondary-color)"/>
 
                 </IconButton>
-                <IconButton backgroundColor={'transparent'} backgroundColorHover={'var(--highlight-color)'} padding={'6px'} src={addIcon}>
-                    <Add size="28" color="var(--secondary-color)"/>
-                </IconButton>
+
                 <input
                     className={styles.input}
                     type="text"
