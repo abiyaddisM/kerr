@@ -7,6 +7,7 @@ import './JobPage.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useFetcher } from "react-router-dom";
+import {Filter} from "iconsax-react";
 
 
 
@@ -15,15 +16,20 @@ const JobPage = () => {
 
     const [jobs, setJobs] = useState([])
     const [filteredJobs, setFilteredJobs] = useState([]);
-
+    const [filterVisible, setFilterVisible] = useState(false);
 
     useEffect (()=>{
         const fetchJobs = async () =>{
             try{
-            const res = await axios.get('https://auth.bizawit.com/api/v1/job')
-            setJobs(res.data[0])
-            setFilteredJobs(res.data[0])
-            console.log(res.data[0])
+                setIsLoading(true)
+                setTimeout(async ()=>{
+                    const res = await axios.get('https://auth.bizawit.com/api/v1/job')
+                    setIsLoading(false)
+
+                    setJobs(res.data[0])
+                    setFilteredJobs(res.data[0])
+                    console.log(res.data[0])
+                },2000)
 
 
             }catch(e){console.log(e)}
@@ -95,15 +101,18 @@ const JobPage = () => {
     useEffect(()=>{
         console.log(filteredJobs)
     },[filteredJobs])
-
+    const [isLoading,setIsLoading] = useState(false);
     return(
         <div className="jobpage">
             <div className="jobcontainer">
-                <JobContainer jobs={filteredJobs}/>
+                <JobContainer jobs={filteredJobs} isLoading={isLoading}/>
             </div>
-            <div className="jobfilter">
+            <div className={filterVisible ? "jobfilter show_filter" : "jobfilter"}>
                 <JobFilter  onStateChange={handleJobFilter}
                  />
+            </div>
+            <div className={"filter_icon_container"} onClick={() => setFilterVisible(!filterVisible)}>
+                <Filter size="24" color="var(--secondary-color)"/>
             </div>
             
         </div>

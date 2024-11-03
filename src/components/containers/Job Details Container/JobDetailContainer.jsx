@@ -17,7 +17,7 @@ import { useAuth } from '../../../utils/AuthContext.jsx';
 import BidCard from '../../cards/Bid Card/BidCard.jsx';
 import ShareContainer from '../Share Container/ShareContainer.jsx';
 
-const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasApplied=false, setHasApplied=()=>{}, isContracted=false }) => {
+const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer = false, hasApplied=false, setHasApplied=()=>{}, isContracted=false }) => {
     const [activePopup, setActivePopup] = useState(null);
     const [isApplyOpen, setIsApplyOpen] = useState(false)
     const [isContactOpen, setIsContactOpen] = useState(false)
@@ -218,7 +218,10 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     }
-
+    const deleteDecline = async () =>{
+        await axios.delete(`https://auth.bizawit.com/api/v1/job/${id}/complete`)
+        setDeliver(null)
+    }
 
     const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`
     const payment = () =>{
@@ -356,7 +359,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                     </>
                 )}
 
-                {isFreelancer &&
+                {isFreelancer && !deliver &&
                     <>
                         <CommandButton commandTerm={"Deliver"} onClick={()=>openPopup('complete')} />
 
@@ -370,7 +373,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 }
 
                 {
-                    (isClient && isContracted && deliver) &&
+                    (isClient || isFreelancer && isContracted && deliver) &&
                     <div className={style.deliver_container}>
                         <div className={style.deliver_header}>
                             <InfoCircle size="24" color="var(--secondary-color)"/>
@@ -381,9 +384,19 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                         </div>
                         <p className={style.deliver_message}>{deliver.message}</p>
                         <div className={style.deliver_button_container}>
-                            <CommandButton commandTerm={"Download"} onClick={handleDownload}/>
-                            <CommandButton commandTerm={"Decline"} />
-                            <CommandButton commandTerm={"Pay"} onClick={payment}/>
+                            { isClient ?
+                                <>
+                                    <CommandButton commandTerm={"Download"} onClick={handleDownload}/>
+                                    {!isPaid &&
+                                        <>
+                                                <CommandButton commandTerm={"Decline"} onClick={deleteDecline}/>
+                                                <CommandButton commandTerm={"Pay"} onClick={payment}/>
+                                        </>
+                                    }
+                                </> :
+                                 !isPaid &&
+                                <CommandButton commandTerm={"Cancel"}onClick={deleteDecline} />
+                            }
                         </div>
                     </div>
 
@@ -405,11 +418,11 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                 <PopUp
                     state={isApplyOpen}
                     setState={setIsApplyOpen}
-                    height={'fit-content'}
-                    width={'fit-content'}
+                    maxWidth={800}
+                    maxHeight={400}
                 >
                     {!hasApplied &&
-                        <ApplyContainer setIsOpen={closePopup} jobID={id} is_negotiable={job.job_negotiation == 1} job_price={job.job_price} onSuccess={()=>{
+                        <ApplyContainer setIsOpen={closePopup} jobID={id} is_negotiable={job.job_negotiation} job_price={job.job_price} onSuccess={()=>{
                             setHasApplied(true)
 
                         }}/>
@@ -433,7 +446,7 @@ const JobDetailContainer = ({ job, isClient = false, isFreelancer = false, hasAp
                     height={'fit-content'}
                     maxWidth={500}
                 >
-                    <JobCompletionContainer  jobID={id} setIsOpen={setIsCompleteOpen} />
+                    <JobCompletionContainer  jobID={id} setIsOpen={setIsCompleteOpen} setDeliver={setDeliver}/>
 
                 </PopUp>
 

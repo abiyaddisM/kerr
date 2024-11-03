@@ -7,18 +7,9 @@ import { Additem, AddSquare, Briefcase, Brush, BrushSquare, ClipboardText, Home,
 import { useAuth } from '../../../utils/AuthContext';
 
 
-const routeMap = {
-    '/': 'home',
-    '/jobs': 'jobs',
-    '/user-jobs': 'user-jobs',
-    '/chat': 'chats',
-    '/library': 'library',
-    '/portfolio': 'portfolio' // Example for additional routes
-};
 
 const SideBar = () => {
     const [selected, setSelected] = useState('');
-    const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
@@ -133,7 +124,6 @@ const SideBar = () => {
                         style={{textDecoration: 'none', display: 'block'}}
                     >
                         <button className={styles.button}>
-                            <p className={styles.label}>Home</p>
                             <Home variant={selected !== '/' ? '' : "Bold"} color="var(--primary-color)"/>
                         </button>
                     </NavLink>
@@ -144,10 +134,7 @@ const SideBar = () => {
                         style={{textDecoration: 'none', display: 'block'}}
                     >
                         <button className={styles.button}>
-
                             <Briefcase variant={selected !== '/jobs' ? '' : "Bold"} color="var(--primary-color)"/>
-                            <p className={styles.label}>Listing</p>
-
                         </button>
                     </NavLink>
 
@@ -158,9 +145,7 @@ const SideBar = () => {
                     style={{textDecoration: 'none', display: 'block'}}
                 >
                     <button className={styles.button}>
-
                         <AddSquare variant={selected !== '/post' ? '' : "Bold"} color="var(--primary-color)"/>
-                        <p className={styles.label}>Post</p>
                     </button>
                 </NavLink>
 
@@ -173,8 +158,6 @@ const SideBar = () => {
 
                             <ClipboardText variant={selected !== '/user-jobs' ? '' : "Bold"}
                                            color="var(--primary-color)"/>
-                            <p className={styles.label}>My Project</p>
-
                         </button>
                     </NavLink>
 
@@ -188,7 +171,6 @@ const SideBar = () => {
                         <button className={styles.button}>
 
                             <VideoSquare variant={selected !== '/library' ? '' : "Bold"} color="var(--primary-color)"/>
-                            <p className={styles.label}>Library</p>
                         </button>
                     </NavLink>
 

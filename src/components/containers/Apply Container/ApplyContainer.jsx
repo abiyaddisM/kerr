@@ -36,7 +36,7 @@ const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSu
             userID: user.id,
             jobID: id,
             bidPitch: pitch,
-            bidCounterPitch: price,
+            bidCounterPrice: price === job_price ? null : price,
         };
 
         axios.post('https://auth.bizawit.com/api/v1/job-bid', application)
