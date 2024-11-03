@@ -3,7 +3,8 @@
     padding: 20px;
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    /* width: 100%; */
+    width: 100%;
+    cursor: pointer;
     gap: 10px;
     /* margin: 5px */
 }
@@ -78,25 +79,27 @@ p.title{
 }
 .description{
     font-weight: 400;
+    color: var(--text-medium-color);
    line-height: 17px;
+    text-wrap: wrap;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    height: fit-content;
 }
-.messages{
+.message{
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.date{
     display:flex;
-    justify-content: space-between;
-
-    p{
-        font-weight: 500;
-        line-height: 15px;
-        font-size: 13px;
-    }
-    :first-child {
-        color: var(--text-secondary-color);
-        
-    }
-
-    :last-child {
-        color: var(--text-light-gray-color);
-
-    }
-    
+    justify-content: flex-end;
+    width: 100%;
+    align-self: flex-end;
+    font-weight: 500;
+    line-height: 15px;
+    font-size: 13px;
 }

@@ -8,18 +8,51 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import OfferCard from '../../cards/Offer Card/OfferCard';
 import { ArrowLeft } from 'iconsax-react';
+import { useAuth } from '../../../utils/AuthContext';
 
 const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
+    
     const [view, setView] = useState('bids')
     const [bids, setBids] = useState([])
     const [offers, setOffers] = useState([])
+    const {id} = useParams();
 
     //state for distinguishing between sent and recieved bids/offers, default is sent
     const [isJobs, setIsJobs] = useState(!!jobID)
+    const {user} = useAuth()
 
     function handleSwitch(){
         setView(view === 'bids' ? 'offers' : 'bids')
+        
+    }
+
+    const removeBid = async (id) => {
+        
+        setBids(prev=> prev.filter((b)=>b.id !== id))
+        try{
+        const url = `https://auth.bizawit.com/api/v1/job-bid/${id}`
+        await axios.delete(url)
+    } catch(error) {console.error(error)}
+    }
+    const acceptBid = async (index) => {
+        try{
+            const url = `https://auth.bizawit.com/api/v1/job/${id}/job-contract`
+            await axios.post(url,{clientID:user.id, freelanceID:bids[index].user_id, price:bids[index].bid_counter_price ? bids[index].bid_counter_price : -1})
+            setIsOpen(false)
+        } catch(error) {console.error(error)}
+    }
+
+    const removeOffer = async (id) => {
+        console.log(id)
+        
+        setOffers(prev=> prev.filter((o)=>o.id !== id))
+        
+        try{
+            const url = `https://auth.bizawit.com/api/v1/job-offer/${id}`
+            await axios.delete(url)
+        } catch(error) {console.error(error)}
+   
         
     }
 
@@ -27,7 +60,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchJobBids = async () => {
-        console.log(isJobs)
+        // console.log(isJobs)
 
         const url = `https://auth.bizawit.com/api/v1/job/${jobID}/job-bid`
 
@@ -41,7 +74,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchUserBids = async () => {
-        console.log(isJobs)
+        // console.log(isJobs)
 
         const url = `https://auth.bizawit.com/api/v1/job-bid`
 
@@ -49,7 +82,7 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         try {
             const response = await axios.get(url, {
                 params: {
-                    userID: userID,
+                    userID: user.id,
                     type: 'sender'
                 },
                 headers: {
@@ -66,11 +99,12 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchJobOffers = async () => {
-        console.log(isJobs)
 
-        const url = `https://auth.bizawit.com/api/v1/job/${jobID}/job-offer`
+        const url = `https://auth.bizawit.com/api/v1/job/${id}/job-offer`
         try{
             const response = await axios.get(url)
+            console.log(response.data.data)
+
             setOffers(response.data.data)
             
         }
@@ -81,18 +115,18 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
 
     const fetchUserOffers = async () => {
-        console.log(isJobs)
+        // console.log(isJobs)
         const url = `https://auth.bizawit.com/api/v1/job-offer`
         try {
             const response = await axios.get(url, {
                 params:{
-                    userID: userID
+                    userID: user.id
                 },
                 headers:{
                     'Content-Type' : 'application/json',
                 }
             })
-            console.log(response.data)
+            // console.log(response.data)
             setOffers(response.data.data)
 
         }
@@ -119,6 +153,8 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
 
     }, [view])
 
+    
+
 
 
     const closePopUp = () => {
@@ -128,7 +164,6 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
     return(
         <div className={styles.container}>
 
-          
             <div className={styles.buttons}>
                 <button className={styles.back_button} onClick={closePopUp}>
                     <ArrowLeft size="20px" color="var(--primary-color)" /> 
@@ -155,6 +190,8 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                                 {/* <p>{bid.created_at}</p> */}
                             <BidCard bid={bid}
                                     received={isJobs}
+                                    onDelete={()=>removeBid(bid.id)}
+                                     onAccept={()=>acceptBid(index)}
                             />
                             </div>)
                             // <BidCard key={index} bid={bid}/>
@@ -163,7 +200,11 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                          :
                         (
                             <div className={styles.empty}>
-                                <p>No bids sent</p>
+                                {userID!==null?
+                                <p>No bids sent</p>:
+                                <p>No bids received</p>
+
+                                }
                             </div>
                         )
                     
@@ -178,12 +219,17 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                         offers.map((offer, index) => (
                             <div key={index}>
                                 {/* <p>{bid.created_at}</p> */}
-                            <OfferCard offer={offer} recieved={!isJobs}/>
+                            <OfferCard offer={offer} recieved={!isJobs}
+                            onDelete={()=>removeOffer(offer.id)}/>
                             </div>)
 
                         ):(
                             <div className={styles.empty}>
+                                {userID===null?
+                                <p>No offers sent</p>:
                                 <p>No offers received</p>
+
+                                }
                             </div>
                         )
                     

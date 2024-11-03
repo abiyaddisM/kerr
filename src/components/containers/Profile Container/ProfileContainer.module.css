@@ -1,6 +1,11 @@
 .container{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,1fr);
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* grid-template-rows: repeat(auto-fill,1fr); */
     gap: 20px;
     align-items: center;
     padding: 20px 0px;
@@ -11,4 +16,15 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    
 }

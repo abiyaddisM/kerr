@@ -8,8 +8,9 @@
     height: fit-content;
     /* overflow: hidden;  */
     scrollbar-width: none; 
-    -ms-overflow-style: none; 
-    
+    -ms-overflow-style: none;
+    border-radius: 20px;
+
 }
 
 /* Hide scrollbar for WebKit browsers */
@@ -25,6 +26,7 @@
     display: flex;
     cursor: pointer;
     gap: 5px;
+    align-items: center;
 
 }
 
@@ -93,6 +95,7 @@
     color: var(--text-light-color);
     font-weight: 400;
     font-size: 14px;
+    flex-wrap: wrap;
 }
 
 .keywords {
@@ -260,4 +263,55 @@
     display: grid;
     grid-template-rows: auto;
     gap: 10px;
+}
+
+.applied_bid{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.deliver_container{
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    width: fit-content;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.deliver_header{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.deliver_header h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-medium-color);
+}
+.deliver_image_container{
+    background: black;
+    height: 200px;
+    width: 400px;
+    display: flex;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: center;
+
+}
+.deliver_image{
+    height: 100%;
+}
+.deliver_button_container{
+    display: flex;
+    gap: 10px;
+}
+.deliver_message{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }

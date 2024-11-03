@@ -6,17 +6,19 @@
     background: var(--background-color);
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 .art_container{
     width: 100%;
     height: 100%;
-    border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 10px;
     overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border: 2px dashed var(--border-color);
+    position: relative;
 }
 .side_container{
     width: 100%;
@@ -34,7 +36,6 @@
     resize: none;
 }
 .text_area{
-    height: 100%;
 
 }
 .add_button{
@@ -56,6 +57,7 @@
     justify-content: center;
     border-radius: 15px;
     cursor: pointer;
+
 }
 .image{
     max-height: 400px;
@@ -116,4 +118,77 @@
     border: 1px solid var(--border-color);
     color: var(--text-medium-color);
     font-size: 14px;
+}
+.upload_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 30px;
+    gap: 10px;
+    height: 100%;
+}
+.upload_container h1 {
+    font-size: 16px;
+    font-weight: 500;
+}
+.upload_container p {
+    font-weight: 500;
+    color: var(--text-light-color);
+}
+.upload_container button {
+    padding: 8px 15px;
+    background: white;
+    border: var(--border-color) 2px solid;
+    border-radius: 10px;
+    color: var(--text-medium-color);
+    font-weight: 500;
+    cursor: pointer;
+}
+.loader_container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(4px);
+}
+.loader {
+    height: 4px;
+    width: 10%;
+    left: 0;
+    top: 0;
+    border-radius: 10px ;
+    --c:no-repeat linear-gradient(#bbbbbb 0 0);
+    background: var(--c),var(--c), #000000;
+    background-size: 60% 100%;
+    animation: l16 3s infinite;
+}
+@keyframes l16 {
+    0%   {background-position:-150% 0,-150% 0}
+    66%  {background-position: 250% 0,-150% 0}
+    100% {background-position: 250% 0, 250% 0}
+}
+
+@media (max-width: 600px) {
+    .container{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .side_container {
+        max-width: 100%;
+    }
 }

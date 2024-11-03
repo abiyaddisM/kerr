@@ -21,7 +21,6 @@
     grid-area: chat;
     height: 100%;
 
-
 }
 .input_container{
     grid-area: input;
@@ -43,4 +42,23 @@
     color: var(--text-medium-color);
     font-size: 14px;
 
+}
+@media (max-width: 764px) {
+    .container {
+        grid-template-areas:
+        'message'
+        'input'
+    ;
+        grid-template-columns:1fr;
+        grid-template-rows: 1fr auto;
+    }
+    .container_id {
+        grid-template-areas:
+        'chat'
+    ;
+        grid-template-columns:1fr;
+        grid-template-rows: 1fr;
+        height: 100%;
+
+    }
 }

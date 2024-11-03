@@ -5,17 +5,35 @@
     width: 100%;
     height: fit-content;
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 0px 20px;
+    border-radius: 30px;
     display: flex;
     gap: 10px;
-    
-
+    position: relative;
+    align-items: center;
 }
 .searchbar input{
     border: none;
     outline: none;
     background-color: transparent;
-    color: var(--text--dark-gray-color);
+    color: var(--text-medium-color);
     width: 100%;
+    padding: 12px 45px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+}
+
+.searchbar input:focus{
+    border: none;
+    outline: none;
+    .searchbar{
+        border: 1px solid var(--dark-border-color);
+    }
+}
+.icon_container{
+
+    position: absolute;
+    left: 20px;
+    top: 12px;
 }

@@ -1,10 +1,18 @@
 .container{
     width: inherit;
-    height: inherit;
+    height: fit-content;
     display: flex;
-    align-items: center;
     border-radius: 2px;
     gap: 10px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.outerBorder{
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 5px;
+    height: fit-content;
 }
 .button{
     padding: 5px 10px;
@@ -22,12 +30,7 @@
 .noBorder{
     border: 1px solid transparent;
 }
-.outerBorder{
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 5px;
-    height: fit-content;
-}
+
 .button p{
     font-size: 13px;
     font-weight: 500;

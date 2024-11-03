@@ -1,11 +1,14 @@
 import styles from './SearchBar.module.css'
 import searchIcon from '../../../assets/icons/searchIcon.svg'
+import {SearchNormal1} from "iconsax-react";
 
 const SearchBar = ({searchTerm, onChange, focus=false}) => {
     return (
         <div className={styles.searchbar}>
-            <img src={searchIcon} alt="" />
-            <input 
+            <div className={styles.icon_container}>
+                <SearchNormal1 size="17" color="var(--secondary-color)"/>
+            </div>
+            <input
                 type="search" 
                 placeholder='Search' 
                 value={searchTerm} 

@@ -7,36 +7,41 @@ import styles from './JobContainer.module.css'
 import JobDetailContainer from "../Job Details Container/JobDetailContainer.jsx";
 
 
-const JobContainer = ({jobs}) => {
+const JobContainer = ({jobs,isLoading}) => {
     // const [jobs, setJobs] = useState([]);
     const [openDetails, setOpenDetails] = useState(false)
 
     const navigate = useNavigate();
 
     const handleJobClick = (job) => {
-      console.log(job.job_id)  
       navigate(`/job/${job.job_id}`);
     }
 
+    const loadingCard = []
+    for(let i= 0; i< 20; i++){
+        loadingCard.push(
+            <div className={styles.loading_card}></div>
+        )
+    }
     return(
-        <div className={styles.jobContainer}>
-            {jobs.length !== 0? 
-            (   
-                jobs.map((j)=>{
-                return( 
-                // <PopUp 
-                // component={
-                
-                <JobCard key={j.job_id} job={j} onClick={()=>handleJobClick(j)}/>
-            // } 
-                // state={openDetails} setState={setOpenDetails}>
-                    // <JobDetailContainer job={j}/>
-                // </PopUp>
-            )
-            })
-            ):(
-            <h1 className={styles.empty}>No jobs available.</h1>
-            )}
+        <div className={styles.jobContainer} style={jobs.length !== 0 ? {height:'fit-content'} : {height:'100%'}}>
+            {
+                isLoading ?
+                    loadingCard
+                    :
+                    jobs.length !== 0?
+                            (
+                                jobs.map((j)=>{
+                                    return(
+                                        <JobCard key={j.job_id} job={j} onClick={()=>handleJobClick(j)}/>
+                                    )
+                                })
+                            ):(
+                                <div className={styles.empty_container}>
+                                    <h1 className={styles.empty}>No jobs available.</h1>
+                                </div>
+                            )
+            }
 
         </div>
     );

@@ -21,12 +21,14 @@ import JobDetailPage from './pages/Job Detail Page/JobDetailPage.jsx';
 import ContractPage from './pages/Contract Page/ContractPage.jsx';
 import {PostPage} from "./pages/Post Page/PostPage.jsx";
 import LandingPage from './pages/Landing page/LandingPage.jsx';
+import {SocketProvider} from "./utils/SocketContext.jsx";
 
 function App () {
 
   return (
       <>
-      <AuthProvider>
+          <AuthProvider>
+              <SocketProvider>
         <Router>
 
           <Routes>
@@ -36,14 +38,15 @@ function App () {
                   <Route path='/post' element= {<PostPage/>}/>
                   <Route path='/jobs' element={<JobPage/>}/>
                   <Route path='/user-jobs' element={<UserJobPage/>}/>
-                  <Route path='/library' element={<ContractPage/>}/>
+                  <Route path='/library' element={<LibraryPage/>}/>
                   <Route path='/chat' element={<ChatPage/>}/>
                   <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/art/:id' element={<ViewPage/>}/>
                   <Route path='/chat/:id' element={<ChatPage/>}/>
                   <Route path='/profile' element={<ProfilePage/>}/>
-                  <Route path='/profile:id' element={<ProfilePage/>}/>
-                  <Route path='/job/:job_id' element={<JobDetailPage/>}/>
+                  <Route path='/profile/:id' element={<ProfilePage/>}/>
+                  
+                  <Route path='/job/:id' element={<JobDetailPage/>}/>
                   <Route path='/contract' element={<ContractPage/>}/>
                   <Route path='/post' element= {<PostPage/>}/>
               </Route>
@@ -57,7 +60,8 @@ function App () {
           </Routes>
 
         </Router>
-      </AuthProvider>
+              </SocketProvider>
+          </AuthProvider>
       </>
 
   )

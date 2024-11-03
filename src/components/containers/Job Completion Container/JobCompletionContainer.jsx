@@ -1,32 +1,88 @@
-import { ArrowLeft } from 'iconsax-react';
+import {ArrowLeft, CloudAdd} from 'iconsax-react';
 import style from './JobCompletionContainer.module.css'
 import CommandButton from '../../buttons/Command Buttons/CommandButton';
+import {useRef, useState} from "react";
+import {Utils} from "../../../utils/utils.js";
+import * as user from "date-fns/locale";
+import {useAuth} from "../../../utils/AuthContext.jsx";
+import axios from "axios";
 
-const JobCompletionContainer = ({setIsOpen, jobID}) => {
+const JobCompletionContainer = ({setIsOpen, jobID,setDeliver}) => {
+    const [url,setUrl] = useState('');
+    const [message,setMessage] = useState('');
+    const fileInputRef = useRef(null);
+    const {user} = useAuth();
+    const [isPosting, setIsPosting] = useState(false);
 
-    const handleJobComplete = () => {
-       
-        console.log("Job completion requested."); 
-        closePopUp();
+    const handleFileClick = () => {
+        fileInputRef.current.click();
     };
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setUrl(URL.createObjectURL(file))
+        }
+    };
+
 
     const closePopUp = () => {
         setIsOpen(false);
     }
+    const upload = async () => {
+        const [newUrl] = await Utils.uploadImages([url]);
 
+        return newUrl;
+    };
+    const handleJobComplete = async () => {
+        setIsPosting(true);
+        const newUrl = await upload();
+        const data = {
+            userID: user.id,
+            image:newUrl,
+            message:message
+        }
+        await axios.post(`https://auth.bizawit.com/api/v1/job/${jobID}/complete`, data)
+        setDeliver(data)
+        setIsPosting(false)
+        closePopUp();
+    };
     return (
         <div className={style.container}>
+            <input
+                type="file"
+                ref={fileInputRef}
+                style={{display: 'none'}}
+                onChange={handleFileChange}
+            />
 
-            <button className={style.back_button} onClick={closePopUp}>
-                <ArrowLeft size="20px" color="var(--primary-color)" /> Back
-            </button>
-            <p className={style.verify}>
-                This action will notify the job owner that the job is completed. 
-                <p>Continue?</p>
-            </p>
+
+            {
+                url !== '' ?
+                    <div onClick={() => {
+                        setUrl("")
+                    }} className={style.image_container}>
+
+                        <img src={url} alt="" className={style.image}/>
+
+                        { isPosting && <div className={style.loader_container}>
+                            <div className={style.loader}></div>
+                        </div>}
+                    </div>
+                    :
+                    <div className={style.upload_container}>
+                        <CloudAdd size="24" color="var(--secondary-color)"/>
+                        <h1>Choose a photo or drag & drop it here</h1>
+                        <p>JPEG, PNG, PDO and GIF formats, up to 50MB</p>
+                        <button onClick={handleFileClick}>Browse File</button>
+                    </div>
+            }
+            <input className={style.input} placeholder="Message" value={message} onChange={(e)=>{setMessage(e.target.value)}}/>
             {/* <div></div> */}
 
-            <CommandButton commandTerm={"Request"} onClick={handleJobComplete} />
+            <div className={style.button_container}>
+                <button className={style.button} onClick={closePopUp}>Cancel</button>
+                <button className={style.button} onClick={handleJobComplete}>Deliver</button>
+            </div>
 
         </div>
     )

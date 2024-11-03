@@ -13,11 +13,8 @@
     display: none;
 }
 .keywords{
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
-    align-items: center;
+    width: fit-content;
+    display: flex;
 }
 .mode{
     display: flex;
@@ -26,6 +23,6 @@
 }
 @media (max-width: 500px){
     .keywords{
-        width: 100vw;
+        width: 100%;
     }
 }

@@ -1,88 +1,174 @@
-import axios from 'axios'
-import styles from './CreateJobContainer.module.css'
+import axios from 'axios';
+import styles from './CreateJobContainer.module.css';
+import { ArrowLeft } from 'iconsax-react';
+import StyleInputs from '../../Job Filter/StyleInputs/StyleInputs';
+import { useState } from 'react';
+import { useAuth } from '../../../utils/AuthContext';
 
-const CreateJobContainer = ({setIsOpen}) => {
+const CreateJobContainer = ({ setIsOpen }) => {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const keywords = ['Public', 'Private'];
+    const [selectedType, setSelectedType] = useState('Public');
+    const [tags, setTags] = useState([]);
+    const [price, setPrice] = useState(0);
+    const [isNegotiable, setIsNegotiable] = useState(false);
+    const [errors, setErrors] = useState({});
+    const {user} = useAuth()
 
-    function submitJob(event){
-        event.preventDefault()
-
-        const newJob = {
-            userID: 1,
-            jobTitle: event.target.job_title.value,
-            jobDescription: event.target.job_description.value,
-            jobPrice: parseFloat(event.target.job_price.value),
-            jobNegotiation: event.target.isNegotiable.checked,
-            jobPublic: event.target.isPublic.checked,
+    function submitJob(event) {
+        event.preventDefault();
+        // Validation
+        const validationErrors = validateFields();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
         }
-
-        console.log(newJob)
         
-        axios.post('https://auth.bizawit.com/api/v1/job', newJob)
-        .then(res=>{
-            console.log('posted', res.data)
-        })
-        .catch(err=>{
-            console.error(err)
-        })
+        const newJob = {
+            userID: user.id,
+            jobTitle: title,
+            jobDescription: description,
+            jobPrice: price,
+            jobNegotiation: isNegotiable,
+            jobPublic: selectedType === 'Public',
+            tag:tags
+        };
 
+        console.log(newJob,tags);
+
+        axios.post('https://auth.bizawit.com/api/v1/job', newJob)
+            .then(res => {
+                console.log('posted', res.data);
+                // Optionally clear the form after successful submission
+                clearForm();
+            })
+            .catch(err => {
+                console.error(err);
+            });
     }
 
-     function handleCancelClick(){
-        setIsOpen(false)
+    function validateFields() {
+        const newErrors = {};
+        
+        if (!title) {
+            newErrors.title = 'Title is required.';
+        } else if (title.split(' ').length > 8) {
+            newErrors.title = 'Title must be at most 8 words.';
+        }
+
+        if (!description) {
+            newErrors.description = 'Description is required.';
+        } else if (description.split(' ').length > 40) {
+            newErrors.description = 'Description must be at most 40 words.';
+        }
+
+        if (price <= 0) {
+            newErrors.price = 'Price must be greater than 0.';
+        }
+
+        return newErrors;
+    }
+
+    function isFormValid() {
+        const validationErrors = validateFields();
+        return Object.keys(validationErrors).length === 0; // True if no errors
+    }
+
+    function clearForm() {
+        setTitle('');
+        setDescription('');
+        setSelectedType('Public');
+        setTags([]);
+        setPrice(0);
+        setIsNegotiable(true);
+        setErrors({});
+        setIsOpen(false);
+    }
+
+    function handleCancelClick() {
+        setIsOpen(false);
+    }
+
+    function handleTagChange(newTag) {
+        setTags(newTag);
     }
 
     return (
         <div className={styles.container}>
-            <h1>New Job</h1>
-            <form onSubmit={submitJob} className={styles.job_form}>
-                <fieldset className={styles.job_info}>
-                    <legend>Job information</legend>
-                    <label>Job Title:</label>
-                    <input type="text" name="job_title" className={styles.title} placeholder='Job title...'/>
-                    <label>Job Description:</label>
-                    <textarea type="text" name="job_description" className={styles.description} placeholder='Describe the job' rows='5'/>
-                    <label>Job Price:</label>
-                    <input type="number" name="job_price" className={styles.price} placeholder='ex: 10'/>
-                </fieldset>
-                <div className={styles.optional}>
-                    <div className={styles.checks}>
-                        {/* <label htmlFor="negotiate">Bidders can negotiate</label> */}
-                        {/* <input type="checkbox" name="isNegotiable" id="negotiate" />Bidders can negotiate */}
-                        <label htmlFor="negotiate" className={styles.checkboxLabel}>
-                        <input 
-                            type="checkbox" 
-                            name="isNegotiable" 
-                            id="negotiate" 
-                            // checked={isPublic} 
-                            // onChange={(e) => setIsPublic(e.target.checked)} 
-                        />
-                        Bidders can negotiate
-                        </label>
-                    </div>
-                    <div className={styles.checks}>
-                        <label htmlFor="public" className={styles.checkboxLabel}>
-                        <input 
-                            type="checkbox" 
-                            name="isPublic" 
-                            id="public" 
-                            // checked={isPublic} 
-                            // onChange={(e) => setIsPublic(e.target.checked)} 
-                        />
-                        Job is public
-                        </label>
+            <button className={styles.back_button} onClick={handleCancelClick}>
+                <ArrowLeft size="20px" color="var(--primary-color)" /> Back
+            </button>
 
+            <div className={styles.job_info}>
+                <input
+                    className={styles.job_title}
+                    type="text"
+                    name="job_title"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                {errors.title && <span className={styles.error}>{errors.title}</span>}
+
+                <textarea
+                    className={styles.job_description}
+                    name="job_description"
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                {errors.description && <span className={styles.error}>{errors.description}</span>}
+
+                <div className={styles.type_buttons}>
+                    <div className={`${styles.bt} ${selectedType === 'Public' ? styles.selected : ''}`}
+                        onClick={() => setSelectedType("Public")}>
+                        Public
+                    </div>
+                    <div className={`${styles.bt} ${selectedType === 'Private' ? styles.selected : ''}`}
+                        onClick={() => setSelectedType("Private")}>
+                        Private
                     </div>
                 </div>
+            </div>
 
-                <div className={styles.buttons}>
+            <div className={styles.style_tags}>
+                <StyleInputs keys={tags} onChange={handleTagChange} />
+            </div>
 
-                    <button className={styles.btn} type='button' onClick={handleCancelClick}>Cancel</button>
-                    <button className={styles.btn2} type="submit"><p>Post</p></button>
-
+            <div className={styles.price_info}>
+                <input
+                    className={styles.job_price}
+                    type="number"
+                    name="job_price"
+                    placeholder="Price"
+                    value={price > 0 ? price : ''}
+                    onChange={(e) => setPrice(Math.max(0, parseFloat(e.target.value)))}
+                />
+                {errors.price && <span className={styles.error}>{errors.price}</span>}
+                <div className={styles.negotiate}>
+                    <input
+                        type="checkbox"
+                        name="job_negotiate"
+                        id=""
+                        checked={isNegotiable}
+                        onChange={() => setIsNegotiable(!isNegotiable)}
+                    />
+                    <label htmlFor="">
+                        Negotiate Price
+                    </label>
                 </div>
-            </form>
+            </div>
+
+            <button 
+                className={styles.create_button} 
+                onClick={submitJob} 
+                // disabled={!isFormValid()} 
+            >
+                Create
+            </button>
         </div>
-    )
+    );
 }
 
-export default CreateJobContainer
+export default CreateJobContainer;

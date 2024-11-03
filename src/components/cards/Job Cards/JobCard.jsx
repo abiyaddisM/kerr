@@ -23,39 +23,21 @@ const JobCard = ({ job, onClick=()=>{}}) => {
     // console.log('j')
     }
 
-    const handleApplyClicked = () => {
-        // navigates to apply window
 
-    }
-
-    const handleContactClicked = () => {
-        // navigates to message
-    }
-
-    // const handleDelete = (id) => {
-    //     try{
-    //      onDelete(id)
-
-    //         // .then 
-    //     }catch(e){console.log(e)}
-    // }
-
-    const profilePic = `https://auth.bizawit.com/api/v1/upload/original/${job.profile_picture}`
-    useEffect(()=>console.log(job),[])
 
     return (
         <div className={styles.jobcard} 
                     onClick={handleJobClicked}>
-            <ProfileImage userId={job.user_id} src={profilePic} size='46px' />
+            <ProfileImage userId={job.user_id} src={job.profile_picture} size='46px' />
 
             <div className={styles.jobcard_content}>
                 <div className={styles.line1}>
                     <div className={styles.nameaddress}>
                         <p className={styles.names}>{job.full_name}</p> 
-                        <p className={styles.address}>Ethiopia, Summit</p>
+                        <p className={styles.address}>{job.location}</p>
                     </div>
                     <p className={styles.price}>
-                        {job.job_price || "Free"}
+                        Br.{job.job_price} 
                     </p>
                     
                 </div>
