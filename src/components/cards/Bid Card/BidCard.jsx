@@ -32,7 +32,9 @@ const BidCard = ({bid, received=false, onDelete=()=>{},onAccept} ) => {
     }
 
 
-
+    useEffect(()=>{
+        console.log(bid)
+    })
 
 
     return (
@@ -51,13 +53,14 @@ const BidCard = ({bid, received=false, onDelete=()=>{},onAccept} ) => {
                         <p className={styles.user_name}>{bid.first_name + " " + bid.last_name}</p>
                     </div>
                     <div className={styles.title_container} style={{paddingTop:10}}>
+                        <p className={styles.title}>{bid.job_title}</p>
                         <p className={styles.job_info}>{bid.bid_pitch} </p>
                     </div>
                 </>
                 :
                 <div className={styles.title_container}>
-                    <p className={styles.job_title}>{bid.job_title} </p>
-                    <p className={styles.job_info}>{bid.job_description} </p>
+                    {/* <p className={styles.job_title}>{bid.bid_pitch} </p> */}
+                    <p className={styles.job_info}>{bid.bid_pitch} </p>
                 </div>
             }
             </div>

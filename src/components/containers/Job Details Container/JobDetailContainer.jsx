@@ -16,22 +16,37 @@ import ProfileContainer from '../Profile Container/ProfileContainer.jsx';
 import { useAuth } from '../../../utils/AuthContext.jsx';
 import BidCard from '../../cards/Bid Card/BidCard.jsx';
 import ShareContainer from '../Share Container/ShareContainer.jsx';
+import PaymentContainer from '../PaymentContainer/PaymentContainer.jsx';
 
-const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer = false, hasApplied=false, setHasApplied=()=>{}, isContracted=false }) => {
+const JobDetailContainer = ({ job,
+    // ,isPaid = false, isClient = false, isFreelancer = false, 
+    hasApplied=false, setHasApplied=()=>{}
+    // , isContracted=false
+ }) => {
+
     const [activePopup, setActivePopup] = useState(null);
     const [isApplyOpen, setIsApplyOpen] = useState(false)
+    const [isOfferOpen, setIsOfferOpen] = useState(false)
     const [isContactOpen, setIsContactOpen] = useState(false)
     const [isCompleteOpen, setIsCompleteOpen] = useState(false)
+    const [isPayOpen, setIsPayOpen] = useState(false);
 
     const [isViewBidsOpen, setIsViewBidsOpen] = useState(false);
     const [offerJob, setOfferJob] = useState(false)
     const [deliver, setDeliver] = useState({})
+    const [pay, setPay] = useState(null)
     const [bids, setBids] = useState([])
     const [offers, setOffers] = useState([])
     const [appliedBid, setAppliedBid] = useState(null)
     const [offeredUser, setOfferedUser]   = useState(null)
     const {user} = useAuth()
     const {id} = useParams()
+
+    const [isClient, setIsClient] = useState(job.client_id === id);
+    const [isFreelancer, setIsFreelancer] = useState(!!job.freelance_id && job.freelance_id === id);
+    const [isContracted, setIsContracted] = useState(job.job_state === 2);
+    const [isPaid, setIsPaid] = useState(false);
+
 
 
     const navigate = useNavigate();
@@ -50,6 +65,8 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
         link.click();
         document.body.removeChild(link);
     };
+
+
     const openPopup = (popup) => {
         closeAllPopups()
         switch (popup){
@@ -66,9 +83,8 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                 setIsViewBidsOpen(true)
                 break;
             case 'offer-job':
-                setOfferJob(true)
+                setIsOfferOpen(true)
                 break;
-
         }
 
     }
@@ -83,6 +99,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
         setIsContactOpen(false);
         setIsCompleteOpen(false);
         setIsViewBidsOpen(false);
+        setIsOfferOpen(false)
     }
 
     const handleJobComplete = () => {
@@ -92,11 +109,15 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
     };
 
     const handleJobOffer = (userID) => {
+
+        const hasOffer = offers.some(o=>o.user_id === userID);
         const application = {
             userID: userID,
             jobID: id
         }
 
+        
+        if (!hasOffer){
         axios.post('https://auth.bizawit.com/api/v1/job-offer', application)
             .then(res => {
                 console.log('posted', res.data);
@@ -105,6 +126,9 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
             .catch(err => {
                 console.error(err);
             });
+        }
+        console.log("ji")
+        closePopup()
     }
 
     const fetchBids = async () => {
@@ -112,6 +136,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
         try {
             const response = await axios.get(url);
             setBids(response.data.data);
+            
         } catch (error) {
             console.error(error);
         }
@@ -127,14 +152,26 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
         }
     };
 
-    useEffect(()=>{
-        console.log(isContracted)
-        axios.get(`https://auth.bizawit.com/api/v1/job/${id}/complete`).then((res) => {
-            setDeliver(res.data.data[0])
+    const fetchCompletedDetail = async () => {
+ 
+        await axios.get(`https://auth.bizawit.com/api/v1/job/${id}/complete`)
+        .then((res) => {
+        setDeliver(res.data.data[0])
         }).catch(err=>{
-            alert("D")
             console.log(err)
         })
+    }
+
+    useEffect(()=>{
+
+        setIsClient(job.client_id === user.id);
+        setIsFreelancer(job.freelance_id !== null && job.freelance_id === user.id);
+        setIsContracted(job.job_state === 2);
+        
+        fetchCompletedDetail()
+        fetchAppliedBid()
+        console.log(appliedBid)
+
     },[])
 
     const deleteBid = async (id) => {
@@ -151,6 +188,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
 
     const fetchAppliedBid = async () => {
         try{
+            fetchBids()
             const url = `https://auth.bizawit.com/api/v1/job-bid`
             const response = await axios.get(url, {
                 params: {
@@ -162,10 +200,15 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                 },
             });
             const userBid = response.data.data.find(bid => bid.job_id == id);
-
-            setAppliedBid(userBid || null);
+            console.log(userBid)
+            setAppliedBid(userBid);
         }
         catch(error){console.error(error)}
+    }
+
+    const apply = () => {
+        setHasApplied(true)
+        console.log(hasApplied)
     }
 
     const fetchOfferedUsers= async () =>{
@@ -201,7 +244,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
         if(hasApplied){
             fetchAppliedBid();
         }
-    }, [hasApplied, user.id])
+    }, [hasApplied])
 
 
     useEffect(()=>{
@@ -212,11 +255,11 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
 
 
     const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
+       return new Date(dateString).toLocaleDateString("en-GB", {
+           day: "2-digit",
+           month: "long",
+           year: "numeric"
+       });
     }
     const deleteDecline = async () =>{
         await axios.delete(`https://auth.bizawit.com/api/v1/job/${id}/complete`)
@@ -313,11 +356,12 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                                 </div>
                                 <div className={style.user_field}>
                                     Job Completed
-                                    <p className={style.date}>{job.created_at || "20/12/24"}</p>
+                                    <p className={style.date}>{job.total_job_completed} job{job.total_job_completed > 1 ? 's' : ''}</p>
+
                                 </div>
                                 <div className={style.user_field}>
                                     Completion Rate
-                                    <p className={style.date}>{job.created_at || "20/12/24"}</p>
+                                    <p className={style.date}>{job.success_percentage + "%"}</p>
                                 </div>
                             </div>
                         </>
@@ -347,7 +391,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
 
 
 
-
+            {/* Buttons  */}
 
             <div className={style.buttons}>
                 {(!isClient && !isFreelancer) &&(
@@ -355,7 +399,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                         {(!hasApplied && !isContracted) &&
                             <CommandButton commandTerm={"Apply"} onClick={()=>openPopup('apply')} />
                         }
-                        <CommandButton commandTerm={"Contact"} onClick={()=>openPopup('contact')} />
+                        {/* <CommandButton commandTerm={"Contact"} onClick={()=>openPopup('contact')} /> */}
                     </>
                 )}
 
@@ -373,7 +417,7 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                 }
 
                 {
-                    (isClient || isFreelancer && isContracted && deliver) &&
+                    ((isClient || isFreelancer) && isContracted && deliver) &&
                     <div className={style.deliver_container}>
                         <div className={style.deliver_header}>
                             <InfoCircle size="24" color="var(--secondary-color)"/>
@@ -422,10 +466,8 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                     maxHeight={400}
                 >
                     {!hasApplied &&
-                        <ApplyContainer setIsOpen={closePopup} jobID={id} is_negotiable={job.job_negotiation} job_price={job.job_price} onSuccess={()=>{
-                            setHasApplied(true)
-
-                        }}/>
+                        <ApplyContainer setIsOpen={closePopup} jobID={id} is_negotiable={job.job_negotiation} job_price={job.job_price} 
+                        onSuccess={apply}/>
                         // :
                         // <BidCard  setIsOpen={setIsViewBidsOpen} />
                     }
@@ -464,10 +506,18 @@ const JobDetailContainer = ({ job,isPaid = false, isClient = false, isFreelancer
                 <PopUp
                     maxHeight={550}
                     maxWidth={800}
-                    state={offerJob}
-                    setState={setOfferJob}>
-                    {/* <ShareContainer id={user.id}/> */}
-                    <ProfileContainer setIsOpen={setOfferJob} onProfileClick={handleJobOffer} />
+                    state={isOfferOpen}
+                    setState={setIsOfferOpen}>
+                    <ShareContainer id={user.id} setIsOpen={closePopup} onProfileClick={handleJobOffer}/>
+                    {/* <ProfileContainer setIsOpen={setOfferJob} onProfileClick={handleJobOffer} /> */}
+                </PopUp>
+
+                <PopUp
+                maxHeight={550}
+                maxWidth={800}
+                state = {pay}
+                setState = {setPay}>
+                    <PaymentContainer job={job.job_id} setIsOpen={setIsPayOpen}/>
                 </PopUp>
             </div>
 

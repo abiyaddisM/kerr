@@ -43,6 +43,18 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
         } catch(error) {console.error(error)}
     }
 
+        const acceptOffer = async (offer) => {
+        try{
+            const url = `https://auth.bizawit.com/api/v1/job/${offer.job_id}/job-contract`
+            await axios.post(url,
+                {
+                    clientID:offer.user_id, 
+                    freelanceID:user.id, 
+                    price:offer.job_price ? offer.job_price : -1
+                })
+            setIsOpen(false)
+        } catch(error) {console.error(error)}
+    }
     const removeOffer = async (id) => {
         console.log(id)
         
@@ -220,7 +232,8 @@ const ViewBidsContainer = ({userID=null, jobID=null, setIsOpen }) =>{
                             <div key={index}>
                                 {/* <p>{bid.created_at}</p> */}
                             <OfferCard offer={offer} recieved={!isJobs}
-                            onDelete={()=>removeOffer(offer.id)}/>
+                            onDelete={()=>removeOffer(offer.id)}
+                            onAccept={()=>acceptOffer(offer)}/>
                             </div>)
 
                         ):(

@@ -14,28 +14,32 @@ const ProfileContainer = ({profiles=[], onProfileClick=()=>{}, share=false}) => 
     const {user} = useAuth()
 
 
-    useEffect(()=>{
+    // useEffect(()=>{
             
-           const fetchUser = async () =>{
+    //        const fetchUser = async () =>{
             
-            try{
+    //         try{
                 
-            const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm}`)
-            setUsers(res.data.data.filter(u=>u.id !== user.id))
-
-            }catch(e){console.log(e)}
-         }
-         if(profiles.length === 0)
-            fetchUser()
-        else
-            setUsers(profiles)
-    },[searchTerm])
+    //         const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm}`)
+    //         setUsers(res.data.data.filter(u=>u.id !== user.id))
+    //             console.log("jiii")
+    //         }catch(e){console.log(e)}
+    //      }
+    //      if(share && profiles.length === 0) 
+    //         fetchUser()
+    //     // else
+    //     //     setUsers(profiles)
+    // },[searchTerm])
 
 
     // const handleProfileClick = (id) => {
     //     navigate(`/profile/${id}`)
     //     onProfileClick(id)
     // }
+    useEffect(()=>{
+        console.log(profiles)
+        
+    },[])
 
     const handleProfileClick = (id) => {
         if (share)
@@ -51,7 +55,7 @@ const ProfileContainer = ({profiles=[], onProfileClick=()=>{}, share=false}) => 
 
     return (
         <div className={`${styles.container} ${!profiles? styles.empty: ''}`}>
-            {!share &&
+            {share &&
             <div className={styles.searchContainer}>
                 <SearchBar focus={true} 
                 onChange={(e)=>setSearchTerm(e.target.value)}/>
@@ -59,9 +63,9 @@ const ProfileContainer = ({profiles=[], onProfileClick=()=>{}, share=false}) => 
 }
             <div className={styles.content}>
 
-            {users? 
+            {profiles? 
             (
-                users.map((profile) => 
+                profiles.map((profile) => 
                 <ProfileCard 
                 onClick={()=>handleProfileClick(profile.id)}
                 key={profile.id}

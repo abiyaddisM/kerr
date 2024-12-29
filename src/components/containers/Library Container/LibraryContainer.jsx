@@ -47,9 +47,6 @@ function LibraryContainer({arts, selectedPost, setSelectedPost, onDelete}){
             />}
           </div>
             
-
-        
-        {/* <ArtContainer arts={posts} selectMode={selectActivate} selectedPost={selectedPost} setSelectedPost={setSelectedPost}/> */}
         <ArtContainer arts={arts} selectMode={selectActivate} selectedPost={selectedPost} setSelectedPost={setSelectedPost}/>
     </div>
 

@@ -36,12 +36,12 @@ const Notification = () => {
     return (
         <div className={styles.notification}>
 
-           <PopOver left={false} component=
+           {/* <PopOver left={false} component=
            {<img src={bellIcon} alt=""/>}
         //    {<Notification/>}
            >
             <NotificationContainer notifications={notifs}/>
-           </PopOver>
+           </PopOver> */}
            <div
                className={styles.icon}
            >
