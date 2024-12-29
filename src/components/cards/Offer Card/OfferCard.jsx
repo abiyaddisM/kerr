@@ -5,7 +5,7 @@ import ProfileImage from '../../general/Profile Image/ProfileImage'
 import styles from './OfferCard.module.css'
 import axios from 'axios'
 
-const OfferCard = ({offer, recieved=false, onDelete=()=>{}}) => {
+const OfferCard = ({offer, recieved=false, onDelete=()=>{}, onAccept=()=>{}}) => {
     const user = {
             id: offer.user_id,
             image: offer.profile_picture,
@@ -19,7 +19,7 @@ const OfferCard = ({offer, recieved=false, onDelete=()=>{}}) => {
         onDelete()
     }
 
-        async function  handleCancel() {
+    async function  handleCancel() {
         try{
         const url = `https://auth.bizawit.com/api/v1/job-bid/${bid.id}`
         await axios.delete(url)
@@ -29,15 +29,7 @@ const OfferCard = ({offer, recieved=false, onDelete=()=>{}}) => {
     }
 
     async function handleAccept(){
-        // const offer = {
-        //     user_id: 1,
-        //     job_id: bid.job_id
-        // }
-        // await axios.post(url, offer)
-        // .then(res=>console.log("posted",  bid.job_id))
-        // .catch(err=>console.error(err))
-        
-        navigate(`/contract`, {state: user})
+        onAccept()
     }
 
     function handleOfferClick(){

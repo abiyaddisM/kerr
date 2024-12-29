@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import JobCard from "../../cards/Job Cards/JobCard.jsx";
 import { PopUp } from "../../pops/Pop Up/PopUp.jsx";
@@ -8,9 +8,7 @@ import JobDetailContainer from "../Job Details Container/JobDetailContainer.jsx"
 
 
 const JobContainer = ({jobs,isLoading}) => {
-    // const [jobs, setJobs] = useState([]);
-    const [openDetails, setOpenDetails] = useState(false)
-
+   
     const navigate = useNavigate();
 
     const handleJobClick = (job) => {
@@ -23,6 +21,8 @@ const JobContainer = ({jobs,isLoading}) => {
             <div className={styles.loading_card}></div>
         )
     }
+
+
     return(
         <div className={styles.jobContainer} style={jobs.length !== 0 ? {height:'fit-content'} : {height:'100%'}}>
             {

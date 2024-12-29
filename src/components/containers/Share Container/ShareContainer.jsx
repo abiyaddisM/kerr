@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import SearchBar from '../../general/Search Bar/SearchBar';
 import { useAuth } from '../../../utils/AuthContext';
 import axios from 'axios';
+import ProfileCard from '../../cards/Profile Card/ProfileCard';
 
 
 
-const ShareContainer = ({ id , onProfileClick=()=>{}}) => {
+const ShareContainer = ({ id , setIsOpen, onProfileClick=()=>{}}) => {
     const [location, setLocation] = useState('');
     const [profiles, setProfiles] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -35,9 +36,6 @@ const ShareContainer = ({ id , onProfileClick=()=>{}}) => {
     }
 
     function goToMessage(profileId) {
-
-
-
         navigate(`/chat/${profileId}`)
     }
 
@@ -60,15 +58,19 @@ const ShareContainer = ({ id , onProfileClick=()=>{}}) => {
               onChange={handleSearch}
               focus = {true}
             />
-            <div className={style.share}>
-                <div className={style.internal_share}>
-                    <ProfileContainer 
-                    profiles={profiles}
-                    onProfileClick={(profileId)=>goToMessage(profileId)}
-                     />
-                </div>
-                
-            </div>
+
+            {profiles? 
+            (
+                profiles.map((profile) => 
+                <ProfileCard 
+                onClick={()=>onProfileClick(profile.id)}
+                key={profile.id}
+                user={profile}/>
+            )
+            ):(
+                <h1>No profiles available.</h1>
+
+            )}
         </div>
     );
 };

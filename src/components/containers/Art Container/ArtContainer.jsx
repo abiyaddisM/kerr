@@ -44,8 +44,8 @@ const ArtContainer = ({arts, selectMode=false, selectedPost=null, setSelectedPos
 
     return(
         <div className={styles.art_container}>
-          {!arts ? 
-          <h1>No Arts Container</h1>
+          {(!arts || arts.length === 0)  ? 
+          <p>No Arts found</p>
           :
           !isLoading ?
             (arts.map((value)=>{

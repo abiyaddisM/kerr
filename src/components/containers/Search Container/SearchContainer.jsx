@@ -8,6 +8,7 @@ import ArtContainer from '../Art Container/ArtContainer'
 import ProfileContainer from '../Profile Container/ProfileContainer'
 import JobContainer from '../JobContainer/JobContainer'
 import { useEffect, useState } from 'react'
+import { useAuth } from '../../../utils/AuthContext'
 
 
 const SearchContainer = ({closeSearch}) => {
@@ -24,6 +25,8 @@ const SearchContainer = ({closeSearch}) => {
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
 
+    const {user} = useAuth()
+
 
 
 
@@ -35,8 +38,9 @@ const SearchContainer = ({closeSearch}) => {
     async function handleSearch(event) {
       const value = event.target.value
       setSearchTerm(value)
-      searchCategory(category, value)
+      // searchCategory(category, value)
     }
+
 
     function searchCategory (category, searchTerm){
       if(category === 'Post'){
@@ -77,15 +81,20 @@ const SearchContainer = ({closeSearch}) => {
             const res = await axios.get(`https://auth.bizawit.com/api/v1/search/post?search=${searchTerm}`)
             setPosts(res.data.data)
             setIsLoading(false)
+            console.log(posts)
             }catch(e){console.log(e)}
       }   
       
      const fetchUser = async () =>{
             try{
             const res = await axios.get(`https://auth.bizawit.com/api/v1/search/user?search=${searchTerm}`)
-            setUsers(res.data.data)
-            console.log(jobs)
+            setUsers(res.data.data.filter(u => u.id !== user.id));
+
+            // console.log(res.data.data)
+            console.log(users)
+
             }catch(e){console.log(e)}
+
       }
   
 

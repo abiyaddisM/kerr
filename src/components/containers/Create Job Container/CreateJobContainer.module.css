@@ -153,7 +153,7 @@ input:focus, textarea:focus{
 
 .create_button:hover{
     background-color: var(--highlight-color);
-    border-color: var(--dark-border-color);
+    border-color: var(--border-color);
     cursor: pointer;
 }
 

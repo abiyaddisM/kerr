@@ -31,7 +31,7 @@ const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSu
         }
     }
 
-    function submitApplication(pitch, price) {
+    async function submitApplication(pitch, price) {
         const application = {
             userID: user.id,
             jobID: id,
@@ -39,7 +39,7 @@ const ApplyContainer = ({ setIsOpen, jobID, is_negotiable=false, job_price, onSu
             bidCounterPrice: price === job_price ? null : price,
         };
 
-        axios.post('https://auth.bizawit.com/api/v1/job-bid', application)
+        await axios.post('https://auth.bizawit.com/api/v1/job-bid', application)
             .then(res => {
                 console.log('posted', res.data);
                 setIsOpen(false); // Close the form on success

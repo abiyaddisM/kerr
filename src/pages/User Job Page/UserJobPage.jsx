@@ -176,7 +176,7 @@ const UserJobPage = () => {
       
       
       {filteredJobs.length !== 0 || isLoading?
-        <UserJobsContainer userJobs={jobs2} assigned={selectedType === 'Contracted'}  isLoading={isLoading}/>
+        <UserJobsContainer userJobs={filteredJobs} assigned={selectedType === 'Contracted'}  isLoading={isLoading}/>
       :
       <div className="no_jobs">
         No jobs found

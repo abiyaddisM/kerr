@@ -94,8 +94,6 @@ const ArtCard = ({art, onClick, selected=false, onSelect=()=>{}, selectMode=fals
                 </div>
 
             </div>
-           
-{/* // } */}
         </div>
 
     );

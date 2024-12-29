@@ -8,9 +8,6 @@ import { useAuth } from '../../utils/AuthContext'
 
 const JobDetailPage = () => {
 
-    // const location = useLocation()
-    // const job = location.state?.job || {}
-    
     const {user} = useAuth()
     const {id} = useParams()
     const [job, setJob] = useState(null)
@@ -49,20 +46,25 @@ const JobDetailPage = () => {
             setApplied(response.data.data.some(bid => bid.job_id == id))
             const userBid = response.data.data.find(bid => bid.job_id == id);
             setAppliedBid(userBid || null);
-            console.log(userBid)
+            console.log(appliedBid)
             console.log(response.data.data)
         }
         catch(error){console.error(error)}
     }
         fetchJobDetails();
         fetchBids();
+
+        // console.log(appliedBid)
         
     }, [id])
 
     return (
         <div className={styles.container}>
             {job?
-            <JobDetailContainer job={job} isPaid={job.contract_state === 2} isClient={user.id === job.client_id} isFreelancer={user.id === job.freelance_id} isContracted={job.client_id !== null && job.freelance_id!==null} hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid}/>
+            <JobDetailContainer job={job} 
+            // isPaid={job.job_state === 2} isClient={user.id === job.client_id} isFreelancer={user.id === job.freelance_id} isContracted={job.freelance_id!==null} 
+            hasApplied={applied} setHasApplied={setApplied} appliedBid={appliedBid} setAppliedBid={setAppliedBid}
+            />
             :
             <p>Job not found</p> 
             }

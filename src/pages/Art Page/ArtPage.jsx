@@ -19,11 +19,11 @@ const ArtPage = () =>{
     function handleTypeSelect(index){
       setTypes(keywords[index])
     }
+
   useEffect(() => {
     axios.get("https://auth.bizawit.com/api/v1/post?page=1")
         .then(res => {
           setTimeout(()=>{
-            console.log("The Art",res.data.data)
             setArts(res.data.data)
             setIsLoading(false)
           },0);
